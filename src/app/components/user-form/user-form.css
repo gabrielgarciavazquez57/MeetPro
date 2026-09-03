@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.fondo-registro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.titulo-registro {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.formulario-registro {
+  width: 100%;
+  max-width: 700px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 2.5rem;
+  border: 1px solid #eef0f3;
+}
+
+.columnas-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.datos-personales,
+.datos-direccion,
+.datos-sesion {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Línea divisoria horizontal entre secciones apiladas */
+.datos-direccion,
+.datos-sesion {
+  padding-top: 2rem;
+  border-top: 1px solid #e2e5ea;
+}
+
+@media (max-width: 600px) {
+  .formulario-registro {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .columnas-form {
+    gap: 1.75rem;
+  }
+
+  .datos-direccion,
+  .datos-sesion {
+    padding-top: 1.75rem;
+  }
+}
+
+.titulo-seccion {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.65rem;
+  border-bottom: 2px solid #eef0f3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.titulo-seccion::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 2.25rem;
+  height: 2px;
+  background-color: #2563eb;
+}
+
+.datos-personales ul,
+.datos-direccion ul,
+.datos-sesion ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.datos-personales li,
+.datos-direccion li,
+.datos-sesion li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+select {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1.5px solid #e2e5ea;
+  border-radius: 9px;
+  background-color: #fafbfc;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+input[type="tel"]::placeholder {
+  color: #9ca3af;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="number"]:hover,
+input[type="date"]:hover,
+input[type="tel"]:hover,
+select:hover {
+  border-color: #cbd2db;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+select:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.25rem;
+}
+
+input[type="text"].ng-invalid.ng-touched,
+input[type="password"].ng-invalid.ng-touched,
+input[type="number"].ng-invalid.ng-touched,
+input[type="date"].ng-invalid.ng-touched,
+input[type="tel"].ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: #f87171;
+  background-color: #fef7f7;
+}
+
+input[type="text"].ng-invalid.ng-touched:focus,
+input[type="password"].ng-invalid.ng-touched:focus,
+input[type="number"].ng-invalid.ng-touched:focus,
+input[type="date"].ng-invalid.ng-touched:focus,
+input[type="tel"].ng-invalid.ng-touched:focus,
+select.ng-invalid.ng-touched:focus {
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.15);
+}
+
+/* Toggle "¿Es profesional?" */
+li:has(input[type="checkbox"]) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  background-color: #f8fafc;
+  border: 1.5px solid #e2e5ea;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+li:has(input[type="checkbox"]:hover) {
+  border-color: #cbd2db;
+}
+
+li:has(input[type="checkbox"]:checked) {
+  background-color: #eff4ff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+li:has(input[type="checkbox"]) label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  order: -1;
+}
+
+li:has(input[type="checkbox"]:checked) label {
+  color: #1d4ed8;
+}
+
+/* Switch estilo iOS en vez de checkbox nativo */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 2.5rem;
+  height: 1.4rem;
+  background-color: #d1d5db;
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #2563eb;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: translateX(1.1rem);
+}
+
+input[type="checkbox"]:focus-visible {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+/* Mensajes de error */
+span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #dc2626;
+}
+
+span::before {
+  content: '!';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background-color: #dc2626;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Botón */
+.boton-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eef0f3;
+}
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
+}
+
+.btn-grande {
+  padding: 0.9rem 3rem;
+  font-size: 0.95rem;
+  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btn-grande:hover:not(:disabled) {
+  background: linear-gradient(180deg, #3b78f5 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.38);
+}
+
+.btn-grande:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28);
+}
+
+.btn-grande:disabled {
+  background: #cbd2db;
+  color: #f3f4f6;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.8;
+}

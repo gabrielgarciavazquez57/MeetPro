@@ -1,1 +1,95 @@
-{}
+{
+  "users": [
+    {
+      "username": "pepe555",
+      "password": "pepe123456",
+      "isProfesional": true,
+      "name": "Pepe",
+      "lastname": "Reyes",
+      "dni": "3454678",
+      "email": "pepe5@gmail.com",
+      "phoneNumber": "55555555555",
+      "age": 77,
+      "gender": "Masculino",
+      "nationality": "Australia",
+      "dateOfBirth": "2000-05-04T00:00:00.000Z",
+      "address": {
+        "address": "av pepe",
+        "city": "pep city",
+        "province": "pepe state",
+        "country": "Argentina",
+        "zipCode": "p5555"
+      },
+      "id": "vsvLADccdcM"
+    },
+    {
+      "username": "dsgsgsgd",
+      "password": "uioplkjuioplkj",
+      "isProfesional": true,
+      "name": "Pepe",
+      "lastname": "Reyes",
+      "dni": "55555555",
+      "email": "pepe5@gmail.com",
+      "phoneNumber": "55555555555",
+      "age": 9,
+      "gender": "Masculino",
+      "nationality": "Azerbaijan",
+      "dateOfBirth": "2026-09-25T00:00:00.000Z",
+      "address": {
+        "address": "av pepe",
+        "city": "pep city",
+        "province": "pepe state",
+        "country": "Argentina",
+        "zipCode": "p5555"
+      },
+      "id": "vOprp3jdKHo"
+    }
+  ],
+  "profesionales": [
+    {
+      "profesional_userData": {
+        "username": "pepe555",
+        "password": "pepe123456",
+        "isProfesional": true,
+        "name": "Pepe",
+        "lastname": "Reyes",
+        "dni": "3454678",
+        "email": "pepe5@gmail.com",
+        "phoneNumber": "55555555555",
+        "age": 77,
+        "gender": "Masculino",
+        "nationality": "Australia",
+        "dateOfBirth": "2000-05-04T00:00:00.000Z",
+        "address": {
+          "address": "av pepe",
+          "city": "pep city",
+          "province": "pepe state",
+          "country": "Argentina",
+          "zipCode": "p5555"
+        },
+        "id": "vsvLADccdcM"
+      },
+      "profession": "Programador",
+      "professionalId": "12345",
+      "descriptionprofesional": "Soy prog",
+      "titulos": [
+        {
+          "nombre_titulo": "progrmaador",
+          "descripcion_titulo": "pp",
+          "fecha_obtencion": "2026-09-01",
+          "institucion_educativa": "utn"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "progrmador jr",
+          "institucion_experiencia": "ibm",
+          "fecha_inicio": "2026-09-02",
+          "fecha_fin": "2026-09-03"
+        }
+      ],
+      "id": "WNgVuw5iIjs"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

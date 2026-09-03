@@ -1,0 +1,150 @@
+<section class="fondo-profesional">
+  <div><h2 class="titulo-profesional">Registro de Profesional</h2></div>
+  <div class="formulario-profesional">
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+
+      <div class="datos-profesion">
+        <h3 class="titulo-seccion">Datos Profesionales:</h3>
+        <ul>
+          <li>
+            <label for="profession">Profesión: </label>
+            <input type="text" formControlName="profession" id="profession">
+            @if(profession.dirty || profession.touched){
+              @if(profession.hasError('required')){
+                <span>Campo requerido</span>
+              }
+            }
+          </li>
+          <li>
+            <label for="professionalId">Matrícula/ID Profesional: </label>
+            <input type="text" formControlName="professionalId" id="professionalId">
+            @if(professionalId.dirty || professionalId.touched){
+              @if(professionalId.hasError('required')){
+                <span>Campo requerido</span>
+              }
+            }
+          </li>
+          <li class="descripcion-item">
+            <label for="descriptionprofesional">Descripción: </label>
+            <textarea formControlName="descriptionprofesional" id="descriptionprofesional" rows="4"></textarea>
+            @if(descriptionprofesional.dirty || descriptionprofesional.touched){
+              @if(descriptionprofesional.hasError('required')){
+                <span>Campo requerido</span>
+              }@else if (descriptionprofesional.hasError('maxlength')) {
+                <span>Debe contener menos de 500 caracteres</span>
+              }
+            }
+          </li>
+        </ul>
+      </div>
+
+      <!-- ===== TITULOS ===== -->
+      <div class="datos-titulos">
+        <div class="header-seccion">
+          <h3 class="titulo-seccion">Títulos:</h3>
+          <button type="button" class="btn btn-agregar" (click)="agregarTitulo()">+ Agregar título</button>
+        </div>
+
+        <div formArrayName="titulos">
+          @for (tituloGroup of titulos.controls; track $index) {
+            <div class="bloque-item" [formGroupName]="$index">
+              <div class="bloque-header">
+                <span class="bloque-numero">Título {{ $index + 1 }}</span>
+                @if (titulos.length > 1) {
+                  <button type="button" class="btn btn-eliminar" (click)="eliminarTitulo($index)">Eliminar</button>
+                }
+              </div>
+              <ul>
+                <li>
+                  <label [for]="'nombre_titulo-' + $index">Nombre del título: </label>
+                  <input type="text" formControlName="nombre_titulo" [id]="'nombre_titulo-' + $index">
+                  @if(tituloGroup.get('nombre_titulo')?.touched && tituloGroup.get('nombre_titulo')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li class="descripcion-item">
+                  <label [for]="'descripcion_titulo-' + $index">Descripción: </label>
+                  <textarea formControlName="descripcion_titulo" [id]="'descripcion_titulo-' + $index" rows="3"></textarea>
+                  @if(tituloGroup.get('descripcion_titulo')?.touched && tituloGroup.get('descripcion_titulo')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }@else if (tituloGroup.get('descripcion_titulo')?.hasError('maxlength')) {
+                    <span>Debe contener menos de 300 caracteres</span>
+                  }
+                </li>
+                <li>
+                  <label [for]="'institucion_educativa-' + $index">Institución educativa: </label>
+                  <input type="text" formControlName="institucion_educativa" [id]="'institucion_educativa-' + $index">
+                  @if(tituloGroup.get('institucion_educativa')?.touched && tituloGroup.get('institucion_educativa')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li>
+                  <label [for]="'fecha_obtencion-' + $index">Fecha de obtención: </label>
+                  <input type="date" formControlName="fecha_obtencion" [id]="'fecha_obtencion-' + $index">
+                  @if(tituloGroup.get('fecha_obtencion')?.touched && tituloGroup.get('fecha_obtencion')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- ===== EXPERIENCIAS ===== -->
+      <div class="datos-experiencias">
+        <div class="header-seccion">
+          <h3 class="titulo-seccion">Experiencia:</h3>
+          <button type="button" class="btn btn-agregar" (click)="agregarExperiencia()">+ Agregar experiencia</button>
+        </div>
+
+        <div formArrayName="experiencias">
+          @for (expGroup of experiencias.controls; track $index) {
+            <div class="bloque-item" [formGroupName]="$index">
+              <div class="bloque-header">
+                <span class="bloque-numero">Experiencia {{ $index + 1 }}</span>
+                @if (experiencias.length > 1) {
+                  <button type="button" class="btn btn-eliminar" (click)="eliminarExperiencia($index)">Eliminar</button>
+                }
+              </div>
+              <ul>
+                <li>
+                  <label [for]="'titulo_experiencia-' + $index">Puesto/Título de la experiencia: </label>
+                  <input type="text" formControlName="titulo_experiencia" [id]="'titulo_experiencia-' + $index">
+                  @if(expGroup.get('titulo_experiencia')?.touched && expGroup.get('titulo_experiencia')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li>
+                  <label [for]="'institucion_experiencia-' + $index">Institución/Empresa: </label>
+                  <input type="text" formControlName="institucion_experiencia" [id]="'institucion_experiencia-' + $index">
+                  @if(expGroup.get('institucion_experiencia')?.touched && expGroup.get('institucion_experiencia')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li class="fila-doble">
+                  <div>
+                    <label [for]="'fecha_inicio-' + $index">Fecha inicio: </label>
+                    <input type="date" formControlName="fecha_inicio" [id]="'fecha_inicio-' + $index">
+                    @if(expGroup.get('fecha_inicio')?.touched && expGroup.get('fecha_inicio')?.hasError('required')){
+                      <span>Campo requerido</span>
+                    }
+                  </div>
+                  <div>
+                    <label [for]="'fecha_fin-' + $index">Fecha fin: </label>
+                    <input type="date" formControlName="fecha_fin" [id]="'fecha_fin-' + $index">
+                  </div>
+                </li>
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="boton-form">
+        <button type="submit" [disabled]="form.invalid" class="btn btn-grande">GUARDAR PERFIL PROFESIONAL</button>
+      </div>
+
+    </form>
+  </div>
+</section>

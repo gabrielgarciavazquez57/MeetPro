@@ -1,0 +1,226 @@
+<section class="fondo-registro">
+    <div><h2 class="titulo-registro">Registro</h2></div>
+    <div class="formulario-registro">
+    <form [formGroup]="form"  (ngSubmit) = 'handleSubmit()' >
+    <div class="columnas-form">
+        <div class="datos-personales">
+            <h3 class="titulo-seccion" >Datos Personales:</h3>
+            <ul> 
+            <li>
+                    <label for="name">Nombre: </label>
+                    <input type="text" formControlName="name" id="name">
+                     @if(name.dirty || name.touched){
+                            @if(name.hasError('required')){
+                                <span>Campo requerido</span>
+                            }@else if (name.hasError('minlength')) {
+                    <span>Debe contener mas de 2 caracteres</span>
+                    }@else if (name.hasError('maxlength')) {
+                    <span>Debe contener menos de 15 caracteres</span>
+                    }
+                    }
+                        
+                </li>
+                <li>
+                    <label for="lastname">Apellido: </label>
+                    <input type="text" formControlName="lastname" id="lastname">
+                     @if(lastname.dirty || lastname.touched){
+                            @if(lastname.hasError('required')){
+                                <span>Campo requerido</span>
+                            }@else if (lastname.hasError('minlength')) {
+                    <span>Debe contener mas de 5 caracteres</span>
+                    }@else if (lastname.hasError('maxlength')) {
+                    <span>Debe contener menos de 15 caracteres</span>
+                    }
+                        }
+                </li>
+                 <li>
+                    <label for="dni">DNI: </label>
+                    <input type="text" formControlName="dni" id="dni">
+                     @if(dni.dirty || dni.touched){
+                            @if(dni.hasError('required')){
+                                <span>Campo requerido</span>
+                            }@else if (dni.hasError('minlength')) {
+                    <span>Debe contener mas de 6 digitos</span>
+                    }@else if (dni.hasError('maxlength')) {
+                    <span>Debe contener menos de 8 digitos</span>
+                    }
+                        }
+                </li>
+                <li>
+                        <label for="gender">Gender: </label>
+                    <select formControlName="gender" id="gender">
+                        <option value="" disabled>Seleccione su genero...</option>
+                        @for (tg of tipos_gen; track $index) {
+                        <option [value]="tg"><strong>{{tg}}</strong></option>
+                        }
+                    </select>
+                    @if(gender.dirty || gender.touched){
+                    @if(gender.hasError('required')){
+                    <span>Campo requerido</span>
+                    }
+                    }
+               
+                    </li>
+                <li>
+                    <label for="age">Edad: </label>
+                    <input type="number" formControlName="age" id="age">
+                     @if(age.dirty || age.touched){
+                            @if(age.hasError('required')){
+                                <span>Campo requerido</span>
+                            }@else if (age.hasError('min')) {
+                    <span>Debe ser mayor a 5</span>
+                    }
+                        }
+                </li>
+                <li>
+  <label for="dateOfBirth">Fecha de Nacimiento: </label>
+  <input type="date" formControlName="dateOfBirth" id="dateOfBirth">
+  @if(dateOfBirth.dirty || dateOfBirth.touched){
+    @if(dateOfBirth.hasError('required')){
+      <span>Campo requerido</span>
+    }
+  }
+</li>
+                        <li>
+                        <label for="nationality">Nacionalidad: </label>
+                        <select formControlName="nationality" id="nationality">
+                            <option value="" disabled>Seleccione su nacionalidad...</option>
+                            @for (pais of paises; track $index) {
+                            <option [value]="pais">{{ pais }}</option>
+                            }
+                        </select>
+                        @if(nationality.dirty){
+                            @if(nationality.hasError('required')){
+                            <span>Campo requerido</span>
+                            }
+                        }
+                        </li>
+                 <li>
+                    <label for="email">Email: </label>
+                    <input type="text" formControlName="email" id="email">
+                     @if(email.dirty || email.touched){
+                            @if(email.hasError('required')){
+                                <span>Campo requerido</span>
+                            }@else if (email.hasError("email")) {
+                                <span>Formato de email incorrecto</span>
+                            }
+                        }
+                </li>
+                <li>
+                    <label for="phoneNumber">Telefono: (codigo de pais) y numero telefonico </label>
+                    <input type="text" formControlName="phoneNumber" id="phoneNumber">
+                     @if(phoneNumber.dirty || phoneNumber.touched){
+                            @if(phoneNumber.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+                <li>
+                    <label for="isProfesional">¿Es profesional?: </label>
+                    <input type="checkbox" formControlName="isProfesional" id="isProfesional">
+                </li>
+        </ul>
+        </div>
+        <div class="datos-direccion" formGroupName="address">  
+            <h3 class="titulo-seccion" >Direccion Personal:</h3>
+            <ul>  
+                <li>
+                    <label for="street">Domicilio: </label>
+                    <input type="text" formControlName="address" id="street">
+                     @if(street.dirty || street.touched){
+                            @if(street.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+                <li>
+                    <label for="city">Ciudad: </label>
+                    <input type="text" formControlName="city" id="city">
+                     @if(city.dirty || city.touched){
+                            @if(city.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+                 <li>
+                    <label for="province">Provincia: </label>
+                    <input type="text" formControlName="province" id="province">
+                     @if(province.dirty || province.touched){
+                            @if(province.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+                  <li>
+                        <label for="country">Pais: </label>
+                        <select formControlName="country" id="country">
+                            <option value="" disabled>Seleccione su pais de residencia...</option>
+                            @for (pais of paises; track $index) {
+                            <option [value]="pais">{{ pais }}</option>
+                            }
+                        </select>
+                        @if(country.dirty){
+                            @if(country.hasError('required')){
+                            <span>Campo requerido</span>
+                            }
+                        }
+                        </li>
+                <li>
+                    <label for="zipCode">Codigo Postal: </label>
+                    <input type="text" formControlName="zipCode" id="zipCode">
+                     @if(zipCode.dirty || zipCode.touched){
+                            @if(zipCode.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+            </ul>
+        </div>
+        <div class="datos-sesion">
+            <h3 class="titulo-seccion" >Configuracion de usuario:</h3>
+            <ul>
+               <li>
+                    <label for="username">Username: </label>
+                    <input type="text" formControlName="username" id="username">
+                     @if(username.dirty || username.touched){
+                            @if(username.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+                <li>
+                    <label for="password">Password: </label>
+                    <input type="password" formControlName="password" id="password">
+                     @if(password.dirty || password.touched){
+                            @if(password.hasError('required')){
+                                <span>Campo requerido</span>
+                            }@else if (password.hasError('minlength')) {
+                    <span>Debe contener mas de 5 caracteres</span>
+                    }@else if (password.hasError('maxlength')) {
+                    <span>Debe contener menos de 15 caracteres</span>
+                    }
+                        }
+                </li>
+               <li>
+  <label for="password_repeat">Repeat Password: </label>
+  <input type="password" formControlName="password_repeat" id="password_repeat">
+  @if(password_repeat.dirty || password_repeat.touched){
+    @if(password_repeat.hasError('required')){
+      <span>Campo requerido</span>
+    }
+  }
+  @if(form.hasError('passwordsNoCoinciden') && password_repeat.touched){
+    <span>Las contraseñas no coinciden</span>
+  }
+</li>
+                
+            </ul>
+        </div>
+    </div> 
+    <div class="boton-form">
+            <button type="submit" [disabled]="form.invalid" class="btn btn-grande">REGISTRARSE</button>
+        </div>
+    </form>
+</div>
+        
+</section>
