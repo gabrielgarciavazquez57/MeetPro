@@ -25,22 +25,117 @@
           <div class="datos-inferior">
             <ul class="datos-contacto">
               <li>
-                <label>ID del profesional</label>
-                <span class="valor">{{ prof.professionalId }}</span>
+                <span class="dato-icono" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                    <circle cx="9" cy="10" r="2" />
+                    <path d="M15 8h3M15 12h3M7 16h10" />
+                  </svg>
+                </span>
+                <span class="dato-texto">
+                  <label>ID del profesional</label>
+                  <span class="valor">{{ prof.professionalId }}</span>
+                </span>
               </li>
               <li>
-                <label>Email</label>
-                <span class="valor">{{ prof.profesional_userData.email }}</span>
+                <span class="dato-icono" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" />
+                  </svg>
+                </span>
+                <span class="dato-texto">
+                  <label>Email</label>
+                  <span class="valor">{{ prof.profesional_userData.email }}</span>
+                </span>
               </li>
               <li>
-                <label>Teléfono</label>
-                <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
+                <span class="dato-icono" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6.5 3h-3A1.5 1.5 0 0 0 2 4.6C2 13 11 22 19.4 22a1.5 1.5 0 0 0 1.6-1.5v-3a1.5 1.5 0 0 0-1.3-1.5l-3-.4a1.5 1.5 0 0 0-1.4.6l-1 1.3a13 13 0 0 1-5.9-5.9l1.3-1a1.5 1.5 0 0 0 .6-1.4l-.4-3A1.5 1.5 0 0 0 6.5 3Z" />
+                  </svg>
+                </span>
+                <span class="dato-texto">
+                  <label>Teléfono</label>
+                  <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
+                </span>
               </li>
             </ul>
 
             <div class="botones-secundarios">
-              <button class="btn-secundario" type="button">Títulos</button>
-              <button class="btn-secundario" type="button">Experiencia laboral</button>
+              <button
+                class="btn-secundario"
+                type="button"
+                [class.btn-secundario--activo]="panel() === 'titulos'"
+                (click)="togglePanel('titulos')"
+              >
+                <span class="btn-secundario-texto">
+                  <span class="btn-secundario-titulo">Títulos</span>
+                  <span class="btn-secundario-sub">Formación académica</span>
+                </span>
+              </button>
+              <button
+                class="btn-secundario"
+                type="button"
+                [class.btn-secundario--activo]="panel() === 'experiencias'"
+                (click)="togglePanel('experiencias')"
+              >
+                <span class="btn-secundario-texto">
+                  <span class="btn-secundario-titulo">Experiencia laboral</span>
+                  <span class="btn-secundario-sub">Trayectoria profesional</span>
+                </span>
+              </button>
+
+              @if (panel() === 'titulos') {
+                <div class="panel-flotante">
+                  <div class="panel-flotante-head">
+                    <h3 class="panel-flotante-titulo">Títulos obtenidos</h3>
+                  </div>
+                  @if (prof.titulos?.length) {
+                    <ul class="panel-lista">
+                      @for (t of prof.titulos; track t.id ?? $index) {
+                        <li class="panel-item">
+                          <p class="panel-item-titulo">{{ t.nombre_titulo }}</p>
+                          @if (t.institucion_educativa) {
+                            <p class="panel-item-institucion">{{ t.institucion_educativa }}</p>
+                          }
+                          @if (t.fecha_obtencion) {
+                            <p class="panel-item-fecha">{{ t.fecha_obtencion }}</p>
+                          }
+                          @if (t.descripcion_titulo) {
+                            <p class="panel-item-desc">{{ t.descripcion_titulo }}</p>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  } @else {
+                    <p class="panel-vacio">No hay títulos cargados.</p>
+                  }
+                </div>
+              } @else if (panel() === 'experiencias') {
+                <div class="panel-flotante">
+                  <div class="panel-flotante-head">
+                    <h3 class="panel-flotante-titulo">Experiencia laboral</h3>
+                  </div>
+                  @if (prof.experiencias?.length) {
+                    <ul class="panel-lista">
+                      @for (e of prof.experiencias; track e.id ?? $index) {
+                        <li class="panel-item">
+                          <p class="panel-item-titulo">{{ e.titulo_experiencia }}</p>
+                          @if (e.institucion_experiencia) {
+                            <p class="panel-item-institucion">{{ e.institucion_experiencia }}</p>
+                          }
+                          @if (e.fecha_inicio || e.fecha_fin) {
+                            <p class="panel-item-fecha">{{ e.fecha_inicio }}@if (e.fecha_fin) { — {{ e.fecha_fin }} }</p>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  } @else {
+                    <p class="panel-vacio">No hay experiencia cargada.</p>
+                  }
+                </div>
+              }
             </div>
           </div>
         </section>

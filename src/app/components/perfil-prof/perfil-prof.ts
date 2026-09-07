@@ -18,6 +18,17 @@ export class PerfilProfesional implements OnInit {
   cargando = signal<boolean>(true);
   error = signal<string | null>(null);
 
+  /** Panel flotante abierto: 'titulos', 'experiencias' o null */
+  panel = signal<'titulos' | 'experiencias' | null>(null);
+
+  togglePanel(seccion: 'titulos' | 'experiencias'): void {
+    this.panel.update((actual) => (actual === seccion ? null : seccion));
+  }
+
+  cerrarPanel(): void {
+    this.panel.set(null);
+  }
+
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
 
