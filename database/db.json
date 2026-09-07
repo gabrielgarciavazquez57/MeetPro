@@ -1,94 +1,228 @@
 {
   "users": [
     {
-      "username": "pepe555",
-      "password": "pepe123456",
+      "username": "jreyes",
+      "password": "Jreyes#2026",
       "isProfesional": true,
-      "name": "Pepe",
+      "name": "José",
       "lastname": "Reyes",
-      "dni": "3454678",
-      "email": "pepe5@gmail.com",
-      "phoneNumber": "55555555555",
-      "age": 77,
+      "dni": "34546789",
+      "email": "jose.reyes@meetpro.com",
+      "phoneNumber": "1145551234",
+      "age": 41,
       "gender": "Masculino",
-      "nationality": "Australia",
-      "dateOfBirth": "2000-05-04T00:00:00.000Z",
+      "nationality": "Argentina",
+      "dateOfBirth": "1985-05-04T00:00:00.000Z",
       "address": {
-        "address": "av pepe",
-        "city": "pep city",
-        "province": "pepe state",
+        "address": "Av. Corrientes 1234",
+        "city": "CABA",
+        "province": "Buenos Aires",
         "country": "Argentina",
-        "zipCode": "p5555"
+        "zipCode": "C1043"
       },
       "id": "vsvLADccdcM"
     },
     {
-      "username": "dsgsgsgd",
-      "password": "uioplkjuioplkj",
+      "username": "ncabrera",
+      "password": "Ncabrera#2026",
       "isProfesional": true,
-      "name": "Pepe",
-      "lastname": "Reyes",
-      "dni": "55555555",
-      "email": "pepe5@gmail.com",
-      "phoneNumber": "55555555555",
-      "age": 9,
-      "gender": "Masculino",
-      "nationality": "Azerbaijan",
-      "dateOfBirth": "2026-09-25T00:00:00.000Z",
+      "name": "Natalia",
+      "lastname": "Cabrera",
+      "dni": "35678912",
+      "email": "natalia.cabrera@meetpro.com",
+      "phoneNumber": "1145556789",
+      "age": 29,
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1996-09-25T00:00:00.000Z",
       "address": {
-        "address": "av pepe",
-        "city": "pep city",
-        "province": "pepe state",
+        "address": "Av. Santa Fe 4520",
+        "city": "CABA",
+        "province": "Buenos Aires",
         "country": "Argentina",
-        "zipCode": "p5555"
+        "zipCode": "C1425"
       },
       "id": "vOprp3jdKHo"
+    },
+    {
+      "username": "mlopez",
+      "password": "Mlopez#2026",
+      "isProfesional": true,
+      "name": "Marina",
+      "lastname": "López",
+      "dni": "38765432",
+      "email": "marina.lopez@meetpro.com",
+      "phoneNumber": "1145678923",
+      "age": 34,
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1992-03-15T00:00:00.000Z",
+      "address": {
+        "address": "Calle Falsa 123",
+        "city": "CABA",
+        "province": "Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "C1425"
+      },
+      "id": "mlz789xyz01"
     }
   ],
   "profesionales": [
     {
       "profesional_userData": {
-        "username": "pepe555",
-        "password": "pepe123456",
+        "username": "jreyes",
+        "password": "Jreyes#2026",
         "isProfesional": true,
-        "name": "Pepe",
+        "name": "José",
         "lastname": "Reyes",
-        "dni": "3454678",
-        "email": "pepe5@gmail.com",
-        "phoneNumber": "55555555555",
-        "age": 77,
+        "dni": "34546789",
+        "email": "jose.reyes@meetpro.com",
+        "phoneNumber": "1145551234",
+        "age": 41,
         "gender": "Masculino",
-        "nationality": "Australia",
-        "dateOfBirth": "2000-05-04T00:00:00.000Z",
+        "nationality": "Argentina",
+        "dateOfBirth": "1985-05-04T00:00:00.000Z",
         "address": {
-          "address": "av pepe",
-          "city": "pep city",
-          "province": "pepe state",
+          "address": "Av. Corrientes 1234",
+          "city": "CABA",
+          "province": "Buenos Aires",
           "country": "Argentina",
-          "zipCode": "p5555"
+          "zipCode": "C1043"
         },
         "id": "vsvLADccdcM"
       },
-      "profession": "Programador",
+      "profession": "Desarrollador de Software",
       "professionalId": "12345",
-      "descriptionprofesional": "Soy prog",
+      "descriptionprofesional": "Desarrollador full-stack con experiencia en aplicaciones web escalables y arquitecturas backend.",
       "titulos": [
         {
-          "nombre_titulo": "progrmaador",
-          "descripcion_titulo": "pp",
-          "fecha_obtencion": "2026-09-01",
-          "institucion_educativa": "utn"
+          "nombre_titulo": "Ingeniería en Sistemas de Información",
+          "descripcion_titulo": "Título de grado orientado al desarrollo de software y bases de datos",
+          "fecha_obtencion": "2010-12-15",
+          "institucion_educativa": "Universidad Tecnológica Nacional"
         }
       ],
       "experiencias": [
         {
-          "titulo_experiencia": "progrmador jr",
-          "institucion_experiencia": "ibm",
-          "fecha_inicio": "2026-09-02",
-          "fecha_fin": "2026-09-03"
+          "titulo_experiencia": "Desarrollador Backend",
+          "institucion_experiencia": "IBM Argentina",
+          "fecha_inicio": "2012-03-01",
+          "fecha_fin": "2018-11-30"
+        },
+        {
+          "titulo_experiencia": "Desarrollador Full-Stack Senior",
+          "institucion_experiencia": "Globant",
+          "fecha_inicio": "2018-12-01",
+          "fecha_fin": "2026-09-01"
         }
       ],
       "id": "WNgVuw5iIjs"
+    },
+    {
+      "profesional_userData": {
+        "username": "ncabrera",
+        "password": "Ncabrera#2026",
+        "isProfesional": true,
+        "name": "Natalia",
+        "lastname": "Cabrera",
+        "dni": "35678912",
+        "email": "natalia.cabrera@meetpro.com",
+        "phoneNumber": "1145556789",
+        "age": 29,
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1996-09-25T00:00:00.000Z",
+        "address": {
+          "address": "Av. Santa Fe 4520",
+          "city": "CABA",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "C1425"
+        },
+        "id": "vOprp3jdKHo"
+      },
+      "profession": "Diseñadora UX/UI",
+      "professionalId": "54321",
+      "descriptionprofesional": "Diseñadora especializada en experiencia de usuario para productos digitales, con foco en accesibilidad.",
+      "titulos": [
+        {
+          "nombre_titulo": "Licenciatura en Diseño Gráfico",
+          "descripcion_titulo": "Título de grado con orientación en diseño digital",
+          "fecha_obtencion": "2019-07-10",
+          "institucion_educativa": "Universidad de Buenos Aires"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Diseñadora UX Junior",
+          "institucion_experiencia": "Mercado Libre",
+          "fecha_inicio": "2019-08-01",
+          "fecha_fin": "2022-02-28"
+        },
+        {
+          "titulo_experiencia": "Diseñadora UX/UI Senior",
+          "institucion_experiencia": "Despegar.com",
+          "fecha_inicio": "2022-03-01",
+          "fecha_fin": "2026-09-01"
+        }
+      ],
+      "id": "dcb321nat05"
+    },
+    {
+      "profesional_userData": {
+        "username": "mlopez",
+        "password": "Mlopez#2026",
+        "isProfesional": true,
+        "name": "Marina",
+        "lastname": "López",
+        "dni": "38765432",
+        "email": "marina.lopez@meetpro.com",
+        "phoneNumber": "1145678923",
+        "age": 34,
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1992-03-15T00:00:00.000Z",
+        "address": {
+          "address": "Calle Falsa 123",
+          "city": "CABA",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "C1425"
+        },
+        "id": "mlz789xyz01"
+      },
+      "profession": "Abogada",
+      "professionalId": "67890",
+      "descriptionprofesional": "Especialista en derecho laboral con más de 8 años de experiencia asesorando empresas y trabajadores.",
+      "titulos": [
+        {
+          "nombre_titulo": "Abogacía",
+          "descripcion_titulo": "Título de grado en Abogacía",
+          "fecha_obtencion": "2015-12-10",
+          "institucion_educativa": "Universidad de Buenos Aires"
+        },
+        {
+          "nombre_titulo": "Especialización en Derecho Laboral",
+          "descripcion_titulo": "Posgrado orientado a litigios laborales",
+          "fecha_obtencion": "2018-06-20",
+          "institucion_educativa": "Universidad de Palermo"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Abogada Junior",
+          "institucion_experiencia": "Estudio Jurídico Pérez & Asoc.",
+          "fecha_inicio": "2016-02-01",
+          "fecha_fin": "2019-05-31"
+        },
+        {
+          "titulo_experiencia": "Abogada Senior",
+          "institucion_experiencia": "Estudio Jurídico López & Cía.",
+          "fecha_inicio": "2019-06-01",
+          "fecha_fin": "2026-09-01"
+        }
+      ],
+      "id": "abg456def02"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -4,118 +4,75 @@
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else if (profesional(); as prof) {
-    <div class="formulario-profesional">
 
-      <div class="perfil-header">
-        <div class="avatar-perfil">
-          {{ prof.profesional_userData.name?.charAt(0) }}{{ prof.profesional_userData.lastname?.charAt(0) }}
-        </div>
-        <div class="perfil-titulo-grupo">
-          <h1 class="titulo-profesional perfil-nombre">
-            {{ prof.profesional_userData.name }} {{ prof.profesional_userData.lastname }}
-          </h1>
-          <span class="badge-profesion">{{ prof.profession }}</span>
-        </div>
-      </div>
+    <div class="perfil-layout">
 
-      <div class="datos-profesion">
-        <h2 class="titulo-seccion">Datos del profesional</h2>
-        <ul>
-          <li>
-            <label>ID del profesional</label>
-            <span class="valor">{{ prof.professionalId }}</span>
-          </li>
-          <li>
-            <label>Descripción</label>
-            <span class="valor">{{ prof.descriptionprofesional }}</span>
-          </li>
-          <li>
-            <label>Email</label>
-            <span class="valor">{{ prof.profesional_userData.email }}</span>
-          </li>
-          <li>
-            <label>Teléfono</label>
-            <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="datos-titulos">
-        <div class="header-seccion">
-          <h2 class="titulo-seccion">Títulos</h2>
-        </div>
-
-        @if (prof.titulos.length === 0) {
-          <p class="estado-msg">No hay títulos cargados.</p>
-        } @else {
-          @for (titulo of prof.titulos; track titulo.nombre_titulo) {
-            <div class="bloque-item">
-              <div class="bloque-header">
-                <span class="bloque-numero">Título</span>
-              </div>
-              <ul>
-                <li>
-                  <label>Nombre</label>
-                  <span class="valor">{{ titulo.nombre_titulo }}</span>
-                </li>
-                <li>
-                  <label>Descripción</label>
-                  <span class="valor">{{ titulo.descripcion_titulo }}</span>
-                </li>
-                <li class="fila-doble">
-                  <div>
-                    <label>Institución</label>
-                    <span class="valor">{{ titulo.institucion_educativa }}</span>
-                  </div>
-                  <div>
-                    <label>Fecha de obtención</label>
-                    <span class="valor">{{ titulo.fecha_obtencion  }}</span>
-                  </div>
-                </li>
-              </ul>
+      <div class="contenedor-izquierdo">
+        <section class="seccion-foto-datos">
+          <div class="fila-superior">
+            <div class="avatar-perfil">
+              {{ prof.profesional_userData.name?.charAt(0) }}{{ prof.profesional_userData.lastname?.charAt(0) }}
             </div>
-          }
-        }
+            <div class="datos-profesional-grupo">
+              <h1 class="nombre-profesional">
+                {{ prof.profesional_userData.name }} {{ prof.profesional_userData.lastname }}
+              </h1>
+              <p class="subtitulo-profesion">{{ prof.profession }}</p>
+              <p class="descripcion-profesional">{{ prof.descriptionprofesional }}</p>
+            </div>
+          </div>
+
+          <div class="datos-inferior">
+            <ul class="datos-contacto">
+              <li>
+                <label>ID del profesional</label>
+                <span class="valor">{{ prof.professionalId }}</span>
+              </li>
+              <li>
+                <label>Email</label>
+                <span class="valor">{{ prof.profesional_userData.email }}</span>
+              </li>
+              <li>
+                <label>Teléfono</label>
+                <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
+              </li>
+            </ul>
+
+            <div class="botones-secundarios">
+              <button class="btn-secundario" type="button">Títulos</button>
+              <button class="btn-secundario" type="button">Experiencia laboral</button>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <div class="datos-experiencias">
-        <div class="header-seccion">
-          <h2 class="titulo-seccion">Experiencias</h2>
-        </div>
+      <div class="columna-derecha">
+        <button class="tarjeta-accion" type="button">
+          <span class="accion-titulo">Botón Turnos</span>
+        </button>
 
-        @if (prof.experiencias.length === 0) {
-          <p class="estado-msg">No hay experiencias cargadas.</p>
-        } @else {
-          @for (exp of prof.experiencias; track exp.titulo_experiencia) {
-            <div class="bloque-item">
-              <div class="bloque-header">
-                <span class="bloque-numero">Experiencia</span>
-              </div>
-              <ul>
-                <li>
-                  <label>Puesto</label>
-                  <span class="valor">{{ exp.titulo_experiencia }}</span>
-                </li>
-                <li>
-                  <label>Institución</label>
-                  <span class="valor">{{ exp.institucion_experiencia }}</span>
-                </li>
-                <li class="fila-doble">
-                  <div>
-                    <label>Fecha inicio</label>
-                    <span class="valor">{{ exp.fecha_inicio }}</span>
-                  </div>
-                  <div>
-                    <label>Fecha fin</label>
-                    <span class="valor">{{ exp.fecha_fin  }}</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          }
-        }
+        <button class="tarjeta-accion" type="button">
+          <span class="accion-titulo">Contenido Extra $</span>
+        </button>
+
+        <button class="tarjeta-accion" type="button">
+          <span class="accion-titulo">Consulta Online</span>
+        </button>
+
+        <button class="tarjeta-accion" type="button">
+          <span class="accion-titulo">Informaicon extra del Profesional</span>
+        </button>
+
+        <button class="tarjeta-accion" type="button">
+          <span class="accion-titulo">Proyectos Profesional / Valoraciones de los clientes</span>
+        </button>
+
+        <button class="tarjeta-accion" type="button">
+          <span class="accion-titulo">Consultas Profesional / Cliente</span>
+        </button>
       </div>
 
     </div>
+
   }
 </div>

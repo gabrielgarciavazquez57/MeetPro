@@ -4,8 +4,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(
+    90deg,
+    #c3ccda 0,
+    #c3ccda calc(50% - 440px),
+    #edf1f7 calc(50% - 440px),
+    #edf1f7 calc(50% + 440px),
+    #c3ccda calc(50% + 440px),
+    #c3ccda 100%
+  );
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -22,215 +30,264 @@
   color: #dc2626;
 }
 
-.formulario-profesional {
+/* Layout general: una columna, apilado verticalmente */
+.perfil-layout {
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Contenedor de datos del profesional */
+.contenedor-izquierdo {
   background-color: #ffffff;
-  border-radius: 16px;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
-  padding: 2.5rem;
   border: 1px solid #eef0f3;
+  overflow: hidden;
 }
 
-.perfil-header {
+.contenedor-izquierdo section {
+  padding: 2rem;
+}
+
+.seccion-foto-datos {
+  background-color: #ffffff;
   display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #eef0f3;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fila-superior {
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+
+/* Datos de contacto a la izquierda + botones a la derecha */
+.datos-inferior {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.botones-secundarios {
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-left: 1.75rem;
+  border-left: 1px solid #d8dde4;
+}
+
+.btn-secundario {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #2563eb;
+  background-color: #ffffff;
+  border: 1.5px solid #e2e5ea;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.btn-secundario:hover {
+  border-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+}
+
+.btn-secundario:active {
+  transform: scale(0.98);
 }
 
 .avatar-perfil {
   flex-shrink: 0;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
+  align-self: flex-start;
+  width: 140px;
+  height: 140px;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
 }
 
-.perfil-titulo-grupo {
+.datos-profesional-grupo {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.55rem;
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
 }
 
-.perfil-nombre {
-  font-size: 1.4rem;
-  margin: 0;
-  text-align: left;
-}
-
-.badge-profesion {
-  align-self: flex-start;
-  font-size: 0.7rem;
+.nombre-profesional {
+  font-size: 1.6rem;
   font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.subtitulo-profesion {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
   color: #2563eb;
-  background-color: #eff4ff;
-  border: 1.5px solid #dbe6fe;
-  border-radius: 999px;
-  padding: 0.2rem 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 
-.titulo-seccion {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0;
-  padding-bottom: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
+.descripcion-profesional {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0.35rem 0 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid #d8dde4;
 }
 
-.titulo-seccion::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 2.25rem;
-  height: 2px;
-  background-color: #2563eb;
-}
-
-.datos-profesion,
-.datos-titulos,
-.datos-experiencias {
-  padding-top: 2rem;
-  border-top: 1px solid #e2e5ea;
-}
-
-.datos-profesion {
-  padding-top: 0;
-  border-top: none;
-}
-
-.datos-profesion .titulo-seccion {
-  margin-bottom: 1.25rem;
-  border-bottom: 2px solid #eef0f3;
-}
-
-.datos-profesion > ul {
+.datos-contacto {
+  flex: 1;
+  min-width: 0;
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
 }
 
-.datos-profesion li {
+.datos-contacto li {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #e4e8ed;
+}
+
+.datos-contacto li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 label {
-  font-size: 0.8rem;
+  flex-shrink: 0;
+  width: 104px;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: #4b5563;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .valor {
   font-size: 0.9rem;
-  font-weight: 500;
-  color: #111827;
+  font-weight: 600;
+  color: #0f172a;
+  word-break: break-word;
 }
 
-.header-seccion {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid #eef0f3;
-  padding-bottom: 0.65rem;
-  margin-bottom: 1.25rem;
+/* Botones debajo de la información del profesional: 3 columnas x 2 filas */
+.columna-derecha {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
 }
 
-.header-seccion .titulo-seccion {
-  padding-bottom: 0;
-}
-
-.header-seccion .titulo-seccion::after {
-  bottom: -0.7rem;
-}
-
-.bloque-item {
-  background-color: #f8fafc;
+.tarjeta-accion {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 210px;
+  justify-self: center;
+  background-color: #ffffff;
   border: 1.5px solid #e2e5ea;
-  border-radius: 12px;
-  padding: 1.35rem;
-  margin-bottom: 1.1rem;
-}
-
-.bloque-item:last-child {
-  margin-bottom: 0;
-}
-
-.bloque-item > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-}
-
-.bloque-item li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.bloque-header {
+  padding: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
 }
 
-.bloque-numero {
-  font-size: 0.75rem;
+.tarjeta-accion:hover {
+  border-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+}
+
+.tarjeta-accion:active {
+  transform: scale(0.98);
+}
+
+.accion-titulo {
+  font-size: 0.85rem;
   font-weight: 700;
   color: #2563eb;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  line-height: 1.35;
 }
 
-.fila-doble {
-  flex-direction: row !important;
-  gap: 1rem;
-}
-
-.fila-doble > div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
+/* Responsive */
 @media (max-width: 600px) {
-  .formulario-profesional {
-    padding: 1.5rem;
-    border-radius: 12px;
+  .fondo-profesional {
+    padding: 1.5rem 1rem;
   }
 
-  .datos-titulos,
-  .datos-experiencias {
-    padding-top: 1.75rem;
+  .contenedor-izquierdo section {
+    padding: 1.35rem;
   }
 
-  .fila-doble {
-    flex-direction: column !important;
+  .fila-superior {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .avatar-perfil {
+    align-self: center;
+    width: 120px;
+    height: 120px;
+    aspect-ratio: unset;
+  }
+
+  .datos-inferior {
+    flex-direction: column;
+  }
+
+  .botones-secundarios {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 0;
+    padding-top: 1.25rem;
+    border-left: none;
+    border-top: 1px solid #d8dde4;
+  }
+
+  .btn-secundario {
+    flex: 1;
+  }
+
+  .datos-contacto li {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  label {
+    width: auto;
+  }
+
+  .columna-derecha {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
