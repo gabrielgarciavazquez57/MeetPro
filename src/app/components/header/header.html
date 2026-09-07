@@ -1,1 +1,36 @@
-<p>header works!</p>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <span class="logo-text">MiApp</span>
+  </div>
+
+  <ul class="navbar-links">
+    <li>
+      <a
+        routerLink="/"
+        routerLinkActive="link-activo"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+      >
+        Inicio
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/CreateUser"
+        routerLinkActive="link-activo"
+        class="nav-link"
+      >
+        Crear Usuario
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/profesionales-lista"
+        routerLinkActive="link-activo"
+        class="nav-link"
+      >
+        Profesionales
+      </a>
+    </li>
+  </ul>
+</nav>

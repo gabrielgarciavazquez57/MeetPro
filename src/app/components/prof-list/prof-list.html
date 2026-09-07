@@ -1,0 +1,44 @@
+<div class="fondo-profesional">
+  <h1 class="titulo-profesional">Profesionales Registrados</h1>
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando profesionales...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else if (profesionales().length === 0) {
+    <p class="estado-msg">No hay profesionales registrados.</p>
+  } @else {
+    <div class="lista-profesionales">
+      @for (prof of profesionales(); track prof.professionalId) {
+        <div class="tarjeta-profesional">
+          <div class="tarjeta-header">
+            <div class="avatar-profesional">
+              {{ prof.profesional_userData?.name?.charAt(0) }}{{ prof.profesional_userData?.lastname?.charAt(0) }}
+            </div>
+            <div class="tarjeta-titulo-grupo">
+              <h2 class="nombre-profesional">
+                {{ prof.profesional_userData?.name }} {{ prof.profesional_userData?.lastname }}
+              </h2>
+              <span class="badge-profesion">{{ prof.profession }}</span>
+            </div>
+          </div>
+
+          <ul class="detalle-profesional">
+            <li>
+              <label>ID del profesional</label>
+              <span class="valor">{{ prof.professionalId }}</span>
+            </li>
+            <li>
+              <label>Descripción</label>
+              <span class="valor descripcion">{{ prof.descriptionprofesional }}</span>
+            </li>
+          </ul>
+
+          <div class="tarjeta-footer">
+           
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
