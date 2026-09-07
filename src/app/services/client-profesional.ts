@@ -15,9 +15,9 @@ export class ClientProfesional {
   }
 
   ///GET - ID
-  getProfesionalByID(id_bus: string | number) { ///Traemos con GET a un profesional por su ID
-    return this.http.get<Profesional>(`${this.url}/${id_bus}`);
-  }
+ getProfesionalByUserID(userId: string | number) {
+  return this.http.get<Profesional[]>(`${this.url}?profesional_userData.id=${userId}`);
+}
 
   ///POST - Agregar Profesional
   addProfesional(new_profesional: Profesional) { ///Agregamos con POST a un nuevo profesional

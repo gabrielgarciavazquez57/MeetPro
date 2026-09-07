@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.fondo-profesional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.estado-msg {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.estado-error {
+  color: #dc2626;
+}
+
+.formulario-profesional {
+  width: 100%;
+  max-width: 700px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 2.5rem;
+  border: 1px solid #eef0f3;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #eef0f3;
+}
+
+.avatar-perfil {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.perfil-titulo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.perfil-nombre {
+  font-size: 1.4rem;
+  margin: 0;
+  text-align: left;
+}
+
+.badge-profesion {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #eff4ff;
+  border: 1.5px solid #dbe6fe;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.titulo-seccion {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  padding-bottom: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.titulo-seccion::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 2.25rem;
+  height: 2px;
+  background-color: #2563eb;
+}
+
+.datos-profesion,
+.datos-titulos,
+.datos-experiencias {
+  padding-top: 2rem;
+  border-top: 1px solid #e2e5ea;
+}
+
+.datos-profesion {
+  padding-top: 0;
+  border-top: none;
+}
+
+.datos-profesion .titulo-seccion {
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid #eef0f3;
+}
+
+.datos-profesion > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.datos-profesion li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.valor {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.header-seccion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #eef0f3;
+  padding-bottom: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.header-seccion .titulo-seccion {
+  padding-bottom: 0;
+}
+
+.header-seccion .titulo-seccion::after {
+  bottom: -0.7rem;
+}
+
+.bloque-item {
+  background-color: #f8fafc;
+  border: 1.5px solid #e2e5ea;
+  border-radius: 12px;
+  padding: 1.35rem;
+  margin-bottom: 1.1rem;
+}
+
+.bloque-item:last-child {
+  margin-bottom: 0;
+}
+
+.bloque-item > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.bloque-item li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bloque-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.bloque-numero {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fila-doble {
+  flex-direction: row !important;
+  gap: 1rem;
+}
+
+.fila-doble > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+@media (max-width: 600px) {
+  .formulario-profesional {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .datos-titulos,
+  .datos-experiencias {
+    padding-top: 1.75rem;
+  }
+
+  .fila-doble {
+    flex-direction: column !important;
+  }
+}

@@ -4,6 +4,7 @@ import { UserForm } from './components/user-form/user-form';
 import { ProfesionalForm } from './components/prof-form/prof-form';
 import { ProfList } from './components/prof-list/prof-list';
 import { PerfilUser } from './components/perfil-user/perfil-user';
+import { PerfilProfesional } from './components/perfil-prof/perfil-prof';
 
 export const routes: Routes = [
   {
@@ -29,5 +30,10 @@ export const routes: Routes = [
   path: 'perfil-user/:id',
   title: 'Perfil de Usuario',
   component: PerfilUser,
+},
+{
+  path: 'perfil-prof/:id',
+  title: 'Perfil Profesional',
+  component: PerfilProfesional,
 }
 ];
