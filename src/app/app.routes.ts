@@ -3,6 +3,7 @@ import { Home } from './components/home/home';
 import { UserForm } from './components/user-form/user-form';
 import { ProfesionalForm } from './components/prof-form/prof-form';
 import { ProfList } from './components/prof-list/prof-list';
+import { PerfilUser } from './components/perfil-user/perfil-user';
 
 export const routes: Routes = [
   {
@@ -23,5 +24,10 @@ export const routes: Routes = [
     path: 'profesionales-lista',
     title: 'Profesionales Lista',
     component: ProfList
-  }
+  },
+  {
+  path: 'perfil-user/:id',
+  title: 'Perfil de Usuario',
+  component: PerfilUser,
+}
 ];

@@ -1,0 +1,71 @@
+<div class="fondo-profesional">
+  @if (cargando()) {
+    <p class="estado-msg">Cargando usuario...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else if (usuario(); as user) {
+    <div class="formulario-profesional">
+      <div class="perfil-header">
+        <div class="avatar-perfil">
+          {{ user.name?.charAt(0) }}{{ user.lastname?.charAt(0) }}
+        </div>
+        <div class="perfil-titulo-grupo">
+          <h1 class="titulo-profesional perfil-nombre">{{ user.name }} {{ user.lastname }}</h1>
+          <span class="badge-profesion">{{ user.isProfesional ? 'Profesional' : 'Usuario' }}</span>
+        </div>
+      </div>
+
+      <div class="datos-profesion">
+        <h2 class="titulo-seccion">Datos personales</h2>
+        <ul>
+          <li>
+            <label>Usuario</label>
+            <span class="valor">{{ user.username }}</span>
+          </li>
+          <li>
+            <label>Email</label>
+            <span class="valor">{{ user.email }}</span>
+          </li>
+          <li>
+            <label>Teléfono</label>
+            <span class="valor">{{ user.phoneNumber }}</span>
+          </li>
+          <li>
+            <label>DNI</label>
+            <span class="valor">{{ user.dni }}</span>
+          </li>
+          <li>
+            <label>Fecha de nacimiento</label>
+            <span class="valor">{{ user.dateOfBirth }}</span>
+          </li>
+          <li>
+            <label>Edad</label>
+            <span class="valor">{{ user.age }}</span>
+          </li>
+          <li>
+            <label>Género</label>
+            <span class="valor">{{ user.gender }}</span>
+          </li>
+          <li>
+            <label>Nacionalidad</label>
+            <span class="valor">{{ user.nationality }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="datos-titulos">
+        <h2 class="titulo-seccion">Dirección</h2>
+        <ul>
+          <li>
+            <label>Dirección completa</label>
+            <span class="valor">{{ user.address}}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="boton-form">
+
+      </div>
+    </div>
+  }
+</div>
