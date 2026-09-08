@@ -1,26 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
 
 .fondo-profesional {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 1rem;
+  padding: 3rem 1.5rem;
   background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .titulo-profesional {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #111827;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0f172a;
   margin-bottom: 2rem;
   text-align: center;
   letter-spacing: -0.02em;
 }
 
 .estado-msg {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: #4b5563;
   text-align: center;
@@ -39,43 +41,43 @@
   gap: 1.5rem;
 }
 
+/* Contenedor de cada profesional */
 .tarjeta-profesional {
+  position: relative;
+  overflow: hidden;
   background-color: #ffffff;
-  border-radius: 16px;
+  border: 1px solid #eef0f3;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
   padding: 1.75rem;
-  border: 1px solid #eef0f3;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .tarjeta-profesional:hover {
-  border-color: #cbd2db;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 16px 36px rgba(15, 23, 42, 0.1);
+  border-color: #2563eb;
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.14);
+  transform: translateY(-2px);
 }
 
 .tarjeta-header {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1rem;
   padding-bottom: 1.15rem;
   margin-bottom: 1.15rem;
-  border-bottom: 2px solid #eef0f3;
+  border-bottom: 1px solid #d8dde4;
 }
 
 .avatar-profesional {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -87,28 +89,26 @@
 .tarjeta-titulo-grupo {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
+  min-width: 0;
 }
 
 .nombre-profesional {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #111827;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .badge-profesion {
   align-self: flex-start;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: #2563eb;
-  background-color: #eff4ff;
-  border: 1.5px solid #dbe6fe;
-  border-radius: 999px;
-  padding: 0.2rem 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 
 .detalle-profesional {
@@ -117,34 +117,47 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
   flex: 1;
 }
 
 .detalle-profesional li {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #e4e8ed;
+}
+
+.detalle-profesional li:first-child {
+  padding-top: 0;
+}
+
+.detalle-profesional li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .detalle-profesional label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #4b5563;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 }
 
 .detalle-profesional .valor {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #111827;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  word-break: break-word;
 }
 
 .detalle-profesional .valor.descripcion {
   font-weight: 400;
-  color: #374151;
-  line-height: 1.45;
+  color: #475569;
+  line-height: 1.55;
+  letter-spacing: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -156,29 +169,30 @@
   justify-content: flex-end;
   margin-top: 1.35rem;
   padding-top: 1.1rem;
-  border-top: 1px solid #eef0f3;
+  border-top: 1px solid #d8dde4;
 }
 
 .btn {
-  border: none;
-  border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   font-family: inherit;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
 }
 
 .btn-agregar {
-  padding: 0.5rem 1.15rem;
+  padding: 0.6rem 1.3rem;
   font-size: 0.8rem;
-  background-color: #eff4ff;
   color: #2563eb;
-  border: 1.5px solid #dbe6fe;
+  background-color: #ffffff;
+  border: 2px solid #e2e5ea;
+  border-left: 4px solid #2563eb;
+  text-decoration: none;
 }
 
 .btn-agregar:hover {
-  background-color: #dbe6fe;
-  border-color: #bfd3fd;
+  background-color: #f5f8ff;
+  border-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.14);
 }
 
 .btn-agregar:active {
