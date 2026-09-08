@@ -8,16 +8,38 @@
   padding: 8.5rem 1.5rem 2.5rem;
   background: linear-gradient(
     90deg,
-    #c3ccda 0,
-    #c3ccda calc(50% - 440px),
+    #cfd6e1 0,
+    #b2bccb calc(50% - 440px),
     #edf1f7 calc(50% - 440px),
     #edf1f7 calc(50% + 440px),
-    #c3ccda calc(50% + 440px),
-    #c3ccda 100%
+    #b2bccb calc(50% + 440px),
+    #cfd6e1 100%
   );
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.fondo-profesional::before {
+  content: 'MeetPro';
+  position: absolute;
+  left: 1.5rem;
+  top: 0;
+  bottom: 0;
+  padding: 2rem 0;
+  box-sizing: border-box;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: justify;
+  text-align-last: justify;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  color: #8b96a7;
+  pointer-events: none;
+  user-select: none;
 }
 
 .estado-msg {

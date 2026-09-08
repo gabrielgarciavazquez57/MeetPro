@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  background-color: #dbe6fb;
+  border-top: 1px solid #c6d8f7;
+  padding: 1.5rem 2rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+}
