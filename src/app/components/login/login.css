@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+.fondo-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border: 1px solid #eef0f3;
+  border-left: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.1);
+  padding: 2.25rem;
+}
+
+.login-titulo {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.login-sub {
+  margin: 0.4rem 0 1.75rem;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.campo input {
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: #0f172a;
+  padding: 0.65rem 0.85rem;
+  background-color: #fbfcfe;
+  border: 1.5px solid #e2e5ea;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.campo input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.campo-error {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #dc2626;
+}
+
+.login-alerta {
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border: 1.5px solid #fecaca;
+}
+
+.btn-login {
+  margin-top: 0.25rem;
+  padding: 0.8rem 1rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #2563eb;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
+}
+
+.btn-login:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.btn-login:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.btn-login:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.login-registro {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.login-registro a {
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.login-registro a:hover {
+  text-decoration: underline;
+}

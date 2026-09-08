@@ -5,11 +5,17 @@ import { ProfesionalForm } from './components/prof-form/prof-form';
 import { ProfList } from './components/prof-list/prof-list';
 import { PerfilUser } from './components/perfil-user/perfil-user';
 import { PerfilProfesional } from './components/perfil-prof/perfil-prof';
+import { Login } from './components/login/login';
 
 export const routes: Routes = [
   {
     path: '',
     component: Home
+  },
+  {
+    path: 'login',
+    title: 'Iniciar sesión',
+    component: Login
   },
   {
     path: 'CreateUser',

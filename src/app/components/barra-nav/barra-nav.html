@@ -17,15 +17,19 @@
     </a>
   </div>
 
-  <a class="barra-nav-avatar" href="#" aria-label="Mi perfil">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
-    </svg>
+  <a class="barra-nav-avatar" [routerLink]="perfilRuta()" aria-label="Ver perfil">
+    @if (iniciales()) {
+      <span class="barra-nav-avatar-iniciales">{{ iniciales() }}</span>
+    } @else {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+      </svg>
+    }
   </a>
 
   <div class="barra-nav-grupo barra-nav-grupo--der">
-    <a class="barra-nav-link" href="#">Ver perfil</a>
+    <a class="barra-nav-link" [routerLink]="perfilRuta()">Ver perfil</a>
   </div>
 </nav>
 

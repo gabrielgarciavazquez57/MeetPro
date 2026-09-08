@@ -1,0 +1,37 @@
+<section class="fondo-login">
+  <div class="login-card">
+    <h1 class="login-titulo">Iniciar sesión</h1>
+    <p class="login-sub">Ingresá con tu usuario y contraseña.</p>
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="login-form">
+      <label class="campo">
+        <span class="campo-label">Usuario</span>
+        <input type="text" formControlName="username" autocomplete="username" />
+        @if (username.touched && username.hasError('required')) {
+          <span class="campo-error">Campo requerido</span>
+        }
+      </label>
+
+      <label class="campo">
+        <span class="campo-label">Contraseña</span>
+        <input type="password" formControlName="password" autocomplete="current-password" />
+        @if (password.touched && password.hasError('required')) {
+          <span class="campo-error">Campo requerido</span>
+        }
+      </label>
+
+      @if (error()) {
+        <p class="login-alerta">{{ error() }}</p>
+      }
+
+      <button type="submit" class="btn-login" [disabled]="cargando()">
+        {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+
+      <p class="login-registro">
+        ¿No tenés cuenta?
+        <a routerLink="/CreateUser">Registrate</a>
+      </p>
+    </form>
+  </div>
+</section>
