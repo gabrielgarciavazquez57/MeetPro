@@ -19,8 +19,8 @@
   gap: 0.5rem;
   width: min(92vw, 839px);
   padding: 0.5rem 1.25rem;
-  background-color: #ffffff;
-  border: 1px solid #eef0f3;
+  background-color: #f6f8fe;
+  border: 1px solid #e6ecfb;
   border-bottom: 4px solid #2563eb;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
@@ -32,7 +32,7 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 7rem;
 }
 
 .barra-nav-grupo--der {
@@ -47,7 +47,7 @@
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  margin: -0.6rem 0;
+  margin: -1.1rem 0 -0.1rem;
   border-radius: 50%;
   background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
   color: #ffffff;
@@ -88,6 +88,9 @@
   color: #475569;
   text-decoration: none;
   padding: 0.5rem 0.9rem;
+  background: none;
+  border: none;
+  cursor: pointer;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
@@ -98,7 +101,6 @@
 
 .barra-nav-link.link-activo {
   color: #1d4ed8;
-  background-color: #eff4ff;
 }
 
 /* Segunda barra, más corta, justo debajo */
@@ -109,7 +111,7 @@
   padding-right: 2.25rem;
   border: none;
   /* tono más apagado: parece que está detrás de la principal */
-  background-color: #dfe4ec;
+  background: linear-gradient(180deg, #e7ebf3 0%, #dbe1ec 100%);
   /* trapecio simétrico, abajo más angosto */
   transform: translateX(-50%);
   clip-path: polygon(0 0, 100% 0, calc(100% - 1.5rem) 100%, 1.5rem 100%);
@@ -127,10 +129,11 @@
 
 .barra-nav-titulo {
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #475569;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5a6577;
   padding: 0.5rem 0.9rem;
 }
 

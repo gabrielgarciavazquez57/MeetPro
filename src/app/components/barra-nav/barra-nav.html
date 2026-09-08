@@ -29,7 +29,9 @@
   </a>
 
   <div class="barra-nav-grupo barra-nav-grupo--der">
-    <a class="barra-nav-link" [routerLink]="perfilRuta()">Ver perfil</a>
+        <a class="barra-nav-link" [routerLink]="perfilRuta()" routerLinkActive="link-activo">Ver perfil</a>
+
+    <button type="button" class="barra-nav-link" (click)="irAlFooter()">Support</button>
   </div>
 </nav>
 

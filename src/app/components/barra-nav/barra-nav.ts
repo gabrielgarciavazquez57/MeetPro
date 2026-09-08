@@ -1,4 +1,5 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Auth } from '../../services/auth';
 
@@ -11,6 +12,14 @@ import { Auth } from '../../services/auth';
 })
 export class BarraNav {
   private readonly auth = inject(Auth);
+  private readonly esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
+
+  irAlFooter(): void {
+    if (!this.esNavegador) {
+      return;
+    }
+    document.querySelector('app-footer')?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
 
   /** Título de la sub-barra */
   titulo = input<string>('Perfil Profesional');
