@@ -1,17 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
 
 .fondo-profesional {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
+  padding: 3rem 1.5rem;
+  background: linear-gradient(
+    90deg,
+    #c3ccda 0,
+    #c3ccda calc(50% - 440px),
+    #edf1f7 calc(50% - 440px),
+    #edf1f7 calc(50% + 440px),
+    #c3ccda calc(50% + 440px),
+    #c3ccda 100%
+  );
   min-height: 100vh;
+  overflow-x: hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .estado-msg {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: #4b5563;
   text-align: center;
@@ -24,101 +34,120 @@
 
 .formulario-profesional {
   width: 100%;
-  max-width: 700px;
+  max-width: 720px;
   background-color: #ffffff;
-  border-radius: 16px;
+  border: 1px solid #eef0f3;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
   padding: 2.5rem;
-  border: 1px solid #eef0f3;
 }
 
+/* Cabecera */
 .perfil-header {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
+  gap: 1.5rem;
   padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #eef0f3;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.perfil-header::before,
+.perfil-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+}
+
+.perfil-header::before {
+  width: 100%;
+  background-color: #334155;
+}
+
+.perfil-header::after {
+  width: 2.25rem;
+  background-color: #2563eb;
 }
 
 .avatar-perfil {
   flex-shrink: 0;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
+  width: 84px;
+  height: 84px;
+  background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
 }
 
 .perfil-titulo-grupo {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.3rem;
+  min-width: 0;
 }
 
 .perfil-nombre {
-  font-size: 1.4rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0f172a;
   margin: 0;
   text-align: left;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .badge-profesion {
   align-self: flex-start;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: #2563eb;
-  background-color: #eff4ff;
-  border: 1.5px solid #dbe6fe;
-  border-radius: 999px;
-  padding: 0.2rem 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 
+/* Títulos de sección */
 .titulo-seccion {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #1f2937;
-  margin: 0;
-  padding-bottom: 0.65rem;
+  color: #0f172a;
+  margin: 0 0 1rem;
+  padding-bottom: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   position: relative;
 }
 
+.titulo-seccion::before,
 .titulo-seccion::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -2px;
-  width: 2.25rem;
+  bottom: 0;
   height: 2px;
+}
+
+.titulo-seccion::before {
+  width: 100%;
+  background-color: #334155;
+}
+
+.titulo-seccion::after {
+  width: 2.25rem;
   background-color: #2563eb;
 }
 
-.datos-profesion,
 .datos-titulos {
-  padding-top: 2rem;
-  border-top: 1px solid #e2e5ea;
-}
-
-.datos-profesion {
-  padding-top: 0;
-  border-top: none;
-}
-
-.datos-profesion .titulo-seccion,
-.datos-titulos .titulo-seccion {
-  margin-bottom: 1.25rem;
-  border-bottom: 2px solid #eef0f3;
+  margin-top: 2rem;
 }
 
 .datos-profesion > ul,
@@ -126,64 +155,142 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 2rem;
 }
 
 .datos-profesion li,
 .datos-titulos li {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e4e8ed;
+}
+
+.datos-titulos li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #4b5563;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .valor {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #111827;
-}
-
-.boton-form {
-  display: flex;
-  justify-content: center;
-  margin-top: 2.75rem;
-  padding-top: 2rem;
-  border-top: 1px solid #eef0f3;
-}
-
-.btn {
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  font-family: inherit;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
-}
-
-.btn-grande {
-  padding: 0.9rem 3rem;
   font-size: 0.95rem;
-  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
-  color: #ffffff;
-  letter-spacing: 0.04em;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  word-break: break-word;
 }
 
-.btn-grande:hover:not(:disabled) {
-  background: linear-gradient(180deg, #3b78f5 0%, #1d4ed8 100%);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.38);
+/* Botones de acción (mismo estilo que perfil profesional) */
+.columna-acciones {
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.tarjeta-accion {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  aspect-ratio: 5 / 4;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2.5px solid #e2e5ea;
+  border-left: 6px solid #2563eb;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  text-decoration: none;
+  color: #1e293b;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
+}
+
+.tarjeta-accion:hover {
+  border-color: #2563eb;
+  background-color: #f7faff;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.14);
+  transform: translateY(-2px);
+}
+
+.tarjeta-accion:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.accion-titulo {
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 5px #ffffff;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.tarjeta-accion:hover .accion-titulo {
+  background-color: #f7faff;
+  box-shadow: 0 0 0 5px #f7faff;
+}
+
+.accion-deco {
+  position: absolute;
+  left: -38px;
+  bottom: -48px;
+  width: 150px;
+  height: 150px;
+  color: #e8eefc;
+  pointer-events: none;
+  transition: color 0.15s ease;
+}
+
+.accion-deco svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tarjeta-accion:hover .accion-deco {
+  color: #bcd4fb;
 }
 
 @media (max-width: 600px) {
   .formulario-profesional {
     padding: 1.5rem;
-    border-radius: 12px;
+  }
+
+  .perfil-header {
+    gap: 1rem;
+  }
+
+  .avatar-perfil {
+    width: 64px;
+    height: 64px;
+    font-size: 1.25rem;
+  }
+
+  .datos-profesion > ul {
+    grid-template-columns: 1fr;
+  }
+
+  .columna-acciones {
+    grid-template-columns: 1fr;
   }
 }
