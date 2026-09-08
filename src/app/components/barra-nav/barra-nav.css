@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:host {
+  display: block;
+}
+
+/* Barra de navegación flotante */
+.barra-nav {
+  position: absolute;
+  /* anclada a esa posición de la página (se desplaza con el scroll) */
+  top: 3.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: min(92vw, 839px);
+  padding: 0.5rem 1.25rem;
+  background-color: #ffffff;
+  border: 1px solid #eef0f3;
+  border-bottom: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.14);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.barra-nav-grupo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.barra-nav-grupo--der {
+  justify-content: flex-end;
+}
+
+/* Círculo central con la foto de perfil */
+.barra-nav-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin: -0.6rem 0;
+  border-radius: 50%;
+  background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.barra-nav-avatar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.4);
+}
+
+.barra-nav-avatar svg {
+  width: 1.55rem;
+  height: 1.55rem;
+}
+
+.barra-nav-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.barra-nav-link {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #475569;
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.barra-nav-link:hover {
+  color: #2563eb;
+  background-color: #f5f8ff;
+}
+
+.barra-nav-link.link-activo {
+  color: #1d4ed8;
+  background-color: #eff4ff;
+}
+
+/* Segunda barra, más corta, justo debajo */
+.barra-nav--sub {
+  top: 7rem;
+  width: min(70vw, 520px);
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+  border: none;
+  /* tono más apagado: parece que está detrás de la principal */
+  background-color: #dfe4ec;
+  /* trapecio simétrico, abajo más angosto */
+  transform: translateX(-50%);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 1.5rem) 100%, 1.5rem 100%);
+  /* línea azul fina en los costados y abajo (sigue la diagonal) + sombra */
+  filter:
+    drop-shadow(1.5px 0 0 #93b4f5)
+    drop-shadow(-1.5px 0 0 #93b4f5)
+    drop-shadow(0 1.5px 0 #93b4f5)
+    drop-shadow(0 8px 20px rgba(15, 23, 42, 0.1));
+}
+
+.barra-nav--sub {
+  justify-content: center;
+}
+
+.barra-nav-titulo {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #475569;
+  padding: 0.5rem 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .barra-nav {
+    gap: 0.25rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .barra-nav-link {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.65rem;
+  }
+}

@@ -1,0 +1,34 @@
+<nav class="barra-nav">
+  <div class="barra-nav-grupo">
+    <a
+      routerLink="/"
+      routerLinkActive="link-activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="barra-nav-link"
+    >
+      Inicio
+    </a>
+    <a
+      routerLink="/profesionales-lista"
+      routerLinkActive="link-activo"
+      class="barra-nav-link"
+    >
+      Profesionales
+    </a>
+  </div>
+
+  <a class="barra-nav-avatar" href="#" aria-label="Mi perfil">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+    </svg>
+  </a>
+
+  <div class="barra-nav-grupo barra-nav-grupo--der">
+    <a class="barra-nav-link" href="#">Ver perfil</a>
+  </div>
+</nav>
+
+<nav class="barra-nav barra-nav--sub">
+  <span class="barra-nav-titulo">Perfil Profesional</span>
+</nav>

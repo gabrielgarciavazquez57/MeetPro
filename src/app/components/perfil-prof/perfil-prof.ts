@@ -2,11 +2,12 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Profesional } from '../../interfaces/profesional';
+import { BarraNav } from '../barra-nav/barra-nav';
 
 @Component({
   selector: 'app-perfil-profesional',
   standalone: true,
-  imports: [],
+  imports: [BarraNav],
   templateUrl: './perfil-prof.html',
   styleUrl: './perfil-prof.css',
 })
