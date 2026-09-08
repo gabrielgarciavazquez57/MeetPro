@@ -17,29 +17,7 @@
   );
   min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
-.fondo-profesional::before {
-  content: 'MeetPro';
-  position: absolute;
-  left: 1.5rem;
-  top: 0;
-  bottom: 0;
-  padding: 2rem 0;
-  box-sizing: border-box;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  text-align: justify;
-  text-align-last: justify;
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 1.15rem;
-  text-transform: uppercase;
-  color: #8b96a7;
-  pointer-events: none;
-  user-select: none;
 }
 
 .estado-msg {
