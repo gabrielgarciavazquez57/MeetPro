@@ -58,9 +58,7 @@ export class Login {
         }
 
         this.auth.iniciarSesion(user);
-
-        const ruta = user.isProfesional ? '/perfil-prof' : '/perfil-user';
-        this.router.navigate([ruta, user.id]);
+        this.router.navigate(['/profesionales-lista']);
       },
       error: (err) => {
         console.error('Error al iniciar sesión:', err);

@@ -90,6 +90,15 @@
   transform: scale(0.98);
 }
 
+.btn-desactivado {
+  color: #94a3b8;
+  background-color: #f1f3f6;
+  border-color: #e2e5ea;
+  border-left-color: #cbd2db;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 @media (max-width: 600px) {
   .contenido-home {
     padding: 1.75rem;
