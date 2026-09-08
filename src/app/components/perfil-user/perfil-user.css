@@ -23,7 +23,7 @@
 .estado-msg {
   font-size: 0.92rem;
   font-weight: 500;
-  color: #4b5563;
+  color: #475569;
   text-align: center;
   margin-top: 1rem;
 }
@@ -36,7 +36,7 @@
   width: 100%;
   max-width: 720px;
   background-color: #ffffff;
-  border: 1px solid #eef0f3;
+  border: 1px solid #e2e8f0;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
@@ -166,7 +166,7 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.75rem 0;
-  border-bottom: 1px solid #e4e8ed;
+  border-bottom: 1px solid #d0d7e2;
 }
 
 .datos-titulos li:last-child {
@@ -177,7 +177,7 @@
 label {
   font-size: 0.68rem;
   font-weight: 700;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -207,7 +207,7 @@ label {
   aspect-ratio: 5 / 4;
   width: 100%;
   background-color: #ffffff;
-  border: 2.5px solid #e2e5ea;
+  border: 2.5px solid #d0d7e2;
   border-left: 6px solid #2563eb;
   padding: 1rem;
   display: flex;

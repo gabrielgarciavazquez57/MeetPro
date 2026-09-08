@@ -46,7 +46,7 @@
 .datos-titulos,
 .datos-experiencias {
   background-color: #ffffff;
-  border: 1px solid #eef0f3;
+  border: 1px solid #e2e8f0;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
@@ -140,7 +140,7 @@
 label {
   font-size: 0.68rem;
   font-weight: 700;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -153,7 +153,7 @@ textarea {
   font-size: 0.9rem;
   font-family: inherit;
   font-weight: 500;
-  border: 1.5px solid #e2e5ea;
+  border: 1.5px solid #d0d7e2;
   background-color: #fbfcfe;
   color: #0f172a;
   outline: none;
@@ -163,12 +163,12 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #9ca3af;
+  color: #64748b;
 }
 
 input:hover,
 textarea:hover {
-  border-color: #cbd2db;
+  border-color: #9aa7ba;
 }
 
 input:focus,
@@ -221,7 +221,7 @@ span::before {
 /* Bloques repetibles (título / experiencia) */
 .bloque-item {
   background-color: #fbfcfe;
-  border: 1.5px solid #e2e5ea;
+  border: 1.5px solid #d0d7e2;
   border-left: 4px solid #2563eb;
   padding: 1.35rem;
   margin-bottom: 1.1rem;
@@ -245,7 +245,7 @@ span::before {
   gap: 1rem;
   padding-bottom: 0.85rem;
   margin-bottom: 1.1rem;
-  border-bottom: 1px solid #e4e8ed;
+  border-bottom: 1px solid #d0d7e2;
 }
 
 .bloque-numero {
@@ -328,7 +328,7 @@ span::before {
   font-size: 0.9rem;
   color: #2563eb;
   background-color: #ffffff;
-  border: 2px solid #e2e5ea;
+  border: 2px solid #d0d7e2;
   border-left: 4px solid #2563eb;
   letter-spacing: 0.05em;
 }
@@ -344,9 +344,9 @@ span::before {
 }
 
 .btn-grande:disabled {
-  color: #94a3b8;
-  border-color: #e2e5ea;
-  border-left-color: #cbd2db;
+  color: #64748b;
+  border-color: #d0d7e2;
+  border-left-color: #9aa7ba;
   cursor: not-allowed;
   opacity: 0.7;
 }

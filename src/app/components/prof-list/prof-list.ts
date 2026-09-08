@@ -23,6 +23,7 @@ export class ProfList implements OnInit {
   ciudadFiltro = signal('');
   profesionFiltro = signal('');
   idFiltro = signal('');
+  nombreFiltro = signal('');
 
   readonly paises = computed(() => {
     const set = new Set<string>();
@@ -49,13 +50,18 @@ export class ProfList implements OnInit {
     const ciudad = this.ciudadFiltro();
     const profesion = this.profesionFiltro().trim().toLowerCase();
     const id = this.idFiltro().trim().toLowerCase();
+    const nombre = this.nombreFiltro().trim().toLowerCase();
 
     return this.profesionales().filter((p) => {
       const addr = p.profesional_userData?.address;
+      const nombreCompleto = `${p.profesional_userData?.name ?? ''} ${p.profesional_userData?.lastname ?? ''}`
+        .toLowerCase()
+        .trim();
       if (pais && addr?.country !== pais) return false;
       if (ciudad && addr?.city !== ciudad) return false;
       if (profesion && !(p.profession ?? '').toLowerCase().includes(profesion)) return false;
       if (id && !String(p.professionalId ?? '').toLowerCase().includes(id)) return false;
+      if (nombre && !nombreCompleto.includes(nombre)) return false;
       return true;
     });
   });
@@ -65,7 +71,8 @@ export class ProfList implements OnInit {
       !!this.paisFiltro() ||
       !!this.ciudadFiltro() ||
       !!this.profesionFiltro().trim() ||
-      !!this.idFiltro().trim(),
+      !!this.idFiltro().trim() ||
+      !!this.nombreFiltro().trim(),
   );
 
   limpiarFiltros(): void {
@@ -73,6 +80,7 @@ export class ProfList implements OnInit {
     this.ciudadFiltro.set('');
     this.profesionFiltro.set('');
     this.idFiltro.set('');
+    this.nombreFiltro.set('');
   }
 
   onPaisChange(valor: string): void {

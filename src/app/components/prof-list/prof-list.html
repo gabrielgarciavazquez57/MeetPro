@@ -71,6 +71,36 @@
         </div>
 
         <label class="filtro-campo">
+          <span class="filtro-label">ID del profesional</span>
+          <input
+            type="text"
+            placeholder="Buscar por ID..."
+            [ngModel]="idFiltro()"
+            (ngModelChange)="idFiltro.set($event)"
+          />
+        </label>
+
+        <label class="filtro-campo">
+          <span class="filtro-label">Nombre y apellido</span>
+          <input
+            type="text"
+            placeholder="Buscar por nombre..."
+            [ngModel]="nombreFiltro()"
+            (ngModelChange)="nombreFiltro.set($event)"
+          />
+        </label>
+
+        <label class="filtro-campo">
+          <span class="filtro-label">Profesión</span>
+          <input
+            type="text"
+            placeholder="Buscar profesión..."
+            [ngModel]="profesionFiltro()"
+            (ngModelChange)="profesionFiltro.set($event)"
+          />
+        </label>
+
+        <label class="filtro-campo">
           <span class="filtro-label">País</span>
           <select
             [ngModel]="paisFiltro()"
@@ -94,26 +124,6 @@
               <option [value]="c">{{ c }}</option>
             }
           </select>
-        </label>
-
-        <label class="filtro-campo">
-          <span class="filtro-label">Profesión</span>
-          <input
-            type="text"
-            placeholder="Buscar profesión..."
-            [ngModel]="profesionFiltro()"
-            (ngModelChange)="profesionFiltro.set($event)"
-          />
-        </label>
-
-        <label class="filtro-campo">
-          <span class="filtro-label">ID del profesional</span>
-          <input
-            type="text"
-            placeholder="Buscar por ID..."
-            [ngModel]="idFiltro()"
-            (ngModelChange)="idFiltro.set($event)"
-          />
         </label>
 
         <p class="filtro-resultado">
