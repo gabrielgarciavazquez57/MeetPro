@@ -52,6 +52,7 @@
   border-radius: 50%;
   background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
   color: #ffffff;
+  text-decoration: none;
   border: 3px solid #ffffff;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   overflow: hidden;
@@ -97,7 +98,6 @@
 
 .barra-nav-link:hover {
   color: #2563eb;
-  background-color: #f5f8ff;
 }
 
 .barra-nav-link.link-activo {
