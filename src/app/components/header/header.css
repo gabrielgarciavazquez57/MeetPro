@@ -27,6 +27,36 @@
   padding: 0;
 }
 
+.navbar-sesion {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.navbar-usuario {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.btn-cerrar-sesion {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #ffffff;
+  border: 2px solid #e2e5ea;
+  border-left: 4px solid #2563eb;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: #f5f8ff;
+  border-color: #2563eb;
+}
+
 .nav-link {
   display: inline-block;
   padding: 0.55rem 1.1rem;

@@ -9,42 +9,119 @@
   } @else if (profesionales().length === 0) {
     <p class="estado-msg">No hay profesionales registrados.</p>
   } @else {
-    <div class="lista-profesionales">
-      @for (prof of profesionales(); track prof.professionalId) {
-        <div class="tarjeta-profesional">
-          <div class="tarjeta-header">
-            <div class="avatar-profesional">
-              {{ prof.profesional_userData?.name?.charAt(0) }}{{ prof.profesional_userData?.lastname?.charAt(0) }}
-            </div>
-            <div class="tarjeta-titulo-grupo">
-              <h2 class="nombre-profesional">
-                {{ prof.profesional_userData?.name }} {{ prof.profesional_userData?.lastname }}
-              </h2>
-              <span class="badge-profesion">{{ prof.profession }}</span>
-            </div>
-          </div>
+    <div class="lista-layout">
 
-          <ul class="detalle-profesional">
-            <li>
-              <label>ID del profesional</label>
-              <span class="valor">{{ prof.professionalId }}</span>
-            </li>
-            <li>
-              <label>Descripción</label>
-              <span class="valor descripcion">{{ prof.descriptionprofesional }}</span>
-            </li>
-          </ul>
+      <div class="lista-col">
+        @if (profesionalesFiltrados().length === 0) {
+          <p class="estado-msg">Ningún profesional coincide con los filtros.</p>
+        } @else {
+          <div class="lista-profesionales">
+            @for (prof of profesionalesFiltrados(); track prof.professionalId) {
+              <div class="tarjeta-profesional">
+                <div class="tarjeta-header">
+                  <div class="avatar-profesional">
+                    {{ prof.profesional_userData?.name?.charAt(0) }}{{ prof.profesional_userData?.lastname?.charAt(0) }}
+                  </div>
+                  <div class="tarjeta-titulo-grupo">
+                    <h2 class="nombre-profesional">
+                      {{ prof.profesional_userData?.name }} {{ prof.profesional_userData?.lastname }}
+                    </h2>
+                    <span class="badge-profesion">{{ prof.profession }}</span>
+                  </div>
+                </div>
 
-          <div class="tarjeta-footer">
-            <a
-              class="btn btn-agregar"
-              [href]="'/perfil-prof/' + prof.profesional_userData.id"
-            >
-              Ver perfil
-            </a>
+                <ul class="detalle-profesional">
+                  <li>
+                    <label>ID del profesional</label>
+                    <span class="valor">{{ prof.professionalId }}</span>
+                  </li>
+                  <li>
+                    <label>Ubicación</label>
+                    <span class="valor">
+                      {{ prof.profesional_userData?.address?.city }}, {{ prof.profesional_userData?.address?.country }}
+                    </span>
+                  </li>
+                  <li>
+                    <label>Descripción</label>
+                    <span class="valor descripcion">{{ prof.descriptionprofesional }}</span>
+                  </li>
+                </ul>
+
+                <div class="tarjeta-footer">
+                  <a
+                    class="btn btn-agregar"
+                    [href]="'/perfil-prof/' + prof.profesional_userData.id"
+                  >
+                    Ver perfil
+                  </a>
+                </div>
+              </div>
+            }
           </div>
+        }
+      </div>
+
+      <div class="filtros-col">
+      <aside class="panel-filtros">
+        <div class="panel-filtros-head">
+          <h2 class="panel-filtros-titulo">Filtros</h2>
+          @if (hayFiltros()) {
+            <button type="button" class="btn-limpiar" (click)="limpiarFiltros()">Limpiar</button>
+          }
         </div>
-      }
+
+        <label class="filtro-campo">
+          <span class="filtro-label">País</span>
+          <select
+            [ngModel]="paisFiltro()"
+            (ngModelChange)="onPaisChange($event)"
+          >
+            <option value="">Todos</option>
+            @for (p of paises(); track p) {
+              <option [value]="p">{{ p }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="filtro-campo">
+          <span class="filtro-label">Ciudad</span>
+          <select
+            [ngModel]="ciudadFiltro()"
+            (ngModelChange)="ciudadFiltro.set($event)"
+          >
+            <option value="">Todas</option>
+            @for (c of ciudades(); track c) {
+              <option [value]="c">{{ c }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="filtro-campo">
+          <span class="filtro-label">Profesión</span>
+          <input
+            type="text"
+            placeholder="Buscar profesión..."
+            [ngModel]="profesionFiltro()"
+            (ngModelChange)="profesionFiltro.set($event)"
+          />
+        </label>
+
+        <label class="filtro-campo">
+          <span class="filtro-label">ID del profesional</span>
+          <input
+            type="text"
+            placeholder="Buscar por ID..."
+            [ngModel]="idFiltro()"
+            (ngModelChange)="idFiltro.set($event)"
+          />
+        </label>
+
+        <p class="filtro-resultado">
+          {{ profesionalesFiltrados().length }} de {{ profesionales().length }} profesionales
+        </p>
+      </aside>
+      </div>
+
     </div>
   }
 </div>

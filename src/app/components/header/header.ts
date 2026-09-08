@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {}
+export class Header {
+  private readonly auth = inject(Auth);
+  private readonly router = inject(Router);
+
+  readonly usuario = this.auth.usuario;
+
+  cerrarSesion(): void {
+    this.auth.cerrarSesion();
+    this.router.navigate(['/']);
+  }
+}

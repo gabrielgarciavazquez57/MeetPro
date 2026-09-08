@@ -4,8 +4,8 @@
 .fondo-profesional {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 8.5rem 1.5rem 3rem;
+  align-items: flex-start;
+  padding: 8.5rem 2rem 3rem;
   background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -33,12 +33,117 @@
   color: #dc2626;
 }
 
-.lista-profesionales {
+/* Layout: lista a la izquierda + panel de filtros a la derecha */
+.lista-layout {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: 280px 1fr;
   gap: 1.5rem;
+}
+
+.filtros-col {
+  order: -1;
+}
+
+.lista-col {
+  min-width: 0;
+}
+
+.lista-profesionales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Panel de filtros */
+.panel-filtros {
+  position: sticky;
+  top: 9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #eef0f3;
+  border-left: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.panel-filtros-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #d8dde4;
+}
+
+.panel-filtros-titulo {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.btn-limpiar {
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-limpiar:hover {
+  text-decoration: underline;
+}
+
+.filtro-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.filtro-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.filtro-campo select,
+.filtro-campo input {
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: #0f172a;
+  padding: 0.55rem 0.7rem;
+  background-color: #fbfcfe;
+  border: 1.5px solid #e2e5ea;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filtro-campo select:focus,
+.filtro-campo input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.filtro-resultado {
+  margin: 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid #d8dde4;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
 }
 
 /* Contenedor de cada profesional */
@@ -197,6 +302,16 @@
 
 .btn-agregar:active {
   transform: scale(0.98);
+}
+
+@media (max-width: 900px) {
+  .lista-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-filtros {
+    position: static;
+  }
 }
 
 @media (max-width: 600px) {

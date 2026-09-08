@@ -3,4 +3,12 @@
     <span class="logo-text">MeetPro</span>
   </div>
 
+  @if (usuario(); as u) {
+    <div class="navbar-sesion">
+      <span class="navbar-usuario">{{ u.name }} {{ u.lastname }}</span>
+      <button type="button" class="btn-cerrar-sesion" (click)="cerrarSesion()">
+        Cerrar sesión
+      </button>
+    </div>
+  }
 </nav>
