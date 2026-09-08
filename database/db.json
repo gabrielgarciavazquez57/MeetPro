@@ -65,6 +65,28 @@
         "zipCode": "C1425"
       },
       "id": "mlz789xyz01"
+    },
+    {
+      "username": "Palermo9",
+      "password": "golariber",
+      "isProfesional": true,
+      "name": "Martin",
+      "lastname": "Palermo",
+      "dni": "99999999",
+      "email": "Palermo@meetpro.com",
+      "phoneNumber": "999999999999",
+      "age": 48,
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1970-09-10T00:00:00.000Z",
+      "address": {
+        "address": "boca",
+        "city": "la plata",
+        "province": "buenos aires",
+        "country": "Argentina",
+        "zipCode": "008097987"
+      },
+      "id": "-7GRVsd6hG8"
     }
   ],
   "profesionales": [
@@ -223,6 +245,50 @@
         }
       ],
       "id": "abg456def02"
+    },
+    {
+      "profesional_userData": {
+        "username": "Palermo9",
+        "password": "golariber",
+        "isProfesional": true,
+        "name": "Martin",
+        "lastname": "Palermo",
+        "dni": "99999999",
+        "email": "Palermo@meetpro.com",
+        "phoneNumber": "999999999999",
+        "age": 48,
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1970-09-10T00:00:00.000Z",
+        "address": {
+          "address": "boca",
+          "city": "la plata",
+          "province": "buenos aires",
+          "country": "Argentina",
+          "zipCode": "008097987"
+        },
+        "id": "-7GRVsd6hG8"
+      },
+      "profession": "Arquitecto",
+      "professionalId": "999999",
+      "descriptionprofesional": "Construccion de edificios estilo moderno.",
+      "titulos": [
+        {
+          "nombre_titulo": "Arquitecto",
+          "descripcion_titulo": "Titulo de grado.",
+          "fecha_obtencion": "2026-09-07",
+          "institucion_educativa": "Universidad Nacional de Mar del Plata"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Arquitecto Jr",
+          "institucion_experiencia": "Paolini",
+          "fecha_inicio": "2026-09-01",
+          "fecha_fin": "2026-09-07"
+        }
+      ],
+      "id": "GNFRW9zkY90"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,19 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
 
 .fondo-profesional {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(180deg, #eef2f7 0%, #e4e9f0 100%);
+  padding: 3rem 1.5rem;
+  background: linear-gradient(
+    90deg,
+    #c3ccda 0,
+    #c3ccda calc(50% - 440px),
+    #edf1f7 calc(50% - 440px),
+    #edf1f7 calc(50% + 440px),
+    #c3ccda calc(50% + 440px),
+    #c3ccda 100%
+  );
   min-height: 100vh;
+  overflow-x: hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .titulo-profesional {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #111827;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0f172a;
   margin-bottom: 2rem;
   text-align: center;
   letter-spacing: -0.02em;
@@ -21,64 +32,92 @@
 
 .formulario-profesional {
   width: 100%;
-  max-width: 700px;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(15, 23, 42, 0.08);
-  padding: 2.5rem;
-  border: 1px solid #eef0f3;
+  max-width: 720px;
 }
 
-.titulo-seccion {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0;
-  padding-bottom: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
+.formulario-profesional form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.titulo-seccion::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 2.25rem;
-  height: 2px;
-  background-color: #2563eb;
-}
-
+/* Cada sección en su propio contenedor */
 .datos-profesion,
 .datos-titulos,
 .datos-experiencias {
-  padding-top: 2rem;
-  border-top: 1px solid #e2e5ea;
+  background-color: #ffffff;
+  border: 1px solid #eef0f3;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 2rem;
 }
 
-.datos-profesion {
-  padding-top: 0;
-  border-top: none;
+/* Títulos de sección */
+.titulo-seccion {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
+/* Sección simple (Datos Profesionales) */
 .datos-profesion .titulo-seccion {
-  margin-bottom: 1.25rem;
-  border-bottom: 2px solid #eef0f3;
+  position: relative;
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
 }
 
-@media (max-width: 600px) {
-  .formulario-profesional {
-    padding: 1.5rem;
-    border-radius: 12px;
-  }
+.datos-profesion .titulo-seccion::before,
+.datos-profesion .titulo-seccion::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+}
 
-  .datos-titulos,
-  .datos-experiencias {
-    padding-top: 1.75rem;
-  }
+.datos-profesion .titulo-seccion::before {
+  width: 100%;
+  background-color: #334155;
+}
+
+.datos-profesion .titulo-seccion::after {
+  width: 2.25rem;
+  background-color: #2563eb;
+}
+
+/* Header de sección con botón agregar (Títulos / Experiencia) */
+.header-seccion {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.header-seccion::before,
+.header-seccion::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+}
+
+.header-seccion::before {
+  width: 100%;
+  background-color: #334155;
+}
+
+.header-seccion::after {
+  width: 2.25rem;
+  background-color: #2563eb;
 }
 
 .datos-profesion > ul,
@@ -99,9 +138,11 @@
 }
 
 label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #4b5563;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 input[type="text"],
@@ -111,10 +152,10 @@ textarea {
   padding: 0.65rem 0.85rem;
   font-size: 0.9rem;
   font-family: inherit;
+  font-weight: 500;
   border: 1.5px solid #e2e5ea;
-  border-radius: 9px;
-  background-color: #fafbfc;
-  color: #111827;
+  background-color: #fbfcfe;
+  color: #0f172a;
   outline: none;
   resize: vertical;
   transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
@@ -177,36 +218,20 @@ span::before {
   flex-shrink: 0;
 }
 
-/* Header de sección con botón agregar */
-.header-seccion {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid #eef0f3;
-  padding-bottom: 0.65rem;
-  margin-bottom: 1.25rem;
-}
-
-.header-seccion .titulo-seccion {
-  padding-bottom: 0;
-}
-
-.header-seccion .titulo-seccion::after {
-  bottom: -0.7rem;
-}
-
 /* Bloques repetibles (título / experiencia) */
 .bloque-item {
-  background-color: #f8fafc;
+  background-color: #fbfcfe;
   border: 1.5px solid #e2e5ea;
-  border-radius: 12px;
+  border-left: 4px solid #2563eb;
   padding: 1.35rem;
   margin-bottom: 1.1rem;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .bloque-item:hover {
-  border-color: #cbd2db;
+  border-color: #2563eb;
+  border-left-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.1);
 }
 
 .bloque-item:last-child {
@@ -217,15 +242,24 @@ span::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid #e4e8ed;
 }
 
 .bloque-numero {
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  background-color: #eff4ff;
+  border: 1px solid #dbe6fe;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #2563eb;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .fila-doble {
@@ -240,79 +274,99 @@ span::before {
   gap: 0.4rem;
 }
 
-@media (max-width: 480px) {
-  .fila-doble {
-    flex-direction: column !important;
-  }
-}
-
 /* Botones */
 .btn {
-  border: none;
-  border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   font-family: inherit;
-  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
 }
 
 .btn-agregar {
-  padding: 0.5rem 1.05rem;
+  width: 100%;
+  margin-top: 1.1rem;
+  padding: 0.85rem 1rem;
   font-size: 0.8rem;
-  background-color: #eff4ff;
+  letter-spacing: 0.03em;
   color: #2563eb;
-  border: 1.5px solid #dbe6fe;
+  background-color: #f7faff;
+  border: 1.5px dashed #a9c3f5;
 }
 
 .btn-agregar:hover {
-  background-color: #dbe6fe;
-  border-color: #bfd3fd;
+  background-color: #eef4ff;
+  border-color: #2563eb;
+  border-style: dashed;
+}
+
+.btn-agregar:active {
+  transform: scale(0.99);
 }
 
 .btn-eliminar {
   padding: 0.4rem 0.9rem;
-  font-size: 0.75rem;
-  background-color: #fef2f2;
+  font-size: 0.72rem;
   color: #dc2626;
+  background-color: #ffffff;
   border: 1.5px solid #fecaca;
+  border-left: 3px solid #dc2626;
 }
 
 .btn-eliminar:hover {
-  background-color: #fee2e2;
-  border-color: #fca5a5;
+  background-color: #fef2f2;
+  border-color: #f87171;
 }
 
 .boton-form {
   display: flex;
   justify-content: center;
-  margin-top: 2.75rem;
-  padding-top: 2rem;
-  border-top: 1px solid #eef0f3;
+  margin-top: 1.5rem;
 }
 
 .btn-grande {
   padding: 0.9rem 3rem;
-  font-size: 0.95rem;
-  background: linear-gradient(180deg, #2f6ef0 0%, #2563eb 100%);
-  color: #ffffff;
-  letter-spacing: 0.04em;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  font-size: 0.9rem;
+  color: #2563eb;
+  background-color: #ffffff;
+  border: 2px solid #e2e5ea;
+  border-left: 4px solid #2563eb;
+  letter-spacing: 0.05em;
 }
 
 .btn-grande:hover:not(:disabled) {
-  background: linear-gradient(180deg, #3b78f5 0%, #1d4ed8 100%);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.38);
+  background-color: #f5f8ff;
+  border-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.14);
 }
 
 .btn-grande:active:not(:disabled) {
   transform: scale(0.98);
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28);
 }
 
 .btn-grande:disabled {
-  background: #cbd2db;
-  color: #f3f4f6;
+  color: #94a3b8;
+  border-color: #e2e5ea;
+  border-left-color: #cbd2db;
   cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.8;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .datos-profesion,
+  .datos-titulos,
+  .datos-experiencias {
+    padding: 1.5rem;
+  }
+
+  .header-seccion {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fila-doble {
+    flex-direction: column !important;
+  }
 }

@@ -42,7 +42,6 @@
       <div class="datos-titulos">
         <div class="header-seccion">
           <h3 class="titulo-seccion">Títulos:</h3>
-          <button type="button" class="btn btn-agregar" (click)="agregarTitulo()">+ Agregar título</button>
         </div>
 
         <div formArrayName="titulos">
@@ -89,13 +88,14 @@
             </div>
           }
         </div>
+
+        <button type="button" class="btn btn-agregar" (click)="agregarTitulo()">+ Agregar título</button>
       </div>
 
       <!-- ===== EXPERIENCIAS ===== -->
       <div class="datos-experiencias">
         <div class="header-seccion">
           <h3 class="titulo-seccion">Experiencia:</h3>
-          <button type="button" class="btn btn-agregar" (click)="agregarExperiencia()">+ Agregar experiencia</button>
         </div>
 
         <div formArrayName="experiencias">
@@ -139,6 +139,8 @@
             </div>
           }
         </div>
+
+        <button type="button" class="btn btn-agregar" (click)="agregarExperiencia()">+ Agregar experiencia</button>
       </div>
 
       <div class="boton-form">
