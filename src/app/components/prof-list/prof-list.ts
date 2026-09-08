@@ -1,11 +1,12 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ClientProfesional } from '../../services/client-profesional'; // ajustá la ruta
 import { Profesional } from '../../interfaces/profesional'; // ajustá la ruta
+import { BarraNav } from '../barra-nav/barra-nav';
 
 @Component({
   selector: 'app-prof-list',
   standalone: true,
-  imports: [],
+  imports: [BarraNav],
   templateUrl: './prof-list.html',
   styleUrl: './prof-list.css',
 })
