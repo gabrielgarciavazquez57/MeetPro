@@ -1,4 +1,14 @@
 <section class="fondo-home">
+  <div class="home-slideshow" aria-hidden="true">
+    @for (img of imagenes; track img; let i = $index) {
+      <div
+        class="home-slide"
+        [class.home-slide--activo]="slide() === i"
+        [style.background-image]="'url(' + img + ')'"
+      ></div>
+    }
+  </div>
+
   <div class="contenido-home">
     <h1 class="titulo-home">Bienvenido a MeetPro</h1>
     <p class="subtitulo-home">Conectá con profesionales y gestioná tus turnos en un solo lugar.</p>
