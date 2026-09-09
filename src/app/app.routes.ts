@@ -8,6 +8,7 @@ import { PerfilProfesional } from './components/perfil-prof/perfil-prof';
 import { Login } from './components/login/login';
 import { ListaTurnos } from './components/lista-turnos/lista-turnos';
 import { TurnoForm } from './components/turno-form/turno-form';
+import { ListaTurnosExistentes } from './components/lista-turnos-existentes/lista-turnos-existentes';
 
 export const routes: Routes = [
   {
@@ -49,6 +50,11 @@ export const routes: Routes = [
     path: 'turno-form/:profesionalId',
     title: 'Nuevo turno',
     component: TurnoForm
+  },
+  {
+    path: 'turnos-existentes/:userId',
+    title: 'Turnos existentes',
+    component: ListaTurnosExistentes
   },
   {
   path: 'perfil-user/:id',

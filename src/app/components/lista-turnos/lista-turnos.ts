@@ -99,7 +99,23 @@ export class ListaTurnos implements OnInit {
 
   confirmar(): void {
     const t = this.seleccionado();
-    if (!t) return;
-    alert(`Turno solicitado: ${t.fecha} a las ${t.hora} (${t.modalidad}).`);
+    if (!t || !t.id) return;
+
+    const cliente = this.auth.usuario();
+    if (!cliente) {
+      alert('Iniciá sesión para reservar un turno.');
+      return;
+    }
+
+    const reservado: Turno = { ...t, disponible: false, cliente };
+
+    this.clientTurno.updateTurno(t.id, reservado).subscribe({
+      next: () => {
+        alert(`Turno reservado: ${t.fecha} a las ${t.hora}.`);
+        this.seleccionado.set(null);
+        this.cargarTurnos();
+      },
+      error: () => alert('No se pudo reservar el turno.'),
+    });
   }
 }

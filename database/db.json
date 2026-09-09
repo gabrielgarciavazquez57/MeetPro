@@ -567,7 +567,8 @@
             "fecha_fin": "2026-09-01"
           }
         ]
-      }
+      },
+      "cliente": null
     },
     {
       "id": "trn004",
@@ -649,7 +650,8 @@
             "fecha_fin": "2026-09-01"
           }
         ]
-      }
+      },
+      "cliente": null
     },
     {
       "id": "trn006",
@@ -742,6 +744,195 @@
         "id": "gfsK7mREfzE"
       },
       "id": "hMBy7D0QB2M"
+    },
+    {
+      "id": "trn101",
+      "fecha": "2026-09-25",
+      "hora": "11:00",
+      "modalidad": "online",
+      "disponible": false,
+      "cliente": {
+        "username": "adimin",
+        "password": "admin123",
+        "isProfesional": false,
+        "name": "Admin",
+        "lastname": "Admin",
+        "dni": "33333333",
+        "email": "admin@meetpro.com",
+        "phoneNumber": "325346748",
+        "age": 68,
+        "gender": "Masculino",
+        "nationality": "Barbados",
+        "dateOfBirth": "1970-04-04T00:00:00.000Z",
+        "address": {
+          "address": "aaaaaaaaa",
+          "city": "aaaaaaaaaaa",
+          "province": "aaaaaaaaaaaa",
+          "country": "Bahamas",
+          "zipCode": "24332543674"
+        },
+        "id": "21uI9BxQdcs"
+      },
+      "profesional": {
+        "profesional_userData": {
+          "name": "José",
+          "lastname": "Reyes",
+          "email": "jose.reyes@meetpro.com",
+          "phoneNumber": "1145551234",
+          "id": "vsvLADccdcM"
+        },
+        "profession": "Desarrollador de Software",
+        "professionalId": "12345",
+        "descriptionprofesional": "Desarrollador full-stack con experiencia en aplicaciones web escalables y arquitecturas backend.",
+        "titulos": [
+          {
+            "nombre_titulo": "Ingeniería en Sistemas de Información",
+            "descripcion_titulo": "Título de grado orientado al desarrollo de software y bases de datos",
+            "fecha_obtencion": "2010-12-15",
+            "institucion_educativa": "Universidad Tecnológica Nacional"
+          }
+        ],
+        "experiencias": [
+          {
+            "titulo_experiencia": "Desarrollador Backend",
+            "institucion_experiencia": "IBM Argentina",
+            "fecha_inicio": "2012-03-01",
+            "fecha_fin": "2018-11-30"
+          },
+          {
+            "titulo_experiencia": "Desarrollador Full-Stack Senior",
+            "institucion_experiencia": "Globant",
+            "fecha_inicio": "2018-12-01",
+            "fecha_fin": "2026-09-01"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trn102",
+      "fecha": "2026-10-03",
+      "hora": "15:30",
+      "modalidad": "presencial",
+      "disponible": false,
+      "cliente": {
+        "username": "adimin",
+        "password": "admin123",
+        "isProfesional": false,
+        "name": "Admin",
+        "lastname": "Admin",
+        "dni": "33333333",
+        "email": "admin@meetpro.com",
+        "phoneNumber": "325346748",
+        "age": 68,
+        "gender": "Masculino",
+        "nationality": "Barbados",
+        "dateOfBirth": "1970-04-04T00:00:00.000Z",
+        "address": {
+          "address": "aaaaaaaaa",
+          "city": "aaaaaaaaaaa",
+          "province": "aaaaaaaaaaaa",
+          "country": "Bahamas",
+          "zipCode": "24332543674"
+        },
+        "id": "21uI9BxQdcs"
+      },
+      "profesional": {
+        "profesional_userData": {
+          "name": "Natalia",
+          "lastname": "Cabrera",
+          "email": "natalia.cabrera@meetpro.com",
+          "phoneNumber": "1145556789",
+          "id": "vOprp3jdKHo"
+        },
+        "profession": "Diseñadora UX/UI",
+        "professionalId": "54321",
+        "descriptionprofesional": "Diseñadora especializada en experiencia de usuario para productos digitales, con foco en accesibilidad.",
+        "titulos": [
+          {
+            "nombre_titulo": "Licenciatura en Diseño Gráfico",
+            "descripcion_titulo": "Título de grado con orientación en diseño digital",
+            "fecha_obtencion": "2019-07-10",
+            "institucion_educativa": "Universidad de Buenos Aires"
+          }
+        ],
+        "experiencias": [
+          {
+            "titulo_experiencia": "Diseñadora UX Junior",
+            "institucion_experiencia": "Mercado Libre",
+            "fecha_inicio": "2019-08-01",
+            "fecha_fin": "2022-02-28"
+          },
+          {
+            "titulo_experiencia": "Diseñadora UX/UI Senior",
+            "institucion_experiencia": "Despegar.com",
+            "fecha_inicio": "2022-03-01",
+            "fecha_fin": "2026-09-01"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trn103",
+      "fecha": "2026-08-20",
+      "hora": "09:00",
+      "modalidad": "online",
+      "disponible": false,
+      "cliente": {
+        "username": "adimin",
+        "password": "admin123",
+        "isProfesional": false,
+        "name": "Admin",
+        "lastname": "Admin",
+        "dni": "33333333",
+        "email": "admin@meetpro.com",
+        "phoneNumber": "325346748",
+        "age": 68,
+        "gender": "Masculino",
+        "nationality": "Barbados",
+        "dateOfBirth": "1970-04-04T00:00:00.000Z",
+        "address": {
+          "address": "aaaaaaaaa",
+          "city": "aaaaaaaaaaa",
+          "province": "aaaaaaaaaaaa",
+          "country": "Bahamas",
+          "zipCode": "24332543674"
+        },
+        "id": "21uI9BxQdcs"
+      },
+      "profesional": {
+        "profesional_userData": {
+          "name": "José",
+          "lastname": "Reyes",
+          "email": "jose.reyes@meetpro.com",
+          "phoneNumber": "1145551234",
+          "id": "vsvLADccdcM"
+        },
+        "profession": "Desarrollador de Software",
+        "professionalId": "12345",
+        "descriptionprofesional": "Desarrollador full-stack con experiencia en aplicaciones web escalables y arquitecturas backend.",
+        "titulos": [
+          {
+            "nombre_titulo": "Ingeniería en Sistemas de Información",
+            "descripcion_titulo": "Título de grado orientado al desarrollo de software y bases de datos",
+            "fecha_obtencion": "2010-12-15",
+            "institucion_educativa": "Universidad Tecnológica Nacional"
+          }
+        ],
+        "experiencias": [
+          {
+            "titulo_experiencia": "Desarrollador Backend",
+            "institucion_experiencia": "IBM Argentina",
+            "fecha_inicio": "2012-03-01",
+            "fecha_fin": "2018-11-30"
+          },
+          {
+            "titulo_experiencia": "Desarrollador Full-Stack Senior",
+            "institucion_experiencia": "Globant",
+            "fecha_inicio": "2018-12-01",
+            "fecha_fin": "2026-09-01"
+          }
+        ]
+      }
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

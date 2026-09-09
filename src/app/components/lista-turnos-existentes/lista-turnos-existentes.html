@@ -1,0 +1,61 @@
+<app-barra-nav titulo="Turnos existentes" />
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando turnos...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="turnos-panel">
+      <div class="turnos-head">
+        <h1 class="turnos-titulo">Turnos existentes</h1>
+        <p class="turnos-sub">Tus turnos reservados</p>
+      </div>
+
+      @if (misTurnos().length === 0) {
+        <p class="estado-msg">No tenés turnos reservados.</p>
+      } @else {
+        <table class="tabla-turnos">
+          <thead>
+            <tr>
+              <th>Profesional</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Modalidad</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (turno of misTurnos(); track turno.id) {
+              <tr>
+                <td>
+                  {{ turno.profesional?.profesional_userData?.name }}
+                  {{ turno.profesional?.profesional_userData?.lastname }}
+                </td>
+                <td>{{ turno.fecha }}</td>
+                <td>{{ turno.hora }}</td>
+                <td>
+                  <span class="celda-modalidad" [class.celda-modalidad--online]="turno.modalidad === 'online'">
+                    {{ turno.modalidad === 'online' ? 'Online' : 'Presencial' }}
+                  </span>
+                </td>
+                <td>
+                  <span class="celda-estado" [class.celda-estado--activo]="estaActivo(turno)">
+                    {{ estaActivo(turno) ? 'Activo' : 'No activo' }}
+                  </span>
+                </td>
+                <td class="celda-accion">
+                  <button type="button" class="btn-cancelar" (click)="cancelar(turno)">
+                    Cancelar turno
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+  }
+</div>
