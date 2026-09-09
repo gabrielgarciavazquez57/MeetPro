@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientUser } from '../../services/client-user'; // ajustá la ruta
 import { User } from '../../interfaces/user'; // ajustá la ruta
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -7,7 +7,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 @Component({
   selector: 'app-perfil-user',
   standalone: true,
-  imports: [BarraNav],
+  imports: [BarraNav, RouterLink],
   templateUrl: './perfil-user.html',
   styleUrl: './perfil-user.css',
 })
