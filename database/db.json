@@ -485,7 +485,8 @@
             "fecha_fin": "2026-09-01"
           }
         ]
-      }
+      },
+      "cliente": null
     },
     {
       "id": "trn002",
@@ -932,6 +933,79 @@
             "fecha_fin": "2026-09-01"
           }
         ]
+      }
+    },
+    {
+      "fecha": "2026-09-09",
+      "hora": "15:59",
+      "modalidad": "online",
+      "disponible": false,
+      "profesional": {
+        "profesional_userData": {
+          "username": "miguel",
+          "password": "bestia123",
+          "isProfesional": true,
+          "name": "Miguel",
+          "lastname": "Merentiel",
+          "dni": "12485980",
+          "email": "miguel@meetpro.com",
+          "phoneNumber": "324256785",
+          "age": 30,
+          "gender": "Masculino",
+          "nationality": "Germany",
+          "dateOfBirth": "1970-08-09T00:00:00.000Z",
+          "address": {
+            "address": "160 W Beaver Creek Blvd",
+            "city": "Avon",
+            "province": "CO",
+            "country": "United States",
+            "zipCode": "81620-5422"
+          },
+          "id": "ZlwghurQ-ws"
+        },
+        "profession": "Contador",
+        "professionalId": "0385721",
+        "descriptionprofesional": "Asientos contables",
+        "titulos": [
+          {
+            "nombre_titulo": "Contador",
+            "descripcion_titulo": "Carrera de grado",
+            "fecha_obtencion": "2026-09-10",
+            "institucion_educativa": "Universidad Uruguay"
+          }
+        ],
+        "experiencias": [
+          {
+            "titulo_experiencia": "Contador jr",
+            "institucion_experiencia": "Palmeiras",
+            "fecha_inicio": "2026-09-08",
+            "fecha_fin": "2026-09-09"
+          }
+        ],
+        "id": "gfsK7mREfzE"
+      },
+      "id": "chyNBNelL7A",
+      "cliente": {
+        "username": "miguel",
+        "password": "bestia123",
+        "isProfesional": true,
+        "name": "Miguel",
+        "lastname": "Merentiel",
+        "dni": "12485980",
+        "email": "miguel@meetpro.com",
+        "phoneNumber": "324256785",
+        "age": 30,
+        "gender": "Masculino",
+        "nationality": "Germany",
+        "dateOfBirth": "1970-08-09T00:00:00.000Z",
+        "address": {
+          "address": "160 W Beaver Creek Blvd",
+          "city": "Avon",
+          "province": "CO",
+          "country": "United States",
+          "zipCode": "81620-5422"
+        },
+        "id": "ZlwghurQ-ws"
       }
     }
   ],

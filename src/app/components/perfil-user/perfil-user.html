@@ -60,7 +60,7 @@
             </span>
           </a>
 
-          <button class="tarjeta-accion" type="button">
+          <a class="tarjeta-accion" [routerLink]="['/profesionales-consultados', user.id]">
             <span class="accion-titulo">Profesionales Consultados</span>
             <span class="accion-deco" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -69,7 +69,7 @@
                 <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             </span>
-          </button>
+          </a>
 
           <a class="tarjeta-accion" href="/profesionales-lista">
             <span class="accion-titulo">Volver a buscar</span>

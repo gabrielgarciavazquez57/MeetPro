@@ -1,0 +1,60 @@
+<app-barra-nav titulo="Profesionales consultados" />
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="turnos-panel">
+      <div class="turnos-head">
+        <h1 class="turnos-titulo">Profesionales consultados</h1>
+        <p class="turnos-sub">Turnos que ya asististe</p>
+      </div>
+
+      @if (consultados().length === 0) {
+        <p class="estado-msg">Todavía no consultaste con ningún profesional.</p>
+      } @else {
+        <table class="tabla-turnos">
+          <thead>
+            <tr>
+              <th>Profesional</th>
+              <th>Profesión</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Modalidad</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (turno of consultados(); track turno.id) {
+              <tr>
+                <td>
+                  {{ turno.profesional?.profesional_userData?.name }}
+                  {{ turno.profesional?.profesional_userData?.lastname }}
+                </td>
+                <td>{{ turno.profesional?.profession }}</td>
+                <td>{{ turno.fecha }}</td>
+                <td>{{ turno.hora }}</td>
+                <td>
+                  <span class="celda-modalidad" [class.celda-modalidad--online]="turno.modalidad === 'online'">
+                    {{ turno.modalidad === 'online' ? 'Online' : 'Presencial' }}
+                  </span>
+                </td>
+                <td class="celda-accion">
+                  <a
+                    class="btn-ver-perfil"
+                    [href]="'/perfil-prof/' + turno.profesional?.profesional_userData?.id"
+                  >
+                    Ver perfil del profesional
+                  </a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+  }
+</div>

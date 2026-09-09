@@ -9,6 +9,7 @@ import { Login } from './components/login/login';
 import { ListaTurnos } from './components/lista-turnos/lista-turnos';
 import { TurnoForm } from './components/turno-form/turno-form';
 import { ListaTurnosExistentes } from './components/lista-turnos-existentes/lista-turnos-existentes';
+import { ProfesionalesConsultados } from './components/profesionales-consultados/profesionales-consultados';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,11 @@ export const routes: Routes = [
     path: 'turnos-existentes/:userId',
     title: 'Turnos existentes',
     component: ListaTurnosExistentes
+  },
+  {
+    path: 'profesionales-consultados/:userId',
+    title: 'Profesionales consultados',
+    component: ProfesionalesConsultados
   },
   {
   path: 'perfil-user/:id',
