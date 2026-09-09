@@ -8,12 +8,12 @@
   padding: 8.5rem 1.5rem 3rem;
   background: linear-gradient(
     90deg,
-    #cfd6e1 0,
-    #b2bccb calc(50% - 440px),
+    #0a1730 0,
+    #0f2547 calc(50% - 440px),
     #edf1f7 calc(50% - 440px),
     #edf1f7 calc(50% + 440px),
-    #b2bccb calc(50% + 440px),
-    #cfd6e1 100%
+    #0f2547 calc(50% + 440px),
+    #0a1730 100%
   );
   min-height: 100vh;
   overflow-x: hidden;

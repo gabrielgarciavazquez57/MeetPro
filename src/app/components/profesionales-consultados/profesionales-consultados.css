@@ -5,16 +5,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8.5rem 2rem 3rem;
-  background: linear-gradient(160deg, #eef3fb 0%, #e4eaf4 55%, #dae1ee 100%);
-  min-height: 100vh;
+  padding: 8.5rem 2rem 5rem;
+  background: linear-gradient(160deg, #0f2547 0%, #0c1c38 55%, #0a1730 100%);
+  overflow-x: hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .estado-msg {
   font-size: 0.92rem;
   font-weight: 500;
-  color: #475569;
+  color: #cbd5e1;
   text-align: center;
   margin-top: 1rem;
 }

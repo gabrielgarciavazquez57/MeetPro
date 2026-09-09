@@ -153,6 +153,28 @@
         "zipCode": "81620-5422"
       },
       "id": "ZlwghurQ-ws"
+    },
+    {
+      "username": "Prueba ",
+      "password": "Prueba 1",
+      "isProfesional": true,
+      "name": "Prueba ",
+      "lastname": "Prueba ",
+      "dni": "32432656",
+      "email": "prueba@meetpro.com",
+      "phoneNumber": "3424325252",
+      "age": 30,
+      "gender": "Femenino",
+      "nationality": "Azerbaijan",
+      "dateOfBirth": "2026-09-09T00:00:00.000Z",
+      "address": {
+        "address": "Prueba ",
+        "city": "Prueba ",
+        "province": "Prueba ",
+        "country": "Azerbaijan",
+        "zipCode": "342525"
+      },
+      "id": "XJkFPfls1dk"
     }
   ],
   "profesionales": [
@@ -443,6 +465,50 @@
         }
       ],
       "id": "gfsK7mREfzE"
+    },
+    {
+      "profesional_userData": {
+        "username": "Prueba ",
+        "password": "Prueba 1",
+        "isProfesional": true,
+        "name": "Prueba ",
+        "lastname": "Prueba ",
+        "dni": "32432656",
+        "email": "prueba@meetpro.com",
+        "phoneNumber": "3424325252",
+        "age": 30,
+        "gender": "Femenino",
+        "nationality": "Azerbaijan",
+        "dateOfBirth": "2026-09-09T00:00:00.000Z",
+        "address": {
+          "address": "Prueba ",
+          "city": "Prueba ",
+          "province": "Prueba ",
+          "country": "Azerbaijan",
+          "zipCode": "342525"
+        },
+        "id": "XJkFPfls1dk"
+      },
+      "profession": "Prueba ",
+      "professionalId": "Prueba ",
+      "descriptionprofesional": "Prueba ",
+      "titulos": [
+        {
+          "nombre_titulo": "Prueba ",
+          "descripcion_titulo": "Prueba ",
+          "fecha_obtencion": "2026-09-03",
+          "institucion_educativa": "Prueba "
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Prueba ",
+          "institucion_experiencia": "Prueba ",
+          "fecha_inicio": "2026-09-01",
+          "fecha_fin": "2026-09-05"
+        }
+      ],
+      "id": "jWowbf_nFL0"
     }
   ],
   "turnos": [
@@ -877,29 +943,8 @@
       "fecha": "2026-08-20",
       "hora": "09:00",
       "modalidad": "online",
-      "disponible": false,
-      "cliente": {
-        "username": "adimin",
-        "password": "admin123",
-        "isProfesional": false,
-        "name": "Admin",
-        "lastname": "Admin",
-        "dni": "33333333",
-        "email": "admin@meetpro.com",
-        "phoneNumber": "325346748",
-        "age": 68,
-        "gender": "Masculino",
-        "nationality": "Barbados",
-        "dateOfBirth": "1970-04-04T00:00:00.000Z",
-        "address": {
-          "address": "aaaaaaaaa",
-          "city": "aaaaaaaaaaa",
-          "province": "aaaaaaaaaaaa",
-          "country": "Bahamas",
-          "zipCode": "24332543674"
-        },
-        "id": "21uI9BxQdcs"
-      },
+      "disponible": true,
+      "cliente": null,
       "profesional": {
         "profesional_userData": {
           "name": "José",
