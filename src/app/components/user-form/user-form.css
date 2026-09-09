@@ -5,29 +5,53 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 1.5rem;
+  padding: 3rem 1.5rem 2.5rem;
   background: linear-gradient(
     90deg,
-    #c3ccda 0,
-    #c3ccda calc(50% - 440px),
+    #cfd6e1 0,
+    #b2bccb calc(50% - 440px),
     #edf1f7 calc(50% - 440px),
     #edf1f7 calc(50% + 440px),
-    #c3ccda calc(50% + 440px),
-    #c3ccda 100%
+    #b2bccb calc(50% + 440px),
+    #cfd6e1 100%
   );
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+.titulo-registro-grupo {
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #9aa7ba;
+  position: relative;
+}
+
+.titulo-registro-grupo::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 3rem;
+  height: 2px;
+  background-color: #2563eb;
+}
+
 .titulo-registro {
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.9rem;
+  font-weight: 700;
   color: #0f172a;
-  margin-bottom: 2rem;
-  text-align: center;
-  letter-spacing: -0.02em;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.titulo-registro-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: #64748b;
 }
 
 .formulario-registro {

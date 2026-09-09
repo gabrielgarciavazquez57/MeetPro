@@ -1,5 +1,8 @@
 <section class="fondo-registro">
-    <div><h2 class="titulo-registro">Registro</h2></div>
+    <div class="titulo-registro-grupo">
+      <h1 class="titulo-registro">Creá tu cuenta</h1>
+      <p class="titulo-registro-sub">Completá tus datos para empezar a usar MeetPro</p>
+    </div>
     <div class="formulario-registro">
     <form [formGroup]="form"  (ngSubmit) = 'handleSubmit()' >
     <div class="columnas-form">
@@ -121,7 +124,7 @@
                 </li>
         </ul>
         </div>
-        <div class="datos-direccion" formGroupName="address">  
+        <div class="datos-direccion" formGroupName="address">
             <h3 class="titulo-seccion" >Direccion Personal:</h3>
             <ul>  
                 <li>

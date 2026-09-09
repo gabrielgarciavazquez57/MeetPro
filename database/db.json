@@ -109,6 +109,28 @@
         "zipCode": "24332543674"
       },
       "id": "21uI9BxQdcs"
+    },
+    {
+      "username": "ayrton",
+      "password": "costa",
+      "isProfesional": true,
+      "name": "Ayrton",
+      "lastname": "Costa",
+      "dni": "8888888",
+      "email": "ayrton@meetpro.com",
+      "phoneNumber": "324546478",
+      "age": 29,
+      "gender": "Masculino",
+      "nationality": "Cabo Verde",
+      "dateOfBirth": "1980-01-01T00:00:00.000Z",
+      "address": {
+        "address": "aaasss",
+        "city": "sssss",
+        "province": "ssss",
+        "country": "Argentina",
+        "zipCode": "4325467"
+      },
+      "id": "V4nX-l5G4IA"
     }
   ],
   "profesionales": [
@@ -311,6 +333,50 @@
         }
       ],
       "id": "GNFRW9zkY90"
+    },
+    {
+      "profesional_userData": {
+        "username": "ayrton",
+        "password": "costa",
+        "isProfesional": true,
+        "name": "Ayrton",
+        "lastname": "Costa",
+        "dni": "8888888",
+        "email": "ayrton@meetpro.com",
+        "phoneNumber": "324546478",
+        "age": 29,
+        "gender": "Masculino",
+        "nationality": "Cabo Verde",
+        "dateOfBirth": "1980-01-01T00:00:00.000Z",
+        "address": {
+          "address": "aaasss",
+          "city": "sssss",
+          "province": "ssss",
+          "country": "Argentina",
+          "zipCode": "4325467"
+        },
+        "id": "V4nX-l5G4IA"
+      },
+      "profession": "Piloto",
+      "professionalId": "5555555",
+      "descriptionprofesional": "Piloto preofesional vuelos comerciales",
+      "titulos": [
+        {
+          "nombre_titulo": "Piloto",
+          "descripcion_titulo": "Carrera de grado en pilotaje aereo",
+          "fecha_obtencion": "2026-09-03",
+          "institucion_educativa": "Universidad Armada"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Piloto",
+          "institucion_experiencia": "Flybondi",
+          "fecha_inicio": "2026-09-07",
+          "fecha_fin": "2026-09-08"
+        }
+      ],
+      "id": "Ypy2ZnEsC6s"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
