@@ -1,7 +1,9 @@
 <section class="fondo-profesional">
   <div class="titulo-registro-grupo">
-    <h1 class="titulo-registro">Registro profesional</h1>
-    <p class="titulo-registro-sub">Cargá tu información profesional, títulos y experiencia</p>
+    <h1 class="titulo-registro">{{ editando ? 'Editar perfil profesional' : 'Registro profesional' }}</h1>
+    <p class="titulo-registro-sub">
+      {{ editando ? 'Actualizá tu información profesional, títulos y experiencia' : 'Cargá tu información profesional, títulos y experiencia' }}
+    </p>
   </div>
   <div class="formulario-profesional">
     <form [formGroup]="form" (ngSubmit)="handleSubmit()">
@@ -147,7 +149,9 @@
       </div>
 
       <div class="boton-form">
-        <button type="submit" [disabled]="form.invalid" class="btn btn-grande">GUARDAR PERFIL PROFESIONAL</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-grande">
+          {{ editando ? 'GUARDAR CAMBIOS' : 'GUARDAR PERFIL PROFESIONAL' }}
+        </button>
       </div>
 
     </form>

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientUser } from '../../services/client-user';
 import { ClientProfesional } from '../../services/client-profesional'; // 👈 nuevo
@@ -21,6 +21,11 @@ export class ProfesionalForm implements OnInit {
 
   protected userData: User | null = null;
 
+  /** Modo edición: viene del data de la ruta `editar-profesional/:userId` */
+  protected readonly editando = this.route.snapshot.data['editar'] === true;
+  /** id del registro de profesional a actualizar (solo en modo edición) */
+  private registroId: string | null = null;
+
   protected readonly form = this.fb.nonNullable.group({
     profession:            ['', [Validators.required]],
     professionalId:        ['', [Validators.required]],
@@ -39,12 +44,58 @@ export class ProfesionalForm implements OnInit {
     }
 
     this.client.getUserByID(userId).subscribe({
-      next: (user) => this.userData = user,
+      next: (user) => {
+        this.userData = user;
+        if (this.editando) {
+          this.cargarProfesionalExistente(userId);
+        }
+      },
       error: () => {
         alert('No se pudo cargar el usuario.');
         this.router.navigate(['/CreateUser']);
       }
     });
+  }
+
+  private cargarProfesionalExistente(userId: string) {
+    this.clientProfesional.getProfesionalByUserID(userId).subscribe({
+      next: (lista) => {
+        const prof = lista[0];
+        if (!prof) {
+          alert('No tenés un perfil profesional para editar.');
+          this.router.navigate(['/perfil-user', userId]);
+          return;
+        }
+
+        this.registroId = prof.id ?? null;
+
+        this.form.patchValue({
+          profession: prof.profession,
+          professionalId: prof.professionalId,
+          descriptionprofesional: prof.descriptionprofesional,
+        });
+
+        this.reemplazarArray(this.titulos, prof.titulos ?? [], () => this.crearTitulo());
+        this.reemplazarArray(this.experiencias, prof.experiencias ?? [], () => this.crearExperiencia());
+      },
+      error: () => {
+        alert('No se pudo cargar el perfil profesional.');
+        this.router.navigate(['/perfil-user', userId]);
+      }
+    });
+  }
+
+  private reemplazarArray(arr: FormArray, items: unknown[], crear: () => FormGroup) {
+    arr.clear();
+    if (items.length === 0) {
+      arr.push(crear());
+      return;
+    }
+    for (const item of items) {
+      const grupo = crear();
+      grupo.patchValue(item as Record<string, unknown>);
+      arr.push(grupo);
+    }
   }
 
   // ===== GETTERS =====
@@ -97,9 +148,31 @@ export class ProfesionalForm implements OnInit {
       return;
     }
 
-    if (confirm('Desea registrar este perfil profesional?')) {
-      const raw = this.form.getRawValue();
+    const raw = this.form.getRawValue();
 
+    if (this.editando) {
+      if (!this.registroId) {
+        alert('No se encontró el perfil profesional a editar.');
+        return;
+      }
+      if (!confirm('¿Guardar los cambios en tu perfil profesional?')) {
+        return;
+      }
+
+      const profesional_editado: Profesional = {
+        id: this.registroId,
+        profesional_userData: this.userData,
+        ...raw,
+      };
+
+      this.clientProfesional.updateProfesional(this.registroId, profesional_editado).subscribe(() => {
+        alert('Perfil profesional actualizado con éxito!');
+        this.router.navigate(['/perfil-prof', this.userData!.id]);
+      });
+      return;
+    }
+
+    if (confirm('Desea registrar este perfil profesional?')) {
       const new_profesional: Profesional = {
         profesional_userData: this.userData,
         ...raw,

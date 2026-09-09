@@ -9,7 +9,7 @@
 .barra-nav {
   position: absolute;
   /* anclada a esa posición de la página (se desplaza con el scroll) */
-  top: 4.5rem;
+  top: 4.05rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
@@ -18,7 +18,7 @@
   justify-content: space-between;
   gap: 0.5rem;
   width: min(92vw, 839px);
-  padding: 0.5rem 1.25rem;
+  padding: 0.5rem 400rem;
   background-color: #e9f0fc;
   border: none;
   border-bottom: 4px solid #2563eb;
@@ -106,7 +106,7 @@
 
 /* Segunda barra, más corta, justo debajo */
 .barra-nav--sub {
-  top: 7.67rem;
+  top: 7.2rem;
   width: min(70vw, 520px);
   padding-left: 2.25rem;
   padding-right: 2.25rem;

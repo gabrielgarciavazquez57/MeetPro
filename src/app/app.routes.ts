@@ -25,9 +25,15 @@ export const routes: Routes = [
     component: UserForm
   },
   {
-    path: 'CreateProfesional/:userId', 
+    path: 'CreateProfesional/:userId',
     title: 'Create Profesional',
     component: ProfesionalForm
+  },
+  {
+    path: 'editar-profesional/:userId',
+    title: 'Editar perfil profesional',
+    component: ProfesionalForm,
+    data: { editar: true }
   },
   {
     path: 'profesionales-lista',

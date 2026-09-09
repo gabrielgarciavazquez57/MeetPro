@@ -157,6 +157,7 @@
   ],
   "profesionales": [
     {
+      "id": "WNgVuw5iIjs",
       "profesional_userData": {
         "username": "jreyes",
         "password": "Jreyes#2026",
@@ -203,8 +204,7 @@
           "fecha_inicio": "2018-12-01",
           "fecha_fin": "2026-09-01"
         }
-      ],
-      "id": "WNgVuw5iIjs"
+      ]
     },
     {
       "profesional_userData": {

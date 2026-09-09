@@ -13,6 +13,11 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+.navbar-brand {
+  display: inline-flex;
+  text-decoration: none;
+}
+
 .navbar-brand .logo-text {
   font-size: 1.9rem;
   font-weight: 800;
