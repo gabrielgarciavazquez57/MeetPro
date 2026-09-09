@@ -10,22 +10,64 @@
   </div>
 
   <div class="contenido-home">
-    <h1 class="titulo-home">Bienvenido a MeetPro</h1>
-    <p class="subtitulo-home">Conectá con profesionales y gestioná tus turnos en un solo lugar.</p>
+    @if (vista() === 'inicio') {
+      <span class="home-logo"><span class="logo-meet">Meet</span><span class="logo-pro">Pro</span></span>
+      <h1 class="titulo-home">Bienvenido a MeetPro</h1>
+      <p class="subtitulo-home">Conectá con profesionales y gestioná tus turnos en un solo lugar.</p>
 
-    <div class="home-acciones">
-      @if (usuario()) {
-        <span class="btn btn-grande btn-desactivado" aria-disabled="true" title="Ya iniciaste sesión">
-          Iniciar sesión
-        </span>
-        <span class="btn btn-grande btn-desactivado" aria-disabled="true" title="Ya iniciaste sesión">
-          Registrar Usuario
-        </span>
-      } @else {
-        <a routerLink="/login" class="btn btn-grande">Iniciar sesión</a>
-        <a routerLink="/CreateUser" class="btn btn-grande">Registrar Usuario</a>
-      }
-      <a routerLink="/profesionales-lista" class="btn btn-grande">Ver profesionales</a>
-    </div>
+      <div class="home-acciones">
+        @if (usuario()) {
+          <span class="btn btn-grande btn-desactivado" aria-disabled="true" title="Ya iniciaste sesión">
+            Iniciar sesión
+          </span>
+          <span class="btn btn-grande btn-desactivado" aria-disabled="true" title="Ya iniciaste sesión">
+            Registrar Usuario
+          </span>
+        } @else {
+          <button type="button" class="btn btn-grande" (click)="abrirLogin()">Iniciar sesión</button>
+          <a routerLink="/CreateUser" class="btn btn-grande">Registrar Usuario</a>
+        }
+      </div>
+    } @else {
+      <span class="home-logo"><span class="logo-meet">Meet</span><span class="logo-pro">Pro</span></span>
+      <h1 class="titulo-home">Iniciar sesión</h1>
+      <p class="subtitulo-home">Ingresá con tu usuario y contraseña.</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" class="home-login-form">
+        <label class="home-campo">
+          <span class="home-campo-label">Usuario</span>
+          <input type="text" formControlName="username" autocomplete="username" />
+          @if (lUsername.touched && lUsername.hasError('required')) {
+            <span class="home-campo-error">Campo requerido</span>
+          }
+        </label>
+
+        <label class="home-campo">
+          <span class="home-campo-label">Contraseña</span>
+          <input type="password" formControlName="password" autocomplete="current-password" />
+          @if (lPassword.touched && lPassword.hasError('required')) {
+            <span class="home-campo-error">Campo requerido</span>
+          }
+        </label>
+
+        @if (loginError()) {
+          <p class="home-login-alerta">{{ loginError() }}</p>
+        }
+
+        <div class="home-acciones">
+          <button type="submit" class="btn btn-grande" [disabled]="loginCargando()">
+            {{ loginCargando() ? 'Ingresando...' : 'Ingresar' }}
+          </button>
+          <button type="button" class="btn btn-grande btn-secundario-home" (click)="volverInicio()">
+            Volver
+          </button>
+        </div>
+
+        <p class="home-login-registro">
+          ¿No tenés cuenta?
+          <a routerLink="/CreateUser">Registrate</a>
+        </p>
+      </form>
+    }
   </div>
 </section>
