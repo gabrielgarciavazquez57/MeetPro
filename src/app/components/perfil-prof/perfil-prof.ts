@@ -1,5 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -7,7 +7,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 @Component({
   selector: 'app-perfil-profesional',
   standalone: true,
-  imports: [BarraNav],
+  imports: [BarraNav, RouterLink],
   templateUrl: './perfil-prof.html',
   styleUrl: './perfil-prof.css',
 })

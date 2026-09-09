@@ -365,6 +365,7 @@ label {
 .tarjeta-accion {
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
   aspect-ratio: 5 / 4;
   width: 100%;
   max-width: 210px;
@@ -380,6 +381,7 @@ label {
   text-align: left;
   cursor: pointer;
   font-family: inherit;
+  text-decoration: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
 }
 

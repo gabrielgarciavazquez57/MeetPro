@@ -1,0 +1,48 @@
+<app-barra-nav titulo="Nuevo turno" />
+
+<section class="fondo-turno-form">
+  <div class="titulo-turno-grupo">
+    <h1 class="titulo-turno">Nuevo turno</h1>
+    @if (nombreProfesional()) {
+      <p class="titulo-turno-sub">{{ nombreProfesional() }}</p>
+    }
+  </div>
+
+  <form class="formulario-turno" [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="datos-turno">
+      <h3 class="titulo-seccion">Datos del turno:</h3>
+      <ul>
+        <li>
+          <label for="fecha">Fecha: </label>
+          <input type="date" formControlName="fecha" id="fecha">
+          @if (fecha.touched && fecha.hasError('required')) {
+            <span>Campo requerido</span>
+          }
+        </li>
+        <li>
+          <label for="hora">Hora: </label>
+          <input type="time" formControlName="hora" id="hora">
+          @if (hora.touched && hora.hasError('required')) {
+            <span>Campo requerido</span>
+          }
+        </li>
+        <li>
+          <label for="modalidad">Modalidad: </label>
+          <select formControlName="modalidad" id="modalidad">
+            <option value="" disabled>Seleccione la modalidad...</option>
+            @for (m of modalidades; track m) {
+              <option [value]="m">{{ m === 'online' ? 'Online' : 'Presencial' }}</option>
+            }
+          </select>
+          @if (modalidad.touched && modalidad.hasError('required')) {
+            <span>Campo requerido</span>
+          }
+        </li>
+      </ul>
+    </div>
+
+    <div class="boton-form">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-grande">CREAR TURNO</button>
+    </div>
+  </form>
+</section>

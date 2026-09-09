@@ -144,7 +144,7 @@
       </div>
 
       <div class="columna-derecha">
-        <button class="tarjeta-accion" type="button">
+        <a class="tarjeta-accion" [routerLink]="['/turnos', prof.professionalId]">
           <span class="accion-titulo">Turnos</span>
           <span class="accion-deco" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -152,7 +152,7 @@
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
           </span>
-        </button>
+        </a>
 
         <button class="tarjeta-accion" type="button">
           <span class="accion-titulo">Contenido extra</span>

@@ -1,0 +1,77 @@
+<app-barra-nav titulo="Turnos disponibles" />
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando turnos...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="turnos-panel">
+      <div class="turnos-head">
+        <div class="turnos-head-texto">
+          <h1 class="turnos-titulo">Turnos disponibles</h1>
+          @if (nombreProfesional()) {
+            <p class="turnos-sub">{{ nombreProfesional() }}</p>
+          }
+        </div>
+        @if (esDueno()) {
+          <a class="btn-nuevo-turno" [routerLink]="['/turno-form', profesionalId()]">
+            Agregar turno nuevo
+          </a>
+        }
+      </div>
+
+      @if (turnosDisponibles().length === 0) {
+        <p class="estado-msg">Este profesional no tiene turnos disponibles.</p>
+      } @else {
+        <table class="tabla-turnos">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Modalidad</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (turno of turnosDisponibles(); track turno.id) {
+              <tr [class.fila-seleccionada]="seleccionado() === turno">
+                <td>{{ turno.fecha }}</td>
+                <td>{{ turno.hora }}</td>
+                <td>
+                  <span class="celda-modalidad" [class.celda-modalidad--online]="turno.modalidad === 'online'">
+                    {{ turno.modalidad === 'online' ? 'Online' : 'Presencial' }}
+                  </span>
+                </td>
+                <td class="celda-accion">
+                  <button type="button" class="btn-elegir" (click)="seleccionar(turno)">
+                    {{ seleccionado() === turno ? 'Elegido' : 'Elegir' }}
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <div class="turnos-footer">
+          @if (seleccionado(); as sel) {
+            <span class="turnos-resumen">
+              Seleccionado: <strong>{{ sel.fecha }} · {{ sel.hora }}</strong>
+            </span>
+          } @else {
+            <span class="turnos-resumen turnos-resumen--vacio">Elegí un turno de la tabla</span>
+          }
+          <button
+            type="button"
+            class="btn-confirmar"
+            [disabled]="!seleccionado()"
+            (click)="confirmar()"
+          >
+            Confirmar turno
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>
