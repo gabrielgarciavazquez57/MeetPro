@@ -1,1 +1,33 @@
-<p>footer works!</p>
+<div class="footer-inner">
+  <div class="footer-top">
+    <div class="footer-marca">
+      <span class="footer-logo">MeetPro</span>
+      <p class="footer-tagline">
+        Conectá con profesionales verificados y gestioná tus turnos en un solo lugar.
+      </p>
+    </div>
+
+    <nav class="footer-cols">
+      <div class="footer-col">
+        <h3 class="footer-col-titulo">Plataforma</h3>
+        <a routerLink="/" class="footer-link">Inicio</a>
+        <a routerLink="/profesionales-lista" class="footer-link">Profesionales</a>
+      </div>
+
+      <div class="footer-col" id="soporte">
+        <h3 class="footer-col-titulo">Soporte</h3>
+        <a href="mailto:soporte@meetpro.com" class="footer-link">soporte@meetpro.com</a>
+        <a href="tel:+541100000000" class="footer-link">+54 11 0000-0000</a>
+        <span class="footer-link footer-link--plano">Lun a Vie, 9 a 18 h</span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© {{ anio }} MeetPro. Todos los derechos reservados.</span>
+    <span class="footer-bottom-legal">
+      <a href="#" class="footer-link">Términos</a>
+      <a href="#" class="footer-link">Privacidad</a>
+    </span>
+  </div>
+</div>

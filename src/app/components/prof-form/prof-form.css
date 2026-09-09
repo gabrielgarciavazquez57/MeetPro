@@ -106,7 +106,7 @@
 
 .datos-profesion .titulo-seccion::before {
   width: 100%;
-  background-color: #334155;
+  background-color: #9aa7ba;
 }
 
 .datos-profesion .titulo-seccion::after {
@@ -136,7 +136,7 @@
 
 .header-seccion::before {
   width: 100%;
-  background-color: #334155;
+  background-color: #9aa7ba;
 }
 
 .header-seccion::after {
