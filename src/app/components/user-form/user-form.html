@@ -1,7 +1,7 @@
 <section class="fondo-registro">
     <div class="titulo-registro-grupo">
-      <h1 class="titulo-registro">Creá tu cuenta</h1>
-      <p class="titulo-registro-sub">Completá tus datos para empezar a usar MeetPro</p>
+      <h1 class="titulo-registro">{{ editando ? 'Editá tu perfil' : 'Creá tu cuenta' }}</h1>
+      <p class="titulo-registro-sub">{{ editando ? 'Actualizá tus datos personales' : 'Completá tus datos para empezar a usar MeetPro' }}</p>
     </div>
     <div class="formulario-registro">
     <form [formGroup]="form"  (ngSubmit) = 'handleSubmit()' >
@@ -221,7 +221,7 @@
         </div>
     </div> 
     <div class="boton-form">
-            <button type="submit" [disabled]="form.invalid" class="btn btn-grande">REGISTRARSE</button>
+            <button type="submit" [disabled]="form.invalid" class="btn btn-grande">{{ editando ? 'GUARDAR CAMBIOS' : 'REGISTRARSE' }}</button>
         </div>
     </form>
 </div>

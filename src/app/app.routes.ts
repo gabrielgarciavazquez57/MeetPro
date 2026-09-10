@@ -27,6 +27,12 @@ export const routes: Routes = [
     component: UserForm
   },
   {
+    path: 'editar-usuario/:id',
+    title: 'Editar perfil',
+    component: UserForm,
+    data: { editar: true }
+  },
+  {
     path: 'CreateProfesional/:userId',
     title: 'Create Profesional',
     component: ProfesionalForm

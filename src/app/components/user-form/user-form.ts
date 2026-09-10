@@ -1,6 +1,6 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../interfaces/user';
 import { ClientUser } from '../../services/client-user';
 import { countries, type ICountry } from 'countries-list';
@@ -17,13 +17,16 @@ function passwordsIguales(control: AbstractControl): ValidationErrors | null {
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
 })
-export class UserForm {
+export class UserForm implements OnInit {
   protected readonly fb = inject(FormBuilder);
   protected readonly client = inject(ClientUser);
-  protected readonly router = inject(Router); // 👈 nuevo
+  protected readonly router = inject(Router);
+  protected readonly route = inject(ActivatedRoute);
 
-  readonly isEditing = input(false);
-  readonly user_edit = input<User>();
+  /** Modo edición: viene del data de la ruta `editar-usuario/:id` */
+  protected readonly editando = this.route.snapshot.data['editar'] === true;
+  /** id del usuario a actualizar (solo en modo edición) */
+  private usuarioId: string | number | null = null;
 
   protected readonly tipos_gen = ['Masculino', 'Femenino', 'No especifico'] as const;
   protected readonly paises = Object.values(countries)
@@ -74,40 +77,79 @@ export class UserForm {
   get zipCode()         { return this.form.controls.address.controls.zipCode; }
   get dateOfBirth()     { return this.form.controls.dateOfBirth; }
 
+  ngOnInit() {
+    if (!this.editando) {
+      return;
+    }
+
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) {
+      alert('No se encontró el usuario a editar.');
+      this.router.navigate(['/']);
+      return;
+    }
+
+    this.client.getUserByID(id).subscribe({
+      next: (user) => {
+        this.usuarioId = user.id ?? id;
+        this.form.patchValue({
+          ...user,
+          password_repeat: user.password,
+          dateOfBirth: this.aFechaInput(user.dateOfBirth),
+        });
+      },
+      error: () => {
+        alert('No se pudo cargar el usuario.');
+        this.router.navigate(['/']);
+      },
+    });
+  }
+
+  /** Convierte la fecha del backend a formato yyyy-MM-dd para el input date */
+  private aFechaInput(fecha: Date | string): string {
+    const d = new Date(fecha);
+    return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+  }
+
 handleSubmit() {
     if (this.form.invalid) {
       alert('Formulario invalido!');
       return;
     }
 
-    if (confirm('Desea registrar este usuario?')) {
-      const raw = this.form.getRawValue();
-      const { password_repeat, ...rest } = raw;
+    const raw = this.form.getRawValue();
+    const { password_repeat, ...rest } = raw;
 
-      const new_user: User = {
-        ...rest,
-        dateOfBirth: new Date(rest.dateOfBirth),
-      };
+    const user_data: User = {
+      ...rest,
+      dateOfBirth: new Date(rest.dateOfBirth),
+    };
 
-      if (!this.isEditing()) {
-        this.client.addUser(new_user).subscribe((createdUser) => {
-          alert('Exito al registrarse!');
-          this.form.reset();
-
-          if (new_user.isProfesional) {
-            this.router.navigate(['/CreateProfesional', createdUser.id]); // 👈 id real del backend
-          }
-        });
-      } else {
-        const userId = this.user_edit()?.id!;
-        this.client.updateUser(userId, new_user).subscribe(() => {
-          alert('Usuario editado exitosamente!');
-
-          if (new_user.isProfesional) {
-            this.router.navigate(['/CreateProfesional', userId]);
-          }
-        });
+    if (this.editando) {
+      if (!this.usuarioId) {
+        alert('No se encontró el usuario a editar.');
+        return;
       }
+      if (!confirm('¿Guardar los cambios en tu perfil?')) {
+        return;
+      }
+
+      this.client.updateUser(this.usuarioId, { id: this.usuarioId, ...user_data }).subscribe(() => {
+        alert('Perfil actualizado con éxito!');
+        this.router.navigate(['/perfil-user', this.usuarioId]);
+      });
+      return;
+    }
+
+    if (confirm('Desea registrar este usuario?')) {
+      this.client.addUser(user_data).subscribe((createdUser) => {
+        alert('Exito al registrarse!');
+        this.form.reset();
+
+        if (user_data.isProfesional) {
+          this.router.navigate(['/CreateProfesional', createdUser.id]);
+        }
+      });
     }
   }
 }

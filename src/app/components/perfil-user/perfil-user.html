@@ -19,12 +19,12 @@
         </div>
 
         <div class="perfil-header-acciones">
-          <button class="btn-secundario" type="button">
+          <a class="btn-secundario" [routerLink]="['/editar-usuario', user.id]">
             <span class="btn-secundario-texto">
               <span class="btn-secundario-titulo">Editar perfil</span>
               <span class="btn-secundario-sub">Actualizá tus datos</span>
             </span>
-          </button>
+          </a>
           @if (user.isProfesional) {
             <a class="btn-secundario" [routerLink]="['/perfil-prof', user.id]">
               <span class="btn-secundario-texto">
