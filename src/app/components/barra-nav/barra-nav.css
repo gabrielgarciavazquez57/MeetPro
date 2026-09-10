@@ -83,13 +83,13 @@
 }
 
 .barra-nav-link {
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-size: 0.85rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: #475569;
   text-decoration: none;
-  padding: 0.5rem 0.9rem;
+  padding: 0.5rem 0.7rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -106,7 +106,7 @@
 
 /* Segunda barra, más corta, justo debajo */
 .barra-nav--sub {
-  top: 7.2rem;
+  top: 7.35rem;
   width: min(70vw, 520px);
   padding-left: 2.25rem;
   padding-right: 2.25rem;
@@ -130,7 +130,7 @@
 }
 
 .barra-nav-titulo {
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.16em;
