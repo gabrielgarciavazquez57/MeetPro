@@ -85,40 +85,55 @@
 
 .tabla-turnos {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.92rem;
+  border: 1px solid #e4e8ed;
 }
 
 .tabla-turnos th {
   text-align: left;
-  padding: 0.65rem 0.85rem;
-  font-size: 0.66rem;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.64rem;
   font-weight: 700;
   color: #64748b;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 2px solid #cbd5e1;
+  letter-spacing: 0.09em;
+  background-color: #f6f8fe;
+  border-bottom: 1px solid #d0d7e2;
 }
 
 .tabla-turnos td {
-  padding: 0.8rem 0.85rem;
+  padding: 0.85rem 0.95rem;
   color: #0f172a;
   font-weight: 600;
   letter-spacing: -0.01em;
-  border-bottom: 1px solid #e4e8ed;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.tabla-turnos tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .tabla-turnos tbody tr {
   transition: background-color 0.12s ease;
 }
 
+.tabla-turnos tbody tr:nth-child(even) {
+  background-color: #fafbfd;
+}
+
 .tabla-turnos tbody tr:hover {
-  background-color: #f5f8ff;
+  background-color: #f0f5ff;
 }
 
 .tabla-turnos tbody tr.fila-seleccionada {
-  background-color: #eff4ff;
-  box-shadow: inset 3px 0 0 #2563eb;
+  background-color: #e8f0ff;
+  box-shadow: inset 4px 0 0 #2563eb;
+}
+
+.tabla-turnos tbody tr.fila-seleccionada td:first-child {
+  font-weight: 700;
 }
 
 .celda-modalidad {
