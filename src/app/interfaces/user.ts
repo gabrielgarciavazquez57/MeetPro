@@ -14,5 +14,6 @@ export interface User {
     dni: string;
     gender: string;
     nationality: string;
+    fotoPerfil?: string;
     address: Address;
 }

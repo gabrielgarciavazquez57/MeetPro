@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../interfaces/user';
@@ -32,6 +32,9 @@ export class UserForm implements OnInit {
   /** era profesional al abrir el form (para detectar si se dio de baja) */
   private eraProfesional = false;
 
+  /** Vista previa de la foto de perfil (data URL) */
+  readonly fotoPreview = signal<string>('');
+
   protected readonly tipos_gen = ['Masculino', 'Femenino', 'No especifico'] as const;
   protected readonly paises = Object.values(countries)
     .map(c => (c as ICountry).name)
@@ -51,6 +54,7 @@ export class UserForm implements OnInit {
     gender:          ['', [Validators.required]],
     nationality:     ['', [Validators.required]],
     dateOfBirth:     ['', [Validators.required]],
+    fotoPerfil:      [''],
     address: this.fb.nonNullable.group({
       address:    ['', [Validators.required]],
       city:       ['', [Validators.required]],
@@ -80,6 +84,29 @@ export class UserForm implements OnInit {
   get country()         { return this.form.controls.address.controls.country; }
   get zipCode()         { return this.form.controls.address.controls.zipCode; }
   get dateOfBirth()     { return this.form.controls.dateOfBirth; }
+  get fotoPerfil()      { return this.form.controls.fotoPerfil; }
+
+  onFoto(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const lector = new FileReader();
+    lector.onload = () => {
+      const dataUrl = lector.result as string;
+      this.fotoPreview.set(dataUrl);
+      this.fotoPerfil.setValue(dataUrl);
+    };
+    lector.readAsDataURL(file);
+    input.value = '';
+  }
+
+  quitarFoto(): void {
+    this.fotoPreview.set('');
+    this.fotoPerfil.setValue('');
+  }
 
   ngOnInit() {
     if (!this.editando) {
@@ -97,6 +124,7 @@ export class UserForm implements OnInit {
       next: (user) => {
         this.usuarioId = user.id ?? id;
         this.eraProfesional = user.isProfesional === true;
+        this.fotoPreview.set(user.fotoPerfil ?? '');
         this.form.patchValue({
           ...user,
           password_repeat: user.password,

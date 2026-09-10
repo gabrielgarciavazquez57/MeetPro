@@ -10,7 +10,11 @@
       <div class="perfil-header">
         <div class="perfil-header-top">
           <div class="avatar-perfil">
-            {{ user.name?.charAt(0) }}{{ user.lastname?.charAt(0) }}
+            @if (user.fotoPerfil) {
+              <img [src]="user.fotoPerfil" [alt]="user.name + ' ' + user.lastname">
+            } @else {
+              {{ user.name?.charAt(0) }}{{ user.lastname?.charAt(0) }}
+            }
           </div>
           <div class="perfil-titulo-grupo">
             <h1 class="titulo-profesional perfil-nombre">{{ user.name }} {{ user.lastname }}</h1>

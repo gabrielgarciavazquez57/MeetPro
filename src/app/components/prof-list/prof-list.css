@@ -180,6 +180,7 @@
   flex-shrink: 0;
   width: 56px;
   height: 56px;
+  overflow: hidden;
   background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
   color: #ffffff;
   font-size: 1.05rem;
@@ -189,6 +190,12 @@
   justify-content: center;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+}
+
+.avatar-profesional img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tarjeta-titulo-grupo {

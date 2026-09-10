@@ -8,7 +8,24 @@
     <div class="columnas-form">
         <div class="datos-personales">
             <h3 class="titulo-seccion" >Datos Personales:</h3>
-            <ul> 
+            <ul>
+            <li class="foto-perfil-item">
+                    <label>Foto de perfil (opcional): </label>
+                    <div class="foto-perfil-campo">
+                        <span class="foto-perfil-preview">
+                            @if (fotoPreview()) {
+                                <img [src]="fotoPreview()" alt="Foto de perfil">
+                            } @else {
+                                {{ (name.value || 'F').charAt(0) }}{{ (lastname.value || '').charAt(0) }}
+                            }
+                        </span>
+                        <input type="file" id="fotoPerfil" accept="image/*" hidden (change)="onFoto($event)">
+                        <label for="fotoPerfil" class="btn btn-foto">{{ fotoPreview() ? 'Cambiar foto' : '+ Subir foto' }}</label>
+                        @if (fotoPreview()) {
+                            <button type="button" class="btn-quitar-foto" (click)="quitarFoto()">Quitar</button>
+                        }
+                    </div>
+            </li>
             <li>
                     <label for="name">Nombre: </label>
                     <input type="text" formControlName="name" id="name">

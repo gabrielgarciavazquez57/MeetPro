@@ -20,7 +20,11 @@
               <div class="tarjeta-profesional">
                 <div class="tarjeta-header">
                   <div class="avatar-profesional">
-                    {{ prof.profesional_userData?.name?.charAt(0) }}{{ prof.profesional_userData?.lastname?.charAt(0) }}
+                    @if (prof.profesional_userData?.fotoPerfil) {
+                      <img [src]="prof.profesional_userData.fotoPerfil" [alt]="prof.profesional_userData?.name">
+                    } @else {
+                      {{ prof.profesional_userData?.name?.charAt(0) }}{{ prof.profesional_userData?.lastname?.charAt(0) }}
+                    }
                   </div>
                   <div class="tarjeta-titulo-grupo">
                     <h2 class="nombre-profesional">
