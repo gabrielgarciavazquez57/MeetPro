@@ -817,29 +817,8 @@
       "fecha": "2026-09-25",
       "hora": "11:00",
       "modalidad": "online",
-      "disponible": false,
-      "cliente": {
-        "username": "adimin",
-        "password": "admin123",
-        "isProfesional": false,
-        "name": "Admin",
-        "lastname": "Admin",
-        "dni": "33333333",
-        "email": "admin@meetpro.com",
-        "phoneNumber": "325346748",
-        "age": 68,
-        "gender": "Masculino",
-        "nationality": "Barbados",
-        "dateOfBirth": "1970-04-04T00:00:00.000Z",
-        "address": {
-          "address": "aaaaaaaaa",
-          "city": "aaaaaaaaaaa",
-          "province": "aaaaaaaaaaaa",
-          "country": "Bahamas",
-          "zipCode": "24332543674"
-        },
-        "id": "21uI9BxQdcs"
-      },
+      "disponible": true,
+      "cliente": null,
       "profesional": {
         "profesional_userData": {
           "name": "José",
@@ -880,29 +859,8 @@
       "fecha": "2026-10-03",
       "hora": "15:30",
       "modalidad": "presencial",
-      "disponible": false,
-      "cliente": {
-        "username": "adimin",
-        "password": "admin123",
-        "isProfesional": false,
-        "name": "Admin",
-        "lastname": "Admin",
-        "dni": "33333333",
-        "email": "admin@meetpro.com",
-        "phoneNumber": "325346748",
-        "age": 68,
-        "gender": "Masculino",
-        "nationality": "Barbados",
-        "dateOfBirth": "1970-04-04T00:00:00.000Z",
-        "address": {
-          "address": "aaaaaaaaa",
-          "city": "aaaaaaaaaaa",
-          "province": "aaaaaaaaaaaa",
-          "country": "Bahamas",
-          "zipCode": "24332543674"
-        },
-        "id": "21uI9BxQdcs"
-      },
+      "disponible": true,
+      "cliente": null,
       "profesional": {
         "profesional_userData": {
           "name": "Natalia",
