@@ -3,11 +3,11 @@
 
 :host {
   display: block;
-  background-color: #93b4f5;
-  background-image: linear-gradient(180deg, #6f9bef 0%, #a9c5f8 100%);
+  background-color: #3f6fd6;
+  background-image: linear-gradient(180deg, #3f6fd6 0%, #5b86e0 100%);
   padding: 1.75rem 2rem 1.25rem;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: #1e293b;
+  color: #eef3fd;
 }
 
 .footer-inner {
@@ -21,7 +21,7 @@
   justify-content: space-between;
   gap: 2.5rem;
   padding-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .footer-marca {
@@ -33,14 +33,14 @@
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .footer-tagline {
   margin: 0.6rem 0 0;
   font-size: 0.85rem;
   line-height: 1.55;
-  color: #1e293b;
+  color: #e2ebfb;
 }
 
 .footer-cols {
@@ -62,23 +62,23 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .footer-link {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #334155;
+  color: #dbe6fb;
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 a.footer-link:hover {
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .footer-link--plano {
-  color: #475569;
+  color: #c6d7f6;
 }
 
 .footer-bottom {
@@ -88,7 +88,7 @@ a.footer-link:hover {
   gap: 0.75rem;
   padding-top: 0.9rem;
   font-size: 0.78rem;
-  color: #334155;
+  color: #c6d7f6;
 }
 
 .footer-bottom-legal {

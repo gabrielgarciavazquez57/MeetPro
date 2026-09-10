@@ -11,6 +11,7 @@ import { TurnoForm } from './components/turno-form/turno-form';
 import { ListaTurnosExistentes } from './components/lista-turnos-existentes/lista-turnos-existentes';
 import { ProfesionalesConsultados } from './components/profesionales-consultados/profesionales-consultados';
 import { FormularioConsulta } from './components/formulario-consulta/formulario-consulta';
+import { Valoraciones } from './components/valoraciones/valoraciones';
 
 export const routes: Routes = [
   {
@@ -73,6 +74,11 @@ export const routes: Routes = [
     path: 'consulta',
     title: 'Nueva consulta',
     component: FormularioConsulta
+  },
+  {
+    path: 'valoraciones/:profesionalId',
+    title: 'Valoraciones',
+    component: Valoraciones
   },
   {
   path: 'perfil-user/:id',

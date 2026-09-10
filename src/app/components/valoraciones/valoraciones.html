@@ -1,0 +1,80 @@
+<app-barra-nav titulo="Valoraciones" />
+
+<div class="fondo-valoraciones">
+  @if (cargando()) {
+    <p class="estado-msg">Cargando valoraciones...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="valoraciones-panel">
+      <div class="valoraciones-head">
+        <div class="valoraciones-head-texto">
+          <h1 class="valoraciones-titulo">Valoraciones</h1>
+          @if (nombreProfesional()) {
+            <p class="valoraciones-sub">{{ nombreProfesional() }}</p>
+          }
+        </div>
+        @if (valoraciones().length) {
+          <div class="valoraciones-promedio">
+            <span class="promedio-num">{{ promedio() }}</span>
+            <span class="promedio-estrellas">{{ estrellas(promedio()) }}</span>
+            <span class="promedio-total">{{ valoraciones().length }} opiniones</span>
+          </div>
+        }
+      </div>
+
+      <div class="lista-comentarios">
+        @if (valoraciones().length === 0) {
+          <p class="estado-msg estado-msg--panel">Todavía no hay valoraciones para este profesional.</p>
+        } @else {
+          @for (v of valoraciones(); track v.id ?? $index) {
+            <article class="comentario">
+              <div class="comentario-head">
+                <span class="comentario-autor">{{ v.nombre }} {{ v.apellido }}</span>
+                <span class="comentario-fecha">{{ v.fecha }}</span>
+              </div>
+              <div class="comentario-estrellas">{{ estrellas(v.puntaje) }}</div>
+              <p class="comentario-texto">{{ v.descripcion }}</p>
+            </article>
+          }
+        }
+      </div>
+
+      @if (mostrandoForm()) {
+        <form class="form-valoracion" [formGroup]="form" (ngSubmit)="enviar()">
+          <div class="form-campo">
+            <label for="puntaje">Puntaje</label>
+            <select id="puntaje" formControlName="puntaje">
+              @for (p of puntajes; track p) {
+                <option [ngValue]="p">{{ p }} — {{ estrellas(p) }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-campo">
+            <label for="descripcion">Comentario</label>
+            <textarea id="descripcion" formControlName="descripcion" rows="4"></textarea>
+            @if (descripcion.touched && descripcion.hasError('required')) {
+              <span class="form-error">Escribí tu comentario</span>
+            } @else if (descripcion.hasError('maxlength')) {
+              <span class="form-error">Máximo 500 caracteres</span>
+            }
+          </div>
+
+          <div class="form-acciones">
+            <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+            <button type="submit" class="btn-enviar" [disabled]="form.invalid || enviando()">
+              {{ enviando() ? 'Enviando...' : 'Publicar valoración' }}
+            </button>
+          </div>
+        </form>
+      } @else {
+        <div class="valoraciones-footer">
+          <button type="button" class="btn-agregar-valoracion" (click)="abrirForm()">
+            Agregar valoración
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1014,5 +1014,34 @@
       }
     }
   ],
+  "valoraciones": [
+    {
+      "id": "val-001",
+      "professionalId": "54321",
+      "nombre": "Lucía",
+      "apellido": "Fernández",
+      "fecha": "2026-07-12",
+      "puntaje": 5,
+      "descripcion": "Excelente atención y muy profesional. La recomiendo totalmente."
+    },
+    {
+      "id": "val-002",
+      "professionalId": "54321",
+      "nombre": "Martín",
+      "apellido": "Gómez",
+      "fecha": "2026-08-03",
+      "puntaje": 4,
+      "descripcion": "Muy buen trato, resolvió mi consulta rápido. Volvería a consultar."
+    },
+    {
+      "professionalId": "12345",
+      "nombre": "Miguel",
+      "apellido": "Merentiel",
+      "fecha": "2026-09-10",
+      "puntaje": 5,
+      "descripcion": "Excelente profesional.",
+      "id": "gdZQ44tuI3o"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

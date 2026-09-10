@@ -89,6 +89,36 @@
   letter-spacing: -0.01em;
 }
 
+.panel-filtros-head-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn-ordenar {
+  font-family: inherit;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #ffffff;
+  border: 1px solid #d0d7e2;
+  border-left: 2px solid #2563eb;
+  padding: 0.2rem 0.3rem;
+  max-width: 124px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-ordenar:hover {
+  border-color: #2563eb;
+}
+
+.btn-ordenar:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
 .btn-limpiar {
   font-family: inherit;
   font-size: 0.72rem;
@@ -221,6 +251,30 @@
   font-weight: 600;
   color: #2563eb;
   letter-spacing: 0.01em;
+}
+
+.tarjeta-puntaje {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.tarjeta-estrella {
+  color: #60a5fa;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.tarjeta-puntaje--vacio {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #94a3b8;
 }
 
 .detalle-profesional {
