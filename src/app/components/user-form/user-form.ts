@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, AbstractControl, ValidationErrors, Va
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../interfaces/user';
 import { ClientUser } from '../../services/client-user';
+import { ClientProfesional } from '../../services/client-profesional';
 import { countries, type ICountry } from 'countries-list';
 
 function passwordsIguales(control: AbstractControl): ValidationErrors | null {
@@ -20,6 +21,7 @@ function passwordsIguales(control: AbstractControl): ValidationErrors | null {
 export class UserForm implements OnInit {
   protected readonly fb = inject(FormBuilder);
   protected readonly client = inject(ClientUser);
+  protected readonly clientProfesional = inject(ClientProfesional);
   protected readonly router = inject(Router);
   protected readonly route = inject(ActivatedRoute);
 
@@ -27,6 +29,8 @@ export class UserForm implements OnInit {
   protected readonly editando = this.route.snapshot.data['editar'] === true;
   /** id del usuario a actualizar (solo en modo edición) */
   private usuarioId: string | number | null = null;
+  /** era profesional al abrir el form (para detectar si se dio de baja) */
+  private eraProfesional = false;
 
   protected readonly tipos_gen = ['Masculino', 'Femenino', 'No especifico'] as const;
   protected readonly paises = Object.values(countries)
@@ -92,6 +96,7 @@ export class UserForm implements OnInit {
     this.client.getUserByID(id).subscribe({
       next: (user) => {
         this.usuarioId = user.id ?? id;
+        this.eraProfesional = user.isProfesional === true;
         this.form.patchValue({
           ...user,
           password_repeat: user.password,
@@ -109,6 +114,33 @@ export class UserForm implements OnInit {
   private aFechaInput(fecha: Date | string): string {
     const d = new Date(fecha);
     return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+  }
+
+  /** Borra el perfil profesional del usuario de la lista de profesionales */
+  private eliminarPerfilProfesional(userId: string | number): void {
+    this.clientProfesional.getProfesionalByUserID(userId).subscribe({
+      next: (lista) => {
+        const registroId = lista[0]?.id;
+        const finalizar = () => {
+          alert('Perfil actualizado. Se quitó tu perfil profesional.');
+          this.router.navigate(['/perfil-user', userId]);
+        };
+
+        if (registroId == null) {
+          finalizar();
+          return;
+        }
+
+        this.clientProfesional.deleteProfesional(registroId).subscribe({
+          next: finalizar,
+          error: finalizar,
+        });
+      },
+      error: () => {
+        alert('Perfil actualizado, pero no se pudo quitar el perfil profesional.');
+        this.router.navigate(['/perfil-user', userId]);
+      },
+    });
   }
 
 handleSubmit() {
@@ -134,9 +166,15 @@ handleSubmit() {
         return;
       }
 
+      const dejaDeSerProfesional = this.eraProfesional && !user_data.isProfesional;
+
       this.client.updateUser(this.usuarioId, { id: this.usuarioId, ...user_data }).subscribe(() => {
-        alert('Perfil actualizado con éxito!');
-        this.router.navigate(['/perfil-user', this.usuarioId]);
+        if (dejaDeSerProfesional) {
+          this.eliminarPerfilProfesional(this.usuarioId!);
+        } else {
+          alert('Perfil actualizado con éxito!');
+          this.router.navigate(['/perfil-user', this.usuarioId]);
+        }
       });
       return;
     }

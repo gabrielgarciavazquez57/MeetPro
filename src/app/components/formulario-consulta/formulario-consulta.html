@@ -1,0 +1,71 @@
+<app-barra-nav titulo="Nueva consulta" />
+
+<section class="fondo-consulta">
+  <div class="titulo-consulta-grupo">
+    <h1 class="titulo-consulta">Nueva consulta</h1>
+    <p class="titulo-consulta-sub">Contanos tu duda y te respondemos por email</p>
+  </div>
+
+  <form class="formulario-consulta" [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="datos-consulta">
+      <h3 class="titulo-seccion">Datos de la consulta:</h3>
+      <ul>
+        <li class="campo-full">
+          <label for="titulo">Título de la consulta: </label>
+          <input type="text" formControlName="titulo" id="titulo">
+          @if (titulo.touched && titulo.hasError('required')) {
+            <span>Campo requerido</span>
+          } @else if (titulo.hasError('maxlength')) {
+            <span>Debe contener menos de 120 caracteres</span>
+          }
+        </li>
+
+        <li>
+          <label for="nombre">Nombre: </label>
+          <input type="text" formControlName="nombre" id="nombre">
+        </li>
+
+        <li>
+          <label for="apellido">Apellido: </label>
+          <input type="text" formControlName="apellido" id="apellido">
+        </li>
+
+        <li class="campo-full">
+          <label for="email">Email: </label>
+          <input type="text" formControlName="email" id="email">
+        </li>
+
+        <li class="campo-full">
+          <label for="descripcion">Descripción: </label>
+          <textarea formControlName="descripcion" id="descripcion" rows="5"></textarea>
+          @if (descripcion.touched && descripcion.hasError('required')) {
+            <span>Campo requerido</span>
+          } @else if (descripcion.hasError('maxlength')) {
+            <span>Debe contener menos de 1000 caracteres</span>
+          }
+        </li>
+
+        <li class="campo-full">
+          <label>Archivos adjuntos: </label>
+          <input type="file" id="adjuntos" multiple hidden (change)="onArchivos($event)">
+          <label for="adjuntos" class="btn btn-adjuntar">+ Adjuntar archivos</label>
+
+          @if (archivos().length) {
+            <ul class="lista-adjuntos">
+              @for (archivo of archivos(); track $index) {
+                <li>
+                  <span class="adjunto-nombre">{{ archivo.name }}</span>
+                  <button type="button" class="btn-quitar" (click)="quitarArchivo($index)">Quitar</button>
+                </li>
+              }
+            </ul>
+          }
+        </li>
+      </ul>
+    </div>
+
+    <div class="boton-form">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-grande">ENVIAR CONSULTA</button>
+    </div>
+  </form>
+</section>
