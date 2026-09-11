@@ -12,6 +12,7 @@ import { ListaTurnosExistentes } from './components/lista-turnos-existentes/list
 import { ProfesionalesConsultados } from './components/profesionales-consultados/profesionales-consultados';
 import { FormularioConsulta } from './components/formulario-consulta/formulario-consulta';
 import { Valoraciones } from './components/valoraciones/valoraciones';
+import { InformacionProfesionalComponent } from './components/informacion-profesional/informacion-profesional';
 
 export const routes: Routes = [
   {
@@ -79,6 +80,11 @@ export const routes: Routes = [
     path: 'valoraciones/:profesionalId',
     title: 'Valoraciones',
     component: Valoraciones
+  },
+  {
+    path: 'informacion-profesional/:profesionalId',
+    title: 'Información Profesional',
+    component: InformacionProfesionalComponent
   },
   {
   path: 'perfil-user/:id',

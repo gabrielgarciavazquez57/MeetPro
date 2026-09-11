@@ -177,7 +177,7 @@
           </span>
         </a>
 
-        <button class="tarjeta-accion" type="button">
+        <a class="tarjeta-accion" [routerLink]="['/informacion-profesional', prof.professionalId]">
           <span class="accion-titulo">Información Profesional +</span>
           <span class="accion-deco" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -185,7 +185,7 @@
               <path d="M12 16v-4M12 8h.01" />
             </svg>
           </span>
-        </button>
+        </a>
 
         <a class="tarjeta-accion" [routerLink]="['/valoraciones', prof.professionalId]">
           <span class="accion-titulo">Valoraciones</span>

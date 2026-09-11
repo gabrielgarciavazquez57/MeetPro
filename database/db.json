@@ -1043,5 +1043,32 @@
       "id": "gdZQ44tuI3o"
     }
   ],
+  "informacionesProfesionales": [
+    {
+      "professionalId": "12345",
+      "profesional_userData": {
+        "name": "José",
+        "lastname": "Reyes",
+        "dni": "34546789",
+        "email": "jose.reyes@meetpro.com",
+        "phoneNumber": "1145551234",
+        "age": 41,
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1985-05-04T00:00:00.000Z",
+        "address": {
+          "address": "Av. Corrientes 1234",
+          "city": "CABA",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "C1043"
+        },
+        "id": "vsvLADccdcM"
+      },
+      "descripcionAmpliada": "Soy desarrollador de software con más de 15 años de experiencia en el diseño y la construcción de aplicaciones web y móviles. Me especializo en arquitecturas backend escalables con Node.js y Angular, y en los últimos años lideré equipos de entre 4 y 8 personas en proyectos para el sector fintech y salud.\n\nMe apasiona el mentoring: dedico parte de mi semana a acompañar a desarrolladores junior en su crecimiento técnico. Trabajo con metodologías ágiles (Scrum/Kanban) y priorizo siempre la calidad del código y la experiencia del usuario final.\n\nFuera del código, doy charlas en meetups locales sobre buenas prácticas de desarrollo y accesibilidad web.",
+      "id": "zoZdozfOb-Y"
+    }
+  ],
+  "proyectos": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

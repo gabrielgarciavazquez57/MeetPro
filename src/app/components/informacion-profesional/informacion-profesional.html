@@ -1,0 +1,137 @@
+<app-barra-nav titulo="Información Profesional" />
+
+<div class="fondo-informacion">
+  @if (cargando()) {
+    <p class="estado-msg">Cargando información...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else if (profesional(); as prof) {
+    <div class="titulo-informacion-grupo">
+      <h1 class="titulo-informacion">{{ prof.profesional_userData.name }} {{ prof.profesional_userData.lastname }}</h1>
+      <p class="titulo-informacion-sub">{{ prof.profession }}</p>
+    </div>
+
+    <div class="informacion-panel">
+      <section class="informacion-seccion">
+        <div class="informacion-seccion-head">
+          <h2 class="titulo-seccion">Descripción ampliada</h2>
+          @if (esDueno() && !editando()) {
+            <button type="button" class="btn-editar" (click)="abrirEdicion()">
+              {{ informacion() ? 'Editar' : '+ Agregar' }}
+            </button>
+          }
+        </div>
+
+        @if (editando()) {
+          <form class="form-descripcion" [formGroup]="form" (ngSubmit)="guardar()">
+            <textarea formControlName="descripcionAmpliada" rows="7" placeholder="Contá con más detalle tu trayectoria, especialidades y forma de trabajo..."></textarea>
+            @if (descripcionAmpliada.touched && descripcionAmpliada.hasError('required')) {
+              <span class="form-error">Escribí una descripción</span>
+            } @else if (descripcionAmpliada.hasError('maxlength')) {
+              <span class="form-error">Máximo 2000 caracteres</span>
+            }
+            <div class="form-acciones">
+              <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+              <button type="submit" class="btn-guardar" [disabled]="form.invalid || guardando()">
+                {{ guardando() ? 'Guardando...' : 'Guardar' }}
+              </button>
+            </div>
+          </form>
+        } @else if (informacion()?.descripcionAmpliada) {
+          <p class="descripcion-texto">{{ informacion()!.descripcionAmpliada }}</p>
+        } @else {
+          <p class="estado-msg estado-msg--panel">Todavía no hay una descripción ampliada para este profesional.</p>
+        }
+      </section>
+
+      <section class="informacion-seccion">
+        <div class="informacion-seccion-head">
+          <h2 class="titulo-seccion">Proyectos</h2>
+          @if (esDueno() && !mostrandoFormProyecto()) {
+            <button type="button" class="btn-editar" (click)="abrirFormProyecto()">+ Agregar proyecto</button>
+          }
+        </div>
+
+        @if (mostrandoFormProyecto()) {
+          <form class="form-descripcion" [formGroup]="formProyecto" (ngSubmit)="guardarProyecto()">
+            <div class="campo-proyecto">
+              <label for="titulo_proyecto">Título del proyecto</label>
+              <input type="text" id="titulo_proyecto" formControlName="titulo_proyecto">
+              @if (titulo_proyecto.touched && titulo_proyecto.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="fila-fechas-proyecto">
+              <div class="campo-proyecto">
+                <label for="fecha_inicio">Fecha de inicio</label>
+                <input type="date" id="fecha_inicio" formControlName="fecha_inicio">
+                @if (fecha_inicio_p.touched && fecha_inicio_p.hasError('required')) {
+                  <span class="form-error">Campo requerido</span>
+                }
+              </div>
+              <div class="campo-proyecto">
+                <label for="fecha_finalizacion">Fecha de finalización</label>
+                <input type="date" id="fecha_finalizacion" formControlName="fecha_finalizacion">
+              </div>
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="descripcion_proyecto">Descripción</label>
+              <textarea id="descripcion_proyecto" formControlName="descripcion_proyecto" rows="5"></textarea>
+              @if (descripcion_proyecto.touched && descripcion_proyecto.hasError('required')) {
+                <span class="form-error">Escribí una descripción</span>
+              } @else if (descripcion_proyecto.hasError('maxlength')) {
+                <span class="form-error">Máximo 800 caracteres</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label>Imagen del proyecto (opcional)</label>
+              <div class="imagen-proyecto-campo">
+                @if (imagenProyectoPreview()) {
+                  <img class="imagen-proyecto-preview" [src]="imagenProyectoPreview()" alt="Vista previa del proyecto">
+                }
+                <input type="file" id="imagen_proyecto" accept="image/*" hidden (change)="onImagenProyecto($event)">
+                <label for="imagen_proyecto" class="btn-subir-imagen">{{ imagenProyectoPreview() ? 'Cambiar imagen' : '+ Subir imagen' }}</label>
+              </div>
+            </div>
+
+            <div class="form-acciones">
+              <button type="button" class="btn-cancelar" (click)="cancelarProyecto()">Cancelar</button>
+              <button type="submit" class="btn-guardar" [disabled]="formProyecto.invalid || guardandoProyecto()">
+                {{ guardandoProyecto() ? 'Guardando...' : 'Guardar proyecto' }}
+              </button>
+            </div>
+          </form>
+        }
+
+        @if (proyectos().length) {
+          <div class="lista-proyectos">
+            @for (p of proyectos(); track p.id ?? $index) {
+              <article class="proyecto-card">
+                @if (p.imagen_proyecto) {
+                  <img class="proyecto-imagen" [src]="p.imagen_proyecto" [alt]="p.titulo_proyecto">
+                }
+                <div class="proyecto-contenido">
+                  <div class="proyecto-head">
+                    <h3 class="proyecto-titulo">{{ p.titulo_proyecto }}</h3>
+                    @if (esDueno()) {
+                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarProyecto(p.id)">Eliminar</button>
+                    }
+                  </div>
+                  <p class="proyecto-fechas">
+                    {{ p.fecha_inicio }}@if (p.fecha_finalizacion) { — {{ p.fecha_finalizacion }} }
+                  </p>
+                  <p class="proyecto-descripcion">{{ p.descripcion_proyecto }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        } @else if (!mostrandoFormProyecto()) {
+          <p class="estado-msg estado-msg--panel">Todavía no hay proyectos cargados.</p>
+        }
+      </section>
+    </div>
+  }
+</div>
