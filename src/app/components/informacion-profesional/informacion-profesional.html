@@ -107,9 +107,17 @@
         }
 
         @if (proyectos().length) {
-          <div class="lista-proyectos">
-            @for (p of proyectos(); track p.id ?? $index) {
-              <article class="proyecto-card">
+          <div class="carrusel-proyectos">
+            @if (proyectos().length > 1) {
+              <button type="button" class="btn-flecha btn-flecha--izq" (click)="anteriorProyecto()" aria-label="Proyecto anterior">‹</button>
+            }
+
+            @for (p of proyectoActualLista(); track p.id) {
+              <article
+                class="proyecto-card"
+                [class.proyecto-card--der]="direccionProyecto() === 'der'"
+                [class.proyecto-card--izq]="direccionProyecto() === 'izq'"
+              >
                 @if (p.imagen_proyecto) {
                   <img class="proyecto-imagen" [src]="p.imagen_proyecto" [alt]="p.titulo_proyecto">
                 }
@@ -127,7 +135,15 @@
                 </div>
               </article>
             }
+
+            @if (proyectos().length > 1) {
+              <button type="button" class="btn-flecha btn-flecha--der" (click)="siguienteProyecto()" aria-label="Proyecto siguiente">›</button>
+            }
           </div>
+
+          @if (proyectos().length > 1) {
+            <p class="carrusel-indicador">{{ indiceProyecto() + 1 }} / {{ proyectos().length }}</p>
+          }
         } @else if (!mostrandoFormProyecto()) {
           <p class="estado-msg estado-msg--panel">Todavía no hay proyectos cargados.</p>
         }

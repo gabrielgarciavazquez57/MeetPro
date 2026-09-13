@@ -77,10 +77,16 @@
   color: #2563eb;
 }
 
-/* Contenedor */
+/* Contenedor: layout que agrupa cada sección como una tarjeta separada */
 .informacion-panel {
   width: 100%;
   max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.informacion-seccion {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-left: 4px solid #2563eb;
@@ -88,9 +94,6 @@
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
   padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
 }
 
 .titulo-seccion {
@@ -284,11 +287,6 @@
   opacity: 0.7;
 }
 
-.informacion-seccion + .informacion-seccion {
-  padding-top: 1.75rem;
-  border-top: 1px solid #e4e8ed;
-}
-
 /* Formulario de campos (proyecto) */
 .campo-proyecto {
   display: flex;
@@ -365,21 +363,88 @@
   border-color: #2563eb;
 }
 
-/* Lista de proyectos */
-.lista-proyectos {
+/* Carrusel de proyectos */
+.carrusel-proyectos {
   margin-top: 1rem;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.85rem;
+  overflow: hidden;
+}
+
+.btn-flecha {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 2.1rem;
+  line-height: 1;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s ease;
+}
+
+.btn-flecha:hover {
+  color: #64748b;
+}
+
+.btn-flecha:active {
+  transform: scale(0.96);
+}
+
+.carrusel-indicador {
+  margin: 0.6rem 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
 }
 
 .proyecto-card {
+  flex: 1;
+  min-width: 0;
   display: flex;
   gap: 1rem;
   padding: 1rem;
   background-color: #f8fafc;
   border: 1px solid #e4e8ed;
   border-left: 3px solid #60a5fa;
+}
+
+@keyframes proyecto-desliza-der {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes proyecto-desliza-izq {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.proyecto-card--der {
+  animation: proyecto-desliza-der 0.28s ease;
+}
+
+.proyecto-card--izq {
+  animation: proyecto-desliza-izq 0.28s ease;
 }
 
 .proyecto-imagen {
@@ -442,7 +507,7 @@
 }
 
 @media (max-width: 560px) {
-  .informacion-panel {
+  .informacion-seccion {
     padding: 1.35rem;
   }
 
