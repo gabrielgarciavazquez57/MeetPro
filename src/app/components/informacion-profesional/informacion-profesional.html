@@ -148,6 +148,84 @@
           <p class="estado-msg estado-msg--panel">Todavía no hay proyectos cargados.</p>
         }
       </section>
+
+      <section class="informacion-seccion">
+        <div class="informacion-seccion-head">
+          <h2 class="titulo-seccion">Títulos</h2>
+        </div>
+
+        @if (prof.titulos?.length) {
+          <ul class="lista-titulos">
+            @for (t of prof.titulos; track t.id ?? $index) {
+              <li class="titulo-card">
+                <p class="titulo-card-nombre">{{ t.nombre_titulo }}</p>
+                @if (t.institucion_educativa) {
+                  <p class="titulo-card-institucion">{{ t.institucion_educativa }}</p>
+                }
+                @if (t.fecha_obtencion) {
+                  <p class="titulo-card-fecha">{{ t.fecha_obtencion }}</p>
+                }
+                @if (t.descripcion_titulo) {
+                  <p class="titulo-card-desc">{{ t.descripcion_titulo }}</p>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="estado-msg estado-msg--panel">Todavía no hay títulos cargados.</p>
+        }
+      </section>
+
+      <section class="informacion-seccion">
+        <div class="informacion-seccion-head">
+          <h2 class="titulo-seccion">Certificados</h2>
+        </div>
+
+        @if (prof.certificados?.length) {
+          <ul class="lista-titulos">
+            @for (c of prof.certificados; track c.id ?? $index) {
+              <li class="titulo-card">
+                <p class="titulo-card-nombre">{{ c.nombre_certificado }}</p>
+                @if (c.institucion_certificado) {
+                  <p class="titulo-card-institucion">{{ c.institucion_certificado }}</p>
+                }
+                @if (c.fecha_obtencion) {
+                  <p class="titulo-card-fecha">{{ c.fecha_obtencion }}</p>
+                }
+                @if (c.descripcion_certificado) {
+                  <p class="titulo-card-desc">{{ c.descripcion_certificado }}</p>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="estado-msg estado-msg--panel">Todavía no hay certificados cargados.</p>
+        }
+      </section>
+
+      <section class="informacion-seccion">
+        <div class="informacion-seccion-head">
+          <h2 class="titulo-seccion">Experiencia profesional</h2>
+        </div>
+
+        @if (prof.experiencias?.length) {
+          <ul class="lista-titulos">
+            @for (e of prof.experiencias; track e.id ?? $index) {
+              <li class="titulo-card">
+                <p class="titulo-card-nombre">{{ e.titulo_experiencia }}</p>
+                @if (e.institucion_experiencia) {
+                  <p class="titulo-card-institucion">{{ e.institucion_experiencia }}</p>
+                }
+                @if (e.fecha_inicio || e.fecha_fin) {
+                  <p class="titulo-card-fecha">{{ e.fecha_inicio }}@if (e.fecha_fin) { — {{ e.fecha_fin }} }</p>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="estado-msg estado-msg--panel">Todavía no hay experiencia profesional cargada.</p>
+        }
+      </section>
     </div>
   }
 </div>

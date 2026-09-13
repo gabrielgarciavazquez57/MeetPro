@@ -447,6 +447,53 @@
   animation: proyecto-desliza-izq 0.28s ease;
 }
 
+/* Títulos y certificados */
+.lista-titulos {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.titulo-card {
+  padding: 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e4e8ed;
+  border-left: 3px solid #60a5fa;
+}
+
+.titulo-card-nombre {
+  margin: 0;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.titulo-card-institucion {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.titulo-card-fecha {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.titulo-card-desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #475569;
+}
+
 .proyecto-imagen {
   flex-shrink: 0;
   width: 96px;
