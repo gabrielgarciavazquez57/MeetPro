@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+.fondo-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8.5rem 1.5rem 2.5rem;
+  background: linear-gradient(
+    90deg,
+    #0a1730 0,
+    #0f2547 calc(50% - 440px),
+    #edf1f7 calc(50% - 440px),
+    #edf1f7 calc(50% + 440px),
+    #0f2547 calc(50% + 440px),
+    #0a1730 100%
+  );
+  min-height: 100vh;
+  overflow-x: hidden;
+  box-shadow: inset 0 -24px 28px -24px rgba(10, 23, 48, 0.4);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.estado-msg {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #475569;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.estado-msg--panel {
+  color: #64748b;
+  margin: 0;
+  padding: 1.5rem 0;
+}
+
+.estado-error {
+  color: #dc2626;
+}
+
+/* Título de la página */
+.contenido-titulo-grupo {
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 1.5rem;
+}
+
+.contenido-titulo {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.contenido-sub {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+/* Layout: cada bloque en su propio contenedor */
+.contenido-secciones {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contenido-seccion {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 1.75rem;
+}
+
+.contenido-seccion-head {
+  padding-bottom: 0.85rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #d0d7e2;
+}
+
+.titulo-seccion {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 560px) {
+  .contenido-seccion {
+    padding: 1.35rem;
+  }
+}

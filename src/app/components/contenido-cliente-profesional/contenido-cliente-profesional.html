@@ -1,0 +1,31 @@
+<app-barra-nav titulo="Contenido: Cliente - Profesional" />
+
+<div class="fondo-contenido">
+  @if (cargando()) {
+    <p class="estado-msg">Cargando...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="contenido-secciones">
+      <section class="contenido-seccion">
+        <div class="contenido-seccion-head">
+          <h2 class="titulo-seccion">Contenido del profesional</h2>
+        </div>
+        <p class="estado-msg estado-msg--panel">
+          @if (esDueno()) {
+            Todavía no compartiste contenido con tus clientes.
+          } @else {
+            Este profesional todavía no compartió contenido.
+          }
+        </p>
+      </section>
+
+      <section class="contenido-seccion">
+        <div class="contenido-seccion-head">
+          <h2 class="titulo-seccion">Contenido del cliente</h2>
+        </div>
+        <p class="estado-msg estado-msg--panel">Todavía no hay contenido cargado por el cliente.</p>
+      </section>
+    </div>
+  }
+</div>

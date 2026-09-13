@@ -13,6 +13,7 @@ import { ProfesionalesConsultados } from './components/profesionales-consultados
 import { FormularioConsulta } from './components/formulario-consulta/formulario-consulta';
 import { Valoraciones } from './components/valoraciones/valoraciones';
 import { InformacionProfesionalComponent } from './components/informacion-profesional/informacion-profesional';
+import { ContenidoClienteProfesional } from './components/contenido-cliente-profesional/contenido-cliente-profesional';
 
 export const routes: Routes = [
   {
@@ -85,6 +86,11 @@ export const routes: Routes = [
     path: 'informacion-profesional/:profesionalId',
     title: 'Información Profesional',
     component: InformacionProfesionalComponent
+  },
+  {
+    path: 'contenido-cliente-profesional/:profesionalId',
+    title: 'Contenido: Cliente - Profesional',
+    component: ContenidoClienteProfesional
   },
   {
   path: 'perfil-user/:id',
