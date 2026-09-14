@@ -1,0 +1,69 @@
+<div class="overlay-contenido" (click)="cerrar()">
+  <div class="modal-contenido" (click)="$event.stopPropagation()">
+    <div class="modal-contenido-head">
+      <h2 class="modal-contenido-titulo">Nuevo contenido</h2>
+      <button type="button" class="btn-cerrar-modal" (click)="cerrar()" aria-label="Cerrar">&times;</button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+      <ul class="datos-contenido-lista">
+        <li class="campo-full">
+          <label for="titulo">Título: </label>
+          <input type="text" formControlName="titulo" id="titulo">
+          @if (titulo.touched && titulo.hasError('required')) {
+            <span>Campo requerido</span>
+          } @else if (titulo.hasError('maxlength')) {
+            <span>Debe contener menos de 120 caracteres</span>
+          }
+        </li>
+
+        <li>
+          <label for="fecha">Fecha: </label>
+          <input type="date" formControlName="fecha" id="fecha">
+        </li>
+
+        <li>
+          <label for="hora">Hora: </label>
+          <input type="time" formControlName="hora" id="hora">
+        </li>
+
+        <li class="campo-full">
+          <label for="descripcion">Descripción: </label>
+          <textarea formControlName="descripcion" id="descripcion" rows="4"></textarea>
+          @if (descripcion.touched && descripcion.hasError('required')) {
+            <span>Campo requerido</span>
+          } @else if (descripcion.hasError('maxlength')) {
+            <span>Debe contener menos de 1000 caracteres</span>
+          }
+        </li>
+
+        <li class="campo-full">
+          <label for="link">Link (opcional): </label>
+          <input type="text" formControlName="link" id="link" placeholder="https://...">
+        </li>
+
+        <li class="campo-full">
+          <label>Archivos adjuntos: </label>
+          <input type="file" id="adjuntos" multiple hidden (change)="onArchivos($event)">
+          <label for="adjuntos" class="btn btn-adjuntar">+ Cargar archivos</label>
+
+          @if (archivos().length) {
+            <ul class="lista-adjuntos">
+              @for (archivo of archivos(); track $index) {
+                <li>
+                  <span class="adjunto-nombre">{{ archivo.name }}</span>
+                  <button type="button" class="btn-quitar" (click)="quitarArchivo($index)">Quitar</button>
+                </li>
+              }
+            </ul>
+          }
+        </li>
+      </ul>
+
+      <div class="boton-form">
+        <button type="button" class="btn btn-cancelar" (click)="cerrar()">Cancelar</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-grande">GUARDAR CONTENIDO</button>
+      </div>
+    </form>
+  </div>
+</div>

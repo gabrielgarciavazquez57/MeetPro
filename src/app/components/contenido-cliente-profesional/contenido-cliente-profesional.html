@@ -18,6 +18,11 @@
             Este profesional todavía no compartió contenido.
           }
         </p>
+        @if (esDueno()) {
+          <div class="contenido-seccion-footer">
+            <button type="button" class="btn-agregar-contenido" (click)="abrirFormulario('profesional')">+ Agregar contenido</button>
+          </div>
+        }
       </section>
 
       <section class="contenido-seccion">
@@ -25,7 +30,21 @@
           <h2 class="titulo-seccion">Contenido del cliente</h2>
         </div>
         <p class="estado-msg estado-msg--panel">Todavía no hay contenido cargado por el cliente.</p>
+        @if (esCliente()) {
+          <div class="contenido-seccion-footer">
+            <button type="button" class="btn-agregar-contenido" (click)="abrirFormulario('cliente')">+ Agregar contenido</button>
+          </div>
+        }
       </section>
     </div>
   }
 </div>
+
+@if (formularioAbierto(); as tipo) {
+  <app-formulario-contenido
+    [profesionalId]="profesionalId()"
+    [tipo]="tipo"
+    (cerrado)="cerrarFormulario()"
+    (guardado)="cerrarFormulario()"
+  />
+}
