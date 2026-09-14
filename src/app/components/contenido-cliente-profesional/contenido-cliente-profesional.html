@@ -11,13 +11,30 @@
         <div class="contenido-seccion-head">
           <h2 class="titulo-seccion">Contenido del profesional</h2>
         </div>
-        <p class="estado-msg estado-msg--panel">
-          @if (esDueno()) {
-            Todavía no compartiste contenido con tus clientes.
-          } @else {
-            Este profesional todavía no compartió contenido.
-          }
-        </p>
+        @if (contenidoProfesional().length) {
+          <ul class="lista-contenido">
+            @for (item of contenidoProfesional(); track item.id) {
+              <li class="item-contenido">
+                <div class="item-contenido-head">
+                  <span class="item-contenido-titulo">{{ item.titulo }}</span>
+                  <span class="item-contenido-fecha">{{ item.fecha }} · {{ item.hora }}</span>
+                </div>
+                <p class="item-contenido-desc">{{ item.descripcion }}</p>
+                @if (item.link) {
+                  <a class="item-contenido-link" [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="estado-msg estado-msg--panel">
+            @if (esDueno()) {
+              Todavía no compartiste contenido con tus clientes.
+            } @else {
+              Este profesional todavía no compartió contenido.
+            }
+          </p>
+        }
         @if (esDueno()) {
           <div class="contenido-seccion-footer">
             <button type="button" class="btn-agregar-contenido" (click)="abrirFormulario('profesional')">+ Agregar contenido</button>
@@ -29,7 +46,24 @@
         <div class="contenido-seccion-head">
           <h2 class="titulo-seccion">Contenido del cliente</h2>
         </div>
-        <p class="estado-msg estado-msg--panel">Todavía no hay contenido cargado por el cliente.</p>
+        @if (contenidoCliente().length) {
+          <ul class="lista-contenido">
+            @for (item of contenidoCliente(); track item.id) {
+              <li class="item-contenido">
+                <div class="item-contenido-head">
+                  <span class="item-contenido-titulo">{{ item.titulo }}</span>
+                  <span class="item-contenido-fecha">{{ item.fecha }} · {{ item.hora }}</span>
+                </div>
+                <p class="item-contenido-desc">{{ item.descripcion }}</p>
+                @if (item.link) {
+                  <a class="item-contenido-link" [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="estado-msg estado-msg--panel">Todavía no hay contenido cargado por el cliente.</p>
+        }
         @if (esCliente()) {
           <div class="contenido-seccion-footer">
             <button type="button" class="btn-agregar-contenido" (click)="abrirFormulario('cliente')">+ Agregar contenido</button>
@@ -45,6 +79,6 @@
     [profesionalId]="profesionalId()"
     [tipo]="tipo"
     (cerrado)="cerrarFormulario()"
-    (guardado)="cerrarFormulario()"
+    (guardado)="onContenidoGuardado()"
   />
 }
