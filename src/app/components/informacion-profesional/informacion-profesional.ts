@@ -8,6 +8,7 @@ import { Auth } from '../../services/auth';
 import { Profesional } from '../../interfaces/profesional';
 import { InformacionProfesional } from '../../interfaces/informacion-profesional';
 import { Proyecto } from '../../interfaces/proyecto';
+import { Certificado } from '../../interfaces/certificado';
 import { BarraNav } from '../barra-nav/barra-nav';
 
 @Component({
@@ -205,10 +206,14 @@ export class InformacionProfesionalComponent implements OnInit {
     });
   }
 
+  /** Proyecto que se está editando (null = alta de proyecto nuevo) */
+  readonly proyectoEditar = signal<Proyecto | null>(null);
+
   abrirFormProyecto(): void {
     if (!this.esDueno()) {
       return;
     }
+    this.proyectoEditar.set(null);
     this.formProyecto.reset({
       titulo_proyecto: '',
       fecha_inicio: '',
@@ -220,8 +225,25 @@ export class InformacionProfesionalComponent implements OnInit {
     this.mostrandoFormProyecto.set(true);
   }
 
+  editarProyecto(p: Proyecto): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.proyectoEditar.set(p);
+    this.formProyecto.reset({
+      titulo_proyecto: p.titulo_proyecto,
+      fecha_inicio: p.fecha_inicio,
+      fecha_finalizacion: p.fecha_finalizacion ?? '',
+      descripcion_proyecto: p.descripcion_proyecto,
+      imagen_proyecto: p.imagen_proyecto ?? '',
+    });
+    this.imagenProyectoPreview.set(p.imagen_proyecto ?? '');
+    this.mostrandoFormProyecto.set(true);
+  }
+
   cancelarProyecto(): void {
     this.mostrandoFormProyecto.set(false);
+    this.proyectoEditar.set(null);
   }
 
   onImagenProyecto(event: Event): void {
@@ -249,8 +271,9 @@ export class InformacionProfesionalComponent implements OnInit {
 
     this.guardandoProyecto.set(true);
     const raw = this.formProyecto.getRawValue();
+    const editando = this.proyectoEditar();
 
-    const nuevo: Proyecto = {
+    const datos: Proyecto = {
       professionalId: this.profesionalId(),
       titulo_proyecto: raw.titulo_proyecto.trim(),
       fecha_inicio: raw.fecha_inicio,
@@ -259,13 +282,24 @@ export class InformacionProfesionalComponent implements OnInit {
       imagen_proyecto: raw.imagen_proyecto,
     };
 
-    this.clientProyecto.addProyecto(nuevo).subscribe({
-      next: (creado) => {
-        this.proyectos.update((lista) => [creado, ...lista]);
+    const alTerminar = (guardado: Proyecto) => {
+      this.proyectos.update((lista) =>
+        editando ? lista.map((p) => (p.id === editando.id ? guardado : p)) : [guardado, ...lista],
+      );
+      if (!editando) {
         this.indiceProyecto.set(0);
-        this.guardandoProyecto.set(false);
-        this.mostrandoFormProyecto.set(false);
-      },
+      }
+      this.guardandoProyecto.set(false);
+      this.mostrandoFormProyecto.set(false);
+      this.proyectoEditar.set(null);
+    };
+
+    const peticion = editando?.id
+      ? this.clientProyecto.updateProyecto(editando.id, { ...datos, id: editando.id })
+      : this.clientProyecto.addProyecto(datos);
+
+    peticion.subscribe({
+      next: alTerminar,
       error: () => {
         this.guardandoProyecto.set(false);
         alert('No se pudo guardar el proyecto.');
@@ -288,6 +322,109 @@ export class InformacionProfesionalComponent implements OnInit {
         }
       },
       error: () => alert('No se pudo eliminar el proyecto.'),
+    });
+  }
+
+  // ===== CERTIFICADOS =====
+  /** Muestra u oculta el formulario para agregar/editar un certificado */
+  readonly mostrandoFormCertificado = signal<boolean>(false);
+  readonly guardandoCertificado = signal<boolean>(false);
+  /** Certificado que se está editando (null = alta de certificado nuevo) */
+  readonly certificadoEditar = signal<Certificado | null>(null);
+
+  protected readonly formCertificado = this.fb.nonNullable.group({
+    nombre_certificado:      ['', [Validators.required]],
+    institucion_certificado: ['', [Validators.required]],
+    fecha_obtencion:         ['', [Validators.required]],
+    descripcion_certificado: ['', [Validators.maxLength(500)]],
+  });
+
+  get nombre_certificado()      { return this.formCertificado.controls.nombre_certificado; }
+  get institucion_certificado() { return this.formCertificado.controls.institucion_certificado; }
+  get fecha_obtencion_cert()    { return this.formCertificado.controls.fecha_obtencion; }
+  get descripcion_certificado() { return this.formCertificado.controls.descripcion_certificado; }
+
+  abrirFormCertificado(): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.certificadoEditar.set(null);
+    this.formCertificado.reset({
+      nombre_certificado: '',
+      institucion_certificado: '',
+      fecha_obtencion: '',
+      descripcion_certificado: '',
+    });
+    this.mostrandoFormCertificado.set(true);
+  }
+
+  editarCertificado(c: Certificado): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.certificadoEditar.set(c);
+    this.formCertificado.reset({
+      nombre_certificado: c.nombre_certificado,
+      institucion_certificado: c.institucion_certificado,
+      fecha_obtencion: c.fecha_obtencion,
+      descripcion_certificado: c.descripcion_certificado ?? '',
+    });
+    this.mostrandoFormCertificado.set(true);
+  }
+
+  cancelarCertificado(): void {
+    this.mostrandoFormCertificado.set(false);
+    this.certificadoEditar.set(null);
+  }
+
+  guardarCertificado(): void {
+    const prof = this.profesional();
+    if (this.formCertificado.invalid || !prof?.id) {
+      this.formCertificado.markAllAsTouched();
+      return;
+    }
+
+    this.guardandoCertificado.set(true);
+    const raw = this.formCertificado.getRawValue();
+    const editando = this.certificadoEditar();
+
+    const datos: Certificado = {
+      id: editando?.id ?? `c-${Date.now()}`,
+      nombre_certificado: raw.nombre_certificado.trim(),
+      institucion_certificado: raw.institucion_certificado.trim(),
+      fecha_obtencion: raw.fecha_obtencion,
+      descripcion_certificado: raw.descripcion_certificado.trim(),
+    };
+
+    const certificados = editando
+      ? (prof.certificados ?? []).map((c) => (c.id === editando.id ? datos : c))
+      : [...(prof.certificados ?? []), datos];
+
+    this.clientProfesional.updateProfesional(prof.id, { ...prof, certificados }).subscribe({
+      next: (actualizado) => {
+        this.profesional.set(actualizado);
+        this.guardandoCertificado.set(false);
+        this.mostrandoFormCertificado.set(false);
+        this.certificadoEditar.set(null);
+      },
+      error: () => {
+        this.guardandoCertificado.set(false);
+        alert('No se pudo guardar el certificado.');
+      },
+    });
+  }
+
+  eliminarCertificado(id: string | number | undefined): void {
+    const prof = this.profesional();
+    if (id == null || !prof?.id || !this.esDueno() || !confirm('¿Eliminar este certificado?')) {
+      return;
+    }
+
+    const certificados = (prof.certificados ?? []).filter((c) => c.id !== id);
+
+    this.clientProfesional.updateProfesional(prof.id, { ...prof, certificados }).subscribe({
+      next: (actualizado) => this.profesional.set(actualizado),
+      error: () => alert('No se pudo eliminar el certificado.'),
     });
   }
 }

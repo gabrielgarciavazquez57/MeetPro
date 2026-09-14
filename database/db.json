@@ -227,6 +227,15 @@
           "fecha_inicio": "2018-12-01",
           "fecha_fin": "2026-09-01"
         }
+      ],
+      "certificados": [
+        {
+          "id": "c-1789416123587",
+          "nombre_certificado": "AWS Certified Developer",
+          "institucion_certificado": "Amazon Web Services",
+          "fecha_obtencion": "2023-06-15",
+          "descripcion_certificado": "Certificación de desarrollo en la nube AWS."
+        }
       ]
     },
     {

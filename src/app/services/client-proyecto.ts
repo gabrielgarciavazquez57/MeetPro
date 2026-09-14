@@ -19,6 +19,11 @@ export class ClientProyecto {
     return this.http.post<Proyecto>(this.url, nuevo_proyecto);
   }
 
+  ///PUT - Editar proyecto
+  updateProyecto(id: string | number, proyecto_editado: Proyecto) {
+    return this.http.put<Proyecto>(`${this.url}/${id}`, proyecto_editado);
+  }
+
   ///DELETE - Eliminar proyecto
   deleteProyecto(id: string | number) {
     return this.http.delete<Proyecto>(`${this.url}/${id}`);

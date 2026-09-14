@@ -46,7 +46,7 @@
 
       <section class="informacion-seccion">
         <div class="informacion-seccion-head">
-          <h2 class="titulo-seccion">Proyectos</h2>
+          <h2 class="titulo-seccion titulo-seccion--fina">Proyectos</h2>
           @if (esDueno() && !mostrandoFormProyecto()) {
             <button type="button" class="btn-editar" (click)="abrirFormProyecto()">+ Agregar proyecto</button>
           }
@@ -100,7 +100,7 @@
             <div class="form-acciones">
               <button type="button" class="btn-cancelar" (click)="cancelarProyecto()">Cancelar</button>
               <button type="submit" class="btn-guardar" [disabled]="formProyecto.invalid || guardandoProyecto()">
-                {{ guardandoProyecto() ? 'Guardando...' : 'Guardar proyecto' }}
+                {{ guardandoProyecto() ? 'Guardando...' : (proyectoEditar() ? 'Guardar cambios' : 'Guardar proyecto') }}
               </button>
             </div>
           </form>
@@ -125,7 +125,10 @@
                   <div class="proyecto-head">
                     <h3 class="proyecto-titulo">{{ p.titulo_proyecto }}</h3>
                     @if (esDueno()) {
-                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarProyecto(p.id)">Eliminar</button>
+                      <div class="proyecto-acciones">
+                        <button type="button" class="btn-editar-item" (click)="editarProyecto(p)">Editar</button>
+                        <button type="button" class="btn-eliminar-proyecto" (click)="eliminarProyecto(p.id)">Eliminar</button>
+                      </div>
                     }
                   </div>
                   <p class="proyecto-fechas">
@@ -179,13 +182,67 @@
       <section class="informacion-seccion">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Certificados</h2>
+          @if (esDueno() && !mostrandoFormCertificado()) {
+            <button type="button" class="btn-editar" (click)="abrirFormCertificado()">+ Agregar certificado</button>
+          }
         </div>
+
+        @if (mostrandoFormCertificado()) {
+          <form class="form-descripcion" [formGroup]="formCertificado" (ngSubmit)="guardarCertificado()">
+            <div class="campo-proyecto">
+              <label for="nombre_certificado">Nombre del certificado</label>
+              <input type="text" id="nombre_certificado" formControlName="nombre_certificado">
+              @if (nombre_certificado.touched && nombre_certificado.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="institucion_certificado">Institución</label>
+              <input type="text" id="institucion_certificado" formControlName="institucion_certificado">
+              @if (institucion_certificado.touched && institucion_certificado.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="fecha_obtencion_cert">Fecha de obtención</label>
+              <input type="date" id="fecha_obtencion_cert" formControlName="fecha_obtencion">
+              @if (fecha_obtencion_cert.touched && fecha_obtencion_cert.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="descripcion_certificado">Descripción (opcional)</label>
+              <textarea id="descripcion_certificado" formControlName="descripcion_certificado" rows="3"></textarea>
+              @if (descripcion_certificado.hasError('maxlength')) {
+                <span class="form-error">Máximo 500 caracteres</span>
+              }
+            </div>
+
+            <div class="form-acciones">
+              <button type="button" class="btn-cancelar" (click)="cancelarCertificado()">Cancelar</button>
+              <button type="submit" class="btn-guardar" [disabled]="formCertificado.invalid || guardandoCertificado()">
+                {{ guardandoCertificado() ? 'Guardando...' : (certificadoEditar() ? 'Guardar cambios' : 'Guardar certificado') }}
+              </button>
+            </div>
+          </form>
+        }
 
         @if (prof.certificados?.length) {
           <ul class="lista-titulos">
             @for (c of prof.certificados; track c.id ?? $index) {
               <li class="titulo-card">
-                <p class="titulo-card-nombre">{{ c.nombre_certificado }}</p>
+                <div class="titulo-card-head">
+                  <p class="titulo-card-nombre">{{ c.nombre_certificado }}</p>
+                  @if (esDueno()) {
+                    <div class="titulo-card-acciones">
+                      <button type="button" class="btn-editar-item" (click)="editarCertificado(c)">Editar</button>
+                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarCertificado(c.id)">Eliminar</button>
+                    </div>
+                  }
+                </div>
                 @if (c.institucion_certificado) {
                   <p class="titulo-card-institucion">{{ c.institucion_certificado }}</p>
                 }
@@ -198,7 +255,7 @@
               </li>
             }
           </ul>
-        } @else {
+        } @else if (!mostrandoFormCertificado()) {
           <p class="estado-msg estado-msg--panel">Todavía no hay certificados cargados.</p>
         }
       </section>
