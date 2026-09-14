@@ -1,7 +1,7 @@
 <div class="overlay-contenido" (click)="cerrar()">
   <div class="modal-contenido" (click)="$event.stopPropagation()">
     <div class="modal-contenido-head">
-      <h2 class="modal-contenido-titulo">Nuevo contenido</h2>
+      <h2 class="modal-contenido-titulo">{{ contenidoEditar() ? 'Editar contenido' : 'Nuevo contenido' }}</h2>
       <button type="button" class="btn-cerrar-modal" (click)="cerrar()" aria-label="Cerrar">&times;</button>
     </div>
 
@@ -62,7 +62,7 @@
 
       <div class="boton-form">
         <button type="button" class="btn btn-cancelar" (click)="cerrar()">Cancelar</button>
-        <button type="submit" [disabled]="form.invalid" class="btn btn-grande">GUARDAR CONTENIDO</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-grande">{{ contenidoEditar() ? 'GUARDAR CAMBIOS' : 'GUARDAR CONTENIDO' }}</button>
       </div>
     </form>
   </div>

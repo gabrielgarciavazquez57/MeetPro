@@ -98,6 +98,35 @@
   text-decoration: underline;
 }
 
+.item-contenido-acciones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid #e4e8ed;
+}
+
+.btn-item-accion {
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-item-accion:hover {
+  text-decoration: underline;
+}
+
+.btn-item-accion--eliminar {
+  color: #dc2626;
+}
+
 /* Título de la página */
 .contenido-titulo-grupo {
   width: 100%;

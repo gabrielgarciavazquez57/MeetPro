@@ -23,6 +23,12 @@
                 @if (item.link) {
                   <a class="item-contenido-link" [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>
                 }
+                @if (esDueno()) {
+                  <div class="item-contenido-acciones">
+                    <button type="button" class="btn-item-accion" (click)="editarContenido(item)">Editar</button>
+                    <button type="button" class="btn-item-accion btn-item-accion--eliminar" (click)="eliminarContenido(item.id)">Eliminar</button>
+                  </div>
+                }
               </li>
             }
           </ul>
@@ -58,6 +64,12 @@
                 @if (item.link) {
                   <a class="item-contenido-link" [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>
                 }
+                @if (esCliente()) {
+                  <div class="item-contenido-acciones">
+                    <button type="button" class="btn-item-accion" (click)="editarContenido(item)">Editar</button>
+                    <button type="button" class="btn-item-accion btn-item-accion--eliminar" (click)="eliminarContenido(item.id)">Eliminar</button>
+                  </div>
+                }
               </li>
             }
           </ul>
@@ -78,6 +90,7 @@
   <app-formulario-contenido
     [profesionalId]="profesionalId()"
     [tipo]="tipo"
+    [contenidoEditar]="contenidoEditar()"
     (cerrado)="cerrarFormulario()"
     (guardado)="onContenidoGuardado()"
   />

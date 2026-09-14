@@ -29,20 +29,39 @@ export class ContenidoClienteProfesional implements OnInit {
   readonly contenidoProfesional = signal<ContenidoProfesionalCliente[]>([]);
   readonly contenidoCliente = signal<ContenidoProfesionalCliente[]>([]);
 
-  /** Modal de "Agregar contenido" abierto ('profesional' | 'cliente' | null) */
+  /** Modal de "Agregar/editar contenido" abierto ('profesional' | 'cliente' | null) */
   readonly formularioAbierto = signal<'profesional' | 'cliente' | null>(null);
+  /** Contenido que se está editando (null = alta de contenido nuevo) */
+  readonly contenidoEditar = signal<ContenidoProfesionalCliente | null>(null);
 
   abrirFormulario(tipo: 'profesional' | 'cliente'): void {
+    this.contenidoEditar.set(null);
     this.formularioAbierto.set(tipo);
+  }
+
+  editarContenido(item: ContenidoProfesionalCliente): void {
+    this.contenidoEditar.set(item);
+    this.formularioAbierto.set(item.tipo);
+  }
+
+  eliminarContenido(id: string | number | undefined): void {
+    if (id == null) {
+      return;
+    }
+    if (!confirm('¿Eliminar este contenido?')) {
+      return;
+    }
+    this.clientContenido.deleteContenido(id).subscribe(() => this.cargarContenido());
   }
 
   cerrarFormulario(): void {
     this.formularioAbierto.set(null);
+    this.contenidoEditar.set(null);
   }
 
   /** Se llama cuando el modal guarda contenido con éxito: cierra y refresca las listas */
   onContenidoGuardado(): void {
-    this.formularioAbierto.set(null);
+    this.cerrarFormulario();
     this.cargarContenido();
   }
 
@@ -91,10 +110,11 @@ export class ContenidoClienteProfesional implements OnInit {
       return;
     }
 
-    this.clientContenido.getContenidoPorProfesional(id).subscribe({
+    this.clientContenido.getContenido().subscribe({
       next: (lista) => {
-        this.contenidoProfesional.set(lista.filter((c) => c.tipo === 'profesional'));
-        this.contenidoCliente.set(lista.filter((c) => c.tipo === 'cliente'));
+        const delProfesional = lista.filter((c) => String(c.professionalId) === String(id));
+        this.contenidoProfesional.set(delProfesional.filter((c) => c.tipo === 'profesional'));
+        this.contenidoCliente.set(delProfesional.filter((c) => c.tipo === 'cliente'));
       },
       error: (err) => console.error('Error al traer el contenido:', err),
     });

@@ -1089,17 +1089,6 @@
       "id": "IHroKEMZ1AA"
     }
   ],
-  "contenido-profesional-cliente": [
-    {
-      "professionalId": "12345",
-      "tipo": "profesional",
-      "titulo": "F1FLY",
-      "fecha": "2026-09-14",
-      "hora": "15:48",
-      "descripcion": "Software desarrolado para la administracion de eventos de F1",
-      "link": "https://gabrielgarciavazquez57.github.io/F1Fly/",
-      "id": "v_tv6BUQYg4"
-    }
-  ],
+  "contenido-profesional-cliente": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

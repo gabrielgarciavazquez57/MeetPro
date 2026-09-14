@@ -1,6 +1,7 @@
 import { Component, inject, input, output, signal, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClientContenido } from '../../services/client-contenido';
+import { ContenidoProfesionalCliente } from '../../interfaces/contenido-profesional-cliente';
 
 @Component({
   selector: 'app-formulario-contenido',
@@ -15,6 +16,8 @@ export class FormularioContenido implements OnInit {
 
   readonly profesionalId = input.required<string>();
   readonly tipo = input.required<'profesional' | 'cliente'>();
+  /** Contenido a editar (null = alta de contenido nuevo) */
+  readonly contenidoEditar = input<ContenidoProfesionalCliente | null>(null);
 
   /** Se emite al cerrar el modal sin guardar (fondo, botón X o cancelar) */
   readonly cerrado = output<void>();
@@ -37,11 +40,24 @@ export class FormularioContenido implements OnInit {
   get descripcion() { return this.form.controls.descripcion; }
 
   ngOnInit(): void {
-    const ahora = new Date();
-    const fechaHoy = ahora.toISOString().slice(0, 10);
-    const horaAhora = ahora.toTimeString().slice(0, 5);
+    const editar = this.contenidoEditar();
 
-    this.form.patchValue({ fecha: fechaHoy, hora: horaAhora });
+    if (editar) {
+      this.form.patchValue({
+        titulo: editar.titulo,
+        fecha: editar.fecha,
+        hora: editar.hora,
+        descripcion: editar.descripcion,
+        link: editar.link,
+      });
+      return;
+    }
+
+    const ahora = new Date();
+    this.form.patchValue({
+      fecha: ahora.toISOString().slice(0, 10),
+      hora: ahora.toTimeString().slice(0, 5),
+    });
   }
 
   onArchivos(event: Event): void {
@@ -69,20 +85,26 @@ export class FormularioContenido implements OnInit {
     }
 
     const { titulo, fecha, hora, descripcion, link } = this.form.getRawValue();
+    const editar = this.contenidoEditar();
 
-    this.clientContenido
-      .addContenido({
-        professionalId: this.profesionalId(),
-        tipo: this.tipo(),
-        titulo,
-        fecha,
-        hora,
-        descripcion,
-        link,
-      })
-      .subscribe(() => {
-        alert('Contenido cargado con éxito.');
-        this.guardado.emit();
-      });
+    const contenido: ContenidoProfesionalCliente = {
+      professionalId: this.profesionalId(),
+      tipo: this.tipo(),
+      titulo,
+      fecha,
+      hora,
+      descripcion,
+      link,
+    };
+
+    const peticion =
+      editar?.id != null
+        ? this.clientContenido.updateContenido(editar.id, { ...contenido, id: editar.id })
+        : this.clientContenido.addContenido(contenido);
+
+    peticion.subscribe(() => {
+      alert(editar ? 'Contenido actualizado con éxito.' : 'Contenido cargado con éxito.');
+      this.guardado.emit();
+    });
   }
 }

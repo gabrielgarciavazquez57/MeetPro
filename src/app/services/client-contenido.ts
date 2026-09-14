@@ -9,9 +9,13 @@ export class ClientContenido {
   protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para hacer peticiones HTTP al backend
   protected readonly url = 'http://localhost:3000/contenido-profesional-cliente'; ///URL del backend para el contenido profesional-cliente
 
-  ///GET - Contenido de un profesional (ambos tipos)
-  getContenidoPorProfesional(professionalId: string | number) {
-    return this.http.get<ContenidoProfesionalCliente[]>(`${this.url}?professionalId=${professionalId}`);
+  ///GET - Todo el contenido
+  ///Nota: no filtramos por professionalId en el query string porque json-server
+  ///(v1 beta) compara valores que "parecen número" como Number, y como acá
+  ///professionalId se guarda como string, la comparación estricta nunca matchea.
+  ///Por eso se trae todo y se filtra en el componente, igual que con los profesionales.
+  getContenido() {
+    return this.http.get<ContenidoProfesionalCliente[]>(this.url);
   }
 
   ///POST - Agregar contenido
