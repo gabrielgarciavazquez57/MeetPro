@@ -9,6 +9,8 @@ import { Profesional } from '../../interfaces/profesional';
 import { InformacionProfesional } from '../../interfaces/informacion-profesional';
 import { Proyecto } from '../../interfaces/proyecto';
 import { Certificado } from '../../interfaces/certificado';
+import { TitulosPro } from '../../interfaces/titulos-pro';
+import { ExperienciaPro } from '../../interfaces/experiencia-pro';
 import { BarraNav } from '../barra-nav/barra-nav';
 
 @Component({
@@ -429,6 +431,211 @@ export class InformacionProfesionalComponent implements OnInit {
     this.clientProfesional.updateProfesional(prof.id, { ...prof, certificados }).subscribe({
       next: (actualizado) => this.profesional.set(actualizado),
       error: () => alert('No se pudo eliminar el certificado.'),
+    });
+  }
+
+  // ===== TÍTULOS =====
+  /** Muestra u oculta el formulario para agregar/editar un título */
+  readonly mostrandoFormTitulo = signal<boolean>(false);
+  readonly guardandoTitulo = signal<boolean>(false);
+  /** Título que se está editando (null = alta de título nuevo) */
+  readonly tituloEditar = signal<TitulosPro | null>(null);
+
+  protected readonly formTitulo = this.fb.nonNullable.group({
+    nombre_titulo:          ['', [Validators.required]],
+    institucion_educativa:  ['', [Validators.required]],
+    fecha_obtencion:        ['', [Validators.required]],
+    descripcion_titulo:     ['', [Validators.maxLength(500)]],
+  });
+
+  get nombre_titulo()          { return this.formTitulo.controls.nombre_titulo; }
+  get institucion_educativa()  { return this.formTitulo.controls.institucion_educativa; }
+  get fecha_obtencion_tit()    { return this.formTitulo.controls.fecha_obtencion; }
+  get descripcion_titulo()     { return this.formTitulo.controls.descripcion_titulo; }
+
+  abrirFormTitulo(): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.tituloEditar.set(null);
+    this.formTitulo.reset({
+      nombre_titulo: '',
+      institucion_educativa: '',
+      fecha_obtencion: '',
+      descripcion_titulo: '',
+    });
+    this.mostrandoFormTitulo.set(true);
+  }
+
+  editarTitulo(t: TitulosPro): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.tituloEditar.set(t);
+    this.formTitulo.reset({
+      nombre_titulo: t.nombre_titulo,
+      institucion_educativa: t.institucion_educativa,
+      fecha_obtencion: t.fecha_obtencion,
+      descripcion_titulo: t.descripcion_titulo ?? '',
+    });
+    this.mostrandoFormTitulo.set(true);
+  }
+
+  cancelarTitulo(): void {
+    this.mostrandoFormTitulo.set(false);
+    this.tituloEditar.set(null);
+  }
+
+  guardarTitulo(): void {
+    const prof = this.profesional();
+    if (this.formTitulo.invalid || !prof?.id) {
+      this.formTitulo.markAllAsTouched();
+      return;
+    }
+
+    this.guardandoTitulo.set(true);
+    const raw = this.formTitulo.getRawValue();
+    const editando = this.tituloEditar();
+
+    const datos: TitulosPro = {
+      id: editando?.id ?? `t-${Date.now()}`,
+      nombre_titulo: raw.nombre_titulo.trim(),
+      institucion_educativa: raw.institucion_educativa.trim(),
+      fecha_obtencion: raw.fecha_obtencion,
+      descripcion_titulo: raw.descripcion_titulo.trim(),
+    };
+
+    const titulos = editando
+      ? (prof.titulos ?? []).map((t) => (t.id === editando.id ? datos : t))
+      : [...(prof.titulos ?? []), datos];
+
+    this.clientProfesional.updateProfesional(prof.id, { ...prof, titulos }).subscribe({
+      next: (actualizado) => {
+        this.profesional.set(actualizado);
+        this.guardandoTitulo.set(false);
+        this.mostrandoFormTitulo.set(false);
+        this.tituloEditar.set(null);
+      },
+      error: () => {
+        this.guardandoTitulo.set(false);
+        alert('No se pudo guardar el título.');
+      },
+    });
+  }
+
+  eliminarTitulo(id: string | number | undefined): void {
+    const prof = this.profesional();
+    if (id == null || !prof?.id || !this.esDueno() || !confirm('¿Eliminar este título?')) {
+      return;
+    }
+
+    const titulos = (prof.titulos ?? []).filter((t) => t.id !== id);
+
+    this.clientProfesional.updateProfesional(prof.id, { ...prof, titulos }).subscribe({
+      next: (actualizado) => this.profesional.set(actualizado),
+      error: () => alert('No se pudo eliminar el título.'),
+    });
+  }
+
+  // ===== EXPERIENCIA PROFESIONAL =====
+  /** Muestra u oculta el formulario para agregar/editar una experiencia */
+  readonly mostrandoFormExperiencia = signal<boolean>(false);
+  readonly guardandoExperiencia = signal<boolean>(false);
+  /** Experiencia que se está editando (null = alta de experiencia nueva) */
+  readonly experienciaEditar = signal<ExperienciaPro | null>(null);
+
+  protected readonly formExperiencia = this.fb.nonNullable.group({
+    titulo_experiencia:      ['', [Validators.required]],
+    institucion_experiencia: ['', [Validators.required]],
+    fecha_inicio:            ['', [Validators.required]],
+    fecha_fin:               [''],
+  });
+
+  get titulo_experiencia()      { return this.formExperiencia.controls.titulo_experiencia; }
+  get institucion_experiencia() { return this.formExperiencia.controls.institucion_experiencia; }
+  get fecha_inicio_exp()        { return this.formExperiencia.controls.fecha_inicio; }
+
+  abrirFormExperiencia(): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.experienciaEditar.set(null);
+    this.formExperiencia.reset({
+      titulo_experiencia: '',
+      institucion_experiencia: '',
+      fecha_inicio: '',
+      fecha_fin: '',
+    });
+    this.mostrandoFormExperiencia.set(true);
+  }
+
+  editarExperiencia(e: ExperienciaPro): void {
+    if (!this.esDueno()) {
+      return;
+    }
+    this.experienciaEditar.set(e);
+    this.formExperiencia.reset({
+      titulo_experiencia: e.titulo_experiencia,
+      institucion_experiencia: e.institucion_experiencia,
+      fecha_inicio: e.fecha_inicio,
+      fecha_fin: e.fecha_fin ?? '',
+    });
+    this.mostrandoFormExperiencia.set(true);
+  }
+
+  cancelarExperiencia(): void {
+    this.mostrandoFormExperiencia.set(false);
+    this.experienciaEditar.set(null);
+  }
+
+  guardarExperiencia(): void {
+    const prof = this.profesional();
+    if (this.formExperiencia.invalid || !prof?.id) {
+      this.formExperiencia.markAllAsTouched();
+      return;
+    }
+
+    this.guardandoExperiencia.set(true);
+    const raw = this.formExperiencia.getRawValue();
+    const editando = this.experienciaEditar();
+
+    const datos: ExperienciaPro = {
+      id: editando?.id ?? `e-${Date.now()}`,
+      titulo_experiencia: raw.titulo_experiencia.trim(),
+      institucion_experiencia: raw.institucion_experiencia.trim(),
+      fecha_inicio: raw.fecha_inicio,
+      fecha_fin: raw.fecha_fin,
+    };
+
+    const experiencias = editando
+      ? (prof.experiencias ?? []).map((e) => (e.id === editando.id ? datos : e))
+      : [...(prof.experiencias ?? []), datos];
+
+    this.clientProfesional.updateProfesional(prof.id, { ...prof, experiencias }).subscribe({
+      next: (actualizado) => {
+        this.profesional.set(actualizado);
+        this.guardandoExperiencia.set(false);
+        this.mostrandoFormExperiencia.set(false);
+        this.experienciaEditar.set(null);
+      },
+      error: () => {
+        this.guardandoExperiencia.set(false);
+        alert('No se pudo guardar la experiencia.');
+      },
+    });
+  }
+
+  eliminarExperiencia(id: string | number | undefined): void {
+    const prof = this.profesional();
+    if (id == null || !prof?.id || !this.esDueno() || !confirm('¿Eliminar esta experiencia?')) {
+      return;
+    }
+
+    const experiencias = (prof.experiencias ?? []).filter((e) => e.id !== id);
+
+    this.clientProfesional.updateProfesional(prof.id, { ...prof, experiencias }).subscribe({
+      next: (actualizado) => this.profesional.set(actualizado),
+      error: () => alert('No se pudo eliminar la experiencia.'),
     });
   }
 }

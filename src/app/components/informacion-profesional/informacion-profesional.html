@@ -146,13 +146,67 @@
       <section class="informacion-seccion">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Títulos</h2>
+          @if (esDueno() && !mostrandoFormTitulo()) {
+            <button type="button" class="btn-editar" (click)="abrirFormTitulo()">+ Agregar título</button>
+          }
         </div>
+
+        @if (mostrandoFormTitulo()) {
+          <form class="form-descripcion" [formGroup]="formTitulo" (ngSubmit)="guardarTitulo()">
+            <div class="campo-proyecto">
+              <label for="nombre_titulo">Nombre del título</label>
+              <input type="text" id="nombre_titulo" formControlName="nombre_titulo">
+              @if (nombre_titulo.touched && nombre_titulo.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="institucion_educativa">Institución educativa</label>
+              <input type="text" id="institucion_educativa" formControlName="institucion_educativa">
+              @if (institucion_educativa.touched && institucion_educativa.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="fecha_obtencion_tit">Fecha de obtención</label>
+              <input type="date" id="fecha_obtencion_tit" formControlName="fecha_obtencion">
+              @if (fecha_obtencion_tit.touched && fecha_obtencion_tit.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="descripcion_titulo">Descripción (opcional)</label>
+              <textarea id="descripcion_titulo" formControlName="descripcion_titulo" rows="3"></textarea>
+              @if (descripcion_titulo.hasError('maxlength')) {
+                <span class="form-error">Máximo 500 caracteres</span>
+              }
+            </div>
+
+            <div class="form-acciones">
+              <button type="button" class="btn-cancelar" (click)="cancelarTitulo()">Cancelar</button>
+              <button type="submit" class="btn-guardar" [disabled]="formTitulo.invalid || guardandoTitulo()">
+                {{ guardandoTitulo() ? 'Guardando...' : (tituloEditar() ? 'Guardar cambios' : 'Guardar título') }}
+              </button>
+            </div>
+          </form>
+        }
 
         @if (prof.titulos?.length) {
           <ul class="lista-titulos">
             @for (t of prof.titulos; track t.id ?? $index) {
               <li class="titulo-card">
-                <p class="titulo-card-nombre">{{ t.nombre_titulo }}</p>
+                <div class="titulo-card-head">
+                  <p class="titulo-card-nombre">{{ t.nombre_titulo }}</p>
+                  @if (esDueno()) {
+                    <div class="titulo-card-acciones">
+                      <button type="button" class="btn-editar-item" (click)="editarTitulo(t)">Editar</button>
+                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarTitulo(t.id)">Eliminar</button>
+                    </div>
+                  }
+                </div>
                 @if (t.institucion_educativa) {
                   <p class="titulo-card-institucion">{{ t.institucion_educativa }}</p>
                 }
@@ -165,7 +219,7 @@
               </li>
             }
           </ul>
-        } @else {
+        } @else if (!mostrandoFormTitulo()) {
           <p class="estado-msg estado-msg--panel">Todavía no hay títulos cargados.</p>
         }
       </section>
@@ -254,13 +308,65 @@
       <section class="informacion-seccion">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Experiencia profesional</h2>
+          @if (esDueno() && !mostrandoFormExperiencia()) {
+            <button type="button" class="btn-editar" (click)="abrirFormExperiencia()">+ Agregar experiencia</button>
+          }
         </div>
+
+        @if (mostrandoFormExperiencia()) {
+          <form class="form-descripcion" [formGroup]="formExperiencia" (ngSubmit)="guardarExperiencia()">
+            <div class="campo-proyecto">
+              <label for="titulo_experiencia">Puesto / título de la experiencia</label>
+              <input type="text" id="titulo_experiencia" formControlName="titulo_experiencia">
+              @if (titulo_experiencia.touched && titulo_experiencia.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="institucion_experiencia">Institución / empresa</label>
+              <input type="text" id="institucion_experiencia" formControlName="institucion_experiencia">
+              @if (institucion_experiencia.touched && institucion_experiencia.hasError('required')) {
+                <span class="form-error">Campo requerido</span>
+              }
+            </div>
+
+            <div class="fila-fechas-proyecto">
+              <div class="campo-proyecto">
+                <label for="fecha_inicio_exp">Fecha de inicio</label>
+                <input type="date" id="fecha_inicio_exp" formControlName="fecha_inicio">
+                @if (fecha_inicio_exp.touched && fecha_inicio_exp.hasError('required')) {
+                  <span class="form-error">Campo requerido</span>
+                }
+              </div>
+              <div class="campo-proyecto">
+                <label for="fecha_fin_exp">Fecha de fin (opcional)</label>
+                <input type="date" id="fecha_fin_exp" formControlName="fecha_fin">
+              </div>
+            </div>
+
+            <div class="form-acciones">
+              <button type="button" class="btn-cancelar" (click)="cancelarExperiencia()">Cancelar</button>
+              <button type="submit" class="btn-guardar" [disabled]="formExperiencia.invalid || guardandoExperiencia()">
+                {{ guardandoExperiencia() ? 'Guardando...' : (experienciaEditar() ? 'Guardar cambios' : 'Guardar experiencia') }}
+              </button>
+            </div>
+          </form>
+        }
 
         @if (prof.experiencias?.length) {
           <ul class="lista-titulos">
             @for (e of prof.experiencias; track e.id ?? $index) {
               <li class="titulo-card">
-                <p class="titulo-card-nombre">{{ e.titulo_experiencia }}</p>
+                <div class="titulo-card-head">
+                  <p class="titulo-card-nombre">{{ e.titulo_experiencia }}</p>
+                  @if (esDueno()) {
+                    <div class="titulo-card-acciones">
+                      <button type="button" class="btn-editar-item" (click)="editarExperiencia(e)">Editar</button>
+                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarExperiencia(e.id)">Eliminar</button>
+                    </div>
+                  }
+                </div>
                 @if (e.institucion_experiencia) {
                   <p class="titulo-card-institucion">{{ e.institucion_experiencia }}</p>
                 }
@@ -270,7 +376,7 @@
               </li>
             }
           </ul>
-        } @else {
+        } @else if (!mostrandoFormExperiencia()) {
           <p class="estado-msg estado-msg--panel">Todavía no hay experiencia profesional cargada.</p>
         }
       </section>
