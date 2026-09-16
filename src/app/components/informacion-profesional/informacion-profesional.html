@@ -46,7 +46,7 @@
 
       <section class="informacion-seccion">
         <div class="informacion-seccion-head">
-          <h2 class="titulo-seccion titulo-seccion--fina">Proyectos</h2>
+          <h2 class="titulo-seccion">Proyectos</h2>
           @if (esDueno() && !mostrandoFormProyecto()) {
             <button type="button" class="btn-editar" (click)="abrirFormProyecto()">+ Agregar proyecto</button>
           }
@@ -62,20 +62,6 @@
               }
             </div>
 
-            <div class="fila-fechas-proyecto">
-              <div class="campo-proyecto">
-                <label for="fecha_inicio">Fecha de inicio</label>
-                <input type="date" id="fecha_inicio" formControlName="fecha_inicio">
-                @if (fecha_inicio_p.touched && fecha_inicio_p.hasError('required')) {
-                  <span class="form-error">Campo requerido</span>
-                }
-              </div>
-              <div class="campo-proyecto">
-                <label for="fecha_finalizacion">Fecha de finalización</label>
-                <input type="date" id="fecha_finalizacion" formControlName="fecha_finalizacion">
-              </div>
-            </div>
-
             <div class="campo-proyecto">
               <label for="descripcion_proyecto">Descripción</label>
               <textarea id="descripcion_proyecto" formControlName="descripcion_proyecto" rows="5"></textarea>
@@ -84,6 +70,11 @@
               } @else if (descripcion_proyecto.hasError('maxlength')) {
                 <span class="form-error">Máximo 800 caracteres</span>
               }
+            </div>
+
+            <div class="campo-proyecto">
+              <label for="link_adjunto">Link adjunto (opcional)</label>
+              <input type="text" id="link_adjunto" formControlName="link_adjunto" placeholder="https://...">
             </div>
 
             <div class="campo-proyecto">
@@ -131,10 +122,10 @@
                       </div>
                     }
                   </div>
-                  <p class="proyecto-fechas">
-                    {{ p.fecha_inicio }}@if (p.fecha_finalizacion) { — {{ p.fecha_finalizacion }} }
-                  </p>
                   <p class="proyecto-descripcion">{{ p.descripcion_proyecto }}</p>
+                  @if (p.link_adjunto) {
+                    <a class="proyecto-link" [href]="p.link_adjunto" target="_blank" rel="noopener">{{ p.link_adjunto }}</a>
+                  }
                 </div>
               </article>
             }

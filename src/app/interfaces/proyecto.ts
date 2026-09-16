@@ -6,5 +6,6 @@ export interface Proyecto {
     fecha_inicio: string,
     fecha_finalizacion: string,
     descripcion_proyecto: string,
-    imagen_proyecto: string
+    imagen_proyecto: string,
+    link_adjunto?: string
 }

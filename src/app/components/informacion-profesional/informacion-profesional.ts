@@ -50,16 +50,17 @@ export class InformacionProfesionalComponent implements OnInit {
 
   protected readonly formProyecto = this.fb.nonNullable.group({
     titulo_proyecto:       ['', [Validators.required]],
-    fecha_inicio:          ['', [Validators.required]],
+    fecha_inicio:          [''],
     fecha_finalizacion:    [''],
     descripcion_proyecto:  ['', [Validators.required, Validators.maxLength(800)]],
     imagen_proyecto:       [''],
+    link_adjunto:          [''],
   });
 
   get titulo_proyecto()      { return this.formProyecto.controls.titulo_proyecto; }
-  get fecha_inicio_p()       { return this.formProyecto.controls.fecha_inicio; }
   get descripcion_proyecto() { return this.formProyecto.controls.descripcion_proyecto; }
   get imagen_proyecto()      { return this.formProyecto.controls.imagen_proyecto; }
+  get link_adjunto()         { return this.formProyecto.controls.link_adjunto; }
 
   /** Solo el profesional dueño de este perfil puede cargar/editar la descripción ampliada */
   readonly esDueno = computed(() => {
@@ -220,6 +221,7 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_finalizacion: '',
       descripcion_proyecto: '',
       imagen_proyecto: '',
+      link_adjunto: '',
     });
     this.imagenProyectoPreview.set('');
     this.mostrandoFormProyecto.set(true);
@@ -236,6 +238,7 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_finalizacion: p.fecha_finalizacion ?? '',
       descripcion_proyecto: p.descripcion_proyecto,
       imagen_proyecto: p.imagen_proyecto ?? '',
+      link_adjunto: p.link_adjunto ?? '',
     });
     this.imagenProyectoPreview.set(p.imagen_proyecto ?? '');
     this.mostrandoFormProyecto.set(true);
@@ -280,6 +283,7 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_finalizacion: raw.fecha_finalizacion,
       descripcion_proyecto: raw.descripcion_proyecto.trim(),
       imagen_proyecto: raw.imagen_proyecto,
+      link_adjunto: raw.link_adjunto.trim(),
     };
 
     const alTerminar = (guardado: Proyecto) => {

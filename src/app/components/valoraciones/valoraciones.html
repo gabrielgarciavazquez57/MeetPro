@@ -7,22 +7,6 @@
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {
     <div class="valoraciones-panel">
-      <div class="valoraciones-head">
-        <div class="valoraciones-head-texto">
-          <h1 class="valoraciones-titulo">Valoraciones</h1>
-          @if (nombreProfesional()) {
-            <p class="valoraciones-sub">{{ nombreProfesional() }}</p>
-          }
-        </div>
-        @if (valoraciones().length) {
-          <div class="valoraciones-promedio">
-            <span class="promedio-num">{{ promedio() }}</span>
-            <span class="promedio-estrellas">{{ estrellas(promedio()) }}</span>
-            <span class="promedio-total">{{ valoraciones().length }} opiniones</span>
-          </div>
-        }
-      </div>
-
       <div class="lista-comentarios">
         @if (valoraciones().length === 0) {
           <p class="estado-msg estado-msg--panel">Todavía no hay valoraciones para este profesional.</p>

@@ -415,11 +415,17 @@
   flex: 1;
   min-width: 0;
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  align-items: flex-start;
+  gap: 1.15rem;
+  padding: 1.15rem;
   background-color: #f8fafc;
   border: 1px solid #e4e8ed;
   border-left: 3px solid #60a5fa;
+  transition: border-color 0.15s ease;
+}
+
+.proyecto-card:hover {
+  border-color: #2563eb;
 }
 
 @keyframes proyecto-desliza-der {
@@ -531,8 +537,8 @@
 
 .proyecto-imagen {
   flex-shrink: 0;
-  width: 96px;
-  height: 96px;
+  width: 108px;
+  height: 108px;
   object-fit: cover;
   border: 1px solid #e4e8ed;
 }
@@ -576,6 +582,19 @@
   font-size: 0.88rem;
   line-height: 1.55;
   color: #475569;
+}
+
+.proyecto-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2563eb;
+  word-break: break-all;
+}
+
+.proyecto-link:hover {
+  text-decoration: underline;
 }
 
 .btn-eliminar-proyecto {
