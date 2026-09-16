@@ -28,8 +28,6 @@ export class Valoraciones implements OnInit {
   readonly cargando = signal<boolean>(true);
   readonly error = signal<string | null>(null);
 
-  /** Muestra u oculta el formulario para agregar una valoración */
-  readonly mostrandoForm = signal<boolean>(false);
   readonly enviando = signal<boolean>(false);
 
   protected readonly puntajes = [5, 4, 3, 2, 1] as const;
@@ -98,16 +96,23 @@ export class Valoraciones implements OnInit {
     return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n);
   }
 
-  abrirForm(): void {
-    if (!this.auth.usuario()) {
-      alert('Iniciá sesión para dejar una valoración.');
+  /** Solo el usuario que hizo el comentario puede eliminarlo */
+  esAutor(v: Valoracion): boolean {
+    const logueado = this.auth.usuario();
+    return !!logueado && v.userId != null && String(logueado.id) === String(v.userId);
+  }
+
+  eliminarValoracion(id: string | undefined): void {
+    if (!id || !confirm('¿Eliminar tu valoración?')) {
       return;
     }
-    this.mostrandoForm.set(true);
+    this.clientValoracion.deleteValoracion(id).subscribe({
+      next: () => this.valoraciones.update((lista) => lista.filter((v) => v.id !== id)),
+      error: () => alert('No se pudo eliminar la valoración.'),
+    });
   }
 
   cancelar(): void {
-    this.mostrandoForm.set(false);
     this.form.reset({ puntaje: 5, descripcion: '' });
   }
 
@@ -127,6 +132,7 @@ export class Valoraciones implements OnInit {
 
     const nueva: Valoracion = {
       professionalId: this.profesionalId(),
+      userId: usuario.id,
       nombre: usuario.name,
       apellido: usuario.lastname,
       fecha: new Date().toISOString().slice(0, 10),

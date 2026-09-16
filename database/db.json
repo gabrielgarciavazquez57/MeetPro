@@ -1049,7 +1049,18 @@
       "fecha": "2026-09-10",
       "puntaje": 5,
       "descripcion": "Excelente profesional.",
-      "id": "gdZQ44tuI3o"
+      "id": "gdZQ44tuI3o",
+      "userId": "ZlwghurQ-ws"
+    },
+    {
+      "professionalId": "999999",
+      "nombre": "José",
+      "apellido": "Reyes",
+      "fecha": "2026-09-16",
+      "puntaje": 5,
+      "descripcion": "Gran atencion.",
+      "id": "8YYQN9-iGQs",
+      "userId": "vsvLADccdcM"
     }
   ],
   "informacionesProfesionales": [

@@ -19,46 +19,48 @@
               </div>
               <div class="comentario-estrellas">{{ estrellas(v.puntaje) }}</div>
               <p class="comentario-texto">{{ v.descripcion }}</p>
+              @if (esAutor(v)) {
+                <button type="button" class="btn-eliminar-comentario" (click)="eliminarValoracion(v.id)" aria-label="Eliminar comentario" title="Eliminar comentario">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18" />
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                    <path d="M10 11v6M14 11v6" />
+                  </svg>
+                </button>
+              }
             </article>
           }
         }
       </div>
 
-      @if (mostrandoForm()) {
-        <form class="form-valoracion" [formGroup]="form" (ngSubmit)="enviar()">
-          <div class="form-campo">
-            <label for="puntaje">Puntaje</label>
-            <select id="puntaje" formControlName="puntaje">
-              @for (p of puntajes; track p) {
-                <option [ngValue]="p">{{ p }} — {{ estrellas(p) }}</option>
-              }
-            </select>
-          </div>
-
-          <div class="form-campo">
-            <label for="descripcion">Comentario</label>
-            <textarea id="descripcion" formControlName="descripcion" rows="4"></textarea>
-            @if (descripcion.touched && descripcion.hasError('required')) {
-              <span class="form-error">Escribí tu comentario</span>
-            } @else if (descripcion.hasError('maxlength')) {
-              <span class="form-error">Máximo 500 caracteres</span>
+      <form class="form-valoracion" [formGroup]="form" (ngSubmit)="enviar()">
+        <div class="form-campo">
+          <label for="puntaje">Puntaje</label>
+          <select id="puntaje" formControlName="puntaje">
+            @for (p of puntajes; track p) {
+              <option [ngValue]="p">{{ p }} — {{ estrellas(p) }}</option>
             }
-          </div>
+          </select>
+        </div>
 
-          <div class="form-acciones">
-            <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
-            <button type="submit" class="btn-enviar" [disabled]="form.invalid || enviando()">
-              {{ enviando() ? 'Enviando...' : 'Publicar valoración' }}
-            </button>
-          </div>
-        </form>
-      } @else {
-        <div class="valoraciones-footer">
-          <button type="button" class="btn-agregar-valoracion" (click)="abrirForm()">
-            Agregar valoración
+        <div class="form-campo">
+          <label for="descripcion">Comentario</label>
+          <textarea id="descripcion" formControlName="descripcion" rows="4"></textarea>
+          @if (descripcion.touched && descripcion.hasError('required')) {
+            <span class="form-error">Escribí tu comentario</span>
+          } @else if (descripcion.hasError('maxlength')) {
+            <span class="form-error">Máximo 500 caracteres</span>
+          }
+        </div>
+
+        <div class="form-acciones">
+          <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+          <button type="submit" class="btn-enviar" [disabled]="form.invalid || enviando()">
+            {{ enviando() ? 'Enviando...' : 'Publicar valoración' }}
           </button>
         </div>
-      }
+      </form>
     </div>
   }
 </div>
