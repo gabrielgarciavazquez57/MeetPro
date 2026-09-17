@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { ClientValoracion } from '../../services/client-valoracion';
 import { Auth } from '../../services/auth';
@@ -11,7 +11,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 @Component({
   selector: 'app-valoraciones',
   standalone: true,
-  imports: [BarraNav, ReactiveFormsModule],
+  imports: [BarraNav, ReactiveFormsModule, RouterLink],
   templateUrl: './valoraciones.html',
   styleUrl: './valoraciones.css',
 })
@@ -54,6 +54,9 @@ export class Valoraciones implements OnInit {
   });
 
   readonly hayUsuario = computed(() => !!this.auth.usuario());
+
+  /** ID del usuario dueño del perfil profesional (para "Volver atrás") */
+  readonly profesionalUsuarioId = computed(() => this.profesional()?.profesional_userData?.id ?? null);
 
   ngOnInit(): void {
     this.profesionalId.set(this.route.snapshot.paramMap.get('profesionalId') ?? '');

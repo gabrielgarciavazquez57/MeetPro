@@ -7,11 +7,11 @@
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else if (profesional(); as prof) {
     <div class="acceso-lateral">
-      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-descripcion')">Descripción ampliada</button>
-      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-proyectos')">Proyectos</button>
-      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-titulos')">Títulos</button>
-      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-certificados')">Certificados</button>
-      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-experiencia')">Experiencia profesional</button>
+      <button type="button" class="btn-acceso-lateral" [class.btn-acceso-lateral--activo]="seccionActiva() === 'seccion-descripcion'" (click)="irASeccion('seccion-descripcion')">Descripción ampliada</button>
+      <button type="button" class="btn-acceso-lateral" [class.btn-acceso-lateral--activo]="seccionActiva() === 'seccion-proyectos'" (click)="irASeccion('seccion-proyectos')">Proyectos</button>
+      <button type="button" class="btn-acceso-lateral" [class.btn-acceso-lateral--activo]="seccionActiva() === 'seccion-titulos'" (click)="irASeccion('seccion-titulos')">Títulos</button>
+      <button type="button" class="btn-acceso-lateral" [class.btn-acceso-lateral--activo]="seccionActiva() === 'seccion-certificados'" (click)="irASeccion('seccion-certificados')">Certificados</button>
+      <button type="button" class="btn-acceso-lateral" [class.btn-acceso-lateral--activo]="seccionActiva() === 'seccion-experiencia'" (click)="irASeccion('seccion-experiencia')">Experiencia profesional</button>
       <a class="btn-acceso-lateral" [routerLink]="['/perfil-prof', prof.profesional_userData.id]">Volver atrás</a>
     </div>
 

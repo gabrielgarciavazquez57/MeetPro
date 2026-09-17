@@ -1,6 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Auth } from '../../services/auth';
 import { BarraNav } from '../barra-nav/barra-nav';
 
@@ -14,6 +15,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 export class FormularioConsulta implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
+  private readonly location = inject(Location);
   private readonly auth = inject(Auth);
 
   /** Archivos adjuntos seleccionados */
@@ -45,6 +47,10 @@ export class FormularioConsulta implements OnInit {
       apellido: u.lastname,
       email: u.email,
     });
+  }
+
+  volver(): void {
+    this.location.back();
   }
 
   onArchivos(event: Event): void {

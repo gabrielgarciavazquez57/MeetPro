@@ -7,6 +7,10 @@
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {
+    <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" [routerLink]="['/perfil-user', userId()]">Volver atrás</a>
+    </div>
+
     <div class="turnos-panel">
       <div class="turnos-head">
         <h1 class="turnos-titulo">Turnos existentes</h1>

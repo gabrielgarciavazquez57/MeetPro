@@ -7,6 +7,16 @@
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {
+    <div class="acceso-lateral">
+      @if (clienteId(); as cid) {
+        <a class="btn-acceso-lateral" [routerLink]="['/turnos-existentes', cid]">Mis turnos</a>
+        <a class="btn-acceso-lateral" [routerLink]="['/profesionales-consultados', cid]">Historial de turnos</a>
+      }
+      @if (profesionalUsuarioId(); as pid) {
+        <a class="btn-acceso-lateral" [routerLink]="['/perfil-prof', pid]">Volver atrás</a>
+      }
+    </div>
+
     <div class="turnos-panel">
       <div class="turnos-head">
         <div class="turnos-head-texto">

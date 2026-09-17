@@ -53,6 +53,12 @@ export class ListaTurnos implements OnInit {
     return u ? `${u.name} ${u.lastname}` : '';
   });
 
+  /** ID del usuario dueño del perfil profesional (para "Volver atrás") */
+  readonly profesionalUsuarioId = computed(() => this.usuarioProfesional()?.id ?? null);
+
+  /** ID del usuario logueado (para "Mis turnos" / "Historial de turnos") */
+  readonly clienteId = computed(() => this.auth.usuario()?.id ?? null);
+
   /** true solo si el usuario logueado es el profesional dueño de esta lista */
   readonly esDueno = computed(() => {
     const logueado = this.auth.usuario();

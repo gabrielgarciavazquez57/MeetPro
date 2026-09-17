@@ -30,6 +30,9 @@ export class InformacionProfesionalComponent implements OnInit {
   private readonly auth = inject(Auth);
   private readonly esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
 
+  /** Sección seleccionada en el acceso lateral */
+  readonly seccionActiva = signal<string>('');
+
   readonly profesionalId = signal<string>('');
   readonly profesional = signal<Profesional | null>(null);
   readonly informacion = signal<InformacionProfesional | null>(null);
@@ -68,6 +71,7 @@ export class InformacionProfesionalComponent implements OnInit {
 
   /** Lleva el scroll hasta la sección indicada */
   irASeccion(id: string): void {
+    this.seccionActiva.set(id);
     if (!this.esNavegador) {
       return;
     }

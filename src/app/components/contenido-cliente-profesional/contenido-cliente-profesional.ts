@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { ClientContenido } from '../../services/client-contenido';
 import { Auth } from '../../services/auth';
@@ -11,7 +11,7 @@ import { FormularioContenido } from '../formulario-contenido/formulario-contenid
 @Component({
   selector: 'app-contenido-cliente-profesional',
   standalone: true,
-  imports: [BarraNav, FormularioContenido],
+  imports: [BarraNav, FormularioContenido, RouterLink],
   templateUrl: './contenido-cliente-profesional.html',
   styleUrl: './contenido-cliente-profesional.css',
 })
@@ -69,6 +69,9 @@ export class ContenidoClienteProfesional implements OnInit {
     const u = this.profesional()?.profesional_userData;
     return u ? `${u.name} ${u.lastname}` : '';
   });
+
+  /** ID del usuario dueño del perfil profesional (para "Volver atrás") */
+  readonly profesionalUsuarioId = computed(() => this.profesional()?.profesional_userData?.id ?? null);
 
   /** Solo el profesional dueño de este perfil puede publicar contenido para sus clientes */
   readonly esDueno = computed(() => {

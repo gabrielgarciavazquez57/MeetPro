@@ -6,6 +6,12 @@
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {
+    @if (profesionalUsuarioId(); as pid) {
+      <div class="acceso-lateral">
+        <a class="btn-acceso-lateral" [routerLink]="['/perfil-prof', pid]">Volver atrás</a>
+      </div>
+    }
+
     <div class="valoraciones-panel">
       <div class="lista-comentarios">
         @if (valoraciones().length === 0) {

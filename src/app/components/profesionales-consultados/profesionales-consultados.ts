@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientTurno } from '../../services/client-turno';
 import { Turno } from '../../interfaces/turno';
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -7,7 +7,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 @Component({
   selector: 'app-profesionales-consultados',
   standalone: true,
-  imports: [BarraNav],
+  imports: [BarraNav, RouterLink],
   templateUrl: './profesionales-consultados.html',
   styleUrl: './profesionales-consultados.css',
 })
@@ -15,7 +15,7 @@ export class ProfesionalesConsultados implements OnInit {
   private readonly clientTurno = inject(ClientTurno);
   private readonly route = inject(ActivatedRoute);
 
-  private readonly userId = signal<string>('');
+  readonly userId = signal<string>('');
 
   turnos = signal<Turno[]>([]);
   cargando = signal<boolean>(true);
