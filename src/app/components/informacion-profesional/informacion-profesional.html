@@ -6,13 +6,22 @@
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else if (profesional(); as prof) {
+    <div class="acceso-lateral">
+      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-descripcion')">Descripción ampliada</button>
+      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-proyectos')">Proyectos</button>
+      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-titulos')">Títulos</button>
+      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-certificados')">Certificados</button>
+      <button type="button" class="btn-acceso-lateral" (click)="irASeccion('seccion-experiencia')">Experiencia profesional</button>
+      <a class="btn-acceso-lateral" [routerLink]="['/perfil-prof', prof.profesional_userData.id]">Volver atrás</a>
+    </div>
+
     <div class="titulo-informacion-grupo">
       <h1 class="titulo-informacion">{{ prof.profesional_userData.name }} {{ prof.profesional_userData.lastname }}</h1>
       <p class="titulo-informacion-sub">{{ prof.profession }}</p>
     </div>
 
     <div class="informacion-panel">
-      <section class="informacion-seccion">
+      <section class="informacion-seccion" id="seccion-descripcion">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Descripción ampliada</h2>
           @if (esDueno() && !editando()) {
@@ -44,7 +53,7 @@
         }
       </section>
 
-      <section class="informacion-seccion">
+      <section class="informacion-seccion" id="seccion-proyectos">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Proyectos</h2>
           @if (esDueno() && !mostrandoFormProyecto()) {
@@ -143,7 +152,7 @@
         }
       </section>
 
-      <section class="informacion-seccion">
+      <section class="informacion-seccion" id="seccion-titulos">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Títulos</h2>
           @if (esDueno() && !mostrandoFormTitulo()) {
@@ -224,7 +233,7 @@
         }
       </section>
 
-      <section class="informacion-seccion">
+      <section class="informacion-seccion" id="seccion-certificados">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Certificados</h2>
           @if (esDueno() && !mostrandoFormCertificado()) {
@@ -305,7 +314,7 @@
         }
       </section>
 
-      <section class="informacion-seccion">
+      <section class="informacion-seccion" id="seccion-experiencia">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Experiencia profesional</h2>
           @if (esDueno() && !mostrandoFormExperiencia()) {

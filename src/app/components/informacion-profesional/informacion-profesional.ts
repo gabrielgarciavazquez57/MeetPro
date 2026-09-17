@@ -1,6 +1,7 @@
-import { Component, computed, inject, signal, OnInit } from '@angular/core';
+import { Component, computed, inject, signal, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { ClientInformacionProfesional } from '../../services/client-informacion-profesional';
 import { ClientProyecto } from '../../services/client-proyecto';
@@ -16,7 +17,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 @Component({
   selector: 'app-informacion-profesional',
   standalone: true,
-  imports: [BarraNav, ReactiveFormsModule],
+  imports: [BarraNav, ReactiveFormsModule, RouterLink],
   templateUrl: './informacion-profesional.html',
   styleUrl: './informacion-profesional.css',
 })
@@ -27,6 +28,7 @@ export class InformacionProfesionalComponent implements OnInit {
   private readonly clientInformacion = inject(ClientInformacionProfesional);
   private readonly clientProyecto = inject(ClientProyecto);
   private readonly auth = inject(Auth);
+  private readonly esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
 
   readonly profesionalId = signal<string>('');
   readonly profesional = signal<Profesional | null>(null);
@@ -63,6 +65,14 @@ export class InformacionProfesionalComponent implements OnInit {
   get descripcion_proyecto() { return this.formProyecto.controls.descripcion_proyecto; }
   get imagen_proyecto()      { return this.formProyecto.controls.imagen_proyecto; }
   get link_adjunto()         { return this.formProyecto.controls.link_adjunto; }
+
+  /** Lleva el scroll hasta la sección indicada */
+  irASeccion(id: string): void {
+    if (!this.esNavegador) {
+      return;
+    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   /** Solo el profesional dueño de este perfil puede cargar/editar la descripción ampliada */
   readonly esDueno = computed(() => {

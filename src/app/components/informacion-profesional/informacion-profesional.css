@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8.5rem 1.5rem 2.5rem;
+  padding: 7rem 1.5rem 2.5rem;
   background: linear-gradient(
     90deg,
     #0a1730 0,
@@ -19,6 +19,72 @@
   overflow-x: hidden;
   box-shadow: inset 0 -24px 28px -24px rgba(10, 23, 48, 0.4);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Acceso rápido fijo al borde izquierdo */
+.acceso-lateral {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn-acceso-lateral {
+  display: block;
+  box-sizing: border-box;
+  width: 250px;
+  text-align: left;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #ffffff;
+  background-image: linear-gradient(270deg, #a9c3f7 0%, #dbe6fb 55%, #ffffff 100%);
+  border: none;
+  border-right: 3px solid #2563eb;
+  padding: 0.85rem 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.22);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  animation: acceso-lateral-entrada 0.45s ease both;
+}
+
+.btn-acceso-lateral:hover {
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+  transform: translateX(2px);
+}
+
+@keyframes acceso-lateral-entrada {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.acceso-lateral .btn-acceso-lateral:nth-child(1) { animation-delay: 0s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(2) { animation-delay: 0.07s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(3) { animation-delay: 0.14s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(4) { animation-delay: 0.21s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(5) { animation-delay: 0.28s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(6) { animation-delay: 0.35s; }
+
+.btn-acceso-lateral:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 700px) {
+  .acceso-lateral {
+    display: none;
+  }
 }
 
 .estado-msg {
@@ -415,8 +481,8 @@
   flex: 1;
   min-width: 0;
   display: flex;
-  align-items: flex-start;
-  gap: 1.15rem;
+  flex-direction: column;
+  gap: 1rem;
   padding: 1.15rem;
   background-color: #f8fafc;
   border: 1px solid #e4e8ed;
@@ -536,9 +602,8 @@
 }
 
 .proyecto-imagen {
-  flex-shrink: 0;
-  width: 108px;
-  height: 108px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border: 1px solid #e4e8ed;
 }
