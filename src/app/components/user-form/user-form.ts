@@ -1,6 +1,8 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, AbstractControl, AsyncValidatorFn, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { map, of } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { ClientUser } from '../../services/client-user';
 import { ClientProfesional } from '../../services/client-profesional';
@@ -10,6 +12,15 @@ function passwordsIguales(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;
   const repeat = control.get('password_repeat')?.value;
   return password === repeat ? null : { passwordsNoCoinciden: true };
+}
+
+/** No permite fechas de nacimiento posteriores al 31/12/2008 */
+function fechaNacimientoValida(control: AbstractControl): ValidationErrors | null {
+  const valor = control.value;
+  if (!valor) {
+    return null;
+  }
+  return valor > '2008-12-31' ? { fechaMaxima: true } : null;
 }
 
 @Component({
@@ -24,6 +35,7 @@ export class UserForm implements OnInit {
   protected readonly clientProfesional = inject(ClientProfesional);
   protected readonly router = inject(Router);
   protected readonly route = inject(ActivatedRoute);
+  private readonly location = inject(Location);
 
   /** Modo edición: viene del data de la ruta `editar-usuario/:id` */
   protected readonly editando = this.route.snapshot.data['editar'] === true;
@@ -34,6 +46,38 @@ export class UserForm implements OnInit {
 
   /** Vista previa de la foto de perfil (data URL) */
   readonly fotoPreview = signal<string>('');
+
+  /** Verifica contra el backend que el DNI no pertenezca a otro usuario */
+  private readonly dniDuplicadoValidator: AsyncValidatorFn = (control: AbstractControl) => {
+    const dni = (control.value ?? '').trim();
+    if (!dni) {
+      return of(null);
+    }
+    return this.client.getUsers().pipe(
+      map((usuarios) => {
+        const duplicado = usuarios.some(
+          (u) => u.dni === dni && String(u.id) !== String(this.usuarioId),
+        );
+        return duplicado ? { dniDuplicado: true } : null;
+      }),
+    );
+  };
+
+  /** Verifica contra el backend que el email no pertenezca a otro usuario */
+  private readonly emailDuplicadoValidator: AsyncValidatorFn = (control: AbstractControl) => {
+    const email = (control.value ?? '').trim().toLowerCase();
+    if (!email) {
+      return of(null);
+    }
+    return this.client.getUsers().pipe(
+      map((usuarios) => {
+        const duplicado = usuarios.some(
+          (u) => (u.email ?? '').trim().toLowerCase() === email && String(u.id) !== String(this.usuarioId),
+        );
+        return duplicado ? { emailDuplicado: true } : null;
+      }),
+    );
+  };
 
   protected readonly tipos_gen = ['Masculino', 'Femenino', 'No especifico'] as const;
   protected readonly paises = Object.values(countries)
@@ -47,13 +91,12 @@ export class UserForm implements OnInit {
     isProfesional:   [false, [Validators.required]],
     name:            ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
     lastname:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
-    dni:             ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
+    dni:             ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)], [this.dniDuplicadoValidator]],
     email:           ['', [Validators.required, Validators.email]],
     phoneNumber:     ['', [Validators.required]],
-    age:             [0,  [Validators.required, Validators.min(5)]],
     gender:          ['', [Validators.required]],
     nationality:     ['', [Validators.required]],
-    dateOfBirth:     ['', [Validators.required]],
+    dateOfBirth:     ['', [Validators.required, fechaNacimientoValida]],
     fotoPerfil:      [''],
     address: this.fb.nonNullable.group({
       address:    ['', [Validators.required]],
@@ -74,7 +117,6 @@ export class UserForm implements OnInit {
   get dni()             { return this.form.controls.dni; }
   get email()           { return this.form.controls.email; }
   get phoneNumber()     { return this.form.controls.phoneNumber; }
-  get age()             { return this.form.controls.age; }
   get nationality()     { return this.form.controls.nationality; }
   get gender()          { return this.form.controls.gender; }
   get address()         { return this.form.controls.address; }
@@ -106,6 +148,30 @@ export class UserForm implements OnInit {
   quitarFoto(): void {
     this.fotoPreview.set('');
     this.fotoPerfil.setValue('');
+  }
+
+  volver(): void {
+    this.location.back();
+  }
+
+  // ===== CARRUSEL DE PASOS =====
+  readonly pasoActual = signal(0);
+  readonly direccionPaso = signal<'izq' | 'der'>('der');
+
+  siguientePaso(): void {
+    if (this.pasoActual() >= 2) {
+      return;
+    }
+    this.direccionPaso.set('der');
+    this.pasoActual.update((p) => p + 1);
+  }
+
+  anteriorPaso(): void {
+    if (this.pasoActual() <= 0) {
+      return;
+    }
+    this.direccionPaso.set('izq');
+    this.pasoActual.update((p) => p - 1);
   }
 
   ngOnInit() {
@@ -144,6 +210,23 @@ export class UserForm implements OnInit {
     return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
   }
 
+  /** Calcula la edad a partir de la fecha de nacimiento */
+  private calcularEdad(fechaNacimiento: string): number {
+    const nacimiento = new Date(fechaNacimiento);
+    if (isNaN(nacimiento.getTime())) {
+      return 0;
+    }
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const sinCumplirAun =
+      hoy.getMonth() < nacimiento.getMonth() ||
+      (hoy.getMonth() === nacimiento.getMonth() && hoy.getDate() < nacimiento.getDate());
+    if (sinCumplirAun) {
+      edad--;
+    }
+    return edad;
+  }
+
   /** Borra el perfil profesional del usuario de la lista de profesionales */
   private eliminarPerfilProfesional(userId: string | number): void {
     this.clientProfesional.getProfesionalByUserID(userId).subscribe({
@@ -172,6 +255,10 @@ export class UserForm implements OnInit {
   }
 
 handleSubmit() {
+    if (this.form.pending) {
+      alert('Esperá un momento, estamos verificando tus datos...');
+      return;
+    }
     if (this.form.invalid) {
       alert('Formulario invalido!');
       return;
@@ -183,6 +270,7 @@ handleSubmit() {
     const user_data: User = {
       ...rest,
       dateOfBirth: new Date(rest.dateOfBirth),
+      age: this.calcularEdad(rest.dateOfBirth),
     };
 
     if (this.editando) {

@@ -1,12 +1,23 @@
 <section class="fondo-registro">
+    <div class="acceso-lateral">
+      <button type="button" class="btn-acceso-lateral" (click)="volver()">Volver atrás</button>
+    </div>
+
     <div class="titulo-registro-grupo">
       <h1 class="titulo-registro">{{ editando ? 'Editá tu perfil' : 'Creá tu cuenta' }}</h1>
       <p class="titulo-registro-sub">{{ editando ? 'Actualizá tus datos personales' : 'Completá tus datos para empezar a usar MeetPro' }}</p>
     </div>
     <div class="formulario-registro">
     <form [formGroup]="form"  (ngSubmit) = 'handleSubmit()' >
+    <div class="carrusel-form">
+      @if (pasoActual() > 0) {
+        <button type="button" class="btn-flecha btn-flecha--izq" (click)="anteriorPaso()" aria-label="Paso anterior">‹</button>
+      }
+
     <div class="columnas-form">
-        <div class="datos-personales">
+      @switch (pasoActual()) {
+        @case (0) {
+        <div class="datos-personales" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
             <h3 class="titulo-seccion" >Datos Personales:</h3>
             <ul>
             <li class="foto-perfil-item">
@@ -63,6 +74,10 @@
                     <span>Debe contener mas de 6 digitos</span>
                     }@else if (dni.hasError('maxlength')) {
                     <span>Debe contener menos de 8 digitos</span>
+                    }@else if (dni.hasError('dniDuplicado')) {
+                    <span>Ya existe un usuario registrado con ese DNI</span>
+                    }@else if (dni.pending) {
+                    <span class="campo-verificando">Verificando DNI...</span>
                     }
                         }
                 </li>
@@ -82,22 +97,13 @@
                
                     </li>
                 <li>
-                    <label for="age">Edad: </label>
-                    <input type="number" formControlName="age" id="age">
-                     @if(age.dirty || age.touched){
-                            @if(age.hasError('required')){
-                                <span>Campo requerido</span>
-                            }@else if (age.hasError('min')) {
-                    <span>Debe ser mayor a 5</span>
-                    }
-                        }
-                </li>
-                <li>
   <label for="dateOfBirth">Fecha de Nacimiento: </label>
-  <input type="date" formControlName="dateOfBirth" id="dateOfBirth">
+  <input type="date" formControlName="dateOfBirth" id="dateOfBirth" max="2008-12-31">
   @if(dateOfBirth.dirty || dateOfBirth.touched){
     @if(dateOfBirth.hasError('required')){
       <span>Campo requerido</span>
+    } @else if (dateOfBirth.hasError('fechaMaxima')) {
+      <span>La fecha no puede ser posterior a 2008</span>
     }
   }
 </li>
@@ -141,9 +147,11 @@
                 </li>
         </ul>
         </div>
-        <div class="datos-direccion" formGroupName="address">
+        }
+        @case (1) {
+        <div class="datos-direccion" formGroupName="address" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
             <h3 class="titulo-seccion" >Direccion Personal:</h3>
-            <ul>  
+            <ul>
                 <li>
                     <label for="street">Domicilio: </label>
                     <input type="text" formControlName="address" id="street">
@@ -196,7 +204,9 @@
                 </li>
             </ul>
         </div>
-        <div class="datos-sesion">
+        }
+        @case (2) {
+        <div class="datos-sesion" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
             <h3 class="titulo-seccion" >Configuracion de usuario:</h3>
             <ul>
                <li>
@@ -236,7 +246,15 @@
                 
             </ul>
         </div>
-    </div> 
+        }
+      }
+    </div>
+
+      @if (pasoActual() < 2) {
+        <button type="button" class="btn-flecha btn-flecha--der" (click)="siguientePaso()" aria-label="Paso siguiente">›</button>
+      }
+    </div>
+
     <div class="boton-form">
             <button type="submit" [disabled]="form.invalid" class="btn btn-grande">{{ editando ? 'GUARDAR CAMBIOS' : 'REGISTRARSE' }}</button>
         </div>
