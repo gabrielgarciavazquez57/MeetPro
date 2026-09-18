@@ -288,6 +288,26 @@
   letter-spacing: 0.01em;
 }
 
+.fila-profesion {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.separador-profesion {
+  width: 1px;
+  height: 1rem;
+  background-color: #cbd5e1;
+}
+
+.badge-id-profesional {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.01em;
+}
+
 .descripcion-profesional {
   font-size: 0.9rem;
   color: #475569;
@@ -361,6 +381,15 @@ label {
   color: #0f172a;
   letter-spacing: -0.01em;
   word-break: break-word;
+}
+
+.valor-link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.valor-link:hover {
+  text-decoration: underline;
 }
 
 /* Botones debajo de la información del profesional: 3 columnas x 2 filas */

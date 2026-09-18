@@ -44,7 +44,7 @@
 
                 <ul class="detalle-profesional">
                   <li>
-                    <label>ID del profesional</label>
+                    <label>Matrícula del profesional</label>
                     <span class="valor">{{ prof.professionalId }}</span>
                   </li>
                   <li>
@@ -95,10 +95,10 @@
         </div>
 
         <label class="filtro-campo">
-          <span class="filtro-label">ID del profesional</span>
+          <span class="filtro-label">Matrícula del profesional</span>
           <input
             type="text"
-            placeholder="Buscar por ID..."
+            placeholder="Buscar por matrícula..."
             [ngModel]="idFiltro()"
             (ngModelChange)="idFiltro.set($event)"
           />

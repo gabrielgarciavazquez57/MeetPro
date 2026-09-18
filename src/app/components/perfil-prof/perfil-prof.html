@@ -23,26 +23,32 @@
               <h1 class="nombre-profesional">
                 {{ prof.profesional_userData.name }} {{ prof.profesional_userData.lastname }}
               </h1>
-              <p class="subtitulo-profesion">{{ prof.profession }}</p>
+              <div class="fila-profesion">
+                <p class="subtitulo-profesion">{{ prof.profession }}</p>
+                <span class="separador-profesion" aria-hidden="true"></span>
+                <span class="badge-id-profesional">Matrícula {{ prof.professionalId }}</span>
+              </div>
               <p class="descripcion-profesional">{{ prof.descriptionprofesional }}</p>
             </div>
           </div>
 
           <div class="datos-inferior">
             <ul class="datos-contacto">
-              <li>
-                <span class="dato-icono" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="4" width="18" height="16" rx="2" />
-                    <circle cx="9" cy="10" r="2" />
-                    <path d="M15 8h3M15 12h3M7 16h10" />
-                  </svg>
-                </span>
-                <span class="dato-texto">
-                  <label>ID del profesional</label>
-                  <span class="valor">{{ prof.professionalId }}</span>
-                </span>
-              </li>
+              @if (prof.linkedin) {
+                <li>
+                  <span class="dato-icono" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                      <path d="M10 9v12M10 13a4 4 0 0 1 8 0v8" />
+                    </svg>
+                  </span>
+                  <span class="dato-texto">
+                    <label>LinkedIn</label>
+                    <a class="valor valor-link" [href]="prof.linkedin" target="_blank" rel="noopener">{{ prof.linkedin }}</a>
+                  </span>
+                </li>
+              }
               <li>
                 <span class="dato-icono" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

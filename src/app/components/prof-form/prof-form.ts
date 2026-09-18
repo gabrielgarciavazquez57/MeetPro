@@ -61,6 +61,7 @@ export class ProfesionalForm implements OnInit {
     profession:            ['', [Validators.required]],
     professionalId:        ['', [Validators.required]],
     descriptionprofesional:['', [Validators.required, Validators.maxLength(500)]],
+    linkedin:               ['', [Validators.pattern(/^https?:\/\/.+/)]],
     titulos:      this.fb.array([this.crearTitulo()]),
     experiencias: this.fb.array([this.crearExperiencia()]),
     descripcionAmpliada: ['', [Validators.maxLength(2000)]],
@@ -107,6 +108,7 @@ export class ProfesionalForm implements OnInit {
           profession: prof.profession,
           professionalId: prof.professionalId,
           descriptionprofesional: prof.descriptionprofesional,
+          linkedin: prof.linkedin ?? '',
         });
 
         this.reemplazarArray(this.titulos, prof.titulos ?? [], () => this.crearTitulo());
@@ -169,6 +171,7 @@ export class ProfesionalForm implements OnInit {
   get profession()             { return this.form.controls.profession; }
   get professionalId()         { return this.form.controls.professionalId; }
   get descriptionprofesional() { return this.form.controls.descriptionprofesional; }
+  get linkedin()               { return this.form.controls.linkedin; }
   get titulos()      { return this.form.controls.titulos as FormArray; }
   get experiencias() { return this.form.controls.experiencias as FormArray; }
   get descripcionAmpliada() { return this.form.controls.descripcionAmpliada; }

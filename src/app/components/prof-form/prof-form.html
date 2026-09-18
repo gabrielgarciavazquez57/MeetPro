@@ -48,6 +48,15 @@
               }
             }
           </li>
+          <li>
+            <label for="linkedin">LinkedIn (opcional): </label>
+            <input type="text" formControlName="linkedin" id="linkedin" placeholder="https://www.linkedin.com/in/...">
+            @if(linkedin.dirty || linkedin.touched){
+              @if(linkedin.hasError('pattern')){
+                <span>Debe ser un link válido (https://...)</span>
+              }
+            }
+          </li>
         </ul>
       </div>
         }
