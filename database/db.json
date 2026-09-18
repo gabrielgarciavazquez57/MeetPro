@@ -156,28 +156,6 @@
       }
     },
     {
-      "username": "Prueba ",
-      "password": "Prueba 1",
-      "isProfesional": true,
-      "name": "Prueba ",
-      "lastname": "Prueba ",
-      "dni": "32432656",
-      "email": "prueba@meetpro.com",
-      "phoneNumber": "3424325252",
-      "age": 30,
-      "gender": "Femenino",
-      "nationality": "Azerbaijan",
-      "dateOfBirth": "2026-09-09T00:00:00.000Z",
-      "address": {
-        "address": "Prueba ",
-        "city": "Prueba ",
-        "province": "Prueba ",
-        "country": "Azerbaijan",
-        "zipCode": "342525"
-      },
-      "id": "XJkFPfls1dk"
-    },
-    {
       "username": "enner",
       "password": "enner123",
       "isProfesional": true,
@@ -478,50 +456,6 @@
         }
       ],
       "id": "Ypy2ZnEsC6s"
-    },
-    {
-      "profesional_userData": {
-        "username": "Prueba ",
-        "password": "Prueba 1",
-        "isProfesional": true,
-        "name": "Prueba ",
-        "lastname": "Prueba ",
-        "dni": "32432656",
-        "email": "prueba@meetpro.com",
-        "phoneNumber": "3424325252",
-        "age": 30,
-        "gender": "Femenino",
-        "nationality": "Azerbaijan",
-        "dateOfBirth": "2026-09-09T00:00:00.000Z",
-        "address": {
-          "address": "Prueba ",
-          "city": "Prueba ",
-          "province": "Prueba ",
-          "country": "Azerbaijan",
-          "zipCode": "342525"
-        },
-        "id": "XJkFPfls1dk"
-      },
-      "profession": "Prueba ",
-      "professionalId": "Prueba ",
-      "descriptionprofesional": "Prueba ",
-      "titulos": [
-        {
-          "nombre_titulo": "Prueba ",
-          "descripcion_titulo": "Prueba ",
-          "fecha_obtencion": "2026-09-03",
-          "institucion_educativa": "Prueba "
-        }
-      ],
-      "experiencias": [
-        {
-          "titulo_experiencia": "Prueba ",
-          "institucion_experiencia": "Prueba ",
-          "fecha_inicio": "2026-09-01",
-          "fecha_fin": "2026-09-05"
-        }
-      ],
-      "id": "jWowbf_nFL0"
     },
     {
       "profesional_userData": {

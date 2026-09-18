@@ -33,13 +33,20 @@ export class FormularioContenido implements OnInit {
     hora:        [{ value: '', disabled: true }],
     descripcion: ['', [Validators.required, Validators.maxLength(1000)]],
     link:        [''],
+    dniCliente:  [''],
   });
 
   // ===== GETTERS =====
   get titulo()      { return this.form.controls.titulo; }
   get descripcion() { return this.form.controls.descripcion; }
+  get dniCliente()  { return this.form.controls.dniCliente; }
 
   ngOnInit(): void {
+    if (this.tipo() === 'profesional') {
+      this.dniCliente.addValidators(Validators.required);
+      this.dniCliente.updateValueAndValidity();
+    }
+
     const editar = this.contenidoEditar();
 
     if (editar) {
@@ -49,6 +56,7 @@ export class FormularioContenido implements OnInit {
         hora: editar.hora,
         descripcion: editar.descripcion,
         link: editar.link,
+        dniCliente: editar.dniCliente ?? '',
       });
       return;
     }
@@ -84,7 +92,7 @@ export class FormularioContenido implements OnInit {
       return;
     }
 
-    const { titulo, fecha, hora, descripcion, link } = this.form.getRawValue();
+    const { titulo, fecha, hora, descripcion, link, dniCliente } = this.form.getRawValue();
     const editar = this.contenidoEditar();
 
     const contenido: ContenidoProfesionalCliente = {
@@ -95,6 +103,7 @@ export class FormularioContenido implements OnInit {
       hora,
       descripcion,
       link,
+      ...(this.tipo() === 'profesional' ? { dniCliente: dniCliente.trim() } : {}),
     };
 
     const peticion =

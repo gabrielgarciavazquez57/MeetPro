@@ -116,7 +116,14 @@ export class ContenidoClienteProfesional implements OnInit {
     this.clientContenido.getContenido().subscribe({
       next: (lista) => {
         const delProfesional = lista.filter((c) => String(c.professionalId) === String(id));
-        this.contenidoProfesional.set(delProfesional.filter((c) => c.tipo === 'profesional'));
+
+        const dniPropio = this.auth.usuario()?.dni;
+        const contenidoProfesional = delProfesional.filter((c) => c.tipo === 'profesional');
+        const visible = this.esDueno()
+          ? contenidoProfesional
+          : contenidoProfesional.filter((c) => !c.dniCliente || c.dniCliente === dniPropio);
+
+        this.contenidoProfesional.set(visible);
         this.contenidoCliente.set(delProfesional.filter((c) => c.tipo === 'cliente'));
       },
       error: (err) => console.error('Error al traer el contenido:', err),

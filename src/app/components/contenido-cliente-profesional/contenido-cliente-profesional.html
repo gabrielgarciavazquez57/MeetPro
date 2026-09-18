@@ -25,6 +25,9 @@
                   <span class="item-contenido-titulo">{{ item.titulo }}</span>
                   <span class="item-contenido-fecha">{{ item.fecha }} · {{ item.hora }}</span>
                 </div>
+                @if (esDueno() && item.dniCliente) {
+                  <span class="item-contenido-destinatario">Para el cliente con DNI {{ item.dniCliente }}</span>
+                }
                 <p class="item-contenido-desc">{{ item.descripcion }}</p>
                 @if (item.link) {
                   <a class="item-contenido-link" [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>

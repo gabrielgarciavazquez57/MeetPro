@@ -133,6 +133,16 @@
   white-space: nowrap;
 }
 
+.item-contenido-destinatario {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+}
+
 .item-contenido-desc {
   margin: 0.4rem 0 0;
   font-size: 0.85rem;

@@ -7,6 +7,16 @@
 
     <form [formGroup]="form" (ngSubmit)="handleSubmit()">
       <ul class="datos-contenido-lista">
+        @if (tipo() === 'profesional') {
+          <li class="campo-full">
+            <label for="dniCliente">DNI del cliente: </label>
+            <input type="text" formControlName="dniCliente" id="dniCliente" placeholder="Solo ese cliente podrá ver este contenido">
+            @if (dniCliente.touched && dniCliente.hasError('required')) {
+              <span>Campo requerido</span>
+            }
+          </li>
+        }
+
         <li class="campo-full">
           <label for="titulo">Título: </label>
           <input type="text" formControlName="titulo" id="titulo">
