@@ -3,6 +3,7 @@ import { Address } from "./address";
 export interface User {
     id?: string | number;
     isProfesional: boolean;
+    isAdmin: boolean;
     username: string;
     password: string;
     name: string;   

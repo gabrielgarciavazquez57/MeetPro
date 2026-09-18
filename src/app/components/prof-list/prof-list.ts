@@ -142,7 +142,7 @@ export class ProfList implements OnInit {
 
     this.clientProfesional.getProfesionales().subscribe({
       next: (data) => {
-        this.profesionales.set(data);
+        this.profesionales.set(data.filter((p) => !p.profesional_userData?.isAdmin));
         this.cargando.set(false);
       },
       error: (err) => {

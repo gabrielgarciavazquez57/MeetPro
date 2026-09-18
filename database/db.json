@@ -20,7 +20,8 @@
         "country": "Argentina",
         "zipCode": "C1043"
       },
-      "id": "vsvLADccdcM"
+      "id": "vsvLADccdcM",
+      "isAdmin": false
     },
     {
       "username": "ncabrera",
@@ -42,7 +43,8 @@
         "country": "Argentina",
         "zipCode": "C1425"
       },
-      "id": "vOprp3jdKHo"
+      "id": "vOprp3jdKHo",
+      "isAdmin": false
     },
     {
       "username": "mlopez",
@@ -64,7 +66,8 @@
         "country": "Argentina",
         "zipCode": "C1425"
       },
-      "id": "mlz789xyz01"
+      "id": "mlz789xyz01",
+      "isAdmin": false
     },
     {
       "username": "Palermo9",
@@ -86,29 +89,8 @@
         "country": "Argentina",
         "zipCode": "008097987"
       },
-      "id": "-7GRVsd6hG8"
-    },
-    {
-      "username": "adimin",
-      "password": "admin123",
-      "isProfesional": false,
-      "name": "Admin",
-      "lastname": "Admin",
-      "dni": "33333333",
-      "email": "admin@meetpro.com",
-      "phoneNumber": "325346748",
-      "age": 68,
-      "gender": "Masculino",
-      "nationality": "Barbados",
-      "dateOfBirth": "1970-04-04T00:00:00.000Z",
-      "address": {
-        "address": "aaaaaaaaa",
-        "city": "aaaaaaaaaaa",
-        "province": "aaaaaaaaaaaa",
-        "country": "Bahamas",
-        "zipCode": "24332543674"
-      },
-      "id": "21uI9BxQdcs"
+      "id": "-7GRVsd6hG8",
+      "isAdmin": false
     },
     {
       "username": "ayrton",
@@ -130,7 +112,8 @@
         "country": "Argentina",
         "zipCode": "4325467"
       },
-      "id": "V4nX-l5G4IA"
+      "id": "V4nX-l5G4IA",
+      "isAdmin": false
     },
     {
       "id": "ZlwghurQ-ws",
@@ -153,7 +136,8 @@
         "province": "CO",
         "country": "United States",
         "zipCode": "81620-5422"
-      }
+      },
+      "isAdmin": false
     },
     {
       "username": "enner",
@@ -176,7 +160,8 @@
         "zipCode": "3425"
       },
       "age": 17,
-      "id": "Rw0aNN2KYhw"
+      "id": "Rw0aNN2KYhw",
+      "isAdmin": false
     },
     {
       "username": "vasco",
@@ -199,7 +184,32 @@
         "zipCode": "23454343"
       },
       "age": 17,
-      "id": "sUQbcM96vqE"
+      "id": "sUQbcM96vqE",
+      "isAdmin": false
+    },
+    {
+      "username": "admin",
+      "password": "admin1234",
+      "isProfesional": true,
+      "isAdmin": true,
+      "name": "Admin",
+      "lastname": "Admin",
+      "dni": "1234567",
+      "email": "admin@meetpro.com",
+      "phoneNumber": "1234567",
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "2000-03-23T00:00:00.000Z",
+      "fotoPerfil": "",
+      "address": {
+        "address": "admin",
+        "city": "admin",
+        "province": "admin",
+        "country": "Argentina",
+        "zipCode": "1234"
+      },
+      "age": 26,
+      "id": "wjIwudcdNyo"
     }
   ],
   "profesionales": [
@@ -225,7 +235,8 @@
           "country": "Argentina",
           "zipCode": "C1043"
         },
-        "id": "vsvLADccdcM"
+        "id": "vsvLADccdcM",
+        "isAdmin": false
       },
       "profession": "Desarrollador de Software",
       "professionalId": "12345",
@@ -501,6 +512,54 @@
         }
       ],
       "id": "1_uMcQB1QFY"
+    },
+    {
+      "profesional_userData": {
+        "username": "admin",
+        "password": "admin1234",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Admin",
+        "lastname": "Admin",
+        "dni": "1234567",
+        "email": "admin@meetpro.com",
+        "phoneNumber": "1234567",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "2000-03-23T00:00:00.000Z",
+        "fotoPerfil": "",
+        "address": {
+          "address": "admin",
+          "city": "admin",
+          "province": "admin",
+          "country": "Argentina",
+          "zipCode": "1234"
+        },
+        "age": 26,
+        "id": "wjIwudcdNyo"
+      },
+      "profession": "Dermatologo",
+      "professionalId": "123456789",
+      "descriptionprofesional": "Dermatologo profesional",
+      "linkedin": "",
+      "titulos": [
+        {
+          "nombre_titulo": "Dermatologia",
+          "descripcion_titulo": "Dermatologo de grado",
+          "fecha_obtencion": "2026-09-08",
+          "institucion_educativa": "universidad de medicina"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Dermatologo jr",
+          "institucion_experiencia": "Colon",
+          "fecha_inicio": "2026-09-18",
+          "fecha_fin": "2026-09-19"
+        }
+      ],
+      "certificados": [],
+      "id": "TBwiVgivTo8"
     }
   ],
   "turnos": [
@@ -1068,6 +1127,35 @@
       },
       "descripcionAmpliada": "Soy desarrollador de software con más de 15 años de experiencia en el diseño y la construcción de aplicaciones web y móviles. Me especializo en arquitecturas backend escalables con Node.js y Angular, y en los últimos años lideré equipos de entre 4 y 8 personas en proyectos para el sector fintech y salud.\n\nMe apasiona el mentoring: dedico parte de mi semana a acompañar a desarrolladores junior en su crecimiento técnico. Trabajo con metodologías ágiles (Scrum/Kanban) y priorizo siempre la calidad del código y la experiencia del usuario final.\n\nFuera del código, doy charlas en meetups locales sobre buenas prácticas de desarrollo y accesibilidad web.",
       "id": "zoZdozfOb-Y"
+    },
+    {
+      "professionalId": "123456789",
+      "profesional_userData": {
+        "username": "admin",
+        "password": "admin1234",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Admin",
+        "lastname": "Admin",
+        "dni": "1234567",
+        "email": "admin@meetpro.com",
+        "phoneNumber": "1234567",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "2000-03-23T00:00:00.000Z",
+        "fotoPerfil": "",
+        "address": {
+          "address": "admin",
+          "city": "admin",
+          "province": "admin",
+          "country": "Argentina",
+          "zipCode": "1234"
+        },
+        "age": 26,
+        "id": "wjIwudcdNyo"
+      },
+      "descripcionAmpliada": "Un fenomeno",
+      "id": "pq66a-JfuSQ"
     }
   ],
   "proyectos": [

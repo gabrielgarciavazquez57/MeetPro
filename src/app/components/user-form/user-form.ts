@@ -89,6 +89,7 @@ export class UserForm implements OnInit {
     password:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
     password_repeat: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
     isProfesional:   [false, [Validators.required]],
+    isAdmin:         [false],
     name:            ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
     lastname:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
     dni:             ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)], [this.dniDuplicadoValidator]],
