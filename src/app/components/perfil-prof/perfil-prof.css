@@ -240,9 +240,8 @@
 
 .avatar-perfil {
   flex-shrink: 0;
-  align-self: stretch;
   width: 180px;
-  min-height: 180px;
+  height: 180px;
   margin: -2rem 2.5rem 0 -2rem;
   overflow: hidden;
   background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
