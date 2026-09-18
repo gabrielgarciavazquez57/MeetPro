@@ -92,7 +92,7 @@ export class UserForm implements OnInit {
     name:            ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
     lastname:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
     dni:             ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)], [this.dniDuplicadoValidator]],
-    email:           ['', [Validators.required, Validators.email]],
+    email:           ['', [Validators.required, Validators.email], [this.emailDuplicadoValidator]],
     phoneNumber:     ['', [Validators.required]],
     gender:          ['', [Validators.required]],
     nationality:     ['', [Validators.required]],

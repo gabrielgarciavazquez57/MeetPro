@@ -129,6 +129,10 @@
                                 <span>Campo requerido</span>
                             }@else if (email.hasError("email")) {
                                 <span>Formato de email incorrecto</span>
+                            }@else if (email.hasError('emailDuplicado')) {
+                                <span>Ya existe un usuario registrado con ese email</span>
+                            }@else if (email.pending) {
+                                <span class="campo-verificando">Verificando email...</span>
                             }
                         }
                 </li>

@@ -68,6 +68,74 @@
   gap: 1.5rem;
 }
 
+/* Carrusel de pasos del formulario */
+.carrusel-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.columnas-form {
+  flex: 1;
+  min-width: 0;
+}
+
+.btn-flecha {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-top: 0.5rem;
+  font-size: 2.1rem;
+  line-height: 1;
+  color: #2563eb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s ease;
+}
+
+.btn-flecha:hover {
+  color: #1d4ed8;
+}
+
+.btn-flecha:active {
+  transform: scale(0.96);
+}
+
+@keyframes paso-desliza-der {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes paso-desliza-izq {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.paso-der {
+  animation: paso-desliza-der 0.28s ease;
+}
+
+.paso-izq {
+  animation: paso-desliza-izq 0.28s ease;
+}
+
 /* Cada sección en su propio contenedor */
 .datos-profesion,
 .datos-titulos,
