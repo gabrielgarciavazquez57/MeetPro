@@ -160,10 +160,136 @@
         <button type="button" class="btn btn-agregar" (click)="agregarExperiencia()">+ Agregar experiencia</button>
       </div>
         }
+        @case (3) {
+
+      <!-- ===== DESCRIPCIÓN AMPLIADA ===== -->
+      <div class="datos-profesion" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
+        <h3 class="titulo-seccion">Descripción ampliada (opcional):</h3>
+        <ul>
+          <li class="descripcion-item">
+            <label for="descripcionAmpliada">Contanos más sobre tu trayectoria: </label>
+            <textarea formControlName="descripcionAmpliada" id="descripcionAmpliada" rows="7"></textarea>
+            @if (descripcionAmpliada.hasError('maxlength')) {
+              <span>Debe contener menos de 2000 caracteres</span>
+            }
+          </li>
+        </ul>
+      </div>
+        }
+        @case (4) {
+
+      <!-- ===== PROYECTOS ===== -->
+      <div class="datos-titulos" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
+        <div class="header-seccion">
+          <h3 class="titulo-seccion">Proyectos (opcional):</h3>
+        </div>
+
+        @if (proyectosExistentes().length) {
+          <p class="ayuda-paso">Ya tenés {{ proyectosExistentes().length }} proyecto(s) cargado(s). Para editarlos o eliminarlos, hacelo desde Información Profesional.</p>
+        }
+
+        <div formArrayName="proyectosNuevos">
+          @for (proyectoGroup of proyectosNuevos.controls; track $index) {
+            <div class="bloque-item" [formGroupName]="$index">
+              <div class="bloque-header">
+                <span class="bloque-numero">Proyecto nuevo {{ $index + 1 }}</span>
+                <button type="button" class="btn btn-eliminar" (click)="eliminarProyectoNuevo($index)">Eliminar</button>
+              </div>
+              <ul>
+                <li>
+                  <label [for]="'titulo_proyecto-' + $index">Título del proyecto: </label>
+                  <input type="text" formControlName="titulo_proyecto" [id]="'titulo_proyecto-' + $index">
+                  @if(proyectoGroup.get('titulo_proyecto')?.touched && proyectoGroup.get('titulo_proyecto')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li class="descripcion-item">
+                  <label [for]="'descripcion_proyecto-' + $index">Descripción: </label>
+                  <textarea formControlName="descripcion_proyecto" [id]="'descripcion_proyecto-' + $index" rows="3"></textarea>
+                  @if(proyectoGroup.get('descripcion_proyecto')?.touched && proyectoGroup.get('descripcion_proyecto')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }@else if (proyectoGroup.get('descripcion_proyecto')?.hasError('maxlength')) {
+                    <span>Debe contener menos de 800 caracteres</span>
+                  }
+                </li>
+                <li>
+                  <label [for]="'link_adjunto-' + $index">Link adjunto (opcional): </label>
+                  <input type="text" formControlName="link_adjunto" [id]="'link_adjunto-' + $index" placeholder="https://...">
+                </li>
+                <li>
+                  <label>Imagen del proyecto (opcional): </label>
+                  <div class="imagen-proyecto-campo">
+                    @if (proyectoGroup.get('imagen_proyecto')?.value) {
+                      <img class="imagen-proyecto-preview" [src]="proyectoGroup.get('imagen_proyecto')?.value" alt="Vista previa del proyecto">
+                    }
+                    <input type="file" [id]="'imagen_proyecto-' + $index" accept="image/*" hidden (change)="onImagenProyectoNuevo($event, $index)">
+                    <label [for]="'imagen_proyecto-' + $index" class="btn-subir-imagen">{{ proyectoGroup.get('imagen_proyecto')?.value ? 'Cambiar imagen' : '+ Subir imagen' }}</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          }
+        </div>
+
+        <button type="button" class="btn btn-agregar" (click)="agregarProyectoNuevo()">+ Agregar proyecto</button>
+      </div>
+        }
+        @case (5) {
+
+      <!-- ===== CERTIFICADOS ===== -->
+      <div class="datos-titulos" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
+        <div class="header-seccion">
+          <h3 class="titulo-seccion">Certificados (opcional):</h3>
+        </div>
+
+        <div formArrayName="certificados">
+          @for (certGroup of certificados.controls; track $index) {
+            <div class="bloque-item" [formGroupName]="$index">
+              <div class="bloque-header">
+                <span class="bloque-numero">Certificado {{ $index + 1 }}</span>
+                <button type="button" class="btn btn-eliminar" (click)="eliminarCertificado($index)">Eliminar</button>
+              </div>
+              <ul>
+                <li>
+                  <label [for]="'nombre_certificado-' + $index">Nombre del certificado: </label>
+                  <input type="text" formControlName="nombre_certificado" [id]="'nombre_certificado-' + $index">
+                  @if(certGroup.get('nombre_certificado')?.touched && certGroup.get('nombre_certificado')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li>
+                  <label [for]="'institucion_certificado-' + $index">Institución: </label>
+                  <input type="text" formControlName="institucion_certificado" [id]="'institucion_certificado-' + $index">
+                  @if(certGroup.get('institucion_certificado')?.touched && certGroup.get('institucion_certificado')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li>
+                  <label [for]="'fecha_obtencion-cert-' + $index">Fecha de obtención: </label>
+                  <input type="date" formControlName="fecha_obtencion" [id]="'fecha_obtencion-cert-' + $index">
+                  @if(certGroup.get('fecha_obtencion')?.touched && certGroup.get('fecha_obtencion')?.hasError('required')){
+                    <span>Campo requerido</span>
+                  }
+                </li>
+                <li class="descripcion-item">
+                  <label [for]="'descripcion_certificado-' + $index">Descripción (opcional): </label>
+                  <textarea formControlName="descripcion_certificado" [id]="'descripcion_certificado-' + $index" rows="3"></textarea>
+                  @if(certGroup.get('descripcion_certificado')?.hasError('maxlength')) {
+                    <span>Debe contener menos de 500 caracteres</span>
+                  }
+                </li>
+              </ul>
+            </div>
+          }
+        </div>
+
+        <button type="button" class="btn btn-agregar" (click)="agregarCertificado()">+ Agregar certificado</button>
+      </div>
+        }
       }
     </div>
 
-      @if (pasoActual() < 2) {
+      @if (pasoActual() < 5) {
         <button type="button" class="btn-flecha btn-flecha--der" (click)="siguientePaso()" aria-label="Paso siguiente">›</button>
       }
     </div>

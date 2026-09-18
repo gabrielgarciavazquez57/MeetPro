@@ -64,8 +64,8 @@ export class ProfesionalForm implements OnInit {
     titulos:      this.fb.array([this.crearTitulo()]),
     experiencias: this.fb.array([this.crearExperiencia()]),
     descripcionAmpliada: ['', [Validators.maxLength(2000)]],
-    proyectosNuevos: this.fb.array([]),
-    certificados:    this.fb.array([]),
+    proyectosNuevos: this.fb.array<ReturnType<typeof this.crearProyectoNuevo>>([]),
+    certificados:    this.fb.array<ReturnType<typeof this.crearCertificado>>([]),
   });
 
   ngOnInit() {
@@ -115,7 +115,7 @@ export class ProfesionalForm implements OnInit {
         this.certificados.clear();
         for (const c of prof.certificados ?? []) {
           const grupo = this.crearCertificado();
-          grupo.patchValue(c);
+          grupo.patchValue({ ...c, id: c.id != null ? String(c.id) : '' });
           this.certificados.push(grupo);
         }
 

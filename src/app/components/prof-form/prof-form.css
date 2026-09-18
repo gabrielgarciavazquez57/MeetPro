@@ -412,6 +412,43 @@ span::before {
   border-color: #f87171;
 }
 
+.ayuda-paso {
+  margin: 0 0 1.1rem;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.imagen-proyecto-campo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.imagen-proyecto-preview {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border: 1px solid #d0d7e2;
+}
+
+.btn-subir-imagen {
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #ffffff;
+  border: 1.5px solid #d0d7e2;
+  border-left: 3px solid #2563eb;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-subir-imagen:hover {
+  background-color: #f5f8ff;
+  border-color: #2563eb;
+}
+
 .boton-form {
   display: flex;
   justify-content: center;
