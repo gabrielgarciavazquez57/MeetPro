@@ -52,6 +52,11 @@
   padding: 2rem;
 }
 
+.datos-profesion,
+.datos-titulos {
+  border-left: 4px solid #2563eb;
+}
+
 /* Cabecera */
 .perfil-header {
   display: flex;
@@ -235,9 +240,16 @@
 .datos-titulos li {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.75rem 0;
+  gap: 0.3rem;
+  padding: 0.75rem 0.85rem;
+  margin: 0 -0.85rem;
   border-bottom: 1px solid #d0d7e2;
+  transition: background-color 0.15s ease;
+}
+
+.datos-profesion li:hover,
+.datos-titulos li:hover {
+  background-color: #f7faff;
 }
 
 .datos-titulos li:last-child {
@@ -338,6 +350,31 @@ label {
 
 .tarjeta-accion:hover .accion-deco {
   color: #bcd4fb;
+}
+
+.boton-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.btn-eliminar-perfil {
+  padding: 0.85rem 2rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #dc2626;
+  background-color: #ffffff;
+  border: 1.5px solid #fecaca;
+  border-left: 4px solid #dc2626;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-eliminar-perfil:hover {
+  background-color: #fef2f2;
+  border-color: #f87171;
 }
 
 @media (max-width: 600px) {

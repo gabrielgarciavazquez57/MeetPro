@@ -3,5 +3,6 @@ export interface Certificado {
     nombre_certificado: string,
     institucion_certificado: string,
     fecha_obtencion: string,
-    descripcion_certificado: string
+    descripcion_certificado: string,
+    archivo_adjunto?: string
 }

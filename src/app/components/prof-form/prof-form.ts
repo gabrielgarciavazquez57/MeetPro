@@ -183,6 +183,7 @@ export class ProfesionalForm implements OnInit {
       institucion_certificado: ['', [Validators.required]],
       fecha_obtencion:         ['', [Validators.required]],
       descripcion_certificado: ['', [Validators.maxLength(500)]],
+      archivo_adjunto:         [''],
     });
   }
 
@@ -192,6 +193,21 @@ export class ProfesionalForm implements OnInit {
 
   eliminarCertificado(index: number) {
     this.certificados.removeAt(index);
+  }
+
+  onArchivoCertificado(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const lector = new FileReader();
+    lector.onload = () => {
+      (this.certificados.at(index) as FormGroup).patchValue({ archivo_adjunto: lector.result as string });
+    };
+    lector.readAsDataURL(file);
+    input.value = '';
   }
 
   // ===== PROYECTOS (nuevos, se suman a los que ya tenga el profesional) =====

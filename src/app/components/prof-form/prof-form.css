@@ -431,6 +431,18 @@ span::before {
   border: 1px solid #d0d7e2;
 }
 
+.proyecto-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2563eb;
+  word-break: break-all;
+}
+
+.proyecto-link:hover {
+  text-decoration: underline;
+}
+
 .btn-subir-imagen {
   font-family: inherit;
   font-size: 0.78rem;

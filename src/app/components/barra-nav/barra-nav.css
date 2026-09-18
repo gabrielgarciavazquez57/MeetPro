@@ -7,8 +7,8 @@
 
 /* Barra de navegación flotante */
 .barra-nav {
-  position: absolute;
-  /* anclada a esa posición de la página (se desplaza con el scroll) */
+  position: fixed;
+  /* anclada al viewport (se queda fija arriba al scrollear) */
   top: 4.05rem;
   left: 50%;
   transform: translateX(-50%);

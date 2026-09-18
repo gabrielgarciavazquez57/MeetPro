@@ -278,6 +278,16 @@
                     <span>Debe contener menos de 500 caracteres</span>
                   }
                 </li>
+                <li>
+                  <label>Archivo adjunto (opcional): </label>
+                  <div class="imagen-proyecto-campo">
+                    @if (certGroup.get('archivo_adjunto')?.value) {
+                      <a class="proyecto-link" [href]="certGroup.get('archivo_adjunto')?.value" target="_blank" rel="noopener">Ver archivo</a>
+                    }
+                    <input type="file" [id]="'archivo_adjunto-' + $index" hidden (change)="onArchivoCertificado($event, $index)">
+                    <label [for]="'archivo_adjunto-' + $index" class="btn-subir-imagen">{{ certGroup.get('archivo_adjunto')?.value ? 'Cambiar archivo' : '+ Subir archivo' }}</label>
+                  </div>
+                </li>
               </ul>
             </div>
           }

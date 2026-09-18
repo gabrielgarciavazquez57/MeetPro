@@ -107,7 +107,7 @@
           </li>
           <li>
             <label>Fecha de nacimiento</label>
-            <span class="valor">{{ user.dateOfBirth }}</span>
+            <span class="valor">{{ user.dateOfBirth | date:'dd/MM/yyyy':'UTC' }}</span>
           </li>
           <li>
             <label>Edad</label>
@@ -148,6 +148,10 @@
             <span class="valor">{{ user.address?.zipCode }}</span>
           </li>
         </ul>
+      </div>
+
+      <div class="boton-form">
+        <button type="button" class="btn-eliminar-perfil" (click)="eliminarPerfil()">Eliminar perfil</button>
       </div>
 
     </div>
