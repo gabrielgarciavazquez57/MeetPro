@@ -1,7 +1,9 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 import { ClientProfesional } from '../../services/client-profesional'; // ajustá la ruta
 import { ClientValoracion } from '../../services/client-valoracion';
+import { ClientUser } from '../../services/client-user';
 import { Profesional } from '../../interfaces/profesional'; // ajustá la ruta
 import { Valoracion } from '../../interfaces/valoracion';
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -16,6 +18,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
 export class ProfList implements OnInit {
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly clientValoracion = inject(ClientValoracion);
+  private readonly clientUser = inject(ClientUser);
 
   profesionales = signal<Profesional[]>([]);
   valoraciones = signal<Valoracion[]>([]);
@@ -140,9 +143,17 @@ export class ProfList implements OnInit {
     this.cargando.set(true);
     this.error.set(null);
 
-    this.clientProfesional.getProfesionales().subscribe({
-      next: (data) => {
-        this.profesionales.set(data.filter((p) => !p.profesional_userData?.isAdmin));
+    forkJoin({
+      profesionales: this.clientProfesional.getProfesionales(),
+      usuarios: this.clientUser.getUsers(),
+    }).subscribe({
+      next: ({ profesionales, usuarios }) => {
+        const idsAdmin = new Set(
+          usuarios.filter((u) => u.isAdmin).map((u) => String(u.id)),
+        );
+        this.profesionales.set(
+          profesionales.filter((p) => !idsAdmin.has(String(p.profesional_userData?.id))),
+        );
         this.cargando.set(false);
       },
       error: (err) => {

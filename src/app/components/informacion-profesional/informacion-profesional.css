@@ -157,6 +157,7 @@
 }
 
 .informacion-seccion {
+  scroll-margin-top: 8.5rem;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-left: 4px solid #2563eb;
