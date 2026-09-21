@@ -471,6 +471,17 @@ label {
   box-shadow: 0 0 0 5px #f7faff;
 }
 
+.accion-proximamente {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 /* Responsive */
 @media (max-width: 1400px) {
   .panel-flotante {
