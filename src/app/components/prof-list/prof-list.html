@@ -88,9 +88,6 @@
               <option value="desc">Mayor valoración</option>
               <option value="asc">Menor valoración</option>
             </select>
-            @if (hayFiltros()) {
-              <button type="button" class="btn-limpiar" (click)="limpiarFiltros()">Limpiar</button>
-            }
           </div>
         </div>
 
@@ -164,6 +161,10 @@
         <p class="filtro-resultado">
           {{ profesionalesFiltrados().length }} de {{ profesionales().length }} profesionales
         </p>
+
+        @if (hayFiltros()) {
+          <button type="button" class="btn-limpiar btn-limpiar--abajo" (click)="limpiarFiltros()">Limpiar</button>
+        }
       </aside>
       </div>
 
