@@ -21,6 +21,9 @@ export class BarraNav {
     document.querySelector('app-footer')?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 
+  /** El acceso al listado de usuarios solo se muestra a los administradores */
+  readonly esAdmin = computed(() => this.auth.usuario()?.isAdmin === true);
+
   /** Título de la sub-barra */
   titulo = input<string>('Perfil Profesional');
 

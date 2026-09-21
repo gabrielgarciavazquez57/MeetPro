@@ -8,6 +8,7 @@ import { PerfilProfesional } from './components/perfil-prof/perfil-prof';
 import { Login } from './components/login/login';
 import { ListaTurnos } from './components/lista-turnos/lista-turnos';
 import { AgendaProfesional } from './components/agenda-profesional/agenda-profesional';
+import { ListaUsuarios } from './components/lista-usuarios/lista-usuarios';
 import { ListaTurnosExistentes } from './components/lista-turnos-existentes/lista-turnos-existentes';
 import { ProfesionalesConsultados } from './components/profesionales-consultados/profesionales-consultados';
 import { FormularioConsulta } from './components/formulario-consulta/formulario-consulta';
@@ -56,6 +57,11 @@ export const routes: Routes = [
     path: 'turnos/:profesionalId',
     title: 'Turnos disponibles',
     component: ListaTurnos
+  },
+  {
+    path: 'usuarios',
+    title: 'Usuarios',
+    component: ListaUsuarios
   },
   {
     path: 'agenda/:profesionalId',

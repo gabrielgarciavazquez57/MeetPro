@@ -1,0 +1,109 @@
+<app-barra-nav titulo="Usuarios" />
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando usuarios...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Usuarios</h1>
+        <p class="turnos-sub">{{ conteos().todos }} registrados en MeetPro</p>
+      </div>
+    </div>
+
+    <div class="turnos-panel">
+      <div class="campo usuarios-buscador">
+        <label for="busqueda">Buscar</label>
+        <input
+          id="busqueda"
+          type="text"
+          placeholder="Nombre, usuario, email, DNI o teléfono..."
+          [ngModel]="busqueda()"
+          (ngModelChange)="busqueda.set($event)"
+        >
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" class="tab" [class.tab--activa]="filtro() === 'todos'" (click)="irA('todos')">
+          Todos <span class="tab-contador">{{ conteos().todos }}</span>
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="filtro() === 'profesionales'" (click)="irA('profesionales')">
+          Profesionales <span class="tab-contador">{{ conteos().profesionales }}</span>
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="filtro() === 'clientes'" (click)="irA('clientes')">
+          Clientes <span class="tab-contador">{{ conteos().clientes }}</span>
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="filtro() === 'admins'" (click)="irA('admins')">
+          Administradores <span class="tab-contador">{{ conteos().admins }}</span>
+        </button>
+      </div>
+
+      @if (visibles().length === 0) {
+        <p class="vacio">Ningún usuario coincide con la búsqueda.</p>
+      } @else {
+        <ul class="lista-cards">
+          @for (u of visibles(); track u.id) {
+            <li class="turno-card usuario-card">
+              <div class="usuario-avatar">
+                @if (u.fotoPerfil) {
+                  <img [src]="u.fotoPerfil" [alt]="u.name + ' ' + u.lastname">
+                } @else {
+                  {{ iniciales(u) }}
+                }
+              </div>
+
+              <div class="turno-cuerpo">
+                <div class="turno-linea">
+                  <span class="turno-nombre">{{ u.name }} {{ u.lastname }}</span>
+                  @if (u.isAdmin) {
+                    <span class="badge badge--ausente">Administrador</span>
+                  }
+                  @if (u.isProfesional) {
+                    <span class="badge badge--online">Profesional</span>
+                  } @else if (!u.isAdmin) {
+                    <span class="badge">Cliente</span>
+                  }
+                </div>
+                <span class="turno-detalle">&#64;{{ u.username }} · {{ u.email }}</span>
+                <span class="turno-detalle">
+                  DNI {{ u.dni }} · {{ u.phoneNumber }}
+                  @if (u.address?.city || u.address?.country) {
+                    · {{ u.address?.city }}{{ u.address?.city && u.address?.country ? ', ' : '' }}{{ u.address?.country }}
+                  }
+                </span>
+                @if (confirmando() === u.id) {
+                  <div class="accion-inline accion-inline--peligro">
+                    <p class="accion-inline-texto">
+                      ¿Eliminar a <strong>{{ u.name }} {{ u.lastname }}</strong>? Se borra su cuenta
+                      @if (u.isProfesional) { y su perfil profesional }
+                      y no se puede deshacer.
+                    </p>
+                    <div class="accion-inline-botones">
+                      <button type="button" class="btn-t btn-t--peligro" [disabled]="eliminando()" (click)="eliminar(u)">
+                        {{ eliminando() ? 'Eliminando...' : 'Sí, eliminar' }}
+                      </button>
+                      <button type="button" class="btn-t" [disabled]="eliminando()" (click)="cancelarConfirmacion()">Volver</button>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="turno-acciones">
+                    <a class="btn-t" [routerLink]="['/perfil-user', u.id]">Ver perfil</a>
+                    @if (u.isProfesional) {
+                      <a class="btn-t" [routerLink]="['/perfil-prof', u.id]">Perfil profesional</a>
+                    }
+                    @if (!esPropio(u)) {
+                      <button type="button" class="btn-t btn-t--peligro" (click)="pedirConfirmacion(u)">Eliminar</button>
+                    }
+                  </div>
+                }
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  }
+</div>

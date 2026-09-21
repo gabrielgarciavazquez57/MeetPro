@@ -192,6 +192,12 @@
   margin: -0.35rem 0 1.35rem;
   border-bottom: 1px solid #d0d7e2;
   overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .turnos-panel > .tabs:first-child {

@@ -40,6 +40,27 @@
   justify-content: flex-end;
 }
 
+.barra-nav-grupo--der {
+  position: relative;
+}
+
+/* Acceso de administrador: fuera del grupo, pegado al borde derecho de la pantalla */
+.barra-nav-link--admin {
+  position: absolute;
+  top: 50%;
+  right: min(-1rem, calc(min(46vw, 419.5px) - 50vw + 1.5rem));
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+/* En pantallas angostas no hay lugar hasta el borde: queda justo a continuación de "Support" */
+@media (max-width: 1320px) {
+  .barra-nav-link--admin {
+    right: auto;
+    left: calc(100% + 1.5rem);
+  }
+}
+
 /* Círculo central con la foto de perfil */
 .barra-nav-avatar {
   flex-shrink: 0;
