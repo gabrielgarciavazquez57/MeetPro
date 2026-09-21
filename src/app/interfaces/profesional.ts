@@ -10,6 +10,7 @@ export interface Profesional {
     professionalId: string;
     descriptionprofesional: string;
     linkedin?: string;
+    linkReunion?: string;
     titulos: TitulosPro[];
     experiencias: ExperienciaPro[];
     certificados?: Certificado[];

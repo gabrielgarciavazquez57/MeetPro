@@ -93,6 +93,43 @@
   }
 }
 
+/* Encabezado fuera del contenedor */
+.valoraciones-encabezado {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #9aa7ba;
+}
+
+.valoraciones-encabezado::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 3rem;
+  height: 2px;
+  background-color: #2563eb;
+}
+
+.valoraciones-titulo {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.valoraciones-sub {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
 /* Contenedor: sin tarjeta blanca, solo controla el ancho */
 .valoraciones-panel {
   width: 100%;

@@ -256,7 +256,7 @@ export class AgendaProfesional implements OnInit {
   abrirAccion(turno: Turno, tipo: TipoAccion): void {
     this.accion.set({ id: turno.id!, tipo });
     this.nota.set('');
-    this.enlace.set('');
+    this.enlace.set(tipo === 'confirmar' ? (this.profesional()?.linkReunion ?? '') : '');
     this.motivoAccion.set('');
   }
 

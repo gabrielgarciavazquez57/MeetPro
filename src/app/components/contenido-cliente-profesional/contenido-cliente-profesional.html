@@ -12,6 +12,11 @@
       </div>
     }
 
+    <div class="contenido-encabezado">
+      <h1 class="contenido-titulo">Contenido: Cliente - Profesional</h1>
+      <p class="contenido-sub">{{ nombreProfesional() }}@if (profesional()?.profession) { · {{ profesional()?.profession }} }</p>
+    </div>
+
     <div class="contenido-secciones">
       <section class="contenido-seccion">
         <div class="contenido-seccion-head">

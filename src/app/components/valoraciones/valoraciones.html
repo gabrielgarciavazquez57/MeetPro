@@ -12,6 +12,11 @@
       </div>
     }
 
+    <div class="valoraciones-encabezado">
+      <h1 class="valoraciones-titulo">Valoraciones</h1>
+      <p class="valoraciones-sub">{{ nombreProfesional() }}@if (profesional()?.profession) { · {{ profesional()?.profession }} }</p>
+    </div>
+
     <div class="valoraciones-panel">
       <div class="lista-comentarios">
         @if (valoraciones().length === 0) {
