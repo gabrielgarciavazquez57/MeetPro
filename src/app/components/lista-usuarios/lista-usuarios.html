@@ -77,9 +77,8 @@
                 @if (confirmando() === u.id) {
                   <div class="accion-inline accion-inline--peligro">
                     <p class="accion-inline-texto">
-                      ¿Eliminar a <strong>{{ u.name }} {{ u.lastname }}</strong>? Se borra su cuenta
-                      @if (u.isProfesional) { y su perfil profesional }
-                      y no se puede deshacer.
+                      ¿Eliminar a <strong>{{ u.name }} {{ u.lastname }}</strong>? Se borran su cuenta y todos sus datos
+                      (perfil profesional, turnos, valoraciones, proyectos y contenido) y no se puede deshacer.
                     </p>
                     <div class="accion-inline-botones">
                       <button type="button" class="btn-t btn-t--peligro" [disabled]="eliminando()" (click)="eliminar(u)">

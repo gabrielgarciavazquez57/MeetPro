@@ -166,8 +166,13 @@ export class ProfList implements OnInit {
         const idsAdmin = new Set(
           usuarios.filter((u) => u.isAdmin).map((u) => String(u.id)),
         );
+        const idsUsuarios = new Set(usuarios.map((u) => String(u.id)));
         this.profesionales.set(
-          profesionales.filter((p) => !idsAdmin.has(String(p.profesional_userData?.id))),
+          profesionales.filter((p) => {
+            const userId = String(p.profesional_userData?.id);
+            // Se ocultan los admins y los perfiles cuyo usuario ya fue eliminado
+            return idsUsuarios.has(userId) && !idsAdmin.has(userId);
+          }),
         );
         this.cargando.set(false);
       },

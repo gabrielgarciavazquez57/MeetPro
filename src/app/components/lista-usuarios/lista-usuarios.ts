@@ -3,7 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ClientUser } from '../../services/client-user';
-import { ClientProfesional } from '../../services/client-profesional';
+import { ClientCuenta } from '../../services/client-cuenta';
 import { Auth } from '../../services/auth';
 import { User } from '../../interfaces/user';
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -22,7 +22,7 @@ const normalizar = (texto: string | undefined) =>
 })
 export class ListaUsuarios implements OnInit {
   private readonly clientUser = inject(ClientUser);
-  private readonly clientProfesional = inject(ClientProfesional);
+  private readonly clientCuenta = inject(ClientCuenta);
   private readonly auth = inject(Auth);
   private readonly router = inject(Router);
   private readonly esNavegador = isPlatformBrowser(inject(PLATFORM_ID));
@@ -115,38 +115,17 @@ export class ListaUsuarios implements OnInit {
 
     this.eliminando.set(true);
 
-    const borrarUsuario = () =>
-      this.clientUser.deleteUser(u.id!).subscribe({
-        next: () => {
-          this.usuarios.update((lista) => lista.filter((x) => String(x.id) !== String(u.id)));
-          this.confirmando.set(null);
-          this.eliminando.set(false);
-        },
-        error: () => {
-          this.eliminando.set(false);
-          alert('No se pudo eliminar el usuario.');
-        },
-      });
-
-    if (!u.isProfesional) {
-      borrarUsuario();
-      return;
-    }
-
-    // Si es profesional, también se borra su perfil profesional
-    this.clientProfesional.getProfesionalByUserID(u.id).subscribe({
-      next: (lista) => {
-        const registroId = lista[0]?.id;
-        if (registroId == null) {
-          borrarUsuario();
-          return;
-        }
-        this.clientProfesional.deleteProfesional(registroId).subscribe({
-          next: borrarUsuario,
-          error: borrarUsuario,
-        });
+    // Borra la cuenta y todos los datos relacionados (perfil profesional, turnos, valoraciones, etc.)
+    this.clientCuenta.eliminarCuenta(u).subscribe({
+      next: () => {
+        this.usuarios.update((lista) => lista.filter((x) => String(x.id) !== String(u.id)));
+        this.confirmando.set(null);
+        this.eliminando.set(false);
       },
-      error: borrarUsuario,
+      error: () => {
+        this.eliminando.set(false);
+        alert('No se pudo eliminar el usuario. Intentá de nuevo.');
+      },
     });
   }
 

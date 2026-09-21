@@ -1,4 +1,8 @@
 /* El resto de los estilos viene de shared/turnos.css */
+.fondo-turnos {
+  padding-top: 7.25rem;
+}
+
 .usuarios-buscador {
   margin-bottom: 1.25rem;
 }

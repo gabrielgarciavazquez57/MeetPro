@@ -2,7 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClientUser } from '../../services/client-user'; // ajustá la ruta
-import { ClientProfesional } from '../../services/client-profesional';
+import { ClientCuenta } from '../../services/client-cuenta';
 import { Auth } from '../../services/auth';
 import { User } from '../../interfaces/user'; // ajustá la ruta
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -18,7 +18,7 @@ export class PerfilUser implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly clientUser = inject(ClientUser);
-  private readonly clientProfesional = inject(ClientProfesional);
+  private readonly clientCuenta = inject(ClientCuenta);
   private readonly auth = inject(Auth);
 
   usuario = signal<User | null>(null);
@@ -56,7 +56,7 @@ export class PerfilUser implements OnInit {
 
   eliminarPerfil(): void {
     const user = this.usuario();
-    if (!user?.id || !confirm('¿Eliminar tu perfil? Esta acción no se puede deshacer.')) {
+    if (!user?.id || !confirm('¿Eliminar tu perfil? Se borran tu cuenta y todos tus datos (turnos, valoraciones, perfil profesional, etc.). Esta acción no se puede deshacer.')) {
       return;
     }
 
@@ -68,27 +68,9 @@ export class PerfilUser implements OnInit {
       this.router.navigate(['/']);
     };
 
-    if (!user.isProfesional) {
-      this.clientUser.deleteUser(user.id).subscribe(finalizar);
-      return;
-    }
-
-    this.clientProfesional.getProfesionalByUserID(user.id).subscribe({
-      next: (lista) => {
-        const registroId = lista[0]?.id;
-        const borrarUsuario = () => this.clientUser.deleteUser(user.id!).subscribe(finalizar);
-
-        if (registroId == null) {
-          borrarUsuario();
-          return;
-        }
-
-        this.clientProfesional.deleteProfesional(registroId).subscribe({
-          next: borrarUsuario,
-          error: borrarUsuario,
-        });
-      },
-      error: () => this.clientUser.deleteUser(user.id!).subscribe(finalizar),
+    this.clientCuenta.eliminarCuenta(user).subscribe({
+      next: finalizar,
+      error: () => alert('No se pudo eliminar el perfil. Intentá de nuevo.'),
     });
   }
 }
