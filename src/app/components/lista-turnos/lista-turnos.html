@@ -17,70 +17,145 @@
       }
     </div>
 
-    <div class="turnos-panel">
-      <div class="turnos-head">
-        <div class="turnos-head-texto">
-          <h1 class="turnos-titulo">Turnos disponibles</h1>
-          @if (nombreProfesional()) {
-            <p class="turnos-sub">{{ nombreProfesional() }}</p>
-          }
-        </div>
-        @if (esDueno()) {
-          <a class="btn-nuevo-turno" [routerLink]="['/turno-form', profesionalId()]">
-            Agregar turno nuevo
-          </a>
-        }
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Reservá tu turno</h1>
+        <p class="turnos-sub">{{ nombreProfesional() }}@if (profesional()?.profession) { · {{ profesional()?.profession }} }</p>
       </div>
+    </div>
 
-      @if (turnosDisponibles().length === 0) {
-        <p class="estado-msg">Este profesional no tiene turnos disponibles.</p>
-      } @else {
-        <table class="tabla-turnos">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Modalidad</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (turno of turnosDisponibles(); track turno.id) {
-              <tr [class.fila-seleccionada]="seleccionado() === turno">
-                <td>{{ turno.fecha }}</td>
-                <td>{{ turno.hora }}</td>
-                <td>
-                  <span class="celda-modalidad" [class.celda-modalidad--online]="turno.modalidad === 'online'">
-                    {{ turno.modalidad === 'online' ? 'Online' : 'Presencial' }}
-                  </span>
-                </td>
-                <td class="celda-accion">
-                  <button type="button" class="btn-elegir" (click)="seleccionar(turno)">
-                    {{ seleccionado() === turno ? 'Elegido' : 'Elegir' }}
-                  </button>
-                </td>
-              </tr>
+    <div class="turnos-panel">
+      @if (reservado(); as r) {
+        <div class="reserva-exito">
+          <span class="reserva-exito-icono" aria-hidden="true">✓</span>
+          <h2 class="reserva-exito-titulo">¡Solicitud enviada!</h2>
+          <p class="reserva-exito-texto">
+            Pediste turno para el <strong>{{ formatearFecha(r.fecha) }}</strong> de
+            <strong>{{ rangoHorario(r) }}</strong>. {{ nombreProfesional() }} tiene que confirmarlo;
+            vas a ver el estado en <em>Mis turnos</em>.
+          </p>
+          <div class="turno-acciones reserva-exito-acciones">
+            @if (clienteId(); as cid) {
+              <a class="btn-t btn-t--primario btn-t--grande" [routerLink]="['/turnos-existentes', cid]">Ver mis turnos</a>
             }
-          </tbody>
-        </table>
-
-        <div class="turnos-footer">
-          @if (seleccionado(); as sel) {
-            <span class="turnos-resumen">
-              Seleccionado: <strong>{{ sel.fecha }} · {{ sel.hora }}</strong>
-            </span>
-          } @else {
-            <span class="turnos-resumen turnos-resumen--vacio">Elegí un turno de la tabla</span>
-          }
-          <button
-            type="button"
-            class="btn-confirmar"
-            [disabled]="!seleccionado()"
-            (click)="confirmar()"
-          >
-            Confirmar turno
-          </button>
+            <button type="button" class="btn-t btn-t--grande" (click)="reservarOtro()">Reservar otro horario</button>
+          </div>
         </div>
+      } @else if (libres().length === 0) {
+        <p class="vacio">Este profesional no tiene horarios disponibles por el momento.</p>
+      } @else {
+        <p class="texto-ayuda">
+          Elegí un día del calendario y después un horario. El profesional confirma cada solicitud.
+        </p>
+
+        <div class="reserva-grid">
+          <section class="calendario" aria-label="Calendario">
+            <div class="calendario-head">
+              <button type="button" class="calendario-flecha" (click)="mesAnterior()" [disabled]="!puedeRetroceder()" aria-label="Mes anterior">‹</button>
+              <span class="calendario-mes">{{ tituloMes() }}</span>
+              <button type="button" class="calendario-flecha" (click)="mesSiguiente()" [disabled]="!puedeAvanzar()" aria-label="Mes siguiente">›</button>
+            </div>
+
+            <div class="calendario-semana">
+              @for (d of diasSemana; track d) {
+                <span class="calendario-dia-nombre">{{ d }}</span>
+              }
+            </div>
+
+            <div class="calendario-grilla">
+              @for (semana of semanas(); track $index) {
+                @for (celda of semana; track celda.fecha) {
+                  <button
+                    type="button"
+                    class="dia"
+                    [class.dia--libre]="celda.libres > 0"
+                    [class.dia--fuera]="!celda.delMes"
+                    [class.dia--hoy]="celda.esHoy"
+                    [class.dia--sel]="celda.fecha === diaSeleccionado()"
+                    [disabled]="celda.libres === 0"
+                    (click)="elegirDia(celda)"
+                  >
+                    {{ celda.dia }}
+                    @if (celda.libres > 0) {
+                      <span class="dia-marca"></span>
+                    }
+                  </button>
+                }
+              }
+            </div>
+
+            <p class="calendario-leyenda"><span class="dia-marca dia-marca--leyenda"></span> Días con horarios libres</p>
+          </section>
+
+          <section class="horarios" aria-label="Horarios">
+            <h2 class="subtitulo-seccion">
+              @if (diaSeleccionado()) {
+                {{ formatearFecha(diaSeleccionado()) }}
+              } @else {
+                Horarios
+              }
+            </h2>
+
+            @if (slotsDelDia().length === 0) {
+              <p class="texto-ayuda">Elegí un día resaltado del calendario.</p>
+            } @else {
+              <div class="slots">
+                @for (t of slotsDelDia(); track t.id) {
+                  <button
+                    type="button"
+                    class="slot"
+                    [class.slot--sel]="turnoElegido()?.id === t.id"
+                    (click)="elegirTurno(t)"
+                  >
+                    <span class="slot-hora">{{ t.hora }}</span>
+                    <span class="slot-detalle">{{ t.duracion }} min</span>
+                    <span class="badge" [class.badge--online]="t.modalidad === 'online'">
+                      {{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}
+                    </span>
+                  </button>
+                }
+              </div>
+            }
+          </section>
+        </div>
+
+        @if (turnoElegido(); as t) {
+          <div class="reserva-resumen">
+            <h2 class="subtitulo-seccion">Tu solicitud</h2>
+            <p class="reserva-resumen-linea">
+              <strong>{{ formatearFecha(t.fecha) }}</strong> · {{ rangoHorario(t) }} ·
+              {{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}
+            </p>
+
+            <div class="campo">
+              <label for="motivo">Motivo de la consulta</label>
+              <textarea
+                id="motivo"
+                rows="3"
+                maxlength="300"
+                placeholder="Contale brevemente al profesional qué querés consultar"
+                [ngModel]="motivo()"
+                (ngModelChange)="motivo.set($event)"
+              ></textarea>
+              @if (motivoTocado() && motivoInvalido()) {
+                <span class="campo-error">Escribí al menos 5 caracteres.</span>
+              }
+            </div>
+
+            @if (errorReserva(); as msg) {
+              <p class="campo-error reserva-error">{{ msg }}</p>
+            }
+
+            <div class="reserva-resumen-pie">
+              @if (!usuario()) {
+                <span class="texto-ayuda reserva-aviso">Necesitás iniciar sesión para solicitar el turno.</span>
+              }
+              <button type="button" class="btn-t btn-t--primario btn-t--grande" [disabled]="enviando()" (click)="solicitar()">
+                {{ enviando() ? 'Enviando...' : (usuario() ? 'Solicitar turno' : 'Iniciar sesión y solicitar') }}
+              </button>
+            </div>
+          </div>
+        }
       }
     </div>
   }

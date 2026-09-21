@@ -8,57 +8,148 @@
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {
     <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" [routerLink]="['/profesionales-consultados', userId()]">Historial de profesionales</a>
       <a class="btn-acceso-lateral" [routerLink]="['/perfil-user', userId()]">Volver atrás</a>
     </div>
 
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Mis turnos</h1>
+        <p class="turnos-sub">Tus reservas y su estado</p>
+      </div>
+      <a class="btn-t btn-t--grande" routerLink="/profesionales-lista">Buscar profesional</a>
+    </div>
+
     <div class="turnos-panel">
-      <div class="turnos-head">
-        <h1 class="turnos-titulo">Turnos existentes</h1>
-        <p class="turnos-sub">Tus turnos reservados</p>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'proximos'" (click)="irA('proximos')">
+          Próximos
+          @if (proximos().length) {
+            <span class="tab-contador tab-contador--alerta">{{ proximos().length }}</span>
+          }
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'historial'" (click)="irA('historial')">
+          Historial
+          @if (historial().length) {
+            <span class="tab-contador">{{ historial().length }}</span>
+          }
+        </button>
       </div>
 
-      @if (misTurnos().length === 0) {
-        <p class="estado-msg">No tenés turnos reservados.</p>
-      } @else {
-        <table class="tabla-turnos">
-          <thead>
-            <tr>
-              <th>Profesional</th>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Modalidad</th>
-              <th>Estado</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (turno of misTurnos(); track turno.id) {
-              <tr>
-                <td>
-                  {{ turno.profesional?.profesional_userData?.name }}
-                  {{ turno.profesional?.profesional_userData?.lastname }}
-                </td>
-                <td>{{ turno.fecha }}</td>
-                <td>{{ turno.hora }}</td>
-                <td>
-                  <span class="celda-modalidad" [class.celda-modalidad--online]="turno.modalidad === 'online'">
-                    {{ turno.modalidad === 'online' ? 'Online' : 'Presencial' }}
-                  </span>
-                </td>
-                <td>
-                  <span class="celda-estado" [class.celda-estado--activo]="estaActivo(turno)">
-                    {{ estaActivo(turno) ? 'Activo' : 'No activo' }}
-                  </span>
-                </td>
-                <td class="celda-accion">
-                  <button type="button" class="btn-cancelar" (click)="cancelar(turno)">
-                    Cancelar turno
-                  </button>
-                </td>
-              </tr>
+      @if (pestana() === 'proximos') {
+        @if (proximos().length === 0) {
+          <p class="vacio">
+            No tenés turnos próximos.
+            <a routerLink="/profesionales-lista">Buscá un profesional</a> y reservá uno.
+          </p>
+        } @else {
+          <ul class="lista-cards">
+            @for (t of proximos(); track t.id) {
+              <li class="turno-card" [class.turno-card--pendiente]="t.estado === 'pendiente'" [class.turno-card--confirmado]="t.estado === 'confirmado'">
+                <div class="turno-fecha">
+                  <span class="turno-fecha-dia">{{ diaDelMes(t.fecha) }}</span>
+                  <span class="turno-fecha-mes">{{ mesCorto(t.fecha) }}</span>
+                </div>
+                <div class="turno-cuerpo">
+                  <div class="turno-linea">
+                    <span class="turno-nombre">{{ nombreProfesional(t) }}</span>
+                    <span class="badge" [class]="'badge badge--' + t.estado">{{ etiquetas[estadoVisible(t)] }}</span>
+                  </div>
+                  <span class="turno-detalle">{{ profesionalDe(t)?.profession }}</span>
+                  <div class="turno-linea">
+                    <span class="turno-hora">{{ formatearFecha(t.fecha) }} · {{ rangoHorario(t) }}</span>
+                    <span class="badge" [class.badge--online]="t.modalidad === 'online'">{{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}</span>
+                    @if (etiquetaDia(t.fecha); as et) {
+                      <span class="grupo-dia-marca">{{ et }}</span>
+                    }
+                  </div>
+
+                  @if (t.estado === 'pendiente') {
+                    <p class="turno-detalle">Esperando que {{ nombreProfesional(t) }} confirme tu solicitud.</p>
+                  }
+                  @if (t.motivo) {
+                    <p class="turno-detalle"><strong>Tu motivo:</strong> {{ t.motivo }}</p>
+                  }
+                  @if (t.notaProfesional) {
+                    <p class="turno-nota"><strong>Mensaje del profesional:</strong> {{ t.notaProfesional }}</p>
+                  }
+                  @if (t.estado === 'confirmado' && t.modalidad === 'online' && t.enlaceReunion) {
+                    <a class="turno-enlace" [href]="t.enlaceReunion" target="_blank" rel="noopener">Unirse a la videollamada</a>
+                  }
+
+                  @if (accion(); as a) {
+                    @if (a.id === t.id) {
+                      <div class="accion-inline accion-inline--peligro">
+                        <p class="accion-inline-texto">
+                          @if (a.tipo === 'reprogramar') {
+                            Se cancela este turno y volvés a la agenda de {{ nombreProfesional(t) }} para elegir otro horario.
+                          } @else {
+                            ¿Seguro que querés cancelar este turno? El horario queda libre para otras personas.
+                          }
+                        </p>
+                        <div class="campo">
+                          <label for="motivo-{{ t.id }}">Motivo (opcional)</label>
+                          <textarea id="motivo-{{ t.id }}" rows="2" maxlength="300" [ngModel]="motivo()" (ngModelChange)="motivo.set($event)"></textarea>
+                        </div>
+                        <div class="accion-inline-botones">
+                          <button type="button" class="btn-t btn-t--peligro" [disabled]="procesando()" (click)="ejecutarAccion(t)">
+                            {{ a.tipo === 'reprogramar' ? 'Cancelar y elegir otro' : 'Sí, cancelar turno' }}
+                          </button>
+                          <button type="button" class="btn-t" (click)="cerrarAccion()">Volver</button>
+                        </div>
+                      </div>
+                    }
+                  }
+
+                  @if (accion()?.id !== t.id) {
+                    <div class="turno-acciones">
+                      <button type="button" class="btn-t" (click)="abrirAccion(t, 'reprogramar')">Reprogramar</button>
+                      <button type="button" class="btn-t btn-t--peligro" (click)="abrirAccion(t, 'cancelar')">Cancelar turno</button>
+                    </div>
+                  }
+                </div>
+              </li>
             }
-          </tbody>
-        </table>
+          </ul>
+        }
+      } @else {
+        @if (historial().length === 0) {
+          <p class="vacio">Todavía no tenés turnos en el historial.</p>
+        } @else {
+          <ul class="lista-cards">
+            @for (t of historial(); track t.id) {
+              <li class="turno-card turno-card--apagada">
+                <div class="turno-fecha">
+                  <span class="turno-fecha-dia">{{ diaDelMes(t.fecha) }}</span>
+                  <span class="turno-fecha-mes">{{ mesCorto(t.fecha) }}</span>
+                </div>
+                <div class="turno-cuerpo">
+                  <div class="turno-linea">
+                    <span class="turno-nombre">{{ nombreProfesional(t) }}</span>
+                    <span class="badge" [class]="'badge badge--' + estadoVisible(t)">{{ etiquetas[estadoVisible(t)] }}</span>
+                  </div>
+                  <span class="turno-detalle">{{ profesionalDe(t)?.profession }}</span>
+                  <div class="turno-linea">
+                    <span class="turno-hora">{{ formatearFecha(t.fecha) }} · {{ rangoHorario(t) }}</span>
+                    <span class="badge" [class.badge--online]="t.modalidad === 'online'">{{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}</span>
+                  </div>
+                  @if (t.motivoCancelacion) {
+                    <p class="turno-detalle">
+                      <strong>{{ t.canceladoPor === 'profesional' ? 'Motivo del profesional:' : 'Tu motivo:' }}</strong>
+                      {{ t.motivoCancelacion }}
+                    </p>
+                  }
+                  <div class="turno-acciones">
+                    <a class="btn-t" [routerLink]="['/turnos', t.professionalId]">Reservar de nuevo</a>
+                    @if (profesionalDe(t)?.profesional_userData?.id; as pid) {
+                      <a class="btn-t" [routerLink]="['/perfil-prof', pid]">Ver perfil</a>
+                    }
+                  </div>
+                </div>
+              </li>
+            }
+          </ul>
+        }
       }
     </div>
   }

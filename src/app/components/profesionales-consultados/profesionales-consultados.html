@@ -8,56 +8,50 @@
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {
     <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" [routerLink]="['/turnos-existentes', userId()]">Mis turnos</a>
       <a class="btn-acceso-lateral" [routerLink]="['/perfil-user', userId()]">Volver atrás</a>
     </div>
 
-    <div class="turnos-panel">
-      <div class="turnos-head">
+    <div class="turnos-encabezado">
+      <div>
         <h1 class="turnos-titulo">Profesionales consultados</h1>
-        <p class="turnos-sub">Turnos que ya asististe</p>
+        <p class="turnos-sub">Con quiénes ya te atendiste</p>
       </div>
+    </div>
 
+    <div class="turnos-panel">
       @if (consultados().length === 0) {
-        <p class="estado-msg">Todavía no consultaste con ningún profesional.</p>
+        <p class="vacio">
+          Todavía no consultaste con ningún profesional.
+          <a routerLink="/profesionales-lista">Buscá uno</a> y reservá tu primer turno.
+        </p>
       } @else {
-        <table class="tabla-turnos">
-          <thead>
-            <tr>
-              <th>Profesional</th>
-              <th>Profesión</th>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Modalidad</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (turno of consultados(); track turno.id) {
-              <tr>
-                <td>
-                  {{ turno.profesional?.profesional_userData?.name }}
-                  {{ turno.profesional?.profesional_userData?.lastname }}
-                </td>
-                <td>{{ turno.profesional?.profession }}</td>
-                <td>{{ turno.fecha }}</td>
-                <td>{{ turno.hora }}</td>
-                <td>
-                  <span class="celda-modalidad" [class.celda-modalidad--online]="turno.modalidad === 'online'">
-                    {{ turno.modalidad === 'online' ? 'Online' : 'Presencial' }}
-                  </span>
-                </td>
-                <td class="celda-accion">
-                  <a
-                    class="btn-ver-perfil"
-                    [href]="'/perfil-prof/' + turno.profesional?.profesional_userData?.id"
-                  >
-                    Ver perfil del profesional
-                  </a>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
+        <ul class="lista-cards">
+          @for (c of consultados(); track c.professionalId) {
+            <li class="turno-card">
+              <div class="turno-fecha">
+                <span class="turno-fecha-dia">{{ c.consultas }}</span>
+                <span class="turno-fecha-mes">{{ c.consultas === 1 ? 'vez' : 'veces' }}</span>
+              </div>
+              <div class="turno-cuerpo">
+                <span class="turno-nombre">
+                  {{ c.profesional?.profesional_userData?.name }} {{ c.profesional?.profesional_userData?.lastname }}
+                </span>
+                <span class="turno-detalle">{{ c.profesional?.profession }}</span>
+                <span class="turno-detalle">
+                  <strong>Última consulta:</strong> {{ formatearFecha(c.ultima.fecha) }} · {{ rangoHorario(c.ultima) }}
+                </span>
+                <div class="turno-acciones">
+                  <a class="btn-t btn-t--primario" [routerLink]="['/turnos', c.professionalId]">Reservar de nuevo</a>
+                  @if (c.profesional?.profesional_userData?.id; as pid) {
+                    <a class="btn-t" [routerLink]="['/perfil-prof', pid]">Ver perfil</a>
+                  }
+                  <a class="btn-t" [routerLink]="['/valoraciones', c.professionalId]">Valoraciones</a>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
       }
     </div>
   }

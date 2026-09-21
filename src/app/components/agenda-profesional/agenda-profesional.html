@@ -1,0 +1,376 @@
+<app-barra-nav titulo="Mi agenda" />
+
+<!-- Datos del cliente (se reutiliza en varias pestañas) -->
+<ng-template #datosCliente let-t>
+  <span class="turno-nombre">{{ t.cliente?.name }} {{ t.cliente?.lastname }}</span>
+  <span class="turno-detalle">
+    DNI {{ t.cliente?.dni }} · {{ t.cliente?.phoneNumber }} · {{ t.cliente?.email }}
+  </span>
+</ng-template>
+
+<!-- Panel inline para confirmar / rechazar / cancelar -->
+<ng-template #panelAccion let-t>
+  @if (accion(); as a) {
+    @if (a.id === t.id) {
+      <div class="accion-inline" [class.accion-inline--peligro]="a.tipo !== 'confirmar'">
+        @switch (a.tipo) {
+          @case ('confirmar') {
+            <p class="accion-inline-texto">Vas a confirmar este turno. Podés dejarle un mensaje al cliente.</p>
+            @if (t.modalidad === 'online') {
+              <div class="campo">
+                <label for="enlace-{{ t.id }}">Link de la videollamada (opcional)</label>
+                <input id="enlace-{{ t.id }}" type="text" placeholder="https://meet.google.com/..." [ngModel]="enlace()" (ngModelChange)="enlace.set($event)">
+              </div>
+            }
+            <div class="campo">
+              <label for="nota-{{ t.id }}">Mensaje para el cliente (opcional)</label>
+              <textarea id="nota-{{ t.id }}" rows="2" maxlength="300" [ngModel]="nota()" (ngModelChange)="nota.set($event)"></textarea>
+            </div>
+          }
+          @case ('rechazar') {
+            <p class="accion-inline-texto">Se le avisa al cliente que no podés atender esta solicitud. El horario no vuelve a quedar libre.</p>
+            <div class="campo">
+              <label for="motivo-{{ t.id }}">Motivo (opcional)</label>
+              <textarea id="motivo-{{ t.id }}" rows="2" maxlength="300" [ngModel]="motivoAccion()" (ngModelChange)="motivoAccion.set($event)"></textarea>
+            </div>
+          }
+          @case ('cancelar') {
+            <p class="accion-inline-texto">Se cancela el turno y el cliente lo va a ver como cancelado. El horario no vuelve a quedar libre.</p>
+            <div class="campo">
+              <label for="motivo-{{ t.id }}">Motivo (opcional)</label>
+              <textarea id="motivo-{{ t.id }}" rows="2" maxlength="300" [ngModel]="motivoAccion()" (ngModelChange)="motivoAccion.set($event)"></textarea>
+            </div>
+          }
+        }
+        <div class="accion-inline-botones">
+          <button
+            type="button"
+            class="btn-t"
+            [class.btn-t--primario]="a.tipo === 'confirmar'"
+            [class.btn-t--peligro]="a.tipo !== 'confirmar'"
+            [disabled]="procesando()"
+            (click)="ejecutarAccion(t)"
+          >
+            {{ a.tipo === 'confirmar' ? 'Confirmar turno' : (a.tipo === 'rechazar' ? 'Rechazar solicitud' : 'Cancelar turno') }}
+          </button>
+          <button type="button" class="btn-t" (click)="cerrarAccion()">Volver</button>
+        </div>
+      </div>
+    }
+  }
+</ng-template>
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando agenda...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="acceso-lateral">
+      @if (profesionalUsuarioId(); as pid) {
+        <a class="btn-acceso-lateral" [routerLink]="['/perfil-prof', pid]">Volver atrás</a>
+      }
+    </div>
+
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Mi agenda</h1>
+        <p class="turnos-sub">{{ nombreProfesional() }}</p>
+      </div>
+    </div>
+
+    <div class="turnos-panel">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-valor">{{ pendientes().length }}</span>
+          <span class="stat-label">Solicitudes pendientes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valor">{{ turnosHoy() }}</span>
+          <span class="stat-label">Turnos hoy</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valor">{{ libres().length }}</span>
+          <span class="stat-label">Horarios libres</span>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'solicitudes'" (click)="irA('solicitudes')">
+          Solicitudes
+          @if (pendientes().length) {
+            <span class="tab-contador tab-contador--alerta">{{ pendientes().length }}</span>
+          }
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'agenda'" (click)="irA('agenda')">
+          Agenda
+          @if (porCerrar().length) {
+            <span class="tab-contador tab-contador--alerta">{{ porCerrar().length }}</span>
+          } @else if (proximos().length) {
+            <span class="tab-contador">{{ proximos().length }}</span>
+          }
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'disponibilidad'" (click)="irA('disponibilidad')">
+          Disponibilidad
+        </button>
+        <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'historial'" (click)="irA('historial')">
+          Historial
+        </button>
+      </div>
+
+      @switch (pestana()) {
+
+        <!-- ===== SOLICITUDES ===== -->
+        @case ('solicitudes') {
+          @if (pendientes().length === 0) {
+            <p class="vacio">No tenés solicitudes pendientes. Cuando un cliente pida un turno, aparece acá.</p>
+          } @else {
+            <ul class="lista-cards">
+              @for (t of pendientes(); track t.id) {
+                <li class="turno-card turno-card--pendiente">
+                  <div class="turno-fecha">
+                    <span class="turno-fecha-dia">{{ diaDelMes(t.fecha) }}</span>
+                    <span class="turno-fecha-mes">{{ mesCorto(t.fecha) }}</span>
+                  </div>
+                  <div class="turno-cuerpo">
+                    <div class="turno-linea">
+                      <span class="turno-hora">{{ rangoHorario(t) }}</span>
+                      <span class="badge" [class.badge--online]="t.modalidad === 'online'">{{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}</span>
+                      @if (etiquetaDia(t.fecha); as et) {
+                        <span class="grupo-dia-marca">{{ et }}</span>
+                      }
+                    </div>
+                    <ng-container *ngTemplateOutlet="datosCliente; context: { $implicit: t }" />
+                    @if (t.motivo) {
+                      <p class="turno-nota"><strong>Motivo:</strong> {{ t.motivo }}</p>
+                    }
+                    <ng-container *ngTemplateOutlet="panelAccion; context: { $implicit: t }" />
+                    @if (accion()?.id !== t.id) {
+                      <div class="turno-acciones">
+                        <button type="button" class="btn-t btn-t--primario" (click)="abrirAccion(t, 'confirmar')">Confirmar</button>
+                        <button type="button" class="btn-t btn-t--peligro" (click)="abrirAccion(t, 'rechazar')">Rechazar</button>
+                      </div>
+                    }
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        }
+
+        <!-- ===== AGENDA ===== -->
+        @case ('agenda') {
+          @if (porCerrar().length) {
+            <div class="grupo-dia">
+              <h3 class="grupo-dia-titulo">Turnos pasados por cerrar</h3>
+              <p class="texto-ayuda">Marcá si el cliente asistió o no. Así queda registrado en el historial.</p>
+              <ul class="lista-cards">
+                @for (t of porCerrar(); track t.id) {
+                  <li class="turno-card turno-card--apagada">
+                    <div class="turno-fecha">
+                      <span class="turno-fecha-dia">{{ diaDelMes(t.fecha) }}</span>
+                      <span class="turno-fecha-mes">{{ mesCorto(t.fecha) }}</span>
+                    </div>
+                    <div class="turno-cuerpo">
+                      <div class="turno-linea">
+                        <span class="turno-hora">{{ rangoHorario(t) }}</span>
+                        <span class="badge" [class.badge--online]="t.modalidad === 'online'">{{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}</span>
+                      </div>
+                      <ng-container *ngTemplateOutlet="datosCliente; context: { $implicit: t }" />
+                      <div class="turno-acciones">
+                        <button type="button" class="btn-t btn-t--primario" [disabled]="procesando()" (click)="cerrarTurno(t, 'completado')">Se realizó</button>
+                        <button type="button" class="btn-t btn-t--peligro" [disabled]="procesando()" (click)="cerrarTurno(t, 'ausente')">No asistió</button>
+                      </div>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+
+          @if (agendaPorDia().length === 0) {
+            <p class="vacio">No tenés turnos confirmados próximos.</p>
+          } @else {
+            @for (g of agendaPorDia(); track g.fecha) {
+              <div class="grupo-dia">
+                <h3 class="grupo-dia-titulo">
+                  {{ formatearFecha(g.fecha) }}
+                  @if (etiquetaDia(g.fecha); as et) {
+                    <span class="grupo-dia-marca">{{ et }}</span>
+                  }
+                </h3>
+                <ul class="lista-cards">
+                  @for (t of g.turnos; track t.id) {
+                    <li class="turno-card turno-card--confirmado">
+                      <div class="turno-fecha">
+                        <span class="turno-fecha-dia">{{ t.hora }}</span>
+                        <span class="turno-fecha-mes">{{ t.duracion }} min</span>
+                      </div>
+                      <div class="turno-cuerpo">
+                        <div class="turno-linea">
+                          <span class="turno-hora">{{ rangoHorario(t) }}</span>
+                          <span class="badge" [class.badge--online]="t.modalidad === 'online'">{{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}</span>
+                          <span class="badge badge--confirmado">Confirmado</span>
+                        </div>
+                        <ng-container *ngTemplateOutlet="datosCliente; context: { $implicit: t }" />
+                        @if (t.motivo) {
+                          <p class="turno-nota"><strong>Motivo:</strong> {{ t.motivo }}</p>
+                        }
+                        @if (t.enlaceReunion) {
+                          <a class="turno-enlace" [href]="t.enlaceReunion" target="_blank" rel="noopener">{{ t.enlaceReunion }}</a>
+                        }
+                        <ng-container *ngTemplateOutlet="panelAccion; context: { $implicit: t }" />
+                        @if (accion()?.id !== t.id) {
+                          <div class="turno-acciones">
+                            <button type="button" class="btn-t btn-t--peligro" (click)="abrirAccion(t, 'cancelar')">Cancelar turno</button>
+                          </div>
+                        }
+                      </div>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          }
+        }
+
+        <!-- ===== DISPONIBILIDAD ===== -->
+        @case ('disponibilidad') {
+          <h2 class="subtitulo-seccion">Generar horarios</h2>
+          <p class="texto-ayuda">
+            Elegí los días, el rango de fechas y tu horario de atención: se crean todos los turnos de una vez.
+            Los horarios que ya existen no se duplican.
+          </p>
+
+          <form class="generador" [formGroup]="formDisp" (ngSubmit)="generar()">
+            <div class="campo">
+              <span class="campo-etiqueta">Días de atención</span>
+              <div class="dias-chips">
+                @for (d of diasChips; track d.n) {
+                  <button type="button" class="chip" [class.chip--sel]="diasElegidos().includes(d.n)" (click)="alternarDia(d.n)">{{ d.l }}</button>
+                }
+              </div>
+            </div>
+
+            <div class="generador-fila">
+              <div class="campo">
+                <label for="desde">Desde</label>
+                <input id="desde" type="date" formControlName="desde" [min]="hoy">
+              </div>
+              <div class="campo">
+                <label for="hasta">Hasta</label>
+                <input id="hasta" type="date" formControlName="hasta" [min]="hoy">
+              </div>
+            </div>
+
+            <div class="generador-fila">
+              <div class="campo">
+                <label for="horaInicio">Hora de inicio</label>
+                <input id="horaInicio" type="time" formControlName="horaInicio">
+              </div>
+              <div class="campo">
+                <label for="horaFin">Hora de fin</label>
+                <input id="horaFin" type="time" formControlName="horaFin">
+              </div>
+            </div>
+
+            <div class="generador-fila">
+              <div class="campo">
+                <label for="duracion">Duración de cada turno</label>
+                <select id="duracion" formControlName="duracion">
+                  @for (d of duraciones; track d) {
+                    <option [ngValue]="d">{{ d }} minutos</option>
+                  }
+                </select>
+              </div>
+              <div class="campo">
+                <label for="modalidad">Modalidad</label>
+                <select id="modalidad" formControlName="modalidad">
+                  <option value="presencial">Presencial</option>
+                  <option value="online">Online</option>
+                </select>
+              </div>
+            </div>
+
+            @if (errorGenerador(); as e) {
+              <p class="campo-error">{{ e }}</p>
+            } @else {
+              <p class="generador-resumen">
+                Se van a crear <strong>{{ nuevosPrevistos().length }}</strong> horarios nuevos.
+              </p>
+            }
+
+            @if (mensajeGenerador()) {
+              <p class="generador-ok">{{ mensajeGenerador() }}</p>
+            }
+
+            <div>
+              <button type="submit" class="btn-t btn-t--primario btn-t--grande" [disabled]="!!errorGenerador() || procesando()">
+                {{ procesando() ? 'Generando...' : 'Generar horarios' }}
+              </button>
+            </div>
+          </form>
+
+          <h2 class="subtitulo-seccion libres-titulo">Horarios libres ({{ libres().length }})</h2>
+          @if (libresPorDia().length === 0) {
+            <p class="vacio">Todavía no cargaste horarios libres.</p>
+          } @else {
+            @for (g of libresPorDia(); track g.fecha) {
+              <div class="libres-grupo">
+                <div class="libres-grupo-head">
+                  <span class="libres-grupo-fecha">{{ formatearFecha(g.fecha) }}</span>
+                  <button type="button" class="btn-t btn-t--peligro btn-t--chico" (click)="vaciarDia(g.turnos)">Quitar el día</button>
+                </div>
+                <div class="libres-chips">
+                  @for (t of g.turnos; track t.id) {
+                    <span class="libre-chip">
+                      <span class="libre-chip-hora">{{ t.hora }}</span>
+                      <span class="libre-chip-mod">{{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}</span>
+                      <button type="button" class="libre-chip-x" (click)="quitarLibre(t)" [attr.aria-label]="'Quitar ' + t.hora">×</button>
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+          }
+        }
+
+        <!-- ===== HISTORIAL ===== -->
+        @case ('historial') {
+          @if (historial().length === 0) {
+            <p class="vacio">Todavía no hay turnos en el historial.</p>
+          } @else {
+            <ul class="lista-cards">
+              @for (t of historialVisible(); track t.id) {
+                <li class="turno-card turno-card--apagada">
+                  <div class="turno-fecha">
+                    <span class="turno-fecha-dia">{{ diaDelMes(t.fecha) }}</span>
+                    <span class="turno-fecha-mes">{{ mesCorto(t.fecha) }}</span>
+                  </div>
+                  <div class="turno-cuerpo">
+                    <div class="turno-linea">
+                      <span class="turno-hora">{{ rangoHorario(t) }}</span>
+                      <span class="badge" [class]="'badge badge--' + estadoVisible(t)">{{ etiquetas[estadoVisible(t)] }}</span>
+                    </div>
+                    <ng-container *ngTemplateOutlet="datosCliente; context: { $implicit: t }" />
+                    @if (t.motivoCancelacion) {
+                      <p class="turno-detalle"><strong>{{ t.canceladoPor === 'cliente' ? 'Motivo (cliente):' : 'Motivo:' }}</strong> {{ t.motivoCancelacion }}</p>
+                    } @else if (t.canceladoPor === 'cliente') {
+                      <p class="turno-detalle">Cancelado por el cliente.</p>
+                    }
+                  </div>
+                </li>
+              }
+            </ul>
+            @if (historial().length > historialVisible().length) {
+              <div class="turno-acciones historial-mas">
+                <button type="button" class="btn-t" (click)="verMasHistorial()">Ver más</button>
+              </div>
+            }
+          }
+        }
+      }
+    </div>
+  }
+</div>
