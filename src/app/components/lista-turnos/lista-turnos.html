@@ -34,6 +34,17 @@
             <strong>{{ rangoHorario(r) }}</strong>. {{ nombreProfesional() }} tiene que confirmarlo;
             vas a ver el estado en <em>Mis turnos</em>.
           </p>
+          @if (r.modalidad === 'presencial' && profesional()?.direccionPresencial; as direccion) {
+            <p class="reserva-direccion reserva-direccion--centrada">
+              <span class="reserva-direccion-icono" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span><strong>Dirección presencial:</strong> {{ direccion }}</span>
+            </p>
+          }
           <div class="turno-acciones reserva-exito-acciones">
             @if (clienteId(); as cid) {
               <a class="btn-t btn-t--primario btn-t--grande" [routerLink]="['/turnos-existentes', cid]">Ver mis turnos</a>
@@ -126,6 +137,18 @@
               <strong>{{ formatearFecha(t.fecha) }}</strong> · {{ rangoHorario(t) }} ·
               {{ t.modalidad === 'online' ? 'Online' : 'Presencial' }}
             </p>
+
+            @if (t.modalidad === 'presencial' && profesional()?.direccionPresencial; as direccion) {
+              <p class="reserva-direccion">
+                <span class="reserva-direccion-icono" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <span><strong>Dirección presencial:</strong> {{ direccion }}</span>
+              </p>
+            }
 
             <div class="campo">
               <label for="motivo">Motivo de la consulta</label>

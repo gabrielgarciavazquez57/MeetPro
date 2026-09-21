@@ -62,7 +62,8 @@ export class ProfesionalForm implements OnInit {
     professionalId:        ['', [Validators.required]],
     descriptionprofesional:['', [Validators.required, Validators.maxLength(500)]],
     linkedin:               ['', [Validators.pattern(/^https?:\/\/.+/)]],
-    linkReunion:            ['', [Validators.pattern(/^https?:\/\/.+/)]],
+    linkReunion:            ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+    direccionPresencial:    ['', [Validators.required, Validators.maxLength(200)]],
     titulos:      this.fb.array([this.crearTitulo()]),
     experiencias: this.fb.array([this.crearExperiencia()]),
     descripcionAmpliada: ['', [Validators.maxLength(2000)]],
@@ -111,6 +112,7 @@ export class ProfesionalForm implements OnInit {
           descriptionprofesional: prof.descriptionprofesional,
           linkedin: prof.linkedin ?? '',
           linkReunion: prof.linkReunion ?? '',
+          direccionPresencial: prof.direccionPresencial ?? '',
         });
 
         this.reemplazarArray(this.titulos, prof.titulos ?? [], () => this.crearTitulo());
@@ -175,6 +177,7 @@ export class ProfesionalForm implements OnInit {
   get descriptionprofesional() { return this.form.controls.descriptionprofesional; }
   get linkedin()               { return this.form.controls.linkedin; }
   get linkReunion()            { return this.form.controls.linkReunion; }
+  get direccionPresencial()    { return this.form.controls.direccionPresencial; }
   get titulos()      { return this.form.controls.titulos as FormArray; }
   get experiencias() { return this.form.controls.experiencias as FormArray; }
   get descripcionAmpliada() { return this.form.controls.descripcionAmpliada; }

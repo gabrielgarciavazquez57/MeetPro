@@ -58,11 +58,24 @@
             }
           </li>
           <li>
-            <label for="linkReunion">Link de reunión online (opcional): </label>
+            <label for="linkReunion">Link de reunión online: </label>
             <input type="text" formControlName="linkReunion" id="linkReunion" placeholder="https://meet.google.com/...">
             @if(linkReunion.dirty || linkReunion.touched){
-              @if(linkReunion.hasError('pattern')){
+              @if(linkReunion.hasError('required')){
+                <span>Campo requerido</span>
+              }@else if(linkReunion.hasError('pattern')){
                 <span>Debe ser un link válido (https://...)</span>
+              }
+            }
+          </li>
+          <li>
+            <label for="direccionPresencial">Dirección presencial: </label>
+            <input type="text" formControlName="direccionPresencial" id="direccionPresencial" placeholder="Calle, número, piso y ciudad donde atendés">
+            @if(direccionPresencial.dirty || direccionPresencial.touched){
+              @if(direccionPresencial.hasError('required')){
+                <span>Campo requerido</span>
+              }@else if(direccionPresencial.hasError('maxlength')){
+                <span>Debe contener menos de 200 caracteres</span>
               }
             }
           </li>

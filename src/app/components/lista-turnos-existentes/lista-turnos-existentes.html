@@ -66,6 +66,9 @@
                   @if (t.estado === 'pendiente') {
                     <p class="turno-detalle">Esperando que {{ nombreProfesional(t) }} confirme tu solicitud.</p>
                   }
+                  @if (t.modalidad === 'presencial' && profesionalDe(t)?.direccionPresencial; as direccion) {
+                    <p class="turno-detalle"><strong>Dirección:</strong> {{ direccion }}</p>
+                  }
                   @if (t.motivo) {
                     <p class="turno-detalle"><strong>Tu motivo:</strong> {{ t.motivo }}</p>
                   }

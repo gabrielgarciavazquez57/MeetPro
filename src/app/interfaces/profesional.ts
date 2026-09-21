@@ -11,6 +11,7 @@ export interface Profesional {
     descriptionprofesional: string;
     linkedin?: string;
     linkReunion?: string;
+    direccionPresencial?: string;
     titulos: TitulosPro[];
     experiencias: ExperienciaPro[];
     certificados?: Certificado[];
