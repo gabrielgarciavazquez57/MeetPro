@@ -165,27 +165,9 @@
                             }
                         }
                 </li>
-                <li>
-                    <label for="city">Ciudad: </label>
-                    <input type="text" formControlName="city" id="city">
-                     @if(city.dirty || city.touched){
-                            @if(city.hasError('required')){
-                                <span>Campo requerido</span>
-                            }
-                        }
-                </li>
-                 <li>
-                    <label for="province">Provincia: </label>
-                    <input type="text" formControlName="province" id="province">
-                     @if(province.dirty || province.touched){
-                            @if(province.hasError('required')){
-                                <span>Campo requerido</span>
-                            }
-                        }
-                </li>
                   <li>
                         <label for="country">Pais: </label>
-                        <select formControlName="country" id="country">
+                        <select formControlName="country" id="country" (change)="onPaisChange()">
                             <option value="" disabled>Seleccione su pais de residencia...</option>
                             @for (pais of paises; track $index) {
                             <option [value]="pais">{{ pais }}</option>
@@ -197,6 +179,46 @@
                             }
                         }
                         </li>
+                 <li>
+                    <label for="province">Provincia: </label>
+                    @if (esArgentina()) {
+                        <select formControlName="province" id="province" (change)="onProvinciaChange()">
+                            <option value="" disabled>Seleccione su provincia...</option>
+                            @for (prov of provinciasArgentina; track prov) {
+                            <option [value]="prov">{{ prov }}</option>
+                            }
+                        </select>
+                    } @else {
+                        <input type="text" formControlName="province" id="province">
+                    }
+                     @if(province.dirty || province.touched){
+                            @if(province.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
+                <li>
+                    <label for="city">Ciudad: </label>
+                    @if (ciudadesDisponibles().length) {
+                        <app-desplegable
+                            ariaLabel="Ciudad"
+                            textoVacio="Seleccione su ciudad..."
+                            [opciones]="opcionesCiudad()"
+                            [valor]="valorCiudad()"
+                            (cambio)="elegirCiudad($event)"
+                        />
+                        @if (ciudadOtra()) {
+                            <input type="text" formControlName="city" id="ciudadOtra" placeholder="Escribí tu ciudad">
+                        }
+                    } @else {
+                        <input type="text" formControlName="city" id="city">
+                    }
+                     @if(city.dirty || city.touched){
+                            @if(city.hasError('required')){
+                                <span>Campo requerido</span>
+                            }
+                        }
+                </li>
                 <li>
                     <label for="zipCode">Codigo Postal: </label>
                     <input type="text" formControlName="zipCode" id="zipCode">

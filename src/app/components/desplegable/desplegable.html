@@ -1,0 +1,30 @@
+<div class="desplegable" [class.desplegable--abierto]="abierto()">
+  <button
+    type="button"
+    class="desplegable-boton"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="abierto()"
+    [attr.aria-label]="ariaLabel() || null"
+    (click)="alternar()"
+    (keydown)="teclado($event)"
+  >
+    <span class="desplegable-texto">{{ etiquetaActual() }}</span>
+    <span class="desplegable-flecha" aria-hidden="true"></span>
+  </button>
+
+  @if (abierto()) {
+    <ul class="desplegable-lista" role="listbox" #lista>
+      @for (o of todas(); track $index) {
+        <li
+          role="option"
+          class="desplegable-opcion"
+          [class.desplegable-opcion--sel]="o.valor === valor()"
+          [class.desplegable-opcion--res]="$index === resaltado()"
+          [attr.aria-selected]="o.valor === valor()"
+          (click)="elegir($index)"
+          (mouseenter)="resaltado.set($index)"
+        >{{ o.texto }}</li>
+      }
+    </ul>
+  }
+</div>

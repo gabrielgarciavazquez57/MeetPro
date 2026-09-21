@@ -1,17 +1,30 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { forkJoin } from 'rxjs';
+import { countries, type ICountry } from 'countries-list';
 import { ClientProfesional } from '../../services/client-profesional'; // ajustá la ruta
 import { ClientValoracion } from '../../services/client-valoracion';
 import { ClientUser } from '../../services/client-user';
 import { Profesional } from '../../interfaces/profesional'; // ajustá la ruta
 import { Valoracion } from '../../interfaces/valoracion';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { Desplegable } from '../desplegable/desplegable';
+import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-argentina';
+
+/** Para comparar sin importar mayúsculas, acentos ni espacios sobrantes */
+const normalizar = (texto: string | undefined) =>
+  (texto ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toLowerCase();
+
+/** Igual que normalizar, y trata a "CABA" como la Ciudad Autónoma de Buenos Aires */
+const normalizarCiudad = (texto: string | undefined) => {
+  const ciudad = normalizar(texto);
+  return ciudad === 'caba' ? 'ciudad autonoma de buenos aires' : ciudad;
+};
 
 @Component({
   selector: 'app-prof-list',
   standalone: true,
-  imports: [BarraNav, FormsModule],
+  imports: [BarraNav, FormsModule, Desplegable],
   templateUrl: './prof-list.html',
   styleUrl: './prof-list.css',
 })
@@ -48,34 +61,27 @@ export class ProfList implements OnInit {
 
   // ===== Filtros =====
   paisFiltro = signal('');
+  provinciaFiltro = signal('');
   ciudadFiltro = signal('');
   profesionFiltro = signal('');
   idFiltro = signal('');
   nombreFiltro = signal('');
   ordenValoracion = signal<'' | 'desc' | 'asc'>('');
 
-  readonly paises = computed(() => {
-    const set = new Set<string>();
-    for (const p of this.profesionales()) {
-      const c = p.profesional_userData?.address?.country;
-      if (c) set.add(c);
-    }
-    return [...set].sort();
-  });
+  /** Todos los países (los mismos que ofrece el formulario de registro) */
+  readonly paises = Object.values(countries)
+    .map((c) => (c as ICountry).name)
+    .sort((a, b) => a.localeCompare(b, 'es'));
 
-  readonly ciudades = computed(() => {
-    const pais = this.paisFiltro();
-    const set = new Set<string>();
-    for (const p of this.profesionales()) {
-      const addr = p.profesional_userData?.address;
-      if (pais && addr?.country !== pais) continue;
-      if (addr?.city) set.add(addr.city);
-    }
-    return [...set].sort();
-  });
+  /** Provincias argentinas: el filtro solo se muestra con Argentina como país */
+  readonly provincias = PROVINCIAS_ARGENTINA;
+
+  /** Ciudades de la provincia elegida (las mismas que ofrece el formulario de registro) */
+  readonly ciudades = computed(() => CIUDADES_ARGENTINA[this.provinciaFiltro()] ?? []);
 
   readonly profesionalesFiltrados = computed(() => {
     const pais = this.paisFiltro();
+    const provincia = normalizar(this.provinciaFiltro());
     const ciudad = this.ciudadFiltro();
     const profesion = this.profesionFiltro().trim().toLowerCase();
     const id = this.idFiltro().trim().toLowerCase();
@@ -87,7 +93,8 @@ export class ProfList implements OnInit {
         .toLowerCase()
         .trim();
       if (pais && addr?.country !== pais) return false;
-      if (ciudad && addr?.city !== ciudad) return false;
+      if (provincia && normalizar(addr?.province) !== provincia) return false;
+      if (ciudad && normalizarCiudad(addr?.city) !== normalizarCiudad(ciudad)) return false;
       if (profesion && !(p.profession ?? '').toLowerCase().includes(profesion)) return false;
       if (id && !String(p.professionalId ?? '').toLowerCase().includes(id)) return false;
       if (nombre && !nombreCompleto.includes(nombre)) return false;
@@ -108,6 +115,7 @@ export class ProfList implements OnInit {
   readonly hayFiltros = computed(
     () =>
       !!this.paisFiltro() ||
+      !!this.provinciaFiltro() ||
       !!this.ciudadFiltro() ||
       !!this.profesionFiltro().trim() ||
       !!this.idFiltro().trim() ||
@@ -116,6 +124,7 @@ export class ProfList implements OnInit {
 
   limpiarFiltros(): void {
     this.paisFiltro.set('');
+    this.provinciaFiltro.set('');
     this.ciudadFiltro.set('');
     this.profesionFiltro.set('');
     this.idFiltro.set('');
@@ -124,6 +133,12 @@ export class ProfList implements OnInit {
 
   onPaisChange(valor: string): void {
     this.paisFiltro.set(valor);
+    this.provinciaFiltro.set('');
+    this.ciudadFiltro.set('');
+  }
+
+  onProvinciaChange(valor: string): void {
+    this.provinciaFiltro.set(valor);
     this.ciudadFiltro.set('');
   }
 

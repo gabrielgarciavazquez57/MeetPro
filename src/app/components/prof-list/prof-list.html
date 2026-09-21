@@ -124,31 +124,42 @@
           />
         </label>
 
-        <label class="filtro-campo">
+        <div class="filtro-campo">
           <span class="filtro-label">País</span>
-          <select
-            [ngModel]="paisFiltro()"
-            (ngModelChange)="onPaisChange($event)"
-          >
-            <option value="">Todos</option>
-            @for (p of paises(); track p) {
-              <option [value]="p">{{ p }}</option>
-            }
-          </select>
-        </label>
+          <app-desplegable
+            ariaLabel="País"
+            textoVacio="Todos"
+            [opciones]="paises"
+            [valor]="paisFiltro()"
+            (cambio)="onPaisChange($event)"
+          />
+        </div>
 
-        <label class="filtro-campo">
-          <span class="filtro-label">Ciudad</span>
-          <select
-            [ngModel]="ciudadFiltro()"
-            (ngModelChange)="ciudadFiltro.set($event)"
-          >
-            <option value="">Todas</option>
-            @for (c of ciudades(); track c) {
-              <option [value]="c">{{ c }}</option>
-            }
-          </select>
-        </label>
+        @if (paisFiltro() === 'Argentina') {
+          <div class="filtro-campo">
+            <span class="filtro-label">Provincia</span>
+            <app-desplegable
+              ariaLabel="Provincia"
+              textoVacio="Todas"
+              [opciones]="provincias"
+              [valor]="provinciaFiltro()"
+              (cambio)="onProvinciaChange($event)"
+            />
+          </div>
+
+          @if (provinciaFiltro()) {
+            <div class="filtro-campo">
+              <span class="filtro-label">Ciudad</span>
+              <app-desplegable
+                ariaLabel="Ciudad"
+                textoVacio="Todas"
+                [opciones]="ciudades()"
+                [valor]="ciudadFiltro()"
+                (cambio)="ciudadFiltro.set($event)"
+              />
+            </div>
+          }
+        }
 
         <p class="filtro-resultado">
           {{ profesionalesFiltrados().length }} de {{ profesionales().length }} profesionales

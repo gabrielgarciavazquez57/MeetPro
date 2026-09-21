@@ -1,4 +1,5 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, AbstractControl, AsyncValidatorFn, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -6,7 +7,11 @@ import { map, of } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { ClientUser } from '../../services/client-user';
 import { ClientProfesional } from '../../services/client-profesional';
+import { Desplegable } from '../desplegable/desplegable';
+import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-argentina';
 import { countries, type ICountry } from 'countries-list';
+
+const OTRA_CIUDAD = 'Otra ciudad...';
 
 function passwordsIguales(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;
@@ -25,7 +30,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 
 @Component({
   selector: 'app-user-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Desplegable],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
 })
@@ -107,6 +112,69 @@ export class UserForm implements OnInit {
       zipCode:    ['', [Validators.required]],
     }),
   }, { validators: passwordsIguales });
+
+  protected readonly provinciasArgentina = PROVINCIAS_ARGENTINA;
+
+  /** true cuando el país elegido es Argentina: provincia y ciudad pasan a ser listas desplegables */
+  protected readonly esArgentina = toSignal(
+    this.form.controls.address.controls.country.valueChanges.pipe(map((pais) => pais === 'Argentina')),
+    { initialValue: false },
+  );
+
+  private readonly provinciaActual = toSignal(this.form.controls.address.controls.province.valueChanges, {
+    initialValue: '',
+  });
+  protected readonly ciudadActual = toSignal(this.form.controls.address.controls.city.valueChanges, {
+    initialValue: '',
+  });
+
+  /** El usuario eligió "Otra ciudad..." y escribe la suya a mano */
+  protected readonly ciudadOtra = signal(false);
+
+  protected readonly ciudadesDisponibles = computed(() =>
+    this.esArgentina() ? (CIUDADES_ARGENTINA[this.provinciaActual()] ?? []) : [],
+  );
+
+  /** Ciudad guardada que no figura en la lista (datos viejos): se agrega como opción para no perderla */
+  protected readonly ciudadFueraDeLista = computed(() => {
+    const actual = this.ciudadActual();
+    return actual !== '' && !this.ciudadOtra() && !this.ciudadesDisponibles().includes(actual);
+  });
+
+  /** Opciones del desplegable: la ciudad guardada fuera de lista (si hay), la lista de la provincia y "Otra ciudad..." */
+  protected readonly opcionesCiudad = computed(() => [
+    ...(this.ciudadFueraDeLista() ? [this.ciudadActual()] : []),
+    ...this.ciudadesDisponibles(),
+    OTRA_CIUDAD,
+  ]);
+
+  protected readonly valorCiudad = computed(() => (this.ciudadOtra() ? OTRA_CIUDAD : this.ciudadActual()));
+
+  /** Al cambiar el país a mano: si la provincia escrita no es una de la lista, se limpia (y la ciudad) */
+  onPaisChange(): void {
+    this.ciudadOtra.set(false);
+    const provincias: readonly string[] = this.provinciasArgentina;
+    if (this.country.value === 'Argentina' && !provincias.includes(this.province.value)) {
+      this.province.setValue('');
+      this.city.setValue('');
+    }
+  }
+
+  /** Al cambiar la provincia de la lista, las ciudades cambian: se limpia la ciudad elegida */
+  onProvinciaChange(): void {
+    this.ciudadOtra.set(false);
+    this.city.setValue('');
+  }
+
+  elegirCiudad(valor: string): void {
+    this.city.markAsDirty();
+    if (valor === OTRA_CIUDAD) {
+      this.city.setValue('');
+      this.ciudadOtra.set(true);
+      return;
+    }
+    this.city.setValue(valor);
+  }
 
   // ===== GETTERS =====
   get username()        { return this.form.controls.username; }
