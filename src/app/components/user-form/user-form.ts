@@ -406,6 +406,8 @@ handleSubmit() {
 
         if (user_data.isProfesional) {
           this.router.navigate(['/CreateProfesional', createdUser.id]);
+        } else {
+          this.router.navigate(['/profesionales-lista']);
         }
       });
     }
