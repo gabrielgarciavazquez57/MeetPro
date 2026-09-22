@@ -6,6 +6,7 @@ import { ClientCuenta } from '../../services/client-cuenta';
 import { Auth } from '../../services/auth';
 import { User } from '../../interfaces/user'; // ajustá la ruta
 import { BarraNav } from '../barra-nav/barra-nav';
+import { formatearTelefono } from '../../shared/codigos-pais';
 
 @Component({
   selector: 'app-perfil-user',
@@ -20,6 +21,8 @@ export class PerfilUser implements OnInit {
   private readonly clientUser = inject(ClientUser);
   private readonly clientCuenta = inject(ClientCuenta);
   private readonly auth = inject(Auth);
+
+  protected readonly formatearTelefono = formatearTelefono;
 
   usuario = signal<User | null>(null);
   cargando = signal<boolean>(true);

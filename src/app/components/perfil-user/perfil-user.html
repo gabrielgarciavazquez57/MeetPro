@@ -99,7 +99,11 @@
           </li>
           <li>
             <label>Teléfono</label>
-            <span class="valor">{{ user.phoneNumber }}</span>
+            @if (formatearTelefono(user.phoneNumber); as tel) {
+              <span class="valor">{{ tel.bandera }} <span class="telefono-codigo">{{ tel.codigo }}</span> {{ tel.numero }}</span>
+            } @else {
+              <span class="valor">{{ user.phoneNumber }}</span>
+            }
           </li>
           <li>
             <label>DNI</label>

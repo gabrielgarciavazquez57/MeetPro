@@ -416,6 +416,52 @@ span::before {
   color: #64748b;
 }
 
+.requisitos-password {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.requisitos-password li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.requisitos-password li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  background-color: transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.requisitos-password li.requisito-cumplido {
+  color: #16a34a;
+}
+
+.requisitos-password li.requisito-cumplido::before {
+  content: '✓';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #16a34a;
+  background-color: #16a34a;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .campo-verificando::before {
   content: none;
 }
@@ -537,4 +583,19 @@ app-desplegable {
   --desplegable-relleno: 0.65rem 0.85rem;
   --desplegable-fuente: 0.9rem;
   --desplegable-peso: 500;
+}
+
+.telefono-campo {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.telefono-campo app-codigo-telefono {
+  flex-shrink: 0;
+  width: 6.6rem;
+}
+
+.telefono-campo input {
+  flex: 1;
+  min-width: 0;
 }

@@ -273,6 +273,10 @@ label {
   word-break: break-word;
 }
 
+.telefono-codigo {
+  color: #64748b;
+}
+
 /* Botones de acción (mismo estilo que perfil profesional) */
 .columna-acciones {
   width: 100%;

@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+
+.codigo-tel {
+  position: relative;
+}
+
+.codigo-tel-boton {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #0f172a;
+  padding: 0.65rem 0.7rem;
+  background-color: #fbfcfe;
+  border: 1.5px solid #d0d7e2;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.codigo-tel-boton:hover {
+  border-color: #9aa7ba;
+}
+
+.codigo-tel-boton:focus-visible,
+.codigo-tel--abierto .codigo-tel-boton {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.codigo-tel-bandera {
+  flex-shrink: 0;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.codigo-tel-numero {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.codigo-tel-flecha {
+  flex-shrink: 0;
+  width: 0;
+  height: 0;
+  border-left: 0.3rem solid transparent;
+  border-right: 0.3rem solid transparent;
+  border-top: 0.36rem solid #64748b;
+  transition: transform 0.15s ease;
+}
+
+.codigo-tel--abierto .codigo-tel-flecha {
+  transform: rotate(180deg);
+}
+
+.codigo-tel-lista {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+  z-index: 60;
+  margin: 0;
+  padding: 0.25rem 0;
+  width: max(100%, 260px);
+  max-height: 15rem;
+  overflow-y: auto;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1.5px solid #2563eb;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.18);
+}
+
+.codigo-tel-opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.7rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.86rem;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.codigo-tel-opcion-nombre {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.codigo-tel-opcion-codigo {
+  flex-shrink: 0;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.codigo-tel-opcion--res {
+  background-color: #eff4ff;
+}
+
+.codigo-tel-opcion--sel {
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.codigo-tel-opcion--sel .codigo-tel-opcion-codigo {
+  color: #1d4ed8;
+}

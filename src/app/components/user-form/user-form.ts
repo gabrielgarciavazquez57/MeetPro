@@ -8,7 +8,9 @@ import { User } from '../../interfaces/user';
 import { ClientUser } from '../../services/client-user';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Desplegable } from '../desplegable/desplegable';
+import { CodigoTelefono } from '../codigo-telefono/codigo-telefono';
 import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-argentina';
+import { CODIGO_PAIS_DEFECTO, separarTelefono } from '../../shared/codigos-pais';
 import { countries, type ICountry } from 'countries-list';
 
 const OTRA_CIUDAD = 'Otra ciudad...';
@@ -17,6 +19,16 @@ function passwordsIguales(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;
   const repeat = control.get('password_repeat')?.value;
   return password === repeat ? null : { passwordsNoCoinciden: true };
+}
+
+/** Exige al menos una mayúscula, un número y un carácter especial */
+function passwordSegura(control: AbstractControl): ValidationErrors | null {
+  const valor: string = control.value ?? '';
+  const errores: ValidationErrors = {};
+  if (!/[A-ZÁÉÍÓÚÑ]/.test(valor)) errores['sinMayuscula'] = true;
+  if (!/[0-9]/.test(valor)) errores['sinNumero'] = true;
+  if (!/[^A-Za-z0-9ÁÉÍÓÚÑáéíóúñ]/.test(valor)) errores['sinEspecial'] = true;
+  return Object.keys(errores).length ? errores : null;
 }
 
 /** No permite fechas de nacimiento posteriores al 31/12/2008 */
@@ -30,7 +42,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 
 @Component({
   selector: 'app-user-form',
-  imports: [ReactiveFormsModule, Desplegable],
+  imports: [ReactiveFormsModule, Desplegable, CodigoTelefono],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
 })
@@ -51,6 +63,25 @@ export class UserForm implements OnInit {
 
   /** Vista previa de la foto de perfil (data URL) */
   readonly fotoPreview = signal<string>('');
+
+  /** Código de país del teléfono (ej. "+54"); el número en sí vive en el control phoneNumber */
+  readonly codigoTelefono = signal<string>(CODIGO_PAIS_DEFECTO);
+
+  /** Verifica contra el backend que el username no pertenezca a otro usuario */
+  private readonly usernameDuplicadoValidator: AsyncValidatorFn = (control: AbstractControl) => {
+    const username = (control.value ?? '').trim().toLowerCase();
+    if (!username) {
+      return of(null);
+    }
+    return this.client.getUsers().pipe(
+      map((usuarios) => {
+        const duplicado = usuarios.some(
+          (u) => (u.username ?? '').trim().toLowerCase() === username && String(u.id) !== String(this.usuarioId),
+        );
+        return duplicado ? { usernameDuplicado: true } : null;
+      }),
+    );
+  };
 
   /** Verifica contra el backend que el DNI no pertenezca a otro usuario */
   private readonly dniDuplicadoValidator: AsyncValidatorFn = (control: AbstractControl) => {
@@ -90,8 +121,8 @@ export class UserForm implements OnInit {
     .sort();
 
   protected readonly form = this.fb.nonNullable.group({
-    username:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
-    password:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+    username:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)], [this.usernameDuplicadoValidator]],
+    password:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15), passwordSegura]],
     password_repeat: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
     isProfesional:   [false, [Validators.required]],
     isAdmin:         [false],
@@ -260,8 +291,11 @@ export class UserForm implements OnInit {
         this.usuarioId = user.id ?? id;
         this.eraProfesional = user.isProfesional === true;
         this.fotoPreview.set(user.fotoPerfil ?? '');
+        const { codigo, numero } = separarTelefono(user.phoneNumber);
+        this.codigoTelefono.set(codigo);
         this.form.patchValue({
           ...user,
+          phoneNumber: numero,
           password_repeat: user.password,
           dateOfBirth: this.aFechaInput(user.dateOfBirth),
         });
@@ -338,6 +372,7 @@ handleSubmit() {
 
     const user_data: User = {
       ...rest,
+      phoneNumber: `${this.codigoTelefono()} ${rest.phoneNumber.trim()}`,
       dateOfBirth: new Date(rest.dateOfBirth),
       age: this.calcularEdad(rest.dateOfBirth),
     };

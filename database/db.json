@@ -1,98 +1,6 @@
 {
   "users": [
     {
-      "username": "jreyes",
-      "password": "Jreyes#2026",
-      "isProfesional": true,
-      "name": "José",
-      "lastname": "Reyes",
-      "dni": "34546789",
-      "email": "jose.reyes@meetpro.com",
-      "phoneNumber": "1145551234",
-      "age": 41,
-      "gender": "Masculino",
-      "nationality": "Argentina",
-      "dateOfBirth": "1985-05-04T00:00:00.000Z",
-      "address": {
-        "address": "Av. Corrientes 1234",
-        "city": "CABA",
-        "province": "Buenos Aires",
-        "country": "Argentina",
-        "zipCode": "C1043"
-      },
-      "id": "vsvLADccdcM",
-      "isAdmin": false
-    },
-    {
-      "username": "ncabrera",
-      "password": "Ncabrera#2026",
-      "isProfesional": true,
-      "name": "Natalia",
-      "lastname": "Cabrera",
-      "dni": "35678912",
-      "email": "natalia.cabrera@meetpro.com",
-      "phoneNumber": "1145556789",
-      "age": 29,
-      "gender": "Femenino",
-      "nationality": "Argentina",
-      "dateOfBirth": "1996-09-25T00:00:00.000Z",
-      "address": {
-        "address": "Av. Santa Fe 4520",
-        "city": "CABA",
-        "province": "Buenos Aires",
-        "country": "Argentina",
-        "zipCode": "C1425"
-      },
-      "id": "vOprp3jdKHo",
-      "isAdmin": false
-    },
-    {
-      "username": "mlopez",
-      "password": "Mlopez#2026",
-      "isProfesional": true,
-      "name": "Marina",
-      "lastname": "López",
-      "dni": "38765432",
-      "email": "marina.lopez@meetpro.com",
-      "phoneNumber": "1145678923",
-      "age": 34,
-      "gender": "Femenino",
-      "nationality": "Argentina",
-      "dateOfBirth": "1992-03-15T00:00:00.000Z",
-      "address": {
-        "address": "Calle Falsa 123",
-        "city": "CABA",
-        "province": "Buenos Aires",
-        "country": "Argentina",
-        "zipCode": "C1425"
-      },
-      "id": "mlz789xyz01",
-      "isAdmin": false
-    },
-    {
-      "username": "Palermo9",
-      "password": "golariber",
-      "isProfesional": true,
-      "name": "Martin",
-      "lastname": "Palermo",
-      "dni": "99999999",
-      "email": "Palermo@meetpro.com",
-      "phoneNumber": "999999999999",
-      "age": 48,
-      "gender": "Masculino",
-      "nationality": "Argentina",
-      "dateOfBirth": "1970-09-10T00:00:00.000Z",
-      "address": {
-        "address": "boca",
-        "city": "la plata",
-        "province": "buenos aires",
-        "country": "Argentina",
-        "zipCode": "008097987"
-      },
-      "id": "-7GRVsd6hG8",
-      "isAdmin": false
-    },
-    {
       "username": "admin",
       "password": "admin1234",
       "isProfesional": true,
@@ -115,220 +23,57 @@
       },
       "age": 26,
       "id": "wjIwudcdNyo"
+    },
+    {
+      "id": "wy0brSNOx7s",
+      "username": "pepereyes",
+      "password": "1234567",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Pepe",
+      "lastname": "Reyes",
+      "dni": "4444444",
+      "email": "pepe@gmail.com",
+      "phoneNumber": "+54 324536475",
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "2008-12-01T00:00:00.000Z",
+      "fotoPerfil": "",
+      "address": {
+        "address": "juan b justo",
+        "city": "Adrogué",
+        "province": "Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "43257"
+      },
+      "age": 17
+    },
+    {
+      "username": "Anakin",
+      "password": "R2D2!",
+      "isProfesional": false,
+      "isAdmin": false,
+      "name": "Anakin",
+      "lastname": "Skywalker",
+      "dni": "1982746",
+      "email": "anakin@meetpro.com",
+      "phoneNumber": "+54 2435464756876",
+      "gender": "Masculino",
+      "nationality": "Austria",
+      "dateOfBirth": "2008-12-03T00:00:00.000Z",
+      "fotoPerfil": "",
+      "address": {
+        "address": "libertad",
+        "city": "Mar Del Plata",
+        "province": "Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "7600"
+      },
+      "age": 17,
+      "id": "-G278XTdeb8"
     }
   ],
   "profesionales": [
-    {
-      "id": "WNgVuw5iIjs",
-      "profesional_userData": {
-        "username": "jreyes",
-        "password": "Jreyes#2026",
-        "isProfesional": true,
-        "name": "José",
-        "lastname": "Reyes",
-        "dni": "34546789",
-        "email": "jose.reyes@meetpro.com",
-        "phoneNumber": "1145551234",
-        "age": 41,
-        "gender": "Masculino",
-        "nationality": "Argentina",
-        "dateOfBirth": "1985-05-04T00:00:00.000Z",
-        "address": {
-          "address": "Av. Corrientes 1234",
-          "city": "CABA",
-          "province": "Buenos Aires",
-          "country": "Argentina",
-          "zipCode": "C1043"
-        },
-        "id": "vsvLADccdcM",
-        "isAdmin": false
-      },
-      "profession": "Desarrollador de Software",
-      "professionalId": "12345",
-      "descriptionprofesional": "Desarrollador full-stack con experiencia en aplicaciones web escalables y arquitecturas backend.",
-      "titulos": [
-        {
-          "nombre_titulo": "Ingeniería en Sistemas de Información",
-          "descripcion_titulo": "Título de grado orientado al desarrollo de software y bases de datos",
-          "fecha_obtencion": "2010-12-15",
-          "institucion_educativa": "Universidad Tecnológica Nacional"
-        }
-      ],
-      "experiencias": [
-        {
-          "titulo_experiencia": "Desarrollador Backend",
-          "institucion_experiencia": "IBM Argentina",
-          "fecha_inicio": "2012-03-01",
-          "fecha_fin": "2018-11-30"
-        },
-        {
-          "titulo_experiencia": "Desarrollador Full-Stack Senior",
-          "institucion_experiencia": "Globant",
-          "fecha_inicio": "2018-12-01",
-          "fecha_fin": "2026-09-01"
-        }
-      ],
-      "certificados": [
-        {
-          "id": "c-1789416123587",
-          "nombre_certificado": "AWS Certified Developer",
-          "institucion_certificado": "Amazon Web Services",
-          "fecha_obtencion": "2023-06-15",
-          "descripcion_certificado": "Certificación de desarrollo en la nube AWS."
-        }
-      ],
-      "linkedin": "https://www.linkedin.com/in/jose-reyes-dev"
-    },
-    {
-      "profesional_userData": {
-        "username": "ncabrera",
-        "password": "Ncabrera#2026",
-        "isProfesional": true,
-        "name": "Natalia",
-        "lastname": "Cabrera",
-        "dni": "35678912",
-        "email": "natalia.cabrera@meetpro.com",
-        "phoneNumber": "1145556789",
-        "age": 29,
-        "gender": "Femenino",
-        "nationality": "Argentina",
-        "dateOfBirth": "1996-09-25T00:00:00.000Z",
-        "address": {
-          "address": "Av. Santa Fe 4520",
-          "city": "CABA",
-          "province": "Buenos Aires",
-          "country": "Argentina",
-          "zipCode": "C1425"
-        },
-        "id": "vOprp3jdKHo"
-      },
-      "profession": "Diseñadora UX/UI",
-      "professionalId": "54321",
-      "descriptionprofesional": "Diseñadora especializada en experiencia de usuario para productos digitales, con foco en accesibilidad.",
-      "titulos": [
-        {
-          "nombre_titulo": "Licenciatura en Diseño Gráfico",
-          "descripcion_titulo": "Título de grado con orientación en diseño digital",
-          "fecha_obtencion": "2019-07-10",
-          "institucion_educativa": "Universidad de Buenos Aires"
-        }
-      ],
-      "experiencias": [
-        {
-          "titulo_experiencia": "Diseñadora UX Junior",
-          "institucion_experiencia": "Mercado Libre",
-          "fecha_inicio": "2019-08-01",
-          "fecha_fin": "2022-02-28"
-        },
-        {
-          "titulo_experiencia": "Diseñadora UX/UI Senior",
-          "institucion_experiencia": "Despegar.com",
-          "fecha_inicio": "2022-03-01",
-          "fecha_fin": "2026-09-01"
-        }
-      ],
-      "id": "dcb321nat05"
-    },
-    {
-      "profesional_userData": {
-        "username": "mlopez",
-        "password": "Mlopez#2026",
-        "isProfesional": true,
-        "name": "Marina",
-        "lastname": "López",
-        "dni": "38765432",
-        "email": "marina.lopez@meetpro.com",
-        "phoneNumber": "1145678923",
-        "age": 34,
-        "gender": "Femenino",
-        "nationality": "Argentina",
-        "dateOfBirth": "1992-03-15T00:00:00.000Z",
-        "address": {
-          "address": "Calle Falsa 123",
-          "city": "CABA",
-          "province": "Buenos Aires",
-          "country": "Argentina",
-          "zipCode": "C1425"
-        },
-        "id": "mlz789xyz01"
-      },
-      "profession": "Abogada",
-      "professionalId": "67890",
-      "descriptionprofesional": "Especialista en derecho laboral con más de 8 años de experiencia asesorando empresas y trabajadores.",
-      "titulos": [
-        {
-          "nombre_titulo": "Abogacía",
-          "descripcion_titulo": "Título de grado en Abogacía",
-          "fecha_obtencion": "2015-12-10",
-          "institucion_educativa": "Universidad de Buenos Aires"
-        },
-        {
-          "nombre_titulo": "Especialización en Derecho Laboral",
-          "descripcion_titulo": "Posgrado orientado a litigios laborales",
-          "fecha_obtencion": "2018-06-20",
-          "institucion_educativa": "Universidad de Palermo"
-        }
-      ],
-      "experiencias": [
-        {
-          "titulo_experiencia": "Abogada Junior",
-          "institucion_experiencia": "Estudio Jurídico Pérez & Asoc.",
-          "fecha_inicio": "2016-02-01",
-          "fecha_fin": "2019-05-31"
-        },
-        {
-          "titulo_experiencia": "Abogada Senior",
-          "institucion_experiencia": "Estudio Jurídico López & Cía.",
-          "fecha_inicio": "2019-06-01",
-          "fecha_fin": "2026-09-01"
-        }
-      ],
-      "id": "abg456def02"
-    },
-    {
-      "profesional_userData": {
-        "username": "Palermo9",
-        "password": "golariber",
-        "isProfesional": true,
-        "name": "Martin",
-        "lastname": "Palermo",
-        "dni": "99999999",
-        "email": "Palermo@meetpro.com",
-        "phoneNumber": "999999999999",
-        "age": 48,
-        "gender": "Masculino",
-        "nationality": "Argentina",
-        "dateOfBirth": "1970-09-10T00:00:00.000Z",
-        "address": {
-          "address": "boca",
-          "city": "la plata",
-          "province": "buenos aires",
-          "country": "Argentina",
-          "zipCode": "008097987"
-        },
-        "id": "-7GRVsd6hG8"
-      },
-      "profession": "Arquitecto",
-      "professionalId": "999999",
-      "descriptionprofesional": "Construccion de edificios estilo moderno.",
-      "titulos": [
-        {
-          "nombre_titulo": "Arquitecto",
-          "descripcion_titulo": "Titulo de grado.",
-          "fecha_obtencion": "2026-09-07",
-          "institucion_educativa": "Universidad Nacional de Mar del Plata"
-        }
-      ],
-      "experiencias": [
-        {
-          "titulo_experiencia": "Arquitecto Jr",
-          "institucion_experiencia": "Paolini",
-          "fecha_inicio": "2026-09-01",
-          "fecha_fin": "2026-09-07"
-        }
-      ],
-      "id": "GNFRW9zkY90"
-    },
     {
       "profesional_userData": {
         "username": "admin",
@@ -376,1737 +121,1662 @@
       ],
       "certificados": [],
       "id": "TBwiVgivTo8"
+    },
+    {
+      "id": "YYM3Teq1fK0",
+      "profesional_userData": {
+        "id": "wy0brSNOx7s",
+        "username": "pepereyes",
+        "password": "1234567",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Pepe",
+        "lastname": "Reyes",
+        "dni": "4444444",
+        "email": "pepe@gmail.com",
+        "phoneNumber": "+54 324536475",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "2008-12-01T00:00:00.000Z",
+        "fotoPerfil": "",
+        "address": {
+          "address": "juan b justo",
+          "city": "Adrogué",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "43257"
+        },
+        "age": 17
+      },
+      "profession": "Contador",
+      "professionalId": "238745",
+      "descriptionprofesional": "Contador recibido de la UBA",
+      "linkedin": "https://cndiwni",
+      "linkReunion": "https://cndiwni",
+      "direccionPresencial": "oficina 6",
+      "titulos": [
+        {
+          "nombre_titulo": "Contador ",
+          "descripcion_titulo": "UBA",
+          "fecha_obtencion": "2026-09-21",
+          "institucion_educativa": "UBA"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Contador jr",
+          "institucion_experiencia": "MazeBank",
+          "fecha_inicio": "2026-09-22",
+          "fecha_fin": "2026-09-23"
+        }
+      ],
+      "certificados": []
     }
   ],
   "turnos": [
     {
-      "id": "trn001",
-      "professionalId": "12345",
-      "fecha": "2026-09-15",
-      "hora": "09:00",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn002",
-      "professionalId": "12345",
-      "fecha": "2026-09-15",
-      "hora": "10:30",
-      "duracion": 30,
-      "modalidad": "online",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn003",
-      "professionalId": "12345",
-      "fecha": "2026-09-16",
-      "hora": "14:00",
-      "duracion": 30,
-      "modalidad": "online",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn004",
-      "professionalId": "12345",
-      "fecha": "2026-09-17",
-      "hora": "11:00",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn005",
-      "professionalId": "12345",
-      "fecha": "2026-09-18",
-      "hora": "16:00",
-      "duracion": 30,
-      "modalidad": "online",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn006",
-      "professionalId": "12345",
-      "fecha": "2026-09-19",
-      "hora": "08:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn102",
-      "professionalId": "54321",
-      "fecha": "2026-10-03",
-      "hora": "15:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "id": "trn103",
-      "professionalId": "12345",
-      "fecha": "2026-08-20",
-      "hora": "09:00",
-      "duracion": 30,
-      "modalidad": "online",
-      "estado": "disponible",
-      "cliente": null
-    },
-    {
-      "professionalId": "12345",
-      "fecha": "2026-09-25",
-      "hora": "11:00",
-      "duracion": 30,
-      "modalidad": "online",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "ZiczyIuSy7g"
-    },
-    {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "09:00",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "b_iXCKKogJA"
-    },
-    {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "09:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "wbdamWt_pWs"
-    },
-    {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "11:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "XQ4LE4YxEkI"
-    },
-    {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "12:00",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "aN-HoB6djNA"
-    },
-    {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "12:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "79wkcIj_TbE"
-    },
-    {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Az1wQfkcedA"
+      "id": "rWvuWSPESu8"
     },
     {
-      "professionalId": "12345",
-      "fecha": "2026-09-23",
-      "hora": "09:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "NGovfW3F2Xw"
-    },
-    {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "ppHuwxm20Vc"
+      "id": "bfAukJYdTNs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
+      "fecha": "2026-09-23",
+      "hora": "09:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "4d9N9TRVbig"
+    },
+    {
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "VJLwjEB_-34"
+      "id": "Q56qy_tVYkw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "IjpoZsbjf8w"
+      "id": "PzMD62F7_XY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Rhr9a5p8H6A"
+      "id": "IycztE02ReY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "XggV8VvhL60"
+      "id": "r-i9ppuRXfM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-23",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "sAFSXShQOzc"
+      "id": "JsW1BLt90Cg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "tEFHEdr-LV4"
+      "id": "mAZG_yEHbZs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "qVcd69bJ-AI"
+      "id": "jhomI9UMFSg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "QW3uOuKXspQ"
+      "id": "bSB9X1r4GWg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "kNjI5vwQFOI"
+      "id": "_PcTG9k6S94"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "o8C_ph1wdCw"
+      "id": "1bCSasgBwRg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "3LoUqvo0z4o"
+      "id": "lEBPDQrK4bY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "guxxJK9kEmM"
+      "id": "ZFCw1B5C_YI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-24",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "rwOp6Otls04"
+      "id": "FlRuhb-KwT8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "TuuueiGdENc"
+      "id": "gqg0Ck9sZfA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "41y3JzcxqIc"
+      "id": "5973jdmrrAw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "fd1IJ0Yabas"
+      "id": "gOAGcktk-tk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "lNNIMKTZunQ"
+      "id": "Bo_7MonQ0yc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
+      "fecha": "2026-09-25",
+      "hora": "11:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "We92KIep4bI"
+    },
+    {
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "tqodfU7Znww"
+      "id": "0X9_m9pWGM8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "rIPmLvJ58Bw"
+      "id": "wrWhtZHQ_uM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-25",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "aAMyo3sY6K4"
+      "id": "u9iTCbfhAXM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "xGBs6Jua0T8"
+      "id": "tkYlT7Rrx1M"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "O3nJ0P1LILk"
+      "id": "uRazHP8vAaY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "yf745T50zNw"
+      "id": "1-9iyYGARpA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "6q5u53ydp8w"
+      "id": "F8_MYpNT4og"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "7zvJm44pYwk"
+      "id": "Fmr3KsiuczE"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "pNlbNtkG8NM"
+      "id": "6c2YDrSs9Mc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "X5qWFMplhBY"
+      "id": "UyE0gAIbXzM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-28",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "IQSZqJB7ULM"
+      "id": "oxOojWYTZ24"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "8qwnBqgpcJ0"
+      "id": "eenfRQfxeQo"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "hjzNSWUfIsE"
+      "id": "KZtN1H7ycfs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
-      "estado": "confirmado",
-      "cliente": {
-        "id": "wjIwudcdNyo",
-        "name": "Admin",
-        "lastname": "Admin",
-        "dni": "1234567",
-        "email": "admin@meetpro.com",
-        "phoneNumber": "1234567"
-      },
-      "id": "u1D8tXvVyGk",
-      "motivo": "Pagina web.",
-      "notaProfesional": "Turno confirmado.",
-      "enlaceReunion": ""
+      "estado": "disponible",
+      "cliente": null,
+      "id": "F19AQX4AUBs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "HeI3SIHm-LM"
+      "id": "1H2oW3cxqvI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "51_Gh4IWhLk"
+      "id": "Zf7FU1CiYYU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "_XVQfC4VyGo"
+      "id": "qUBQeWnaFC8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "pieUp1DwJyw"
+      "id": "P2u49FCBFIs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-29",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "oqF1x5U6lm8"
+      "id": "t3zCerx_V5A"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "v_z67Oa6-mU"
+      "id": "qoxe9Bqape0"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Pa1zVvjqDFw"
+      "id": "GuNCHt5B0pI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "S7PWDtCxj-I"
+      "id": "g4K9oiSjhM0"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "OgnYvjbSUCw"
+      "id": "SMkQWBH8pFw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "p1OnKQLbpLU"
+      "id": "UkDq4zQGUEs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "ZBe2sdSaCPg"
+      "id": "b3Kp6qnwRxc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "U35fFHde2jw"
+      "id": "tITY7BZ3xq8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-09-30",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "q32aKdQToUI"
+      "id": "eOmtLU9PVpU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "9RZOCEe6ngE"
+      "id": "N-nwC84xzDM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "6Y0MUlUcW3w"
+      "id": "5lOScReoPgs"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "95xRnBRbEqM"
+      "id": "s-ZPGpBPZNE"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "ubyuKUnuezA"
+      "id": "jvMlbs4Qwbw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "753h5YtIabM"
+      "id": "_Xp95QpXl1c"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "f-OAodgQEUs"
+      "id": "ih70ze_0gbg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "fZPCe1f4-JU"
+      "id": "r-PbvTYRHAg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-01",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "ZkAj9zxCcqM"
+      "id": "iMEkeHMe_A4"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "zw8d_Nu4Ivg"
+      "id": "ci28qRrmI3w"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "aVzfj53192Y"
+      "id": "YZ4beV44ew8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "7-KFjUoxQJw"
+      "id": "hYRtq17XB5Y"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "fPlMbu2EKAs"
+      "id": "pjRVxE6tXMY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "dt6g3pbYMco"
+      "id": "jrrLcyJnqrY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "FevZa59EySA"
+      "id": "GhtMxClHy9A"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "w3p3hRFQAAU"
+      "id": "Z4XoS9Qrl7I"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-02",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Av-6zA_Nco8"
+      "id": "H3QDuKIIRDI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "FlaXJH-TnBA"
+      "id": "OSc04SvWoWM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "w7xQaflNq5M"
+      "id": "ysr0NsuYMM8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "ZF2CMd2pSfg"
+      "id": "tiJzEZjIUbA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "3nVlp6xAmvM"
+      "id": "lcybd_dDZgE"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "KZbanH5HLb0"
+      "id": "fgET4TGdevI"
     },
     {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "10:00",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "Vo4ORWMjdDc"
-    },
-    {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "xxpj36slu9w"
+      "id": "DGxoQmxyCbo"
     },
     {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "10:30",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "iMkN3j20Zks"
-    },
-    {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "R5eRJac5fZo"
+      "id": "rubvCidaR_8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-05",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "-YOipzCHixE"
+      "id": "K6VLz_iE-gI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "dmnQgGjEYwk"
+      "id": "xiYFsKjDe2k"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "JeS8FUEVm78"
+      "id": "lOENzNBluWw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "0AextOsP--c"
+      "id": "zNYsQp_tXJk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "2sNrNyoM004"
+      "id": "THFB0cRXAWc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "kWe86s7P364"
+      "id": "BDX91xISR_w"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "GYh7WW4hXX8"
+      "id": "j_Q9QRN0d0Q"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "CrY36jmtyak"
+      "id": "HLDQuXXLxjo"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-06",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "F0gI1fOX87U"
+      "id": "stfd0tS-AUo"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "SNWerG2dGM8"
+      "id": "-j5Q57-ksws"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "aSehhyUeEDg"
+      "id": "laN2BWQvQ3U"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "K1MqaiuTDbM"
+      "id": "WVSTd__wUYA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "dO98uMa8Pi4"
+      "id": "udkfA-n357g"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "GaiOfDHzAC8"
+      "id": "obYtWfwGkXU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Re3RFkGEQoQ"
+      "id": "hPCQeeYA0mg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "iY4NSibDOyQ"
+      "id": "sqhwt3sE4qk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-07",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "0mpCpflH0To"
+      "id": "236QF13KHOY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "t45qUGP1WDM"
+      "id": "VeJ0Pw8LsAY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "TzzIWjQbdTA"
+      "id": "AAdfpPAmpEM"
     },
     {
-      "professionalId": "12345",
-      "fecha": "2026-09-22",
-      "hora": "11:00",
-      "duracion": 30,
-      "modalidad": "presencial",
-      "estado": "disponible",
-      "cliente": null,
-      "id": "4YYtJTCQL2w"
-    },
-    {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "4RWmHOT2318"
+      "id": "UNDIDDBKiLY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "msLPEDfpW78"
+      "id": "I53DcKoBcos"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "2w9xLxISFA0"
+      "id": "RTXBUV4AXqg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "fEt4FkQauO0"
+      "id": "9cUdCc2xro8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "gLNDrtAj8C8"
+      "id": "dw7W2Lq8jXM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-08",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "g2SzDVepP6Q"
+      "id": "CpsV3Hi6co0"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "RNgWHQcozQ8"
+      "id": "6qjuuhMJMtg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Rik_v5DJqok"
+      "id": "DdDVOXc0BNc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "jwtYW9PpOgo"
+      "id": "z-29b8S4z7c"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "4EwiSGxZTOs"
+      "id": "mPTkz-87S8g"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "AnTpKfD3vvE"
+      "id": "Ki6720hce6Y"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "__vCO0Zb6PA"
+      "id": "1MHYHnhJlhM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "XGbywWuAV3Q"
+      "id": "QQqS1f8UCRk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-09",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "2XtdTIDh-4w"
+      "id": "7M3Dd6foDKM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "ru427Jq18Tw"
+      "id": "N8hPAKKBCRI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "RRehSpBWbhQ"
+      "id": "xds5sk16sfA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "N7nct_-J0mk"
+      "id": "hORfzJ84Xtk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "mOB2aUAwHdk"
+      "id": "qnIew7a4QeI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "p3WKcOmjmKg"
+      "id": "QlJvR4krM9Q"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "C9xAFyV4sCk"
+      "id": "nDH9GOdkgXA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "REQTDD16-os"
+      "id": "vVn37DfcFDk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-12",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "n0QT3ZIDPMo"
+      "id": "dhqUPAydKdI"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "O2tfuF-DVA8"
+      "id": "VN1QiYX2I5w"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "kpXRo7zrMGY"
+      "id": "XmucSXCtZGM"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "cofuGeOMWXg"
+      "id": "nJDWjtn-lEw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "iIoq_qkVWQ8"
+      "id": "f7bQgDRrC8U"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "m8AfUqbEy_8"
+      "id": "3S5b0E82JbA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "-2wCxBVYoXA"
+      "id": "-1LXjrcF02Y"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Or9uHE3Hcyg"
+      "id": "GIR0YIgbHyA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-13",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "HAq6frEVOLs"
+      "id": "nkCrWbTNx5s"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "vsEBVvcLguk"
+      "id": "quDlEdlsBLw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "eGp6lqy13FA"
+      "id": "MYYdMxQxPQU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "C23mobLFbAY"
+      "id": "3yZHvzS-agg"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "UC9X5yZomKQ"
+      "id": "7VjkWV0Fxu8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "7HOTnQzL5fM"
+      "id": "4aWjzlKa0U4"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "worIuAsGfdU"
+      "id": "BKVdWw2cTgU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "hMGh6FbOMoE"
+      "id": "zmx8CPJACTk"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-14",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "rKPSz8FIl-0"
+      "id": "glIYZB3aGVU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "7L2JzgE2H7s"
+      "id": "r8LZAfo3QAo"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "I-xKrcZZ6q4"
+      "id": "0eG76-Nl3uQ"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "NZxbDG6Y6_U"
+      "id": "v6SvjJXz7uc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "2KPUpdS9Xqs"
+      "id": "2E7_BFpgnlY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "z7EzpXZ6tR4"
+      "id": "H8i9Veah3P0"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "5ZXVYsgUZC0"
+      "id": "mbwR7X3VEW0"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "9AUxgYf5EIo"
+      "id": "tSulxxJ3YfA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-15",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "VD5J7eybPqA"
+      "id": "OaYhStEgvLc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "4u4n6DOoOPM"
+      "id": "yF3mUWbbAwU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "cuKTJBDIF-E"
+      "id": "R6bWhYWeGX8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "5uLhdyH8Iwg"
+      "id": "Wwfmt-kuFTU"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "FPE6XsHV_Sg"
+      "id": "_0lzLeXvhbE"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "STufOc095JQ"
+      "id": "KWUlhsetcn0"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "TGQQthKdYU4"
+      "id": "SotpUPPYWvc"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "y9_J1o8oGnE"
+      "id": "ze_kdNTStKQ"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-16",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "EzHxDBypG20"
+      "id": "ZtHeFlUV1A8"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "09:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "dPIdwZjM5UQ"
+      "id": "vv3tTFWdddY"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "09:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "M_845D9BIdw"
+      "id": "PpRil_DO9bE"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "10:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "DoS1mO8NPG0"
+      "id": "a6F7dLUoKCw"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "10:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "BlcOhznIhpY"
+      "id": "aqTfGmFsgEA"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "11:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "nTuZ7cg-_HI"
+      "id": "AOkRvQyChbo"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "11:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "Zoza8ta-LE4"
+      "id": "tw8DHQlyLNE"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "12:00",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "LvRMlCQ1Af8"
+      "id": "9Y7onioGx90"
     },
     {
-      "professionalId": "12345",
+      "professionalId": "238745",
       "fecha": "2026-10-19",
       "hora": "12:30",
       "duracion": 30,
       "modalidad": "presencial",
       "estado": "disponible",
       "cliente": null,
-      "id": "AQ0q3hfYh1s"
+      "id": "uMMTLG76mhc"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "09:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "QMNewuiW8Mo"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "09:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "CuoTCvppgW8"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "nCNFE0ATlH4"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "10:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "Os5iQ0Mgswc"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "11:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "LntJs2QD5iY"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "11:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "IySFG2MbB0M"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "12:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "nqSDgsrryrk"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-10-20",
+      "hora": "12:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "wEIvYAP9Qyo"
     }
   ],
-  "valoraciones": [
-    {
-      "professionalId": "999999",
-      "nombre": "José",
-      "apellido": "Reyes",
-      "fecha": "2026-09-16",
-      "puntaje": 5,
-      "descripcion": "Gran atencion.",
-      "id": "8YYQN9-iGQs",
-      "userId": "vsvLADccdcM"
-    }
-  ],
+  "valoraciones": [],
   "informacionesProfesionales": [
-    {
-      "professionalId": "12345",
-      "profesional_userData": {
-        "name": "José",
-        "lastname": "Reyes",
-        "dni": "34546789",
-        "email": "jose.reyes@meetpro.com",
-        "phoneNumber": "1145551234",
-        "age": 41,
-        "gender": "Masculino",
-        "nationality": "Argentina",
-        "dateOfBirth": "1985-05-04T00:00:00.000Z",
-        "address": {
-          "address": "Av. Corrientes 1234",
-          "city": "CABA",
-          "province": "Buenos Aires",
-          "country": "Argentina",
-          "zipCode": "C1043"
-        },
-        "id": "vsvLADccdcM"
-      },
-      "descripcionAmpliada": "Soy desarrollador de software con más de 15 años de experiencia en el diseño y la construcción de aplicaciones web y móviles. Me especializo en arquitecturas backend escalables con Node.js y Angular, y en los últimos años lideré equipos de entre 4 y 8 personas en proyectos para el sector fintech y salud.\n\nMe apasiona el mentoring: dedico parte de mi semana a acompañar a desarrolladores junior en su crecimiento técnico. Trabajo con metodologías ágiles (Scrum/Kanban) y priorizo siempre la calidad del código y la experiencia del usuario final.\n\nFuera del código, doy charlas en meetups locales sobre buenas prácticas de desarrollo y accesibilidad web.",
-      "id": "zoZdozfOb-Y"
-    },
     {
       "professionalId": "123456789",
       "profesional_userData": {
@@ -2137,27 +1807,18 @@
       "id": "pq66a-JfuSQ"
     }
   ],
-  "proyectos": [
+  "proyectos": [],
+  "contenido-profesional-cliente": [
     {
-      "professionalId": "12345",
-      "titulo_proyecto": "Plataforma de gestión de turnos para clínicas",
-      "fecha_inicio": "2025-02-01",
-      "fecha_finalizacion": "2025-07-15",
-      "descripcion_proyecto": "Sistema web para que clínicas pequeñas gestionen turnos, fichas de pacientes y recordatorios automáticos por email. Desarrollado con Angular y Node.js, con backend REST y autenticación de usuarios.",
-      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZjJmNyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYmU0ZjMiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgoKICA8IS0tIHZlbnRhbmEgZGVsIG5hdmVnYWRvciAtLT4KICA8cmVjdCB4PSI2MCIgeT0iNTAiIHdpZHRoPSI2ODAiIGhlaWdodD0iMzUwIiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNlMmU4ZjAiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjYwIiB5PSI1MCIgd2lkdGg9IjY4MCIgaGVpZ2h0PSIzNCIgZmlsbD0iI2Y2ZjhmZSIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8Y2lyY2xlIGN4PSI4MiIgY3k9IjY3IiByPSI2IiBmaWxsPSIjZjg3MTcxIi8+CiAgPGNpcmNsZSBjeD0iMTAyIiBjeT0iNjciIHI9IjYiIGZpbGw9IiNmYmJmMjQiLz4KICA8Y2lyY2xlIGN4PSIxMjIiIGN5PSI2NyIgcj0iNiIgZmlsbD0iIzM0ZDM5OSIvPgoKICA8IS0tIGJhcnJhIGxhdGVyYWwgLS0+CiAgPHJlY3QgeD0iNjAiIHk9Ijg0IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjMxNiIgZmlsbD0iIzBmMjU0NyIvPgogIDxyZWN0IHg9Ijg2IiB5PSIxMTIiIHdpZHRoPSI5OCIgaGVpZ2h0PSIxMCIgcng9IjEiIGZpbGw9IiM2MGE1ZmEiLz4KICA8cmVjdCB4PSI4NiIgeT0iMTUwIiB3aWR0aD0iOTgiIGhlaWdodD0iOCIgcng9IjEiIGZpbGw9IiMzYjViOGMiLz4KICA8cmVjdCB4PSI4NiIgeT0iMTc0IiB3aWR0aD0iOTgiIGhlaWdodD0iOCIgcng9IjEiIGZpbGw9IiMzYjViOGMiLz4KICA8cmVjdCB4PSI4NiIgeT0iMTk4IiB3aWR0aD0iOTgiIGhlaWdodD0iOCIgcng9IjEiIGZpbGw9IiMzYjViOGMiLz4KICA8cmVjdCB4PSI4NiIgeT0iMjIyIiB3aWR0aD0iOTgiIGhlaWdodD0iOCIgcng9IjEiIGZpbGw9IiMzYjViOGMiLz4KCiAgPCEtLSB0aXR1bG8gcGFuZWwgLS0+CiAgPHJlY3QgeD0iMjM0IiB5PSIxMDQiIHdpZHRoPSIyMjAiIGhlaWdodD0iMTQiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgPHJlY3QgeD0iMjM0IiB5PSIxMjgiIHdpZHRoPSIxNDAiIGhlaWdodD0iOSIgcng9IjEiIGZpbGw9IiM5NGEzYjgiLz4KCiAgPCEtLSB0YWJsYSBkZSB0dXJub3MgLS0+CiAgPHJlY3QgeD0iMjM0IiB5PSIxNjAiIHdpZHRoPSI0NzIiIGhlaWdodD0iMjE2IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNlMmU4ZjAiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjIzNCIgeT0iMTYwIiB3aWR0aD0iNDcyIiBoZWlnaHQ9IjM0IiBmaWxsPSIjZjZmOGZlIiBzdHJva2U9IiNlMmU4ZjAiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjI1MiIgeT0iMTcyIiB3aWR0aD0iNzAiIGhlaWdodD0iOSIgcng9IjEiIGZpbGw9IiM2NDc0OGIiLz4KICA8cmVjdCB4PSIzNjAiIHk9IjE3MiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjNjQ3NDhiIi8+CiAgPHJlY3QgeD0iNDcwIiB5PSIxNzIiIHdpZHRoPSI4MCIgaGVpZ2h0PSI5IiByeD0iMSIgZmlsbD0iIzY0NzQ4YiIvPgoKICA8ZyBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjE5NCIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSIxIiBmaWxsPSIjZWVmMWY1Ii8+CiAgICA8cmVjdCB4PSIyNTIiIHk9IjIwNiIgd2lkdGg9IjcwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSIzNjAiIHk9IjIwNiIgd2lkdGg9IjUwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSI0NzAiIHk9IjIwNCIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE2IiBmaWxsPSIjZWZmNGZmIiBzdHJva2U9IiNkYmU2ZmUiLz4KICAgIDxyZWN0IHg9IjYyOCIgeT0iMjAyIiB3aWR0aD0iNTgiIGhlaWdodD0iMjAiIGZpbGw9IiMyNTYzZWIiLz4KCiAgICA8cmVjdCB4PSIyMzQiIHk9IjIzOCIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSIxIiBmaWxsPSIjZWVmMWY1Ii8+CiAgICA8cmVjdCB4PSIyNTIiIHk9IjI1MCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSIzNjAiIHk9IjI1MCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSI0NzAiIHk9IjI0OCIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE2IiBmaWxsPSIjZWZmNGZmIiBzdHJva2U9IiNkYmU2ZmUiLz4KICAgIDxyZWN0IHg9IjYyOCIgeT0iMjQ2IiB3aWR0aD0iNTgiIGhlaWdodD0iMjAiIGZpbGw9IiNlMmU4ZjAiLz4KCiAgICA8cmVjdCB4PSIyMzQiIHk9IjI4MiIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSIxIiBmaWxsPSIjZWVmMWY1Ii8+CiAgICA8cmVjdCB4PSIyNTIiIHk9IjI5NCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSIzNjAiIHk9IjI5NCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSI0NzAiIHk9IjI5MiIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE2IiBmaWxsPSIjZWZmNGZmIiBzdHJva2U9IiNkYmU2ZmUiLz4KICAgIDxyZWN0IHg9IjYyOCIgeT0iMjkwIiB3aWR0aD0iNTgiIGhlaWdodD0iMjAiIGZpbGw9IiNlMmU4ZjAiLz4KCiAgICA8cmVjdCB4PSIyMzQiIHk9IjMyNiIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSIxIiBmaWxsPSIjZWVmMWY1Ii8+CiAgICA8cmVjdCB4PSIyNTIiIHk9IjMzOCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSIzNjAiIHk9IjMzOCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgICA8cmVjdCB4PSI0NzAiIHk9IjMzNiIgd2lkdGg9IjcyIiBoZWlnaHQ9IjE2IiBmaWxsPSIjZWZmNGZmIiBzdHJva2U9IiNkYmU2ZmUiLz4KICAgIDxyZWN0IHg9IjYyOCIgeT0iMzM0IiB3aWR0aD0iNTgiIGhlaWdodD0iMjAiIGZpbGw9IiNlMmU4ZjAiLz4KICA8L2c+Cjwvc3ZnPgo=",
-      "link_adjunto": "https://github.com/jreyes/clinicas-turnos",
-      "id": "kBmUKCA2UZo"
-    },
-    {
-      "professionalId": "12345",
-      "titulo_proyecto": "App móvil de recordatorios de turnos",
-      "fecha_inicio": "2024-03-10",
-      "fecha_finalizacion": "2024-09-05",
-      "descripcion_proyecto": "Aplicación para iOS y Android que envía notificaciones push y recordatorios por SMS antes de cada turno médico. Incluye reprogramación desde la propia app y sincronización en tiempo real con la agenda del profesional.",
-      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmcyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlZWYyZjciLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZGJlNGYzIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0idXJsKCNiZzIpIi8+CgogIDwhLS0gdGVsZWZvbm8gLS0+CiAgPHJlY3QgeD0iMzA4IiB5PSI0NSIgd2lkdGg9IjE4NCIgaGVpZ2h0PSIzNjAiIHJ4PSIyMiIgZmlsbD0iIzBmMjU0NyIvPgogIDxyZWN0IHg9IjMyMCIgeT0iNjgiIHdpZHRoPSIxNjAiIGhlaWdodD0iMzE0IiByeD0iNCIgZmlsbD0iI2ZmZmZmZiIvPgogIDxyZWN0IHg9IjM3OCIgeT0iNTMiIHdpZHRoPSI0NCIgaGVpZ2h0PSI4IiByeD0iNCIgZmlsbD0iIzNiNWI4YyIvPgoKICA8IS0tIGJhcnJhIGRlIGVzdGFkbyAtLT4KICA8cmVjdCB4PSIzMjAiIHk9IjY4IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjI2IiBmaWxsPSIjZjZmOGZlIi8+CiAgPHJlY3QgeD0iMzMyIiB5PSI3OCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjciIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CgogIDwhLS0gZW5jYWJlemFkbyBhcHAgLS0+CiAgPHJlY3QgeD0iMzIwIiB5PSI5NCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0NiIgZmlsbD0iIzI1NjNlYiIvPgogIDxyZWN0IHg9IjMzNCIgeT0iMTA4IiB3aWR0aD0iOTAiIGhlaWdodD0iMTAiIHJ4PSIxIiBmaWxsPSIjZmZmZmZmIi8+CiAgPHJlY3QgeD0iMzM0IiB5PSIxMjIiIHdpZHRoPSI2MCIgaGVpZ2h0PSI4IiByeD0iMSIgZmlsbD0iI2JjZDRmYiIvPgoKICA8IS0tIHRhcmpldGEgZGUgdHVybm8gZGVzdGFjYWRhIC0tPgogIDxyZWN0IHg9IjMzMiIgeT0iMTUyIiB3aWR0aD0iMTM2IiBoZWlnaHQ9IjU2IiBmaWxsPSIjZWZmNGZmIiBzdHJva2U9IiNkYmU2ZmUiLz4KICA8cmVjdCB4PSIzNDQiIHk9IjE2NCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjkiIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgPHJlY3QgeD0iMzQ0IiB5PSIxODAiIHdpZHRoPSI5MCIgaGVpZ2h0PSI3IiByeD0iMSIgZmlsbD0iIzI1NjNlYiIvPgogIDxjaXJjbGUgY3g9IjQ1MiIgY3k9IjE4MCIgcj0iMTAiIGZpbGw9IiMyNTYzZWIiLz4KICA8cGF0aCBkPSJNNDQ4IDE4MGwzIDMgNi03IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CgogIDwhLS0gbGlzdGEgZGUgbm90aWZpY2FjaW9uZXMgLS0+CiAgPHJlY3QgeD0iMzMyIiB5PSIyMjIiIHdpZHRoPSIxMzYiIGhlaWdodD0iMSIgZmlsbD0iI2U0ZThlZCIvPgogIDxjaXJjbGUgY3g9IjM0NCIgY3k9IjI0MCIgcj0iNiIgZmlsbD0iIzk0YTNiOCIvPgogIDxyZWN0IHg9IjM1OCIgeT0iMjM1IiB3aWR0aD0iOTgiIGhlaWdodD0iNyIgcng9IjEiIGZpbGw9IiMwZjE3MmEiLz4KICA8cmVjdCB4PSIzNTgiIHk9IjI0NyIgd2lkdGg9IjcwIiBoZWlnaHQ9IjYiIHJ4PSIxIiBmaWxsPSIjOTRhM2I4Ii8+CgogIDxyZWN0IHg9IjMzMiIgeT0iMjY2IiB3aWR0aD0iMTM2IiBoZWlnaHQ9IjEiIGZpbGw9IiNlNGU4ZWQiLz4KICA8Y2lyY2xlIGN4PSIzNDQiIGN5PSIyODQiIHI9IjYiIGZpbGw9IiM5NGEzYjgiLz4KICA8cmVjdCB4PSIzNTgiIHk9IjI3OSIgd2lkdGg9Ijk4IiBoZWlnaHQ9IjciIHJ4PSIxIiBmaWxsPSIjMGYxNzJhIi8+CiAgPHJlY3QgeD0iMzU4IiB5PSIyOTEiIHdpZHRoPSI3MCIgaGVpZ2h0PSI2IiByeD0iMSIgZmlsbD0iIzk0YTNiOCIvPgoKICA8cmVjdCB4PSIzMzIiIHk9IjMxMCIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIxIiBmaWxsPSIjZTRlOGVkIi8+CiAgPGNpcmNsZSBjeD0iMzQ0IiBjeT0iMzI4IiByPSI2IiBmaWxsPSIjOTRhM2I4Ii8+CiAgPHJlY3QgeD0iMzU4IiB5PSIzMjMiIHdpZHRoPSI5OCIgaGVpZ2h0PSI3IiByeD0iMSIgZmlsbD0iIzBmMTcyYSIvPgogIDxyZWN0IHg9IjM1OCIgeT0iMzM1IiB3aWR0aD0iNzAiIGhlaWdodD0iNiIgcng9IjEiIGZpbGw9IiM5NGEzYjgiLz4KCiAgPCEtLSBib3RvbiBmbG90YW50ZSAtLT4KICA8Y2lyY2xlIGN4PSI0NTIiIGN5PSIzNjAiIHI9IjE2IiBmaWxsPSIjMjU2M2ViIi8+CiAgPHBhdGggZD0iTTQ1MiAzNTN2MTRNNDQ1IDM2MGgxNCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=",
-      "id": "IHroKEMZ1AA"
+      "professionalId": "238745",
+      "tipo": "cliente",
+      "titulo": "Archivo contable 1",
+      "fecha": "2026-09-22",
+      "hora": "17:24",
+      "descripcion": "Le envio el archivo de mi empres",
+      "link": "",
+      "id": "-vRvGXtQUJQ"
     }
   ],
-  "contenido-profesional-cliente": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

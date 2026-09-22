@@ -382,6 +382,10 @@ label {
   word-break: break-word;
 }
 
+.telefono-codigo {
+  color: #64748b;
+}
+
 .valor-link {
   color: #2563eb;
   text-decoration: none;

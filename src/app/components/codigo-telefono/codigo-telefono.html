@@ -1,0 +1,35 @@
+<div class="codigo-tel" [class.codigo-tel--abierto]="abierto()">
+  <button
+    type="button"
+    class="codigo-tel-boton"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="abierto()"
+    [attr.aria-label]="ariaLabel()"
+    (click)="alternar()"
+    (keydown)="teclado($event)"
+  >
+    <span class="codigo-tel-bandera" aria-hidden="true">{{ actual().bandera }}</span>
+    <span class="codigo-tel-numero">{{ actual().codigo }}</span>
+    <span class="codigo-tel-flecha" aria-hidden="true"></span>
+  </button>
+
+  @if (abierto()) {
+    <ul class="codigo-tel-lista" role="listbox" #lista>
+      @for (p of paises; track p.iso) {
+        <li
+          role="option"
+          class="codigo-tel-opcion"
+          [class.codigo-tel-opcion--sel]="p.codigo === valor()"
+          [class.codigo-tel-opcion--res]="$index === resaltado()"
+          [attr.aria-selected]="p.codigo === valor()"
+          (click)="elegir($index)"
+          (mouseenter)="resaltado.set($index)"
+        >
+          <span class="codigo-tel-bandera" aria-hidden="true">{{ p.bandera }}</span>
+          <span class="codigo-tel-opcion-nombre">{{ p.nombre }}</span>
+          <span class="codigo-tel-opcion-codigo">{{ p.codigo }}</span>
+        </li>
+      }
+    </ul>
+  }
+</div>

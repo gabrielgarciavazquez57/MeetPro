@@ -137,8 +137,15 @@
                         }
                 </li>
                 <li>
-                    <label for="phoneNumber">Telefono: (codigo de pais) y numero telefonico </label>
-                    <input type="text" formControlName="phoneNumber" id="phoneNumber">
+                    <label for="phoneNumber">Teléfono: </label>
+                    <div class="telefono-campo">
+                        <app-codigo-telefono
+                            ariaLabel="Código de país"
+                            [valor]="codigoTelefono()"
+                            (cambio)="codigoTelefono.set($event)"
+                        />
+                        <input type="text" formControlName="phoneNumber" id="phoneNumber" placeholder="Número sin el 0 ni el 15">
+                    </div>
                      @if(phoneNumber.dirty || phoneNumber.touched){
                             @if(phoneNumber.hasError('required')){
                                 <span>Campo requerido</span>
@@ -241,7 +248,11 @@
                      @if(username.dirty || username.touched){
                             @if(username.hasError('required')){
                                 <span>Campo requerido</span>
-                            }
+                            }@else if (username.hasError('usernameDuplicado')) {
+                    <span>Ya existe un usuario registrado con ese username</span>
+                    }@else if (username.pending) {
+                    <span class="campo-verificando">Verificando username...</span>
+                    }
                         }
                 </li>
                 <li>
@@ -268,6 +279,11 @@
   @if(form.hasError('passwordsNoCoinciden') && password_repeat.touched){
     <span>Las contraseñas no coinciden</span>
   }
+                    <ul class="requisitos-password">
+                        <li [class.requisito-cumplido]="!password.hasError('sinMayuscula')">Una letra mayúscula</li>
+                        <li [class.requisito-cumplido]="!password.hasError('sinNumero')">Un número</li>
+                        <li [class.requisito-cumplido]="!password.hasError('sinEspecial')">Un carácter especial (ej: ! @ # $ %)</li>
+                    </ul>
 </li>
                 
             </ul>

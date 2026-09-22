@@ -69,23 +69,13 @@
                 </span>
                 <span class="dato-texto">
                   <label>Teléfono</label>
-                  <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
+                  @if (formatearTelefono(prof.profesional_userData.phoneNumber); as tel) {
+                    <span class="valor">{{ tel.bandera }} <span class="telefono-codigo">{{ tel.codigo }}</span> {{ tel.numero }}</span>
+                  } @else {
+                    <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
+                  }
                 </span>
               </li>
-              @if (prof.direccionPresencial) {
-                <li>
-                  <span class="dato-icono" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                  </span>
-                  <span class="dato-texto">
-                    <label>Dirección presencial</label>
-                    <span class="valor">{{ prof.direccionPresencial }}</span>
-                  </span>
-                </li>
-              }
             </ul>
 
             <div class="botones-secundarios">

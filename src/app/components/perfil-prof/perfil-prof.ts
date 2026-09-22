@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { formatearTelefono } from '../../shared/codigos-pais';
 
 @Component({
   selector: 'app-perfil-profesional',
@@ -14,6 +15,8 @@ import { BarraNav } from '../barra-nav/barra-nav';
 export class PerfilProfesional implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
+
+  protected readonly formatearTelefono = formatearTelefono;
 
   profesional = signal<Profesional | null>(null);
   cargando = signal<boolean>(true);
