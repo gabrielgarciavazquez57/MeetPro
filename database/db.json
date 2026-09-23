@@ -2855,6 +2855,229 @@
       "estado": "disponible",
       "cliente": null,
       "id": "lDCBMQRCFg4"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-09-03",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "completado",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Liquidación de monotributo",
+      "id": "CrkCfPRqfmw"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-09",
+      "hora": "16:00",
+      "duracion": 45,
+      "modalidad": "online",
+      "estado": "completado",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Primera consulta",
+      "notaProfesional": "Buena primera sesión, seguimos la semana que viene.",
+      "id": "xBIowI_NOC8"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-13",
+      "hora": "11:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "completado",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Consulta por despido",
+      "id": "WC6G2WfDJ7s"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-09-18",
+      "hora": "09:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "ausente",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Revisión de balance",
+      "id": "Kl7uBPIVzK0"
+    },
+    {
+      "professionalId": "89732",
+      "fecha": "2026-09-15",
+      "hora": "14:00",
+      "duracion": 60,
+      "modalidad": "presencial",
+      "estado": "cancelado",
+      "canceladoPor": "cliente",
+      "motivoCancelacion": "Se me complicó el horario de trabajo.",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Presupuesto de reforma",
+      "id": "z5i6eWV_2jo"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-27",
+      "hora": "10:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "confirmado",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Control pediátrico",
+      "notaProfesional": "Traer el carnet de vacunación.",
+      "id": "cGGzApCACJc"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-29",
+      "hora": "17:00",
+      "duracion": 45,
+      "modalidad": "online",
+      "estado": "confirmado",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Diseño de logo",
+      "enlaceReunion": "https://meet.google.com/tomas-ferrari",
+      "id": "GpBfvAGH9mk"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-10-02",
+      "hora": "12:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "pendiente",
+      "cliente": {
+        "id": "BOB6piNCBFY",
+        "name": "Ana",
+        "lastname": "García",
+        "dni": "29777888",
+        "email": "ana.garcia@meetpro.com",
+        "phoneNumber": "+54 1155221100"
+      },
+      "motivo": "Plan de alimentación",
+      "id": "gjFbizB-Rtk"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-07",
+      "hora": "15:00",
+      "duracion": 45,
+      "modalidad": "online",
+      "estado": "completado",
+      "cliente": {
+        "id": "-4-bCtzk0Z8",
+        "name": "Roberto",
+        "lastname": "Sosa",
+        "dni": "27333444",
+        "email": "roberto.sosa@meetpro.com",
+        "phoneNumber": "+54 3515559900"
+      },
+      "motivo": "Ansiedad laboral",
+      "id": "Gv_v9foz_b4"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-20",
+      "hora": "09:30",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "rechazado",
+      "canceladoPor": "profesional",
+      "motivoCancelacion": "Se superpuso con una audiencia, disculpas.",
+      "cliente": {
+        "id": "-4-bCtzk0Z8",
+        "name": "Roberto",
+        "lastname": "Sosa",
+        "dni": "27333444",
+        "email": "roberto.sosa@meetpro.com",
+        "phoneNumber": "+54 3515559900"
+      },
+      "motivo": "Consulta laboral",
+      "id": "k6pF_n7Y3yA"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-09-22",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "confirmado",
+      "cliente": {
+        "id": "0b5Ojs0Tp3I",
+        "name": "Florencia",
+        "lastname": "Fernández",
+        "dni": "36999000",
+        "email": "florencia.fernandez@meetpro.com",
+        "phoneNumber": "+54 3417778855"
+      },
+      "motivo": "Consulta impositiva",
+      "id": "V-A8wgcO7-I"
+    },
+    {
+      "professionalId": "238745",
+      "fecha": "2026-09-26",
+      "hora": "11:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "pendiente",
+      "cliente": {
+        "id": "-4-bCtzk0Z8",
+        "name": "Roberto",
+        "lastname": "Sosa",
+        "dni": "27333444",
+        "email": "roberto.sosa@meetpro.com",
+        "phoneNumber": "+54 3515559900"
+      },
+      "motivo": "Apertura de sociedad",
+      "id": "MSSBC6TLGVw"
     }
   ],
   "valoraciones": [
@@ -3028,6 +3251,209 @@
       },
       "descripcionAmpliada": "Un fenomeno",
       "id": "pq66a-JfuSQ"
+    },
+    {
+      "professionalId": "89732",
+      "profesional_userData": {
+        "username": "palermo9",
+        "password": "Hierro123!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Martin",
+        "lastname": "Palermo",
+        "dni": "98765432",
+        "email": "palermo@meetpro.com",
+        "phoneNumber": "+54 99999999999",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "2000-08-09T00:00:00.000Z",
+        "fotoPerfil": "",
+        "address": {
+          "address": "Independencia",
+          "city": "Ezeiza",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "9999999"
+        },
+        "age": 26,
+        "id": "hrZV8lZ2UXQ"
+      },
+      "descripcionAmpliada": "Soy Arquitecto con foco en obras en seco, reformas y ampliaciones para viviendas particulares. A lo largo de mi trayectoria dirigí proyectos residenciales de distinta escala, siempre priorizando cumplir los plazos y el presupuesto acordado con el cliente. Ofrezco asesoramiento desde el anteproyecto hasta la entrega final de la obra, incluyendo gestión de permisos municipales y coordinación de gremios. Me interesa acompañar a quienes están construyendo o reformando por primera vez, traduciendo los términos técnicos a un lenguaje simple.",
+      "id": "zvTcLck5aIQ"
+    },
+    {
+      "professionalId": "167350",
+      "profesional_userData": {
+        "username": "valeortiz",
+        "password": "ValeOrtiz26!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Valentina",
+        "lastname": "Ortiz",
+        "dni": "33555666",
+        "email": "valentina.ortiz@meetpro.com",
+        "phoneNumber": "+54 1145223344",
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1992-11-08T00:00:00.000Z",
+        "address": {
+          "address": "Av. Cabildo 1500",
+          "city": "CABA",
+          "province": "Ciudad Autónoma de Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "C1426"
+        },
+        "fotoPerfil": "",
+        "age": 33,
+        "id": "lF3gxsTjDmk"
+      },
+      "descripcionAmpliada": "Soy Nutricionista especializada en planes alimentarios personalizados y en el abordaje de trastornos de la conducta alimentaria, con diplomatura de la UBA. Diseño planes que se adaptan a los horarios, gustos y objetivos de cada paciente, alejándome de las dietas restrictivas y promoviendo una relación más saludable con la comida. Acompaño procesos de bajada o subida de peso, rendimiento deportivo y situaciones clínicas que requieren un seguimiento nutricional más cercano. Las consultas de seguimiento pueden ser presenciales u online.",
+      "id": "Hz15MKZ0dOg"
+    },
+    {
+      "professionalId": "238745",
+      "profesional_userData": {
+        "id": "wy0brSNOx7s",
+        "username": "pepereyes",
+        "password": "1234567",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Pepe",
+        "lastname": "Reyes",
+        "dni": "4444444",
+        "email": "pepe@gmail.com",
+        "phoneNumber": "+54 324536475",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "2008-12-01T00:00:00.000Z",
+        "fotoPerfil": "",
+        "address": {
+          "address": "juan b justo",
+          "city": "Adrogué",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "43257"
+        },
+        "age": 17
+      },
+      "descripcionAmpliada": "Soy Contador Público egresado de la UBA, con más de 10 años de experiencia asesorando a monotributistas, pequeñas empresas y profesionales independientes. Me especializo en liquidación de impuestos, altas y bajas ante AFIP, y en ayudar a mis clientes a ordenar su contabilidad sin perder tiempo en trámites. Trabajo con un enfoque claro y didáctico: explico cada paso para que entiendas tu situación impositiva, no solo la resuelvo. Atiendo tanto consultas puntuales como el seguimiento contable mensual de tu actividad.",
+      "id": "ucAbyeBIYX4"
+    },
+    {
+      "professionalId": "298471",
+      "profesional_userData": {
+        "username": "tomasferrari",
+        "password": "Ferrari2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Tomás",
+        "lastname": "Ferrari",
+        "dni": "35222333",
+        "email": "tomas.ferrari@meetpro.com",
+        "phoneNumber": "+54 2235557722",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1995-01-30T00:00:00.000Z",
+        "address": {
+          "address": "Av. Colón 3200",
+          "city": "Mar del Plata",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "7600"
+        },
+        "fotoPerfil": "",
+        "age": 31,
+        "id": "BbjhBPBlKXE"
+      },
+      "descripcionAmpliada": "Soy Diseñador Gráfico especializado en identidad de marca, con formación avanzada en branding. Ayudo a emprendimientos y pequeñas empresas a construir una imagen visual coherente: logos, paletas de colores, papelería y cartelería que reflejen la esencia de cada negocio. Trabajo de manera colaborativa, entendiendo primero la historia y los valores de la marca antes de proponer un diseño. Mis entregas incluyen todos los archivos y manuales necesarios para que el cliente pueda usar su marca en cualquier soporte.",
+      "id": "lzy6XjsO998"
+    },
+    {
+      "professionalId": "410233",
+      "profesional_userData": {
+        "username": "lauracorrea",
+        "password": "Correa2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Laura",
+        "lastname": "Correa",
+        "dni": "30111222",
+        "email": "laura.correa@meetpro.com",
+        "phoneNumber": "+54 3512345678",
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1988-04-12T00:00:00.000Z",
+        "address": {
+          "address": "Bv. San Juan 850",
+          "city": "Córdoba",
+          "province": "Córdoba",
+          "country": "Argentina",
+          "zipCode": "5000"
+        },
+        "fotoPerfil": "",
+        "age": 38,
+        "id": "Yr6825QIfRo"
+      },
+      "descripcionAmpliada": "Soy Psicóloga clínica especializada en Terapia Cognitivo-Conductual, con formación de posgrado en la Fundación Aiglé. Trabajo con adultos y adolescentes que atraviesan cuadros de ansiedad, estrés, dificultades vinculares o momentos de transición personal. Mi enfoque combina herramientas prácticas con un espacio de escucha genuina, buscando que cada paciente pueda entender sus procesos y ganar autonomía. Ofrezco sesiones tanto presenciales como online, con la misma calidad de atención en ambas modalidades.",
+      "id": "Vrg3TmxmaXg"
+    },
+    {
+      "professionalId": "552019",
+      "profesional_userData": {
+        "username": "carladiaz",
+        "password": "CarlaD2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Carla",
+        "lastname": "Díaz",
+        "dni": "32888999",
+        "email": "carla.diaz@meetpro.com",
+        "phoneNumber": "+54 2615559911",
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1990-06-25T00:00:00.000Z",
+        "address": {
+          "address": "San Martín 480",
+          "city": "Mendoza",
+          "province": "Mendoza",
+          "country": "Argentina",
+          "zipCode": "5500"
+        },
+        "fotoPerfil": "",
+        "age": 36,
+        "id": "l9d6FkDdDbw"
+      },
+      "descripcionAmpliada": "Soy Médica Pediatra, especialista certificada por la Sociedad Argentina de Pediatría, con orientación en desarrollo infantil y control de niño sano. Acompaño a las familias desde el nacimiento hasta la adolescencia, con controles periódicos, seguimiento del calendario de vacunación y asesoramiento en alimentación y hábitos saludables. Creo en una pediatría cercana, donde los padres puedan hacer todas las preguntas necesarias sin apuro. Atiendo tanto consultas de rutina como situaciones agudas que requieran una evaluación rápida.",
+      "id": "DmMK04rbfC8"
+    },
+    {
+      "professionalId": "773108",
+      "profesional_userData": {
+        "username": "diegoromero",
+        "password": "Romero2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Diego",
+        "lastname": "Romero",
+        "dni": "28444555",
+        "email": "diego.romero@meetpro.com",
+        "phoneNumber": "+54 3415558899",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1982-09-03T00:00:00.000Z",
+        "address": {
+          "address": "Córdoba 2145",
+          "city": "Rosario",
+          "province": "Santa Fe",
+          "country": "Argentina",
+          "zipCode": "2000"
+        },
+        "fotoPerfil": "",
+        "age": 44,
+        "id": "UUgWzj0vthA"
+      },
+      "descripcionAmpliada": "Soy Abogado especializado en Derecho del Trabajo, con posgrado en la Universidad Nacional de Rosario. Asesoro a trabajadores y empleadores en casos de despidos, liquidaciones finales, negociaciones colectivas y conflictos laborales en general. Mi objetivo es que cada cliente entienda claramente sus derechos y las opciones disponibles antes de tomar una decisión. Además de la representación en instancias judiciales, ofrezco asesoramiento preventivo para evitar conflictos antes de que escalen.",
+      "id": "QjhGi-8G_wo"
     }
   ],
   "proyectos": [
