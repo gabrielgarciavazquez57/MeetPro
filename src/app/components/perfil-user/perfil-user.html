@@ -6,6 +6,10 @@
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else if (usuario(); as user) {
+    <div class="acceso-lateral">
+      <button type="button" class="btn-acceso-lateral">Historial de pagos - Realizados</button>
+    </div>
+
     <div class="formulario-profesional">
       <div class="perfil-header">
         <div class="perfil-header-top">

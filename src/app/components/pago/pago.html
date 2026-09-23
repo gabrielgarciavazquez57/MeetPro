@@ -8,6 +8,10 @@
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else if (profesional(); as prof) {
 
+    <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" [routerLink]="['/perfil-prof', prof.profesional_userData.id]">Volver atrás</a>
+    </div>
+
     <div class="turnos-encabezado">
       <div>
         <h1 class="turnos-titulo">Realizar pago - Mensual</h1>
