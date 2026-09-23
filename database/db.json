@@ -95,6 +95,198 @@
       },
       "age": 26,
       "id": "hrZV8lZ2UXQ"
+    },
+    {
+      "username": "lauracorrea",
+      "password": "Correa2026!",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Laura",
+      "lastname": "Correa",
+      "dni": "30111222",
+      "email": "laura.correa@meetpro.com",
+      "phoneNumber": "+54 3512345678",
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1988-04-12T00:00:00.000Z",
+      "address": {
+        "address": "Bv. San Juan 850",
+        "city": "Córdoba",
+        "province": "Córdoba",
+        "country": "Argentina",
+        "zipCode": "5000"
+      },
+      "fotoPerfil": "",
+      "age": 38,
+      "id": "Yr6825QIfRo"
+    },
+    {
+      "username": "diegoromero",
+      "password": "Romero2026!",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Diego",
+      "lastname": "Romero",
+      "dni": "28444555",
+      "email": "diego.romero@meetpro.com",
+      "phoneNumber": "+54 3415558899",
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1982-09-03T00:00:00.000Z",
+      "address": {
+        "address": "Córdoba 2145",
+        "city": "Rosario",
+        "province": "Santa Fe",
+        "country": "Argentina",
+        "zipCode": "2000"
+      },
+      "fotoPerfil": "",
+      "age": 44,
+      "id": "UUgWzj0vthA"
+    },
+    {
+      "username": "carladiaz",
+      "password": "CarlaD2026!",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Carla",
+      "lastname": "Díaz",
+      "dni": "32888999",
+      "email": "carla.diaz@meetpro.com",
+      "phoneNumber": "+54 2615559911",
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1990-06-25T00:00:00.000Z",
+      "address": {
+        "address": "San Martín 480",
+        "city": "Mendoza",
+        "province": "Mendoza",
+        "country": "Argentina",
+        "zipCode": "5500"
+      },
+      "fotoPerfil": "",
+      "age": 36,
+      "id": "l9d6FkDdDbw"
+    },
+    {
+      "username": "tomasferrari",
+      "password": "Ferrari2026!",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Tomás",
+      "lastname": "Ferrari",
+      "dni": "35222333",
+      "email": "tomas.ferrari@meetpro.com",
+      "phoneNumber": "+54 2235557722",
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1995-01-30T00:00:00.000Z",
+      "address": {
+        "address": "Av. Colón 3200",
+        "city": "Mar del Plata",
+        "province": "Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "7600"
+      },
+      "fotoPerfil": "",
+      "age": 31,
+      "id": "BbjhBPBlKXE"
+    },
+    {
+      "username": "valeortiz",
+      "password": "ValeOrtiz26!",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Valentina",
+      "lastname": "Ortiz",
+      "dni": "33555666",
+      "email": "valentina.ortiz@meetpro.com",
+      "phoneNumber": "+54 1145223344",
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1992-11-08T00:00:00.000Z",
+      "address": {
+        "address": "Av. Cabildo 1500",
+        "city": "CABA",
+        "province": "Ciudad Autónoma de Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "C1426"
+      },
+      "fotoPerfil": "",
+      "age": 33,
+      "id": "lF3gxsTjDmk"
+    },
+    {
+      "username": "anagarcia",
+      "password": "AnaG2026!",
+      "isProfesional": false,
+      "isAdmin": false,
+      "name": "Ana",
+      "lastname": "García",
+      "dni": "29777888",
+      "email": "ana.garcia@meetpro.com",
+      "phoneNumber": "+54 1155221100",
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1993-03-14T00:00:00.000Z",
+      "address": {
+        "address": "Rivadavia 2200",
+        "city": "CABA",
+        "province": "Ciudad Autónoma de Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "C1034"
+      },
+      "fotoPerfil": "",
+      "age": 33,
+      "id": "BOB6piNCBFY"
+    },
+    {
+      "username": "robertososa",
+      "password": "Sosa2026!",
+      "isProfesional": false,
+      "isAdmin": false,
+      "name": "Roberto",
+      "lastname": "Sosa",
+      "dni": "27333444",
+      "email": "roberto.sosa@meetpro.com",
+      "phoneNumber": "+54 3515559900",
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1985-07-22T00:00:00.000Z",
+      "address": {
+        "address": "Av. Colón 900",
+        "city": "Córdoba",
+        "province": "Córdoba",
+        "country": "Argentina",
+        "zipCode": "5000"
+      },
+      "fotoPerfil": "",
+      "age": 41,
+      "id": "-4-bCtzk0Z8"
+    },
+    {
+      "username": "florfernandez",
+      "password": "Flor2026!",
+      "isProfesional": false,
+      "isAdmin": false,
+      "name": "Florencia",
+      "lastname": "Fernández",
+      "dni": "36999000",
+      "email": "florencia.fernandez@meetpro.com",
+      "phoneNumber": "+54 3417778855",
+      "gender": "Femenino",
+      "nationality": "Argentina",
+      "dateOfBirth": "1998-10-05T00:00:00.000Z",
+      "address": {
+        "address": "Pellegrini 1400",
+        "city": "Rosario",
+        "province": "Santa Fe",
+        "country": "Argentina",
+        "zipCode": "2000"
+      },
+      "fotoPerfil": "",
+      "age": 27,
+      "id": "0b5Ojs0Tp3I"
     }
   ],
   "profesionales": [
@@ -251,6 +443,316 @@
         "precio": 500000
       },
       "id": "A0alrkiFlaI"
+    },
+    {
+      "profesional_userData": {
+        "username": "lauracorrea",
+        "password": "Correa2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Laura",
+        "lastname": "Correa",
+        "dni": "30111222",
+        "email": "laura.correa@meetpro.com",
+        "phoneNumber": "+54 3512345678",
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1988-04-12T00:00:00.000Z",
+        "address": {
+          "address": "Bv. San Juan 850",
+          "city": "Córdoba",
+          "province": "Córdoba",
+          "country": "Argentina",
+          "zipCode": "5000"
+        },
+        "fotoPerfil": "",
+        "age": 38,
+        "id": "Yr6825QIfRo"
+      },
+      "profession": "Psicóloga",
+      "professionalId": "410233",
+      "descriptionprofesional": "Psicóloga clínica especializada en terapia cognitivo-conductual para adultos y adolescentes.",
+      "linkedin": "https://www.linkedin.com/in/lauracorrea",
+      "linkReunion": "https://meet.google.com/laura-correa",
+      "direccionPresencial": "Bv. San Juan 850, piso 3, Córdoba",
+      "titulos": [
+        {
+          "nombre_titulo": "Licenciatura en Psicología",
+          "descripcion_titulo": "Orientación cognitivo-conductual",
+          "fecha_obtencion": "2012-12-10",
+          "institucion_educativa": "Universidad Nacional de Córdoba"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Psicóloga clínica",
+          "institucion_experiencia": "Consultorio particular",
+          "fecha_inicio": "2013-03-01",
+          "fecha_fin": ""
+        }
+      ],
+      "certificados": [
+        {
+          "id": "c-410233-1",
+          "nombre_certificado": "Terapia Cognitivo-Conductual",
+          "institucion_certificado": "Fundación Aiglé",
+          "fecha_obtencion": "2018-06-10",
+          "descripcion_certificado": "Formación de posgrado en TCC para adultos.",
+          "archivo_adjunto": ""
+        }
+      ],
+      "pago": {
+        "precio": 8500
+      },
+      "id": "WOEAKNnaRKA"
+    },
+    {
+      "profesional_userData": {
+        "username": "diegoromero",
+        "password": "Romero2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Diego",
+        "lastname": "Romero",
+        "dni": "28444555",
+        "email": "diego.romero@meetpro.com",
+        "phoneNumber": "+54 3415558899",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1982-09-03T00:00:00.000Z",
+        "address": {
+          "address": "Córdoba 2145",
+          "city": "Rosario",
+          "province": "Santa Fe",
+          "country": "Argentina",
+          "zipCode": "2000"
+        },
+        "fotoPerfil": "",
+        "age": 44,
+        "id": "UUgWzj0vthA"
+      },
+      "profession": "Abogado",
+      "professionalId": "773108",
+      "descriptionprofesional": "Abogado especializado en derecho laboral, con foco en despidos y negociaciones colectivas.",
+      "linkedin": "",
+      "linkReunion": "https://meet.google.com/diego-romero",
+      "direccionPresencial": "Córdoba 2145, oficina 12, Rosario",
+      "titulos": [
+        {
+          "nombre_titulo": "Abogacía",
+          "descripcion_titulo": "Orientación en derecho laboral",
+          "fecha_obtencion": "2008-11-20",
+          "institucion_educativa": "Universidad Nacional de Rosario"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Abogado laboralista",
+          "institucion_experiencia": "Estudio Romero & Asociados",
+          "fecha_inicio": "2009-02-01",
+          "fecha_fin": ""
+        }
+      ],
+      "certificados": [
+        {
+          "id": "c-773108-1",
+          "nombre_certificado": "Especialización en Derecho del Trabajo",
+          "institucion_certificado": "Universidad Nacional de Rosario",
+          "fecha_obtencion": "2014-11-20",
+          "descripcion_certificado": "Posgrado en derecho laboral y relaciones colectivas.",
+          "archivo_adjunto": ""
+        }
+      ],
+      "pago": {
+        "precio": 15000
+      },
+      "id": "6k-d1MTsyWY"
+    },
+    {
+      "profesional_userData": {
+        "username": "carladiaz",
+        "password": "CarlaD2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Carla",
+        "lastname": "Díaz",
+        "dni": "32888999",
+        "email": "carla.diaz@meetpro.com",
+        "phoneNumber": "+54 2615559911",
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1990-06-25T00:00:00.000Z",
+        "address": {
+          "address": "San Martín 480",
+          "city": "Mendoza",
+          "province": "Mendoza",
+          "country": "Argentina",
+          "zipCode": "5500"
+        },
+        "fotoPerfil": "",
+        "age": 36,
+        "id": "l9d6FkDdDbw"
+      },
+      "profession": "Médica Pediatra",
+      "professionalId": "552019",
+      "descriptionprofesional": "Médica pediatra con orientación en desarrollo infantil y control de niño sano.",
+      "linkedin": "https://www.linkedin.com/in/carladiazpediatra",
+      "linkReunion": "https://meet.google.com/carla-diaz",
+      "direccionPresencial": "San Martín 480, consultorio 5, Mendoza",
+      "titulos": [
+        {
+          "nombre_titulo": "Medicina",
+          "descripcion_titulo": "Especialización en Pediatría",
+          "fecha_obtencion": "2015-12-15",
+          "institucion_educativa": "Universidad Nacional de Cuyo"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Pediatra",
+          "institucion_experiencia": "Hospital Central de Mendoza",
+          "fecha_inicio": "2016-03-01",
+          "fecha_fin": ""
+        }
+      ],
+      "certificados": [
+        {
+          "id": "c-552019-1",
+          "nombre_certificado": "Especialista en Pediatría",
+          "institucion_certificado": "Sociedad Argentina de Pediatría",
+          "fecha_obtencion": "2017-05-15",
+          "descripcion_certificado": "Certificación de especialista en pediatría general.",
+          "archivo_adjunto": ""
+        }
+      ],
+      "pago": {
+        "precio": 12000
+      },
+      "id": "r7Va3eXbeLA"
+    },
+    {
+      "profesional_userData": {
+        "username": "tomasferrari",
+        "password": "Ferrari2026!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Tomás",
+        "lastname": "Ferrari",
+        "dni": "35222333",
+        "email": "tomas.ferrari@meetpro.com",
+        "phoneNumber": "+54 2235557722",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1995-01-30T00:00:00.000Z",
+        "address": {
+          "address": "Av. Colón 3200",
+          "city": "Mar del Plata",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "7600"
+        },
+        "fotoPerfil": "",
+        "age": 31,
+        "id": "BbjhBPBlKXE"
+      },
+      "profession": "Diseñador Gráfico",
+      "professionalId": "298471",
+      "descriptionprofesional": "Diseñador gráfico y de marca, especializado en identidad visual para emprendimientos.",
+      "linkedin": "https://www.linkedin.com/in/tomasferrari",
+      "linkReunion": "https://meet.google.com/tomas-ferrari",
+      "direccionPresencial": "Av. Colón 3200, Mar del Plata",
+      "titulos": [
+        {
+          "nombre_titulo": "Diseño Gráfico",
+          "descripcion_titulo": "Identidad visual y branding",
+          "fecha_obtencion": "2018-12-01",
+          "institucion_educativa": "Universidad FASTA"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Diseñador freelance",
+          "institucion_experiencia": "Independiente",
+          "fecha_inicio": "2019-01-01",
+          "fecha_fin": ""
+        }
+      ],
+      "certificados": [
+        {
+          "id": "c-298471-1",
+          "nombre_certificado": "Diseño de Marca",
+          "institucion_certificado": "Domestika",
+          "fecha_obtencion": "2020-03-01",
+          "descripcion_certificado": "Curso avanzado de identidad visual y branding.",
+          "archivo_adjunto": ""
+        }
+      ],
+      "pago": {
+        "precio": 6000
+      },
+      "id": "XpUxDZTSfyY"
+    },
+    {
+      "profesional_userData": {
+        "username": "valeortiz",
+        "password": "ValeOrtiz26!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Valentina",
+        "lastname": "Ortiz",
+        "dni": "33555666",
+        "email": "valentina.ortiz@meetpro.com",
+        "phoneNumber": "+54 1145223344",
+        "gender": "Femenino",
+        "nationality": "Argentina",
+        "dateOfBirth": "1992-11-08T00:00:00.000Z",
+        "address": {
+          "address": "Av. Cabildo 1500",
+          "city": "CABA",
+          "province": "Ciudad Autónoma de Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "C1426"
+        },
+        "fotoPerfil": "",
+        "age": 33,
+        "id": "lF3gxsTjDmk"
+      },
+      "profession": "Nutricionista",
+      "professionalId": "167350",
+      "descriptionprofesional": "Nutricionista especializada en planes alimentarios personalizados y trastornos alimentarios.",
+      "linkedin": "https://www.linkedin.com/in/valentinaortiz",
+      "linkReunion": "https://meet.google.com/vale-ortiz",
+      "direccionPresencial": "Av. Cabildo 1500, piso 2, CABA",
+      "titulos": [
+        {
+          "nombre_titulo": "Licenciatura en Nutrición",
+          "descripcion_titulo": "Nutrición clínica",
+          "fecha_obtencion": "2016-07-15",
+          "institucion_educativa": "Universidad de Buenos Aires"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Nutricionista",
+          "institucion_experiencia": "Consultorio particular",
+          "fecha_inicio": "2017-02-01",
+          "fecha_fin": ""
+        }
+      ],
+      "certificados": [
+        {
+          "id": "c-167350-1",
+          "nombre_certificado": "Trastornos de la Conducta Alimentaria",
+          "institucion_certificado": "Universidad de Buenos Aires",
+          "fecha_obtencion": "2019-08-20",
+          "descripcion_certificado": "Diplomatura en abordaje de TCA.",
+          "archivo_adjunto": ""
+        }
+      ],
+      "pago": {
+        "precio": 9500
+      },
+      "id": "e1b-KS557qo"
     }
   ],
   "turnos": [
@@ -1853,9 +2355,650 @@
       "estado": "disponible",
       "cliente": null,
       "id": "wEIvYAP9Qyo"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-24",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "9zVPUTlwdiY"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-24",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "mdY6scucQJQ"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-25",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "zxiD-mmouIc"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-25",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "xsp7ktS9z0c"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-26",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "K-__vFPJbnM"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-26",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "BE53tLugaKk"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-27",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "AJvaE1aTHgg"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-27",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "1F1bB_PCXrM"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-28",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "Yb-qpIkU7D4"
+    },
+    {
+      "professionalId": "410233",
+      "fecha": "2026-09-28",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "yW5N77OKre8"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-24",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "7biw-gUNRKc"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-24",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "LoLUry8xolM"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-25",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "j988L4fz-sQ"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-25",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "qbTaIvxpm5w"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-26",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "RclXWhVB5a8"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-26",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "eTpKnkfukAI"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-27",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "DR9Q9A0Jj_Y"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-27",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "Dq0yP-FYZnI"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-28",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "hc3PjPMbZD4"
+    },
+    {
+      "professionalId": "773108",
+      "fecha": "2026-09-28",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "Deyib-l7C5w"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-24",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "m3-8hBVzPfE"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-24",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "fs2GC-oZXTA"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-25",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "SMBlYdHM2sc"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-25",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "riJPOqu1uTc"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-26",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "orCEjPWUlZg"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-26",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "tFNIAz1pun8"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-27",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "6gCA9d9kfzo"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-27",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "ge4YAn2-rrE"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-28",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "iObdEp6IPlc"
+    },
+    {
+      "professionalId": "552019",
+      "fecha": "2026-09-28",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "gxP2gyx6r5k"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-24",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "KCH3rbuL5D4"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-24",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "JHt_Lq1k6A0"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-25",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "PW7yP4ie8yg"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-25",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "Gm6OYIrwdQk"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-26",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "7XESRno8tzA"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-26",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "08BF3d51MvE"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-27",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "bVF8Xy0G2PU"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-27",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "VDLrzcowFc0"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-28",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "l29FqVA7LqI"
+    },
+    {
+      "professionalId": "298471",
+      "fecha": "2026-09-28",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "Jlsi0IueHIg"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-24",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "jUUg8Aagk40"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-24",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "vwDC_tvN8Pk"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-25",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "XTcYr7U8Yho"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-25",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "HuCRj9WzNq8"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-26",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "z2xeGodAnKI"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-26",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "wYnTcgO9fNY"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-27",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "3WZDqJGST9A"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-27",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "online",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "wWgH5zeL8nI"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-28",
+      "hora": "10:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "sulk7XdB1ZA"
+    },
+    {
+      "professionalId": "167350",
+      "fecha": "2026-09-28",
+      "hora": "15:00",
+      "duracion": 30,
+      "modalidad": "presencial",
+      "estado": "disponible",
+      "cliente": null,
+      "id": "lDCBMQRCFg4"
     }
   ],
-  "valoraciones": [],
+  "valoraciones": [
+    {
+      "professionalId": "410233",
+      "userId": "BOB6piNCBFY",
+      "nombre": "Ana",
+      "apellido": "García",
+      "fecha": "2026-09-18",
+      "puntaje": 5,
+      "descripcion": "Muy buena escucha, me sentí acompañada en todo el proceso.",
+      "id": "xU11oguEBik"
+    },
+    {
+      "professionalId": "410233",
+      "userId": "-4-bCtzk0Z8",
+      "nombre": "Roberto",
+      "apellido": "Sosa",
+      "fecha": "2026-09-11",
+      "puntaje": 4,
+      "descripcion": "Profesional y puntual, recomendable.",
+      "id": "GMokKlRHGHY"
+    },
+    {
+      "professionalId": "773108",
+      "userId": "0b5Ojs0Tp3I",
+      "nombre": "Florencia",
+      "apellido": "Fernández",
+      "fecha": "2026-09-18",
+      "puntaje": 5,
+      "descripcion": "Me ayudó a resolver un despido injustificado, excelente asesoramiento.",
+      "id": "JUN4QCmeA6k"
+    },
+    {
+      "professionalId": "773108",
+      "userId": "BOB6piNCBFY",
+      "nombre": "Ana",
+      "apellido": "García",
+      "fecha": "2026-09-11",
+      "puntaje": 5,
+      "descripcion": "Muy claro para explicar los pasos legales, siempre disponible.",
+      "id": "6Wji7AoQv9Q"
+    },
+    {
+      "professionalId": "552019",
+      "userId": "-4-bCtzk0Z8",
+      "nombre": "Roberto",
+      "apellido": "Sosa",
+      "fecha": "2026-09-18",
+      "puntaje": 5,
+      "descripcion": "Excelente con los chicos, muy paciente y clara con las indicaciones.",
+      "id": "ag53nEs2_yU"
+    },
+    {
+      "professionalId": "552019",
+      "userId": "0b5Ojs0Tp3I",
+      "nombre": "Florencia",
+      "apellido": "Fernández",
+      "fecha": "2026-09-11",
+      "puntaje": 4,
+      "descripcion": "Muy atenta, aunque a veces cuesta conseguir turno.",
+      "id": "q6Y6yCdz6h8"
+    },
+    {
+      "professionalId": "298471",
+      "userId": "BOB6piNCBFY",
+      "nombre": "Ana",
+      "apellido": "García",
+      "fecha": "2026-09-18",
+      "puntaje": 5,
+      "descripcion": "Le hizo el logo a mi emprendimiento, quedó buenísimo y a tiempo.",
+      "id": "KK59nsvYblQ"
+    },
+    {
+      "professionalId": "298471",
+      "userId": "-4-bCtzk0Z8",
+      "nombre": "Roberto",
+      "apellido": "Sosa",
+      "fecha": "2026-09-11",
+      "puntaje": 4,
+      "descripcion": "Buen ojo para el diseño, comunicación fácil por videollamada.",
+      "id": "24pvBCMKpfs"
+    },
+    {
+      "professionalId": "167350",
+      "userId": "0b5Ojs0Tp3I",
+      "nombre": "Florencia",
+      "apellido": "Fernández",
+      "fecha": "2026-09-18",
+      "puntaje": 5,
+      "descripcion": "El plan alimentario se adaptó perfecto a mis horarios y gustos.",
+      "id": "VIMNDrGSA5A"
+    },
+    {
+      "professionalId": "167350",
+      "userId": "BOB6piNCBFY",
+      "nombre": "Ana",
+      "apellido": "García",
+      "fecha": "2026-09-11",
+      "puntaje": 5,
+      "descripcion": "Muy profesional y empática, no juzga, solo acompaña.",
+      "id": "rdGreXl4lS8"
+    },
+    {
+      "professionalId": "238745",
+      "userId": "BOB6piNCBFY",
+      "nombre": "Ana",
+      "apellido": "García",
+      "fecha": "2026-09-20",
+      "puntaje": 5,
+      "descripcion": "Me ordenó la contabilidad del monotributo en una sola reunión, muy claro con los números.",
+      "id": "61W2n1T4Q9s"
+    },
+    {
+      "professionalId": "238745",
+      "userId": "0b5Ojs0Tp3I",
+      "nombre": "Florencia",
+      "apellido": "Fernández",
+      "fecha": "2026-09-11",
+      "puntaje": 4,
+      "descripcion": "Buena atención, aunque tarda un poco en responder por mensaje.",
+      "id": "TW0oeY-DMnw"
+    },
+    {
+      "professionalId": "89732",
+      "userId": "-4-bCtzk0Z8",
+      "nombre": "Roberto",
+      "apellido": "Sosa",
+      "fecha": "2026-09-20",
+      "puntaje": 5,
+      "descripcion": "Excelente para la refacción de mi casa, cumplió los plazos y el presupuesto.",
+      "id": "RfSV7UM3mMQ"
+    },
+    {
+      "professionalId": "89732",
+      "userId": "BOB6piNCBFY",
+      "nombre": "Ana",
+      "apellido": "García",
+      "fecha": "2026-09-11",
+      "puntaje": 4,
+      "descripcion": "Buenas ideas de diseño, muy prolijo con los planos.",
+      "id": "Bt280ot4nVg"
+    }
+  ],
   "informacionesProfesionales": [
     {
       "professionalId": "123456789",
@@ -1887,7 +3030,58 @@
       "id": "pq66a-JfuSQ"
     }
   ],
-  "proyectos": [],
+  "proyectos": [
+    {
+      "professionalId": "410233",
+      "titulo_proyecto": "Taller de manejo de ansiedad",
+      "fecha_inicio": "2026-07-25",
+      "fecha_finalizacion": "2026-08-24",
+      "descripcion_proyecto": "Ciclo de 6 encuentros grupales sobre herramientas para el manejo de la ansiedad cotidiana.",
+      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjN2MzYWVkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1NjNlYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InVybCgjZykiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsMTIwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iMC45NSI+CiAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iLTIwIiByPSIzNCIvPjxwYXRoIGQ9Ik0tMzQgNDAgUSAwIDAgMzQgNDAiLz48Y2lyY2xlIGN4PSItMTQiIGN5PSItMjQiIHI9IjMiIGZpbGw9IiNmZmYiIHN0cm9rZT0ibm9uZSIvPjxjaXJjbGUgY3g9IjE0IiBjeT0iLTI0IiByPSIzIiBmaWxsPSIjZmZmIiBzdHJva2U9Im5vbmUiLz4KICA8L2c+CiAgPHRleHQgeD0iMjAwIiB5PSIyNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TWFuZWpvIGRlIGFuc2llZGFkPC90ZXh0Pgo8L3N2Zz4=",
+      "link_adjunto": "",
+      "id": "C3kcFKTrpWc"
+    },
+    {
+      "professionalId": "773108",
+      "titulo_proyecto": "Guía de derechos laborales",
+      "fecha_inicio": "2026-07-25",
+      "fecha_finalizacion": "2026-08-24",
+      "descripcion_proyecto": "Material gratuito con las preguntas frecuentes sobre despidos y liquidaciones.",
+      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMGYxNzJhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1NjNlYiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InVybCgjZykiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsMTIwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iMC45NSI+CiAgICA8cGF0aCBkPSJNMCAtNDUgViA0NSIvPjxwYXRoIGQ9Ik0tNDUgLTMwIEggNDUiLz48cGF0aCBkPSJNLTQ1IC0zMCBMIC02MCA1IEEgMjAgMjAgMCAwIDAgLTMwIDUgWiIvPjxwYXRoIGQ9Ik00NSAtMzAgTCAzMCA1IEEgMjAgMjAgMCAwIDAgNjAgNSBaIi8+PHBhdGggZD0iTS0yNSA0NSBIIDI1Ii8+CiAgPC9nPgogIDx0ZXh0IHg9IjIwMCIgeT0iMjQ1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRlcmVjaG9zIGxhYm9yYWxlczwvdGV4dD4KPC9zdmc+",
+      "link_adjunto": "",
+      "id": "ktZFZxoQ41I"
+    },
+    {
+      "professionalId": "552019",
+      "titulo_proyecto": "Charla: control de niño sano",
+      "fecha_inicio": "2026-07-25",
+      "fecha_finalizacion": "2026-08-24",
+      "descripcion_proyecto": "Encuentro informativo para padres sobre hitos del desarrollo y controles pediátricos.",
+      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMTZhMzRhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzY1YTMwZCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InVybCgjZykiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsMTIwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iMC45NSI+CiAgICA8Y2lyY2xlIGN4PSIwIiBjeT0iLTMwIiByPSIyNiIvPjxwYXRoIGQ9Ik0tNDAgNDUgUSAwIDAgNDAgNDUiLz48cGF0aCBkPSJNLTEwIC0zNCBxIDEwIC0xMCAyMCAwIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8L2c+CiAgPHRleHQgeD0iMjAwIiB5PSIyNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+Q29udHJvbCBkZSBuacOxbyBzYW5vPC90ZXh0Pgo8L3N2Zz4=",
+      "link_adjunto": "",
+      "id": "88h3ME-wcQw"
+    },
+    {
+      "professionalId": "298471",
+      "titulo_proyecto": "Identidad visual \"Café del Puerto\"",
+      "fecha_inicio": "2026-07-25",
+      "fecha_finalizacion": "2026-08-24",
+      "descripcion_proyecto": "Diseño de logo, paleta de colores y cartelería para una cafetería de Mar del Plata.",
+      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjU5ZTBiIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VhNTgwYyIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InVybCgjZykiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsMTIwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iMC45NSI+CiAgICA8cmVjdCB4PSItNDAiIHk9Ii0xMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjU1IiByeD0iOCIvPjxwYXRoIGQ9Ik0tMjQgLTEwIHYgLTE1IGEgMjQgMjQgMCAwIDEgNDggMCB2IDE1Ii8+PHBhdGggZD0iTS00MCAxNSBoIDgwIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8L2c+CiAgPHRleHQgeD0iMjAwIiB5PSIyNDUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SWRlbnRpZGFkIGRlIG1hcmNhPC90ZXh0Pgo8L3N2Zz4=",
+      "link_adjunto": "",
+      "id": "bIcHAwe8sLg"
+    },
+    {
+      "professionalId": "167350",
+      "titulo_proyecto": "Guía de alimentación consciente",
+      "fecha_inicio": "2026-07-25",
+      "fecha_finalizacion": "2026-08-24",
+      "descripcion_proyecto": "Material descargable con pautas de alimentación intuitiva para pacientes.",
+      "imagen_proyecto": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzAwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjJjNTVlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBkOTQ4OCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InVybCgjZykiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsMTIwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iMC45NSI+CiAgICA8cGF0aCBkPSJNMCAtNDAgQyAzMCAtNDAgNDAgLTEwIDQwIDEwIEMgNDAgNDAgMjAgNTUgMCA1NSBDIC0yMCA1NSAtNDAgNDAgLTQwIDEwIEMgLTQwIC0xMCAtMzAgLTQwIDAgLTQwIFoiLz48cGF0aCBkPSJNMCAtNDAgcSA4IC0xNCAyMiAtMTYiIHN0cm9rZS13aWR0aD0iNCIvPgogIDwvZz4KICA8dGV4dCB4PSIyMDAiIHk9IjI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BbGltZW50YWNpw7NuIGNvbnNjaWVudGU8L3RleHQ+Cjwvc3ZnPg==",
+      "link_adjunto": "",
+      "id": "H5c94f8Iupc"
+    }
+  ],
   "contenido-profesional-cliente": [
     {
       "professionalId": "238745",
