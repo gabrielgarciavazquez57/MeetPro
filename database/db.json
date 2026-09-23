@@ -71,6 +71,30 @@
       },
       "age": 17,
       "id": "-G278XTdeb8"
+    },
+    {
+      "username": "palermo9",
+      "password": "Hierro123!",
+      "isProfesional": true,
+      "isAdmin": false,
+      "name": "Martin",
+      "lastname": "Palermo",
+      "dni": "98765432",
+      "email": "palermo@meetpro.com",
+      "phoneNumber": "+54 99999999999",
+      "gender": "Masculino",
+      "nationality": "Argentina",
+      "dateOfBirth": "2000-08-09T00:00:00.000Z",
+      "fotoPerfil": "",
+      "address": {
+        "address": "Independencia",
+        "city": "Ezeiza",
+        "province": "Buenos Aires",
+        "country": "Argentina",
+        "zipCode": "9999999"
+      },
+      "age": 26,
+      "id": "hrZV8lZ2UXQ"
     }
   ],
   "profesionales": [
@@ -174,6 +198,59 @@
       "pago": {
         "precio": 3200.75
       }
+    },
+    {
+      "profesional_userData": {
+        "username": "palermo9",
+        "password": "Hierro123!",
+        "isProfesional": true,
+        "isAdmin": false,
+        "name": "Martin",
+        "lastname": "Palermo",
+        "dni": "98765432",
+        "email": "palermo@meetpro.com",
+        "phoneNumber": "+54 99999999999",
+        "gender": "Masculino",
+        "nationality": "Argentina",
+        "dateOfBirth": "2000-08-09T00:00:00.000Z",
+        "fotoPerfil": "",
+        "address": {
+          "address": "Independencia",
+          "city": "Ezeiza",
+          "province": "Buenos Aires",
+          "country": "Argentina",
+          "zipCode": "9999999"
+        },
+        "age": 26,
+        "id": "hrZV8lZ2UXQ"
+      },
+      "profession": "Arquitecto",
+      "professionalId": "89732",
+      "descriptionprofesional": "Arquitecto - obras en seco",
+      "linkedin": "https://cndiwni",
+      "linkReunion": "https://cndiwni",
+      "direccionPresencial": "La plata, oficina 47",
+      "titulos": [
+        {
+          "nombre_titulo": "Arquitecto",
+          "descripcion_titulo": "Arquitecto egreado de la UP",
+          "fecha_obtencion": "2026-09-22",
+          "institucion_educativa": "Universidad de Palermo"
+        }
+      ],
+      "experiencias": [
+        {
+          "titulo_experiencia": "Arquitecto Jr",
+          "institucion_experiencia": "Paolini",
+          "fecha_inicio": "2026-09-22",
+          "fecha_fin": "2026-09-25"
+        }
+      ],
+      "certificados": [],
+      "pago": {
+        "precio": 500000
+      },
+      "id": "A0alrkiFlaI"
     }
   ],
   "turnos": [

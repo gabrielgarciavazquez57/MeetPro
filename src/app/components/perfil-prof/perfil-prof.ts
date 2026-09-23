@@ -1,9 +1,10 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { formatearTelefono } from '../../shared/codigos-pais';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-perfil-profesional',
@@ -15,12 +16,20 @@ import { formatearTelefono } from '../../shared/codigos-pais';
 export class PerfilProfesional implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
+  private readonly auth = inject(Auth);
 
   protected readonly formatearTelefono = formatearTelefono;
 
   profesional = signal<Profesional | null>(null);
   cargando = signal<boolean>(true);
   error = signal<string | null>(null);
+
+  /** Solo el profesional dueño de este perfil ve sus propios accesos (clientes, pagos) */
+  readonly esDueno = computed(() => {
+    const logueado = this.auth.usuario();
+    const u = this.profesional()?.profesional_userData;
+    return !!logueado && !!u && String(logueado.id) === String(u.id);
+  });
 
   /** Panel flotante abierto: 'titulos', 'experiencias', 'beneficios' o null */
   panel = signal<'titulos' | 'experiencias' | 'beneficios' | null>(null);
