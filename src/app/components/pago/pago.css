@@ -1,5 +1,11 @@
 /* El resto de los estilos viene de shared/turnos.css */
 
+.pago-panel {
+  width: 100%;
+  max-width: 820px;
+  box-sizing: border-box;
+}
+
 .pago-contenido {
   width: 100%;
   max-width: 440px;
@@ -100,7 +106,7 @@ form {
 
 .pago-fila {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 6rem;
   gap: 1rem;
 }
 

@@ -1,4 +1,4 @@
-<app-barra-nav titulo="Realizar pago" />
+<app-barra-nav titulo="Realizar pago - Mensual" />
 
 <div class="fondo-turnos">
 
@@ -10,12 +10,12 @@
 
     <div class="turnos-encabezado">
       <div>
-        <h1 class="turnos-titulo">Realizar pago</h1>
+        <h1 class="turnos-titulo">Realizar pago - Mensual</h1>
         <p class="turnos-sub">{{ nombreProfesional() }}@if (prof.profession) { · {{ prof.profession }} }</p>
       </div>
     </div>
 
-    <div class="turnos-panel">
+    <div class="pago-panel">
       @if (pagoRealizado()) {
         <div class="pago-exito">
           <span class="pago-exito-icono" aria-hidden="true">✓</span>

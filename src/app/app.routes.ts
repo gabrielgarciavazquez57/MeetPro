@@ -111,7 +111,7 @@ export const routes: Routes = [
 },
 {
   path: 'pago/:profesionalId',
-  title: 'Realizar pago',
+  title: 'Realizar pago - Mensual',
   component: PagoComponent,
 }
 ];
