@@ -28,82 +28,104 @@
           </a>
         </div>
       } @else {
-        <div class="pago-resumen">
-          <span class="pago-resumen-label">Total a pagar</span>
-          @if (tienePrecio()) {
-            <span class="pago-resumen-monto">${{ prof.pago?.precio?.toFixed(2) }}</span>
-          } @else {
-            <span class="pago-resumen-vacio">El profesional todavía no cargó un precio para su servicio.</span>
-          }
+        <div class="pago-contenido">
+          <div class="pago-resumen">
+            <span class="pago-resumen-icono" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M2 10h20" />
+              </svg>
+            </span>
+            <div class="pago-resumen-texto">
+              <span class="pago-resumen-label">Total a pagar</span>
+              @if (tienePrecio()) {
+                <span class="pago-resumen-monto">${{ prof.pago?.precio?.toFixed(2) }}</span>
+              } @else {
+                <span class="pago-resumen-vacio">El profesional todavía no cargó un precio para su servicio.</span>
+              }
+            </div>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+            <div class="pago-tarjeta">
+              <h3 class="pago-tarjeta-titulo">Datos de la tarjeta</h3>
+
+              <div class="campo">
+                <label for="titular">Nombre del titular</label>
+                <input type="text" id="titular" formControlName="titular" placeholder="Como figura en la tarjeta">
+                @if (titular.touched && titular.hasError('required')) {
+                  <span class="campo-error">Campo requerido</span>
+                }
+              </div>
+
+              <div class="campo">
+                <label for="numero">Número de tarjeta</label>
+                <input
+                  class="pago-input-numero"
+                  type="text"
+                  id="numero"
+                  formControlName="numero"
+                  placeholder="0000 0000 0000 0000"
+                  inputmode="numeric"
+                  maxlength="19"
+                  (input)="onNumeroInput($event)"
+                >
+                @if (numero.touched && numero.hasError('required')) {
+                  <span class="campo-error">Campo requerido</span>
+                } @else if (numero.touched && numero.hasError('pattern')) {
+                  <span class="campo-error">Ingresá los 16 dígitos de la tarjeta</span>
+                }
+              </div>
+
+              <div class="pago-fila">
+                <div class="campo">
+                  <label for="venc">Vencimiento</label>
+                  <input
+                    class="pago-input-numero"
+                    type="text"
+                    id="venc"
+                    formControlName="venc"
+                    placeholder="MM/AA"
+                    inputmode="numeric"
+                    maxlength="5"
+                    (input)="onVencInput($event)"
+                  >
+                  @if (venc.touched && venc.hasError('required')) {
+                    <span class="campo-error">Requerido</span>
+                  } @else if (venc.touched && venc.hasError('pattern')) {
+                    <span class="campo-error">Formato MM/AA</span>
+                  }
+                </div>
+
+                <div class="campo">
+                  <label for="cvv">CVV</label>
+                  <input class="pago-input-numero" type="text" id="cvv" formControlName="cvv" placeholder="123" inputmode="numeric" maxlength="4">
+                  @if (cvv.touched && cvv.hasError('required')) {
+                    <span class="campo-error">Requerido</span>
+                  } @else if (cvv.touched && cvv.hasError('pattern')) {
+                    <span class="campo-error">Inválido</span>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <p class="pago-aviso">
+              <span class="pago-aviso-icono" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="10" width="16" height="10" rx="2" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                </svg>
+              </span>
+              Esta es una pasarela de pago simulada: no se procesa ningún cobro real ni se guardan los datos de la tarjeta.
+            </p>
+
+            <div class="pago-acciones">
+              <button type="submit" class="btn-t btn-t--primario btn-t--grande" [disabled]="form.invalid || procesando() || !tienePrecio()">
+                {{ procesando() ? 'Procesando...' : 'Confirmar pago' }}
+              </button>
+            </div>
+          </form>
         </div>
-
-        <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-          <div class="campo">
-            <label for="titular">Nombre del titular</label>
-            <input type="text" id="titular" formControlName="titular" placeholder="Como figura en la tarjeta">
-            @if (titular.touched && titular.hasError('required')) {
-              <span class="campo-error">Campo requerido</span>
-            }
-          </div>
-
-          <div class="campo">
-            <label for="numero">Número de tarjeta</label>
-            <input
-              type="text"
-              id="numero"
-              formControlName="numero"
-              placeholder="0000 0000 0000 0000"
-              inputmode="numeric"
-              maxlength="19"
-              (input)="onNumeroInput($event)"
-            >
-            @if (numero.touched && numero.hasError('required')) {
-              <span class="campo-error">Campo requerido</span>
-            } @else if (numero.touched && numero.hasError('pattern')) {
-              <span class="campo-error">Ingresá los 16 dígitos de la tarjeta</span>
-            }
-          </div>
-
-          <div class="pago-fila">
-            <div class="campo">
-              <label for="venc">Vencimiento</label>
-              <input
-                type="text"
-                id="venc"
-                formControlName="venc"
-                placeholder="MM/AA"
-                inputmode="numeric"
-                maxlength="5"
-                (input)="onVencInput($event)"
-              >
-              @if (venc.touched && venc.hasError('required')) {
-                <span class="campo-error">Requerido</span>
-              } @else if (venc.touched && venc.hasError('pattern')) {
-                <span class="campo-error">Formato MM/AA</span>
-              }
-            </div>
-
-            <div class="campo">
-              <label for="cvv">CVV</label>
-              <input type="text" id="cvv" formControlName="cvv" placeholder="123" inputmode="numeric" maxlength="4">
-              @if (cvv.touched && cvv.hasError('required')) {
-                <span class="campo-error">Requerido</span>
-              } @else if (cvv.touched && cvv.hasError('pattern')) {
-                <span class="campo-error">Inválido</span>
-              }
-            </div>
-          </div>
-
-          <p class="texto-ayuda">
-            Esta es una pasarela de pago simulada: no se procesa ningún cobro real ni se guardan los datos de la tarjeta.
-          </p>
-
-          <div class="pago-acciones">
-            <button type="submit" class="btn-t btn-t--primario btn-t--grande" [disabled]="form.invalid || procesando() || !tienePrecio()">
-              {{ procesando() ? 'Procesando...' : 'Confirmar pago' }}
-            </button>
-          </div>
-        </form>
       }
     </div>
   }

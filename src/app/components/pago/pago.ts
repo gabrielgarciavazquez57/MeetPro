@@ -10,7 +10,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
   standalone: true,
   imports: [BarraNav, RouterLink, ReactiveFormsModule],
   templateUrl: './pago.html',
-  styleUrl: './pago.css',
+  styleUrls: ['../../shared/turnos.css', './pago.css'],
 })
 export class PagoComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
