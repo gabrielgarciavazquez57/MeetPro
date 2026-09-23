@@ -22,10 +22,18 @@ export class PerfilProfesional implements OnInit {
   cargando = signal<boolean>(true);
   error = signal<string | null>(null);
 
-  /** Panel flotante abierto: 'titulos', 'experiencias' o null */
-  panel = signal<'titulos' | 'experiencias' | null>(null);
+  /** Panel flotante abierto: 'titulos', 'experiencias', 'beneficios' o null */
+  panel = signal<'titulos' | 'experiencias' | 'beneficios' | null>(null);
 
-  togglePanel(seccion: 'titulos' | 'experiencias'): void {
+  /** Lo que un cliente obtiene al contratar al profesional, mostrado en el panel "Beneficios" */
+  protected readonly beneficios = [
+    { titulo: 'Turnos online', descripcion: 'Reservá una consulta virtual desde donde estés.' },
+    { titulo: 'Turnos presenciales', descripcion: 'Coordiná un encuentro en persona con el profesional.' },
+    { titulo: 'Contenido cliente-profesional', descripcion: 'Intercambien material y avances privados de la consulta.' },
+    { titulo: 'Contenido extra', descripcion: 'Próximamente disponible.' },
+  ];
+
+  togglePanel(seccion: 'titulos' | 'experiencias' | 'beneficios'): void {
     this.panel.update((actual) => (actual === seccion ? null : seccion));
   }
 

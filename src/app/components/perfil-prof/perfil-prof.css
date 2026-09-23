@@ -57,10 +57,43 @@
 }
 
 .seccion-foto-datos {
+  position: relative;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.btn-contratar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #2563eb;
+  border: 2px solid #2563eb;
+  padding: 0.65rem 1.3rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.btn-contratar:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.btn-contratar:active {
+  transform: scale(0.98);
+}
+
+.btn-contratar--activo {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
 }
 
 .fila-superior {
@@ -122,10 +155,8 @@
 .panel-flotante {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: calc(100% + 2.5rem);
   right: calc((100% - 100vw) / 2 + 2.75rem);
-  overflow-y: auto;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-left: 4px solid #2563eb;
@@ -190,6 +221,44 @@
   font-size: 0.88rem;
   font-weight: 700;
   color: #0f172a;
+}
+
+.panel-item-titulo--beneficio {
+  color: #2563eb;
+}
+
+.panel-flotante-pie {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-realizar-pago {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #16a34a;
+  background-color: #ffffff;
+  border: 2px solid #16a34a;
+  padding: 0.65rem 1.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.btn-realizar-pago:hover {
+  color: #ffffff;
+  background-color: #16a34a;
+  border-color: #16a34a;
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.25);
+}
+
+.btn-realizar-pago:active {
+  transform: scale(0.98);
 }
 
 .panel-item-institucion {

@@ -1,0 +1,110 @@
+<app-barra-nav titulo="Realizar pago" />
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg">Cargando...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else if (profesional(); as prof) {
+
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Realizar pago</h1>
+        <p class="turnos-sub">{{ nombreProfesional() }}@if (prof.profession) { · {{ prof.profession }} }</p>
+      </div>
+    </div>
+
+    <div class="turnos-panel">
+      @if (pagoRealizado()) {
+        <div class="pago-exito">
+          <span class="pago-exito-icono" aria-hidden="true">✓</span>
+          <h2 class="pago-exito-titulo">¡Pago realizado!</h2>
+          <p class="pago-exito-texto">
+            Se procesó el pago de <strong>${{ prof.pago?.precio?.toFixed(2) }}</strong> a {{ nombreProfesional() }}.
+          </p>
+          <a class="btn-t btn-t--primario btn-t--grande" [routerLink]="['/perfil-prof', prof.profesional_userData.id]">
+            Volver al perfil
+          </a>
+        </div>
+      } @else {
+        <div class="pago-resumen">
+          <span class="pago-resumen-label">Total a pagar</span>
+          @if (tienePrecio()) {
+            <span class="pago-resumen-monto">${{ prof.pago?.precio?.toFixed(2) }}</span>
+          } @else {
+            <span class="pago-resumen-vacio">El profesional todavía no cargó un precio para su servicio.</span>
+          }
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+          <div class="campo">
+            <label for="titular">Nombre del titular</label>
+            <input type="text" id="titular" formControlName="titular" placeholder="Como figura en la tarjeta">
+            @if (titular.touched && titular.hasError('required')) {
+              <span class="campo-error">Campo requerido</span>
+            }
+          </div>
+
+          <div class="campo">
+            <label for="numero">Número de tarjeta</label>
+            <input
+              type="text"
+              id="numero"
+              formControlName="numero"
+              placeholder="0000 0000 0000 0000"
+              inputmode="numeric"
+              maxlength="19"
+              (input)="onNumeroInput($event)"
+            >
+            @if (numero.touched && numero.hasError('required')) {
+              <span class="campo-error">Campo requerido</span>
+            } @else if (numero.touched && numero.hasError('pattern')) {
+              <span class="campo-error">Ingresá los 16 dígitos de la tarjeta</span>
+            }
+          </div>
+
+          <div class="pago-fila">
+            <div class="campo">
+              <label for="venc">Vencimiento</label>
+              <input
+                type="text"
+                id="venc"
+                formControlName="venc"
+                placeholder="MM/AA"
+                inputmode="numeric"
+                maxlength="5"
+                (input)="onVencInput($event)"
+              >
+              @if (venc.touched && venc.hasError('required')) {
+                <span class="campo-error">Requerido</span>
+              } @else if (venc.touched && venc.hasError('pattern')) {
+                <span class="campo-error">Formato MM/AA</span>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" formControlName="cvv" placeholder="123" inputmode="numeric" maxlength="4">
+              @if (cvv.touched && cvv.hasError('required')) {
+                <span class="campo-error">Requerido</span>
+              } @else if (cvv.touched && cvv.hasError('pattern')) {
+                <span class="campo-error">Inválido</span>
+              }
+            </div>
+          </div>
+
+          <p class="texto-ayuda">
+            Esta es una pasarela de pago simulada: no se procesa ningún cobro real ni se guardan los datos de la tarjeta.
+          </p>
+
+          <div class="pago-acciones">
+            <button type="submit" class="btn-t btn-t--primario btn-t--grande" [disabled]="form.invalid || procesando() || !tienePrecio()">
+              {{ procesando() ? 'Procesando...' : 'Confirmar pago' }}
+            </button>
+          </div>
+        </form>
+      }
+    </div>
+  }
+</div>

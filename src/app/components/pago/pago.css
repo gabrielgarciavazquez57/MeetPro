@@ -1,0 +1,101 @@
+/* El resto de los estilos viene de shared/turnos.css */
+
+.pago-resumen {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background-color: #fbfcfe;
+  border: 1.5px solid #d0d7e2;
+  border-left: 4px solid #16a34a;
+}
+
+.pago-resumen-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pago-resumen-monto {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.pago-resumen-vacio {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  text-align: right;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.pago-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pago-acciones {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* ===== Éxito ===== */
+.pago-exito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1rem;
+}
+
+.pago-exito-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #16a34a;
+}
+
+.pago-exito-titulo {
+  margin: 0.25rem 0 0;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.pago-exito-texto {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+@media (max-width: 480px) {
+  .pago-fila {
+    grid-template-columns: 1fr;
+  }
+
+  .pago-resumen {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

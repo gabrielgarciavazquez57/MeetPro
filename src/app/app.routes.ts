@@ -15,6 +15,7 @@ import { FormularioConsulta } from './components/formulario-consulta/formulario-
 import { Valoraciones } from './components/valoraciones/valoraciones';
 import { InformacionProfesionalComponent } from './components/informacion-profesional/informacion-profesional';
 import { ContenidoClienteProfesional } from './components/contenido-cliente-profesional/contenido-cliente-profesional';
+import { PagoComponent } from './components/pago/pago';
 
 export const routes: Routes = [
   {
@@ -107,5 +108,10 @@ export const routes: Routes = [
   path: 'perfil-prof/:id',
   title: 'Perfil Profesional',
   component: PerfilProfesional,
+},
+{
+  path: 'pago/:profesionalId',
+  title: 'Realizar pago',
+  component: PagoComponent,
 }
 ];

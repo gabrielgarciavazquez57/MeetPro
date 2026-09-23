@@ -2,6 +2,7 @@ import { User } from "./user";
 import{TitulosPro} from "./titulos-pro";
 import{ExperienciaPro} from "./experiencia-pro";
 import{Certificado} from "./certificado";
+import{Pago} from "./pago";
 
 export interface Profesional {
     id?: string;
@@ -15,4 +16,5 @@ export interface Profesional {
     titulos: TitulosPro[];
     experiencias: ExperienciaPro[];
     certificados?: Certificado[];
+    pago?: Pago;
 }

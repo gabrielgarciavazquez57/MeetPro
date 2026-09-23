@@ -61,6 +61,7 @@ export class ProfesionalForm implements OnInit {
     profession:            ['', [Validators.required]],
     professionalId:        ['', [Validators.required]],
     descriptionprofesional:['', [Validators.required, Validators.maxLength(500)]],
+    precio:                 [0, [Validators.required, Validators.min(0.01)]],
     linkedin:               ['', [Validators.pattern(/^https?:\/\/.+/)]],
     linkReunion:            ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
     direccionPresencial:    ['', [Validators.required, Validators.maxLength(200)]],
@@ -110,6 +111,7 @@ export class ProfesionalForm implements OnInit {
           profession: prof.profession,
           professionalId: prof.professionalId,
           descriptionprofesional: prof.descriptionprofesional,
+          precio: prof.pago?.precio ?? 0,
           linkedin: prof.linkedin ?? '',
           linkReunion: prof.linkReunion ?? '',
           direccionPresencial: prof.direccionPresencial ?? '',
@@ -175,6 +177,7 @@ export class ProfesionalForm implements OnInit {
   get profession()             { return this.form.controls.profession; }
   get professionalId()         { return this.form.controls.professionalId; }
   get descriptionprofesional() { return this.form.controls.descriptionprofesional; }
+  get precio()                 { return this.form.controls.precio; }
   get linkedin()               { return this.form.controls.linkedin; }
   get linkReunion()            { return this.form.controls.linkReunion; }
   get direccionPresencial()    { return this.form.controls.direccionPresencial; }
@@ -337,7 +340,7 @@ export class ProfesionalForm implements OnInit {
     }
 
     const raw = this.form.getRawValue();
-    const { descripcionAmpliada, proyectosNuevos, certificados, ...resto } = raw;
+    const { descripcionAmpliada, proyectosNuevos, certificados, precio, ...resto } = raw;
 
     const certificadosFinal = certificados.map((c, i) => ({
       ...c,
@@ -358,6 +361,7 @@ export class ProfesionalForm implements OnInit {
         profesional_userData: this.userData,
         ...resto,
         certificados: certificadosFinal,
+        pago: { precio },
       };
 
       this.clientProfesional.updateProfesional(this.registroId, profesional_editado).subscribe(() => {
@@ -374,6 +378,7 @@ export class ProfesionalForm implements OnInit {
         profesional_userData: this.userData,
         ...resto,
         certificados: certificadosFinal,
+        pago: { precio },
       };
 
       this.clientProfesional.addProfesional(new_profesional).subscribe(() => {

@@ -11,6 +11,12 @@
 
       <div class="contenedor-izquierdo">
         <section class="seccion-foto-datos">
+          <button
+            type="button"
+            class="btn-contratar"
+            [class.btn-contratar--activo]="panel() === 'beneficios'"
+            (click)="togglePanel('beneficios')"
+          >Contratar profesional</button>
           <div class="fila-superior">
             <div class="avatar-perfil">
               @if (prof.profesional_userData.fotoPerfil) {
@@ -150,6 +156,23 @@
                   } @else {
                     <p class="panel-vacio">No hay experiencia cargada.</p>
                   }
+                </div>
+              } @else if (panel() === 'beneficios') {
+                <div class="panel-flotante">
+                  <div class="panel-flotante-head">
+                    <h3 class="panel-flotante-titulo">Beneficios</h3>
+                  </div>
+                  <ul class="panel-lista">
+                    @for (b of beneficios; track b.titulo) {
+                      <li class="panel-item">
+                        <p class="panel-item-titulo panel-item-titulo--beneficio">{{ b.titulo }}</p>
+                        <p class="panel-item-desc">{{ b.descripcion }}</p>
+                      </li>
+                    }
+                  </ul>
+                  <div class="panel-flotante-pie">
+                    <a class="btn-realizar-pago" [routerLink]="['/pago', prof.professionalId]">Realizar pago</a>
+                  </div>
                 </div>
               }
             </div>
