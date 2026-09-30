@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { User } from '../interfaces/user';
 
 export class ClientUser {
   protected readonly http = inject(HttpClient);///Inyectamos el HttpClient para poder hacer peticiones HTTP a nuestro backend
-  protected readonly url = 'http://localhost:3000/users';///URL de nuestro backend para los usuarios
+  protected readonly url = `${environment.apiUrl}/users`;///URL de nuestro backend para los usuarios
 
   ///GET
   getUsers(){///Traermos con GET a los users

@@ -8,8 +8,9 @@ import { Valoracion } from '../interfaces/valoracion';
 import { InformacionProfesional } from '../interfaces/informacion-profesional';
 import { Proyecto } from '../interfaces/proyecto';
 import { ContenidoProfesionalCliente } from '../interfaces/contenido-profesional-cliente';
+import { environment } from '../../environments/environment';
 
-const API = 'http://localhost:3000';
+const API = environment.apiUrl;
 
 /** Cantidad de registros borrados de cada colección */
 export interface ResumenEliminacion {

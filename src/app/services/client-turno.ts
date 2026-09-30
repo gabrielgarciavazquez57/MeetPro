@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { ConfigDisponibilidad, Turno } from '../interfaces/turno';
 import { User } from '../interfaces/user';
+import { environment } from '../../environments/environment';
 import { aClienteTurno, haComenzado, horariosNuevos, seSuperponen } from '../shared/turno-utils';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { aClienteTurno, haComenzado, horariosNuevos, seSuperponen } from '../sha
 })
 export class ClientTurno {
   protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para hacer peticiones HTTP al backend
-  protected readonly url = 'http://localhost:3000/turnos'; ///URL del backend para los turnos
+  protected readonly url = `${environment.apiUrl}/turnos`; ///URL del backend para los turnos
 
   // ===== CRUD =====
   getTurnos() {

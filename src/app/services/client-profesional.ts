@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Profesional } from '../interfaces/profesional';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientProfesional {
   protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para poder hacer peticiones HTTP a nuestro backend
-  protected readonly url = 'http://localhost:3000/profesionales'; ///URL de nuestro backend para los profesionales
+  protected readonly url = `${environment.apiUrl}/profesionales`; ///URL de nuestro backend para los profesionales
 
   ///GET
   getProfesionales() { ///Traemos con GET a los profesionales

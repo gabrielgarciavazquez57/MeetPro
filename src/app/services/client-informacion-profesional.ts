@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { InformacionProfesional } from '../interfaces/informacion-profesional';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientInformacionProfesional {
   protected readonly http = inject(HttpClient);
-  protected readonly url = 'http://localhost:3000/informacionesProfesionales';
+  protected readonly url = `${environment.apiUrl}/informacionesProfesionales`;
 
   ///GET - Toda la información profesional
   getInformaciones() {

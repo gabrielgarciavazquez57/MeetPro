@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Valoracion } from '../interfaces/valoracion';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientValoracion {
   protected readonly http = inject(HttpClient);
-  protected readonly url = 'http://localhost:3000/valoraciones';
+  protected readonly url = `${environment.apiUrl}/valoraciones`;
 
   ///GET - Todas las valoraciones
   getValoraciones() {

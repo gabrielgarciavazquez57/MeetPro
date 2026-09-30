@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ContenidoProfesionalCliente } from '../interfaces/contenido-profesional-cliente';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientContenido {
   protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para hacer peticiones HTTP al backend
-  protected readonly url = 'http://localhost:3000/contenido-profesional-cliente'; ///URL del backend para el contenido profesional-cliente
+  protected readonly url = `${environment.apiUrl}/contenido-profesional-cliente`; ///URL del backend para el contenido profesional-cliente
 
   ///GET - Todo el contenido
   ///Nota: no filtramos por professionalId en el query string porque json-server

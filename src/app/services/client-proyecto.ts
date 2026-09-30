@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Proyecto } from '../interfaces/proyecto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientProyecto {
   protected readonly http = inject(HttpClient);
-  protected readonly url = 'http://localhost:3000/proyectos';
+  protected readonly url = `${environment.apiUrl}/proyectos`;
 
   ///GET - Todos los proyectos
   getProyectos() {
