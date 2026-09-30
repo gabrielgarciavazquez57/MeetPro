@@ -23,7 +23,7 @@ export class Home {
   readonly vista = signal<'inicio' | 'login'>('inicio');
 
   // ===== Slideshow de fondo =====
-  readonly imagenes = ['/img/home-1.webp', '/img/home-2.jpg', '/img/home-3.jpg'];
+  readonly imagenes = ['img/home-1.webp', 'img/home-2.jpg', 'img/home-3.jpg'];
   readonly slide = signal(0);
 
   // ===== Login inline =====
