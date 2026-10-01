@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { countries, type ICountry } from 'countries-list';
 import { ClientProfesional } from '../../services/client-profesional'; // ajustá la ruta
@@ -24,7 +25,7 @@ const normalizarCiudad = (texto: string | undefined) => {
 @Component({
   selector: 'app-prof-list',
   standalone: true,
-  imports: [BarraNav, FormsModule, Desplegable],
+  imports: [BarraNav, FormsModule, Desplegable, RouterLink],
   templateUrl: './prof-list.html',
   styleUrl: './prof-list.css',
 })

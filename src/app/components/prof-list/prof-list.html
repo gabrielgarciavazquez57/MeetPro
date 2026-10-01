@@ -62,7 +62,7 @@
                 <div class="tarjeta-footer">
                   <a
                     class="btn btn-agregar"
-                    [href]="'/perfil-prof/' + prof.profesional_userData.id"
+                    [routerLink]="['/perfil-prof', prof.profesional_userData.id]"
                   >
                     Ver perfil
                   </a>
