@@ -42,3 +42,6 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Datos locales de json-server (contenían credenciales; los datos viven en Supabase)
+/database/db.json
