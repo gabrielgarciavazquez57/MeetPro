@@ -7,8 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:MeetPro": "node dist/MeetPro/server/server.mjs",
-    "api": "json-server --port ${PORT:-3000} --host 0.0.0.0 database/db.json"
+    "serve:ssr:MeetPro": "node dist/MeetPro/server/server.mjs"
   },
   "private": true,
   "packageManager": "npm@10.9.3",
@@ -24,7 +23,6 @@
     "@supabase/supabase-js": "^2.118.0",
     "countries-list": "^3.4.1",
     "express": "^5.1.0",
-    "json-server": "^1.0.0-beta.15",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
