@@ -85,6 +85,7 @@ create table if not exists public."contenido-profesional-cliente" (
   id text primary key,
   "professionalId" text,
   tipo text,
+  "dniCliente" text,
   titulo text,
   fecha text,
   hora text,

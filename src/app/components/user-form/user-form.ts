@@ -3,10 +3,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, AbstractControl, AsyncValidatorFn, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { map, of } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { ClientUser } from '../../services/client-user';
 import { ClientProfesional } from '../../services/client-profesional';
+import { Auth } from '../../services/auth';
 import { Desplegable } from '../desplegable/desplegable';
 import { CodigoTelefono } from '../codigo-telefono/codigo-telefono';
 import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-argentina';
@@ -24,6 +25,7 @@ function passwordsIguales(control: AbstractControl): ValidationErrors | null {
 /** Exige al menos una mayúscula, un número y un carácter especial */
 function passwordSegura(control: AbstractControl): ValidationErrors | null {
   const valor: string = control.value ?? '';
+  if (!valor) return null;
   const errores: ValidationErrors = {};
   if (!/[A-ZÁÉÍÓÚÑ]/.test(valor)) errores['sinMayuscula'] = true;
   if (!/[0-9]/.test(valor)) errores['sinNumero'] = true;
@@ -50,6 +52,7 @@ export class UserForm implements OnInit {
   protected readonly fb = inject(FormBuilder);
   protected readonly client = inject(ClientUser);
   protected readonly clientProfesional = inject(ClientProfesional);
+  private readonly auth = inject(Auth);
   protected readonly router = inject(Router);
   protected readonly route = inject(ActivatedRoute);
   private readonly location = inject(Location);
@@ -69,17 +72,13 @@ export class UserForm implements OnInit {
 
   /** Verifica contra el backend que el username no pertenezca a otro usuario */
   private readonly usernameDuplicadoValidator: AsyncValidatorFn = (control: AbstractControl) => {
-    const username = (control.value ?? '').trim().toLowerCase();
+    const username = (control.value ?? '').trim();
     if (!username) {
       return of(null);
     }
-    return this.client.getUsers().pipe(
-      map((usuarios) => {
-        const duplicado = usuarios.some(
-          (u) => (u.username ?? '').trim().toLowerCase() === username && String(u.id) !== String(this.usuarioId),
-        );
-        return duplicado ? { usernameDuplicado: true } : null;
-      }),
+    return this.client.datosDisponibles({ username }, this.usuarioId).pipe(
+      map((d) => (d.username ? null : { usernameDuplicado: true })),
+      catchError(() => of(null)),
     );
   };
 
@@ -89,29 +88,21 @@ export class UserForm implements OnInit {
     if (!dni) {
       return of(null);
     }
-    return this.client.getUsers().pipe(
-      map((usuarios) => {
-        const duplicado = usuarios.some(
-          (u) => u.dni === dni && String(u.id) !== String(this.usuarioId),
-        );
-        return duplicado ? { dniDuplicado: true } : null;
-      }),
+    return this.client.datosDisponibles({ dni }, this.usuarioId).pipe(
+      map((d) => (d.dni ? null : { dniDuplicado: true })),
+      catchError(() => of(null)),
     );
   };
 
   /** Verifica contra el backend que el email no pertenezca a otro usuario */
   private readonly emailDuplicadoValidator: AsyncValidatorFn = (control: AbstractControl) => {
-    const email = (control.value ?? '').trim().toLowerCase();
+    const email = (control.value ?? '').trim();
     if (!email) {
       return of(null);
     }
-    return this.client.getUsers().pipe(
-      map((usuarios) => {
-        const duplicado = usuarios.some(
-          (u) => (u.email ?? '').trim().toLowerCase() === email && String(u.id) !== String(this.usuarioId),
-        );
-        return duplicado ? { emailDuplicado: true } : null;
-      }),
+    return this.client.datosDisponibles({ email }, this.usuarioId).pipe(
+      map((d) => (d.email ? null : { emailDuplicado: true })),
+      catchError(() => of(null)),
     );
   };
 
@@ -122,8 +113,8 @@ export class UserForm implements OnInit {
 
   protected readonly form = this.fb.nonNullable.group({
     username:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)], [this.usernameDuplicadoValidator]],
-    password:        ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15), passwordSegura]],
-    password_repeat: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+    password:        ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15), passwordSegura]],
+    password_repeat: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
     isProfesional:   [false, [Validators.required]],
     isAdmin:         [false],
     name:            ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
@@ -143,6 +134,15 @@ export class UserForm implements OnInit {
       zipCode:    ['', [Validators.required]],
     }),
   }, { validators: passwordsIguales });
+
+  constructor() {
+    if (this.editando) {
+      this.form.controls.password.removeValidators(Validators.required);
+      this.form.controls.password_repeat.removeValidators(Validators.required);
+      this.form.controls.password.updateValueAndValidity();
+      this.form.controls.password_repeat.updateValueAndValidity();
+    }
+  }
 
   protected readonly provinciasArgentina = PROVINCIAS_ARGENTINA;
 
@@ -296,7 +296,6 @@ export class UserForm implements OnInit {
         this.form.patchValue({
           ...user,
           phoneNumber: numero,
-          password_repeat: user.password,
           dateOfBirth: this.aFechaInput(user.dateOfBirth),
         });
       },
@@ -388,28 +387,55 @@ handleSubmit() {
 
       const dejaDeSerProfesional = this.eraProfesional && !user_data.isProfesional;
 
-      this.client.updateUser(this.usuarioId, { id: this.usuarioId, ...user_data }).subscribe(() => {
-        if (dejaDeSerProfesional) {
-          this.eliminarPerfilProfesional(this.usuarioId!);
-        } else {
-          alert('Perfil actualizado con éxito!');
-          this.router.navigate(['/perfil-user', this.usuarioId]);
-        }
-      });
+      const nuevaPassword = rest.password;
+      const esPropio = String(this.auth.usuario()?.id) === String(this.usuarioId);
+      const cambioPassword$ = nuevaPassword && esPropio ? this.auth.cambiarPassword(nuevaPassword) : of(undefined);
+
+      cambioPassword$
+        .pipe(switchMap(() => this.client.updateUser(this.usuarioId!, { id: this.usuarioId!, ...user_data })))
+        .subscribe({
+          next: () => {
+            if (dejaDeSerProfesional) {
+              this.eliminarPerfilProfesional(this.usuarioId!);
+              return;
+            }
+            alert(
+              nuevaPassword && !esPropio
+                ? 'Perfil actualizado. La contraseña de otro usuario no se puede cambiar desde acá.'
+                : 'Perfil actualizado con éxito!',
+            );
+            this.router.navigate(['/perfil-user', this.usuarioId]);
+          },
+          error: () => alert('No se pudo actualizar el perfil. Intentá de nuevo.'),
+        });
       return;
     }
 
     if (confirm('Desea registrar este usuario?')) {
-      this.client.addUser(user_data).subscribe((createdUser) => {
-        alert('Exito al registrarse!');
-        this.form.reset();
+      this.auth
+        .registrar(user_data.email.trim(), rest.password)
+        .pipe(switchMap((authId) => this.client.addUser({ ...user_data, isAdmin: false, auth_id: authId })))
+        .subscribe({
+          next: (createdUser) => {
+            this.auth.iniciarSesion(createdUser);
+            alert('Exito al registrarse!');
+            this.form.reset();
 
-        if (user_data.isProfesional) {
-          this.router.navigate(['/CreateProfesional', createdUser.id]);
-        } else {
-          this.router.navigate(['/profesionales-lista']);
-        }
-      });
+            if (user_data.isProfesional) {
+              this.router.navigate(['/CreateProfesional', createdUser.id]);
+            } else {
+              this.router.navigate(['/profesionales-lista']);
+            }
+          },
+          error: (err: Error) => {
+            if (err.message === 'CONFIRMAR_EMAIL') {
+              alert('Te enviamos un email para confirmar la cuenta. Confirmalo e iniciá sesión.');
+              this.router.navigate(['/login']);
+              return;
+            }
+            alert('No se pudo completar el registro: ' + err.message);
+          },
+        });
     }
   }
 }

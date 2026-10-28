@@ -1,11 +1,9 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { forkJoin } from 'rxjs';
 import { countries, type ICountry } from 'countries-list';
 import { ClientProfesional } from '../../services/client-profesional'; // ajustá la ruta
 import { ClientValoracion } from '../../services/client-valoracion';
-import { ClientUser } from '../../services/client-user';
 import { Profesional } from '../../interfaces/profesional'; // ajustá la ruta
 import { Valoracion } from '../../interfaces/valoracion';
 import { BarraNav } from '../barra-nav/barra-nav';
@@ -32,7 +30,6 @@ const normalizarCiudad = (texto: string | undefined) => {
 export class ProfList implements OnInit {
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly clientValoracion = inject(ClientValoracion);
-  private readonly clientUser = inject(ClientUser);
 
   profesionales = signal<Profesional[]>([]);
   valoraciones = signal<Valoracion[]>([]);
@@ -159,22 +156,10 @@ export class ProfList implements OnInit {
     this.cargando.set(true);
     this.error.set(null);
 
-    forkJoin({
-      profesionales: this.clientProfesional.getProfesionales(),
-      usuarios: this.clientUser.getUsers(),
-    }).subscribe({
-      next: ({ profesionales, usuarios }) => {
-        const idsAdmin = new Set(
-          usuarios.filter((u) => u.isAdmin).map((u) => String(u.id)),
-        );
-        const idsUsuarios = new Set(usuarios.map((u) => String(u.id)));
-        this.profesionales.set(
-          profesionales.filter((p) => {
-            const userId = String(p.profesional_userData?.id);
-            // Se ocultan los admins y los perfiles cuyo usuario ya fue eliminado
-            return idsUsuarios.has(userId) && !idsAdmin.has(userId);
-          }),
-        );
+    // La base ya oculta a los admins y a los perfiles sin usuario
+    this.clientProfesional.getProfesionales().subscribe({
+      next: (profesionales) => {
+        this.profesionales.set(profesionales);
         this.cargando.set(false);
       },
       error: (err) => {

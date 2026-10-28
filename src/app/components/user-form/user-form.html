@@ -63,7 +63,7 @@
                             @if(lastname.hasError('required')){
                                 <span>Campo requerido</span>
                             }@else if (lastname.hasError('minlength')) {
-                    <span>Debe contener mas de 5 caracteres</span>
+                    <span>Debe contener al menos 6 caracteres</span>
                     }@else if (lastname.hasError('maxlength')) {
                     <span>Debe contener menos de 15 caracteres</span>
                     }
@@ -262,6 +262,7 @@
                 </li>
                 <li>
                     <label for="password">Password: </label>
+                    @if (editando) { <span class="campo-verificando">Dejalo vacío para mantener tu contraseña actual</span> }
                     <input type="password" formControlName="password" id="password">
                      @if(password.dirty || password.touched){
                             @if(password.hasError('required')){

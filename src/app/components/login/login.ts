@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ClientUser } from '../../services/client-user';
 import { Auth } from '../../services/auth';
 
 @Component({
@@ -13,7 +12,6 @@ import { Auth } from '../../services/auth';
 })
 export class Login {
   private readonly fb = inject(FormBuilder);
-  private readonly clientUser = inject(ClientUser);
   private readonly auth = inject(Auth);
   private readonly router = inject(Router);
 
@@ -44,25 +42,18 @@ export class Login {
 
     const { username, password } = this.form.getRawValue();
 
-    this.clientUser.getUsers().subscribe({
-      next: (users) => {
+    this.auth.login(username.trim(), password).subscribe({
+      next: () => {
         this.cargando.set(false);
-
-        const user = users.find(
-          (u) => u.username === username && u.password === password,
-        );
-
-        if (!user) {
+        this.router.navigate(['/profesionales-lista']);
+      },
+      error: (err: Error) => {
+        this.cargando.set(false);
+        if (err.message === 'CREDENCIALES') {
           this.error.set('Usuario o contraseña incorrectos.');
           return;
         }
-
-        this.auth.iniciarSesion(user);
-        this.router.navigate(['/profesionales-lista']);
-      },
-      error: (err) => {
         console.error('Error al iniciar sesión:', err);
-        this.cargando.set(false);
         this.error.set('No se pudo conectar con el servidor.');
       },
     });

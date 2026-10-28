@@ -5,7 +5,10 @@ export interface User {
     isProfesional: boolean;
     isAdmin: boolean;
     username: string;
-    password: string;
+    /** Solo se usa al registrarse o cambiar la contraseña; nunca se guarda en la tabla */
+    password?: string;
+    /** Id de la cuenta en Supabase Auth */
+    auth_id?: string;
     name: string;   
     lastname: string;
     dateOfBirth: Date;  

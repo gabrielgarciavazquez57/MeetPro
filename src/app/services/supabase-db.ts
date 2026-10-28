@@ -15,7 +15,7 @@ export type Tabla =
 /** Columnas de cada tabla (deben coincidir con supabase/schema.sql) */
 const COLUMNAS: Record<Tabla, string[]> = {
   users: [
-    'id', 'username', 'password', 'isProfesional', 'isAdmin', 'name', 'lastname', 'dni', 'email',
+    'id', 'auth_id', 'username', 'isProfesional', 'isAdmin', 'name', 'lastname', 'dni', 'email',
     'phoneNumber', 'gender', 'nationality', 'dateOfBirth', 'fotoPerfil', 'address', 'age',
   ],
   profesionales: [
@@ -33,12 +33,33 @@ const COLUMNAS: Record<Tabla, string[]> = {
     'descripcion_proyecto', 'imagen_proyecto', 'link_adjunto',
   ],
   'contenido-profesional-cliente': [
-    'id', 'professionalId', 'tipo', 'titulo', 'fecha', 'hora', 'descripcion', 'link',
+    'id', 'professionalId', 'tipo', 'dniCliente', 'titulo', 'fecha', 'hora', 'descripcion', 'link',
   ],
 };
 
 /** Columnas donde null es un valor real y no "campo ausente" */
 const NULL_VALIDO = new Set(['cliente']);
+
+/** Datos del usuario que sí pueden verse en las copias dentro de profesionales e información */
+const CAMPOS_PUBLICOS = ['id', 'isProfesional', 'name', 'lastname', 'email', 'phoneNumber', 'fotoPerfil'];
+
+function aDatosPublicos(usuario: unknown): unknown {
+  if (!usuario || typeof usuario !== 'object') {
+    return usuario;
+  }
+  const origen = usuario as Record<string, unknown>;
+  const publico: Record<string, unknown> = {};
+  for (const campo of CAMPOS_PUBLICOS) {
+    if (origen[campo] !== undefined) {
+      publico[campo] = origen[campo];
+    }
+  }
+  const dir = origen['address'] as Record<string, unknown> | undefined;
+  if (dir) {
+    publico['address'] = { city: dir['city'], province: dir['province'], country: dir['country'] };
+  }
+  return publico;
+}
 
 type Fila = Record<string, unknown>;
 type Respuesta = { data: unknown; error: { message: string } | null };
@@ -47,9 +68,11 @@ type Respuesta = { data: unknown; error: { message: string } | null };
   providedIn: 'root',
 })
 export class SupabaseDb {
-  private readonly sb: SupabaseClient = createClient(environment.supabaseUrl, environment.supabaseKey, {
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+  /** Cliente de Supabase compartido (base de datos y autenticación) */
+  readonly client: SupabaseClient = createClient(environment.supabaseUrl, environment.supabaseKey, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
   });
+  private readonly sb = this.client;
 
   listar<T>(tabla: Tabla): Observable<T[]> {
     return this.ejecutar(() => this.sb.from(tabla).select('*').limit(5000)).pipe(
@@ -104,6 +127,11 @@ export class SupabaseDb {
     return this.ejecutar(() => this.sb.from(tabla).delete().eq('id', String(id))).pipe(map(() => null));
   }
 
+  /** Llama a una función de la base de datos */
+  rpc<T>(funcion: string, args: object): Observable<T> {
+    return this.ejecutar(() => this.sb.rpc(funcion, args)).pipe(map((r) => r as T));
+  }
+
   private ejecutar(consulta: () => PromiseLike<Respuesta>): Observable<unknown> {
     return defer(() => consulta()).pipe(
       map(({ data, error }) => {
@@ -122,9 +150,12 @@ export class SupabaseDb {
       const valor = cuerpo[col];
       if (valor !== undefined) {
         fila[col] = valor;
-      } else if (completar) {
+      } else if (completar && col !== 'auth_id') {
         fila[col] = null;
       }
+    }
+    if ((tabla === 'profesionales' || tabla === 'informacionesProfesionales') && fila['profesional_userData']) {
+      fila['profesional_userData'] = aDatosPublicos(fila['profesional_userData']);
     }
     return fila;
   }

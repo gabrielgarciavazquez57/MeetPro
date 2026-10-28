@@ -66,18 +66,22 @@ export class ClientCuenta {
             .map((c) => c.id),
         };
 
-        const borrados = [
-          ...this.borrar('profesionales', aBorrar.perfiles),
+        // Primero lo que cuelga del perfil profesional, después el perfil y al final el usuario:
+        // las políticas de acceso dependen de que el perfil siga existiendo mientras se borra lo demás
+        const dependientes = [
           ...this.borrar('turnos', aBorrar.turnos),
           ...this.borrar('valoraciones', aBorrar.valoraciones),
           ...this.borrar('informacionesProfesionales', aBorrar.informaciones),
           ...this.borrar('proyectos', aBorrar.proyectos),
           ...this.borrar('contenido-profesional-cliente', aBorrar.contenido),
         ];
+        const borradoPerfiles = this.borrar('profesionales', aBorrar.perfiles);
 
-        const relacionados$ = borrados.length ? forkJoin(borrados) : of([]);
+        const dependientes$ = dependientes.length ? forkJoin(dependientes) : of([]);
+        const perfiles$ = borradoPerfiles.length ? forkJoin(borradoPerfiles) : of([]);
 
-        return relacionados$.pipe(
+        return dependientes$.pipe(
+          switchMap(() => perfiles$),
           switchMap(() => this.db.eliminar('users', usuario.id!)),
           map(() => ({
             perfiles: aBorrar.perfiles.length,
