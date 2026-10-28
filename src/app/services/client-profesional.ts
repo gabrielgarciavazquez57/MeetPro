@@ -1,37 +1,30 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Profesional } from '../interfaces/profesional';
-import { environment } from '../../environments/environment';
+import { SupabaseDb } from './supabase-db';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientProfesional {
-  protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para poder hacer peticiones HTTP a nuestro backend
-  protected readonly url = `${environment.apiUrl}/profesionales`; ///URL de nuestro backend para los profesionales
+  protected readonly db = inject(SupabaseDb);
 
-  ///GET
-  getProfesionales() { ///Traemos con GET a los profesionales
-    return this.http.get<Profesional[]>(this.url);
+  getProfesionales() {
+    return this.db.listar<Profesional>('profesionales');
   }
 
-  ///GET - ID
- getProfesionalByUserID(userId: string | number) {
-  return this.http.get<Profesional[]>(`${this.url}?profesional_userData.id=${userId}`);
-}
-
-  ///POST - Agregar Profesional
-  addProfesional(new_profesional: Profesional) { ///Agregamos con POST a un nuevo profesional
-    return this.http.post<Profesional>(this.url, new_profesional);
+  getProfesionalByUserID(userId: string | number) {
+    return this.db.listarDonde<Profesional>('profesionales', 'profesional_userData->>id', userId);
   }
 
-  ///PUT - Editar Profesional
-  updateProfesional(id_bus: string | number, updated_profesional: Profesional) { ///Editamos con PUT a un profesional por su ID
-    return this.http.put<Profesional>(`${this.url}/${id_bus}`, updated_profesional);
+  addProfesional(new_profesional: Profesional) {
+    return this.db.insertar<Profesional>('profesionales', new_profesional);
   }
 
-  ///DELETE - Eliminar profesional
+  updateProfesional(id_bus: string | number, updated_profesional: Profesional) {
+    return this.db.reemplazar<Profesional>('profesionales', id_bus, updated_profesional);
+  }
+
   deleteProfesional(id_bus: string | number) {
-    return this.http.delete<Profesional>(`${this.url}/${id_bus}`);
+    return this.db.eliminar('profesionales', id_bus);
   }
 }

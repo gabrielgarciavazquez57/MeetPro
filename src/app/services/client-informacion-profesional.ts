@@ -1,32 +1,26 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { InformacionProfesional } from '../interfaces/informacion-profesional';
-import { environment } from '../../environments/environment';
+import { SupabaseDb } from './supabase-db';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientInformacionProfesional {
-  protected readonly http = inject(HttpClient);
-  protected readonly url = `${environment.apiUrl}/informacionesProfesionales`;
+  protected readonly db = inject(SupabaseDb);
 
-  ///GET - Toda la información profesional
   getInformaciones() {
-    return this.http.get<InformacionProfesional[]>(this.url);
+    return this.db.listar<InformacionProfesional>('informacionesProfesionales');
   }
 
-  ///GET - Información de un profesional
   getInformacionByProfesional(professionalId: string) {
-    return this.http.get<InformacionProfesional[]>(`${this.url}?professionalId=${professionalId}`);
+    return this.db.listarDonde<InformacionProfesional>('informacionesProfesionales', 'professionalId', professionalId);
   }
 
-  ///POST - Agregar información
   addInformacion(nueva_informacion: InformacionProfesional) {
-    return this.http.post<InformacionProfesional>(this.url, nueva_informacion);
+    return this.db.insertar<InformacionProfesional>('informacionesProfesionales', nueva_informacion);
   }
 
-  ///PUT - Editar información
   updateInformacion(id: string | number, informacion_actualizada: InformacionProfesional) {
-    return this.http.put<InformacionProfesional>(`${this.url}/${id}`, informacion_actualizada);
+    return this.db.reemplazar<InformacionProfesional>('informacionesProfesionales', id, informacion_actualizada);
   }
 }

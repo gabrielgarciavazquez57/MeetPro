@@ -1,46 +1,43 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { ConfigDisponibilidad, Turno } from '../interfaces/turno';
 import { User } from '../interfaces/user';
-import { environment } from '../../environments/environment';
+import { SupabaseDb } from './supabase-db';
 import { aClienteTurno, haComenzado, horariosNuevos, seSuperponen } from '../shared/turno-utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientTurno {
-  protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para hacer peticiones HTTP al backend
-  protected readonly url = `${environment.apiUrl}/turnos`; ///URL del backend para los turnos
+  protected readonly db = inject(SupabaseDb);
 
   // ===== CRUD =====
   getTurnos() {
-    return this.http.get<Turno[]>(this.url);
+    return this.db.listar<Turno>('turnos');
   }
 
   getTurnoById(id: string | number) {
-    return this.http.get<Turno>(`${this.url}/${id}`);
+    return this.db.obtener<Turno>('turnos', id);
   }
 
   addTurno(nuevo_turno: Turno) {
-    return this.http.post<Turno>(this.url, nuevo_turno);
+    return this.db.insertar<Turno>('turnos', nuevo_turno);
   }
 
   updateTurno(id: string | number, turno_editado: Turno) {
-    return this.http.put<Turno>(`${this.url}/${id}`, turno_editado);
+    return this.db.reemplazar<Turno>('turnos', id, turno_editado);
   }
 
   patchTurno(id: string | number, cambios: Partial<Turno>) {
-    return this.http.patch<Turno>(`${this.url}/${id}`, cambios);
+    return this.db.actualizar<Turno>('turnos', id, cambios);
   }
 
   deleteTurno(id: string | number) {
-    return this.http.delete<Turno>(`${this.url}/${id}`);
+    return this.db.eliminar('turnos', id);
   }
 
   // ===== Consultas =====
-  // Nota: json-server compara "parecido a número" como Number en los filtros por query string,
-  // por eso se trae todo y se filtra acá con String().
+  // Se trae todo y se filtra acá con String().
   getTurnosDeProfesional(professionalId: string): Observable<Turno[]> {
     return this.getTurnos().pipe(
       map((lista) => lista.filter((t) => String(t.professionalId) === String(professionalId))),

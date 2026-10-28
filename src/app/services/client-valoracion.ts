@@ -1,32 +1,26 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Valoracion } from '../interfaces/valoracion';
-import { environment } from '../../environments/environment';
+import { SupabaseDb } from './supabase-db';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientValoracion {
-  protected readonly http = inject(HttpClient);
-  protected readonly url = `${environment.apiUrl}/valoraciones`;
+  protected readonly db = inject(SupabaseDb);
 
-  ///GET - Todas las valoraciones
   getValoraciones() {
-    return this.http.get<Valoracion[]>(this.url);
+    return this.db.listar<Valoracion>('valoraciones');
   }
 
-  ///GET - Valoraciones de un profesional
   getValoracionesByProfesional(professionalId: string) {
-    return this.http.get<Valoracion[]>(`${this.url}?professionalId=${professionalId}`);
+    return this.db.listarDonde<Valoracion>('valoraciones', 'professionalId', professionalId);
   }
 
-  ///POST - Agregar valoración
   addValoracion(nueva_valoracion: Valoracion) {
-    return this.http.post<Valoracion>(this.url, nueva_valoracion);
+    return this.db.insertar<Valoracion>('valoraciones', nueva_valoracion);
   }
 
-  ///DELETE - Eliminar valoración
   deleteValoracion(id: string | number) {
-    return this.http.delete<Valoracion>(`${this.url}/${id}`);
+    return this.db.eliminar('valoraciones', id);
   }
 }

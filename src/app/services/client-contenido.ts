@@ -1,36 +1,27 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ContenidoProfesionalCliente } from '../interfaces/contenido-profesional-cliente';
-import { environment } from '../../environments/environment';
+import { SupabaseDb } from './supabase-db';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientContenido {
-  protected readonly http = inject(HttpClient); ///Inyectamos el HttpClient para hacer peticiones HTTP al backend
-  protected readonly url = `${environment.apiUrl}/contenido-profesional-cliente`; ///URL del backend para el contenido profesional-cliente
+  protected readonly db = inject(SupabaseDb);
 
-  ///GET - Todo el contenido
-  ///Nota: no filtramos por professionalId en el query string porque json-server
-  ///(v1 beta) compara valores que "parecen número" como Number, y como acá
-  ///professionalId se guarda como string, la comparación estricta nunca matchea.
-  ///Por eso se trae todo y se filtra en el componente, igual que con los profesionales.
+  ///Se trae todo y se filtra en el componente por professionalId
   getContenido() {
-    return this.http.get<ContenidoProfesionalCliente[]>(this.url);
+    return this.db.listar<ContenidoProfesionalCliente>('contenido-profesional-cliente');
   }
 
-  ///POST - Agregar contenido
   addContenido(nuevo_contenido: ContenidoProfesionalCliente) {
-    return this.http.post<ContenidoProfesionalCliente>(this.url, nuevo_contenido);
+    return this.db.insertar<ContenidoProfesionalCliente>('contenido-profesional-cliente', nuevo_contenido);
   }
 
-  ///PUT - Editar contenido
   updateContenido(id: string | number, contenido_editado: ContenidoProfesionalCliente) {
-    return this.http.put<ContenidoProfesionalCliente>(`${this.url}/${id}`, contenido_editado);
+    return this.db.reemplazar<ContenidoProfesionalCliente>('contenido-profesional-cliente', id, contenido_editado);
   }
 
-  ///DELETE - Eliminar contenido
   deleteContenido(id: string | number) {
-    return this.http.delete<ContenidoProfesionalCliente>(`${this.url}/${id}`);
+    return this.db.eliminar('contenido-profesional-cliente', id);
   }
 }

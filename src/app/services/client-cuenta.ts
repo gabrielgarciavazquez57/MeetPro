@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Profesional } from '../interfaces/profesional';
@@ -8,9 +7,7 @@ import { Valoracion } from '../interfaces/valoracion';
 import { InformacionProfesional } from '../interfaces/informacion-profesional';
 import { Proyecto } from '../interfaces/proyecto';
 import { ContenidoProfesionalCliente } from '../interfaces/contenido-profesional-cliente';
-import { environment } from '../../environments/environment';
-
-const API = environment.apiUrl;
+import { SupabaseDb, Tabla } from './supabase-db';
 
 /** Cantidad de registros borrados de cada colección */
 export interface ResumenEliminacion {
@@ -26,7 +23,7 @@ export interface ResumenEliminacion {
   providedIn: 'root',
 })
 export class ClientCuenta {
-  private readonly http = inject(HttpClient);
+  private readonly db = inject(SupabaseDb);
 
   /**
    * Elimina un usuario junto con todos los datos relacionados:
@@ -35,14 +32,13 @@ export class ClientCuenta {
    * contenido que le dirigieron). La cuenta se borra al final, así un fallo se puede reintentar.
    */
   eliminarCuenta(usuario: User): Observable<ResumenEliminacion> {
-    // Se trae todo y se filtra acá: json-server compara "parecido a número" como Number en los filtros por query
     return forkJoin({
-      perfiles: this.http.get<Profesional[]>(`${API}/profesionales`),
-      turnos: this.http.get<Turno[]>(`${API}/turnos`),
-      valoraciones: this.http.get<Valoracion[]>(`${API}/valoraciones`),
-      informaciones: this.http.get<InformacionProfesional[]>(`${API}/informacionesProfesionales`),
-      proyectos: this.http.get<Proyecto[]>(`${API}/proyectos`),
-      contenido: this.http.get<ContenidoProfesionalCliente[]>(`${API}/contenido-profesional-cliente`),
+      perfiles: this.db.listar<Profesional>('profesionales'),
+      turnos: this.db.listar<Turno>('turnos'),
+      valoraciones: this.db.listar<Valoracion>('valoraciones'),
+      informaciones: this.db.listar<InformacionProfesional>('informacionesProfesionales'),
+      proyectos: this.db.listar<Proyecto>('proyectos'),
+      contenido: this.db.listar<ContenidoProfesionalCliente>('contenido-profesional-cliente'),
     }).pipe(
       switchMap((datos) => {
         const uid = String(usuario.id);
@@ -82,7 +78,7 @@ export class ClientCuenta {
         const relacionados$ = borrados.length ? forkJoin(borrados) : of([]);
 
         return relacionados$.pipe(
-          switchMap(() => this.http.delete(`${API}/users/${usuario.id}`)),
+          switchMap(() => this.db.eliminar('users', usuario.id!)),
           map(() => ({
             perfiles: aBorrar.perfiles.length,
             turnos: aBorrar.turnos.length,
@@ -103,9 +99,9 @@ export class ClientCuenta {
     return igual(v.nombre, u.name) && igual(v.apellido, u.lastname);
   }
 
-  private borrar(coleccion: string, ids: (string | number | undefined)[]): Observable<unknown>[] {
+  private borrar(coleccion: Tabla, ids: (string | number | undefined)[]): Observable<unknown>[] {
     return ids
       .filter((id): id is string | number => id != null)
-      .map((id) => this.http.delete(`${API}/${coleccion}/${id}`));
+      .map((id) => this.db.eliminar(coleccion, id));
   }
 }

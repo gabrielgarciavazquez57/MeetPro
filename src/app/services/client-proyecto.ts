@@ -1,32 +1,26 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Proyecto } from '../interfaces/proyecto';
-import { environment } from '../../environments/environment';
+import { SupabaseDb } from './supabase-db';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientProyecto {
-  protected readonly http = inject(HttpClient);
-  protected readonly url = `${environment.apiUrl}/proyectos`;
+  protected readonly db = inject(SupabaseDb);
 
-  ///GET - Todos los proyectos
   getProyectos() {
-    return this.http.get<Proyecto[]>(this.url);
+    return this.db.listar<Proyecto>('proyectos');
   }
 
-  ///POST - Agregar proyecto
   addProyecto(nuevo_proyecto: Proyecto) {
-    return this.http.post<Proyecto>(this.url, nuevo_proyecto);
+    return this.db.insertar<Proyecto>('proyectos', nuevo_proyecto);
   }
 
-  ///PUT - Editar proyecto
   updateProyecto(id: string | number, proyecto_editado: Proyecto) {
-    return this.http.put<Proyecto>(`${this.url}/${id}`, proyecto_editado);
+    return this.db.reemplazar<Proyecto>('proyectos', id, proyecto_editado);
   }
 
-  ///DELETE - Eliminar proyecto
   deleteProyecto(id: string | number) {
-    return this.http.delete<Proyecto>(`${this.url}/${id}`);
+    return this.db.eliminar('proyectos', id);
   }
 }
