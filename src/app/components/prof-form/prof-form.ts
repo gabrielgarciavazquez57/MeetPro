@@ -339,7 +339,7 @@ export class ProfesionalForm implements OnInit {
 
   handleSubmit() {
     if (this.form.invalid || !this.userData) {
-      this.toast.mostrar('Formulario invalido o usuario no cargado!');
+      this.toast.mostrar('Revisá los campos del formulario o volvé a cargar la página.', 'error');
       return;
     }
 

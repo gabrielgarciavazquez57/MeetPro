@@ -619,3 +619,125 @@ app-desplegable {
   flex: 1;
   min-width: 0;
 }
+
+/* ===== Indicador de pasos ===== */
+.pasos {
+  display: flex;
+  max-width: 34rem;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.paso {
+  position: relative;
+  flex: 1;
+}
+
+.paso + .paso::before {
+  content: '';
+  position: absolute;
+  top: 1.1rem;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #d0d7e2;
+  transition: background-color 0.2s ease;
+}
+
+.paso + .paso--activo::before,
+.paso + .paso--hecho::before {
+  background-color: #2563eb;
+}
+
+.paso-boton {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0;
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.paso-numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #64748b;
+  background-color: #ffffff;
+  border: 2px solid #d0d7e2;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.paso-nombre {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.paso--hecho .paso-numero {
+  color: #2563eb;
+  border-color: #2563eb;
+}
+
+.paso--activo .paso-numero {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.paso--activo .paso-nombre {
+  color: #1d4ed8;
+}
+
+.paso-boton:hover .paso-numero {
+  border-color: #2563eb;
+}
+
+.boton-form-ayuda {
+  margin: 0.75rem 0 0;
+  font-size: 0.78rem;
+  text-align: center;
+  color: #64748b;
+}
+
+@media (max-width: 480px) {
+  .paso-nombre {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* El estilo base de "span" marca todo como error: estos casos no lo son */
+.paso-numero::before,
+.paso-nombre::before,
+.campo-nota::before {
+  content: none;
+}
+
+.campo-nota {
+  color: #64748b;
+}
+
+.campo-verificando::before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: transparent;
+  border: 2px solid #c3ccda;
+  border-top-color: #2563eb;
+  animation: giro-cargando 0.7s linear infinite;
+}

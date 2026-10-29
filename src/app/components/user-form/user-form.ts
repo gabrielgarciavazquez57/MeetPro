@@ -260,7 +260,16 @@ export class UserForm implements OnInit {
 
   // ===== CARRUSEL DE PASOS =====
   readonly pasoActual = signal(0);
+  protected readonly pasos = ['Datos personales', 'Dirección', 'Cuenta'] as const;
   readonly direccionPaso = signal<'izq' | 'der'>('der');
+
+  irAPaso(paso: number): void {
+    if (paso === this.pasoActual()) {
+      return;
+    }
+    this.direccionPaso.set(paso > this.pasoActual() ? 'der' : 'izq');
+    this.pasoActual.set(paso);
+  }
 
   siguientePaso(): void {
     if (this.pasoActual() >= 2) {
@@ -366,7 +375,7 @@ handleSubmit() {
       return;
     }
     if (this.form.invalid) {
-      this.toast.mostrar('Formulario invalido!');
+      this.toast.mostrar('Revisá los campos del formulario.', 'error');
       return;
     }
 
@@ -427,7 +436,7 @@ handleSubmit() {
         .subscribe({
           next: (createdUser) => {
             this.auth.iniciarSesion(createdUser);
-            this.toast.mostrar('Exito al registrarse!');
+            this.toast.mostrar('Te registraste con éxito. ¡Bienvenido a MeetPro!', 'exito');
             this.form.reset();
 
             if (user_data.isProfesional) {
