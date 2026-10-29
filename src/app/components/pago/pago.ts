@@ -1,7 +1,12 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Observable, switchMap, timer } from 'rxjs';
 import { ClientProfesional } from '../../services/client-profesional';
+import { ClientTicket } from '../../services/client-ticket';
+import { Auth } from '../../services/auth';
+import { ToastService } from '../../services/toast';
+import { Ticket } from '../../interfaces/ticket';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
 
@@ -29,6 +34,10 @@ export class PagoComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
+  private readonly auth = inject(Auth);
+  private readonly clientTicket = inject(ClientTicket);
+  private readonly toast = inject(ToastService);
 
   readonly profesionalId = signal<string>('');
   readonly profesional = signal<Profesional | null>(null);
@@ -126,17 +135,53 @@ export class PagoComponent implements OnInit {
       return;
     }
 
-    // No hay pasarela de pago conectada ni se guarda nada: el resultado depende solo de la tarjeta de prueba.
+    const usuario = this.auth.usuario();
+    const prof = this.profesional();
+    if (!usuario?.id || !prof) {
+      this.toast.mostrar('Iniciá sesión para realizar el pago.', 'aviso');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // No hay pasarela de pago conectada: el resultado depende solo de la tarjeta de prueba.
+    // Lo único que se guarda es el ticket (comprobante), nunca los datos de la tarjeta.
+    const rechazada = this.numero.value === TARJETA_RECHAZADA;
+    const ticket: Ticket = {
+      numeroComprobante: 'PRUEBA-' + Math.random().toString(36).slice(2, 8).toUpperCase(),
+      monto: prof.pago?.precio ?? 0,
+      fecha: new Date().toISOString(),
+      profesional: {
+        id: prof.profesional_userData.id ?? '',
+        professionalId: prof.professionalId,
+        name: prof.profesional_userData.name,
+        lastname: prof.profesional_userData.lastname,
+        profession: prof.profession,
+      },
+      usuario: { id: usuario.id, name: usuario.name, lastname: usuario.lastname, email: usuario.email },
+      estado: rechazada ? 'rechazado' : 'aprobado',
+      concepto: 'Pago mensual',
+      moneda: 'ARS',
+      ultimosDigitos: this.numero.value.slice(-4),
+      esPrueba: true,
+    };
+
     this.rechazado.set(false);
     this.procesando.set(true);
-    setTimeout(() => {
-      this.procesando.set(false);
-      if (this.numero.value === TARJETA_RECHAZADA) {
-        this.rechazado.set(true);
-        return;
-      }
-      this.comprobante.set('PRUEBA-' + Math.random().toString(36).slice(2, 8).toUpperCase());
-      this.pagoRealizado.set(true);
-    }, 1200);
+    const guardado$: Observable<Ticket> = timer(1200).pipe(switchMap(() => this.clientTicket.addTicket(ticket)));
+    guardado$.subscribe({
+      next: (guardado) => {
+        this.procesando.set(false);
+        if (rechazada) {
+          this.rechazado.set(true);
+          return;
+        }
+        this.comprobante.set(guardado.numeroComprobante);
+        this.pagoRealizado.set(true);
+      },
+      error: () => {
+        this.procesando.set(false);
+        this.toast.mostrar('No se pudo registrar el pago. Intentá de nuevo.', 'error');
+      },
+    });
   }
 }

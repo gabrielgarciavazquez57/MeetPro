@@ -18,6 +18,7 @@ import { ContenidoClienteProfesional } from './components/contenido-cliente-prof
 import { PagoComponent } from './components/pago/pago';
 import { ListaNotificaciones } from './components/lista-notificaciones/lista-notificaciones';
 import { ListaConsultas } from './components/lista-consultas/lista-consultas';
+import { HistorialPagos } from './components/historial-pagos/historial-pagos';
 
 export const routes: Routes = [
   {
@@ -125,5 +126,17 @@ export const routes: Routes = [
   path: 'consultas',
   title: 'Consultas',
   component: ListaConsultas,
+},
+{
+  path: 'pagos-realizados',
+  title: 'Pagos realizados',
+  component: HistorialPagos,
+  data: { modo: 'realizados' },
+},
+{
+  path: 'pagos-recibidos',
+  title: 'Pagos recibidos',
+  component: HistorialPagos,
+  data: { modo: 'recibidos' },
 }
 ];

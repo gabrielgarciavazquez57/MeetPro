@@ -1,0 +1,76 @@
+<app-barra-nav [titulo]="modo === 'recibidos' ? 'Pagos recibidos' : 'Pagos realizados'" />
+
+<div class="fondo-turnos">
+  @if (cargando()) {
+    <p class="estado-msg estado-cargando">Cargando pagos...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" [routerLink]="rutaPerfil()">Volver atrás</a>
+    </div>
+
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">{{ modo === 'recibidos' ? 'Pagos recibidos' : 'Pagos realizados' }}</h1>
+        <p class="turnos-sub">{{ modo === 'recibidos' ? 'Lo que te pagaron tus clientes' : 'Lo que pagaste a los profesionales' }}</p>
+      </div>
+    </div>
+
+    <div class="turnos-panel">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-valor">{{ totalTexto() }}</span>
+          <span class="stat-label">{{ modo === 'recibidos' ? 'Total recibido' : 'Total pagado' }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-valor">{{ aprobados().length }}</span>
+          <span class="stat-label">{{ aprobados().length === 1 ? 'Pago aprobado' : 'Pagos aprobados' }}</span>
+        </div>
+      </div>
+
+      <p class="historial-prueba" role="note">
+        Todos los pagos son de prueba: no corresponden a cobros reales.
+      </p>
+
+      @if (visibles().length === 0) {
+        <p class="vacio">
+          {{ modo === 'recibidos' ? 'Todavía no recibiste pagos.' : 'Todavía no realizaste pagos.' }}
+          @if (modo === 'realizados') {
+            <a routerLink="/profesionales-lista">Buscá un profesional</a> y probá el pago desde su perfil.
+          }
+        </p>
+      } @else {
+        <ul class="lista-cards">
+          @for (t of visibles(); track t.id) {
+            <li class="turno-card" [class.turno-card--confirmado]="t.estado === 'aprobado'" [class.turno-card--apagada]="t.estado === 'rechazado'">
+              <div class="turno-fecha">
+                <span class="turno-fecha-dia">{{ dia(t) }}</span>
+                <span class="turno-fecha-mes">{{ mes(t) }}</span>
+              </div>
+              <div class="turno-cuerpo">
+                <div class="turno-linea">
+                  <span class="badge" [class.badge--confirmado]="t.estado === 'aprobado'" [class.badge--cancelado]="t.estado === 'rechazado'">
+                    {{ t.estado === 'aprobado' ? 'Aprobado' : 'Rechazado' }}
+                  </span>
+                  @if (t.esPrueba) {
+                    <span class="badge">Prueba</span>
+                  }
+                </div>
+                <strong class="turno-nombre">{{ contraparte(t) }}</strong>
+                <strong class="historial-monto">{{ monto(t) }}</strong>
+                <p class="turno-detalle">
+                  {{ detalle(t) }} · {{ t.concepto }}
+                  @if (t.ultimosDigitos) { · Tarjeta terminada en {{ t.ultimosDigitos }} }
+                </p>
+                <p class="turno-detalle">
+                  <strong>Comprobante:</strong> {{ t.numeroComprobante }} · {{ fecha(t) }}
+                </p>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  }
+</div>

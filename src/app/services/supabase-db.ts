@@ -12,7 +12,8 @@ export type Tabla =
   | 'proyectos'
   | 'contenido-profesional-cliente'
   | 'notificaciones'
-  | 'consultas';
+  | 'consultas'
+  | 'tickets';
 
 /** Columnas de cada tabla (deben coincidir con supabase/schema.sql) */
 const COLUMNAS: Record<Tabla, string[]> = {
@@ -41,6 +42,10 @@ const COLUMNAS: Record<Tabla, string[]> = {
   consultas: [
     'id', 'professionalId', 'userId', 'nombre', 'apellido', 'email', 'titulo', 'descripcion',
     'respuesta', 'fechaRespuesta', 'creada',
+  ],
+  tickets: [
+    'id', 'numeroComprobante', 'monto', 'fecha', 'profesional', 'usuario', 'estado', 'concepto',
+    'moneda', 'ultimosDigitos', 'esPrueba',
   ],
 };
 
