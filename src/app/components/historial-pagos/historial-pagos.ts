@@ -74,10 +74,6 @@ export class HistorialPagos implements OnInit {
     return `${p.name} ${p.lastname}`;
   }
 
-  detalle(t: Ticket): string {
-    return this.modo === 'recibidos' ? 'Pagó' : t.profesional.profession;
-  }
-
   monto(t: Ticket): string {
     return t.monto.toLocaleString('es-AR', { style: 'currency', currency: t.moneda || 'ARS', minimumFractionDigits: 2 });
   }
@@ -88,13 +84,5 @@ export class HistorialPagos implements OnInit {
 
   fecha(t: Ticket): string {
     return new Date(t.fecha).toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
-  }
-
-  dia(t: Ticket): string {
-    return String(new Date(t.fecha).getDate());
-  }
-
-  mes(t: Ticket): string {
-    return new Date(t.fecha).toLocaleDateString('es-AR', { month: 'short' }).replace('.', '');
   }
 }

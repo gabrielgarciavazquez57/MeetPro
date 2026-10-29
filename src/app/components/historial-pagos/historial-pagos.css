@@ -15,3 +15,142 @@
   letter-spacing: -0.01em;
   color: #0f172a;
 }
+
+/* ===== Tarjetas de pago ===== */
+.pagos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pago-card {
+  --acento: #3b82f6;
+  --icono: #22c55e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.6rem 1.25rem 1.1rem;
+  color: #ffffff;
+  background: linear-gradient(165deg, #14346a 0%, #0f2547 100%);
+  border: 1px solid #1d4580;
+  box-shadow: 0 10px 28px rgba(10, 23, 48, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.pago-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(10, 23, 48, 0.36);
+}
+
+.pago-card--rechazado {
+  --acento: #ef4444;
+  --icono: #ef4444;
+}
+
+.pago-card-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.9rem;
+  height: 3.9rem;
+  color: #0f2547;
+  background-color: #ffffff;
+  border: 4px solid var(--icono);
+  border-radius: 50%;
+}
+
+.pago-card-icono svg {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.pago-card--rechazado .pago-card-icono {
+  color: #ef4444;
+}
+
+.pago-card-titulo {
+  width: 100%;
+  margin: 1rem 0 1.1rem;
+  padding-bottom: 0.55rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--acento);
+}
+
+.pago-card-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+  margin: 0;
+}
+
+.pago-card-datos dt {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9fb4dc;
+}
+
+.pago-card-datos dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  overflow-wrap: anywhere;
+}
+
+.pago-card-datos .pago-card-monto {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.pago-card--rechazado .pago-card-monto {
+  color: #f87171;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.pago-card-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1.1rem;
+}
+
+.pago-card-prueba {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fde68a;
+  background-color: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(253, 230, 138, 0.45);
+}
+
+.pago-card-pie-icono {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: auto;
+  color: #9fb4dc;
+}
+
+@media (max-width: 480px) {
+  .pagos-grid {
+    grid-template-columns: 1fr;
+  }
+}

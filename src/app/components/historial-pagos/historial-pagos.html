@@ -41,31 +41,66 @@
           }
         </p>
       } @else {
-        <ul class="lista-cards">
+        <ul class="pagos-grid">
           @for (t of visibles(); track t.id) {
-            <li class="turno-card" [class.turno-card--confirmado]="t.estado === 'aprobado'" [class.turno-card--apagada]="t.estado === 'rechazado'">
-              <div class="turno-fecha">
-                <span class="turno-fecha-dia">{{ dia(t) }}</span>
-                <span class="turno-fecha-mes">{{ mes(t) }}</span>
+            <li class="pago-card" [class.pago-card--rechazado]="t.estado === 'rechazado'">
+              <div class="pago-card-icono" aria-hidden="true">
+                @if (t.estado === 'aprobado') {
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m5 12.5 4.5 4.5L19 7.5" />
+                  </svg>
+                } @else {
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 6l12 12M18 6 6 18" />
+                  </svg>
+                }
               </div>
-              <div class="turno-cuerpo">
-                <div class="turno-linea">
-                  <span class="badge" [class.badge--confirmado]="t.estado === 'aprobado'" [class.badge--cancelado]="t.estado === 'rechazado'">
-                    {{ t.estado === 'aprobado' ? 'Aprobado' : 'Rechazado' }}
-                  </span>
-                  @if (t.esPrueba) {
-                    <span class="badge">Prueba</span>
-                  }
+
+              <h3 class="pago-card-titulo">{{ t.estado === 'aprobado' ? '¡Pago aprobado!' : 'Pago rechazado' }}</h3>
+
+              <dl class="pago-card-datos">
+                <div>
+                  <dt>{{ modo === 'recibidos' ? 'Pagado por' : 'Pagado a' }}</dt>
+                  <dd>{{ contraparte(t) }}</dd>
                 </div>
-                <strong class="turno-nombre">{{ contraparte(t) }}</strong>
-                <strong class="historial-monto">{{ monto(t) }}</strong>
-                <p class="turno-detalle">
-                  {{ detalle(t) }} · {{ t.concepto }}
-                  @if (t.ultimosDigitos) { · Tarjeta terminada en {{ t.ultimosDigitos }} }
-                </p>
-                <p class="turno-detalle">
-                  <strong>Comprobante:</strong> {{ t.numeroComprobante }} · {{ fecha(t) }}
-                </p>
+                @if (modo === 'realizados') {
+                  <div>
+                    <dt>Profesión</dt>
+                    <dd>{{ t.profesional.profession }}</dd>
+                  </div>
+                }
+                <div>
+                  <dt>Concepto</dt>
+                  <dd>{{ t.concepto }}</dd>
+                </div>
+                @if (t.ultimosDigitos) {
+                  <div>
+                    <dt>Tarjeta</dt>
+                    <dd>Terminada en {{ t.ultimosDigitos }}</dd>
+                  </div>
+                }
+                <div>
+                  <dt>Comprobante</dt>
+                  <dd>{{ t.numeroComprobante }}</dd>
+                </div>
+                <div>
+                  <dt>Fecha</dt>
+                  <dd>{{ fecha(t) }}</dd>
+                </div>
+                <div>
+                  <dt>Monto total</dt>
+                  <dd class="pago-card-monto">{{ monto(t) }}</dd>
+                </div>
+              </dl>
+
+              <div class="pago-card-pie">
+                @if (t.esPrueba) {
+                  <strong class="pago-card-prueba">Prueba</strong>
+                }
+                <svg class="pago-card-pie-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <path d="M2 10h20" />
+                </svg>
               </div>
             </li>
           }
