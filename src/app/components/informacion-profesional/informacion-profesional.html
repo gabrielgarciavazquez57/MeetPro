@@ -194,6 +194,23 @@
               }
             </div>
 
+            <div class="campo-proyecto">
+              <label>Archivo adjunto (opcional)</label>
+              <div class="imagen-proyecto-campo">
+                @if (archivoTitulo(); as f) {
+                  <span class="adjunto-nombre">{{ f.name }}</span>
+                } @else if (tituloEditar()?.archivo_adjunto && !quitarArchivoTitulo()) {
+                  <a class="proyecto-link" [href]="tituloEditar()!.archivo_adjunto" target="_blank" rel="noopener" (click)="adjuntos.abrir(tituloEditar()!.archivo_adjunto!, $event)">{{ tituloEditar()!.archivo_nombre || 'Archivo actual' }}</a>
+                }
+                <input type="file" id="archivo_titulo" [accept]="adjuntos.accept" hidden (change)="onArchivoTitulo($event)">
+                <label for="archivo_titulo" class="btn-subir-imagen">{{ tituloConArchivo() ? 'Cambiar archivo' : '+ Subir archivo' }}</label>
+                @if (tituloConArchivo()) {
+                  <button type="button" class="btn-eliminar-proyecto" (click)="quitarAdjuntoTitulo()">Quitar</button>
+                }
+              </div>
+              <span class="campo-ayuda">PDF o imagen, hasta 5 MB</span>
+            </div>
+
             <div class="form-acciones">
               <button type="button" class="btn-cancelar" (click)="cancelarTitulo()">Cancelar</button>
               <button type="submit" class="btn-guardar" [disabled]="formTitulo.invalid || guardandoTitulo()">
@@ -224,6 +241,9 @@
                 }
                 @if (t.descripcion_titulo) {
                   <p class="titulo-card-desc">{{ t.descripcion_titulo }}</p>
+                }
+                @if (t.archivo_adjunto) {
+                  <a class="titulo-card-adjunto" [href]="t.archivo_adjunto" target="_blank" rel="noopener" (click)="adjuntos.abrir(t.archivo_adjunto!, $event)">{{ t.archivo_nombre || 'Ver archivo adjunto' }}</a>
                 }
               </li>
             }
@@ -275,6 +295,23 @@
               }
             </div>
 
+            <div class="campo-proyecto">
+              <label>Archivo adjunto (opcional)</label>
+              <div class="imagen-proyecto-campo">
+                @if (archivoCertificado(); as f) {
+                  <span class="adjunto-nombre">{{ f.name }}</span>
+                } @else if (certificadoEditar()?.archivo_adjunto && !quitarArchivoCertificado()) {
+                  <a class="proyecto-link" [href]="certificadoEditar()!.archivo_adjunto" target="_blank" rel="noopener" (click)="adjuntos.abrir(certificadoEditar()!.archivo_adjunto!, $event)">{{ certificadoEditar()!.archivo_nombre || 'Archivo actual' }}</a>
+                }
+                <input type="file" id="archivo_certificado" [accept]="adjuntos.accept" hidden (change)="onArchivoCertificado($event)">
+                <label for="archivo_certificado" class="btn-subir-imagen">{{ certificadoConArchivo() ? 'Cambiar archivo' : '+ Subir archivo' }}</label>
+                @if (certificadoConArchivo()) {
+                  <button type="button" class="btn-eliminar-proyecto" (click)="quitarAdjuntoCertificado()">Quitar</button>
+                }
+              </div>
+              <span class="campo-ayuda">PDF o imagen, hasta 5 MB</span>
+            </div>
+
             <div class="form-acciones">
               <button type="button" class="btn-cancelar" (click)="cancelarCertificado()">Cancelar</button>
               <button type="submit" class="btn-guardar" [disabled]="formCertificado.invalid || guardandoCertificado()">
@@ -305,6 +342,9 @@
                 }
                 @if (c.descripcion_certificado) {
                   <p class="titulo-card-desc">{{ c.descripcion_certificado }}</p>
+                }
+                @if (c.archivo_adjunto) {
+                  <a class="titulo-card-adjunto" [href]="c.archivo_adjunto" target="_blank" rel="noopener" (click)="adjuntos.abrir(c.archivo_adjunto!, $event)">{{ c.archivo_nombre || 'Ver archivo adjunto' }}</a>
                 }
               </li>
             }

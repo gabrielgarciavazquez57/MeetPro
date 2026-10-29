@@ -4,5 +4,8 @@ export interface Certificado {
     institucion_certificado: string,
     fecha_obtencion: string,
     descripcion_certificado: string,
-    archivo_adjunto?: string
+    /** Link del archivo adjunto (en Supabase Storage) */
+    archivo_adjunto?: string,
+    /** Nombre original del archivo adjunto */
+    archivo_nombre?: string
 }

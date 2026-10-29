@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Observable, of, switchMap } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
@@ -15,6 +16,7 @@ import { ExperienciaPro } from '../../interfaces/experiencia-pro';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { ToastService } from '../../services/toast';
 import { ConfirmacionService } from '../../services/confirmacion';
+import { AdjuntosService, ArchivoSubido } from '../../services/adjuntos';
 
 @Component({
   selector: 'app-informacion-profesional',
@@ -26,6 +28,7 @@ import { ConfirmacionService } from '../../services/confirmacion';
 export class InformacionProfesionalComponent implements OnInit {
   private readonly toast = inject(ToastService);
   private readonly confirmacion = inject(ConfirmacionService);
+  protected readonly adjuntos = inject(AdjuntosService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
@@ -373,6 +376,42 @@ export class InformacionProfesionalComponent implements OnInit {
   get fecha_obtencion_cert()    { return this.formCertificado.controls.fecha_obtencion; }
   get descripcion_certificado() { return this.formCertificado.controls.descripcion_certificado; }
 
+  /** Archivo elegido para el certificado (todavía sin subir) y marca de "quitar el archivo actual" */
+  readonly archivoCertificado = signal<File | null>(null);
+  readonly quitarArchivoCertificado = signal<boolean>(false);
+  readonly certificadoConArchivo = computed(
+    () => !!this.archivoCertificado() || (!!this.certificadoEditar()?.archivo_adjunto && !this.quitarArchivoCertificado()),
+  );
+
+  onArchivoCertificado(event: Event): void {
+    const archivo = this.elegirArchivo(event);
+    if (archivo) {
+      this.archivoCertificado.set(archivo);
+      this.quitarArchivoCertificado.set(false);
+    }
+  }
+
+  quitarAdjuntoCertificado(): void {
+    this.archivoCertificado.set(null);
+    this.quitarArchivoCertificado.set(true);
+  }
+
+  /** Toma el archivo del input y lo valida; si no sirve avisa y devuelve null */
+  private elegirArchivo(event: Event): File | null {
+    const input = event.target as HTMLInputElement;
+    const archivo = input.files?.[0] ?? null;
+    input.value = '';
+    if (!archivo) {
+      return null;
+    }
+    const motivo = this.adjuntos.validar(archivo);
+    if (motivo) {
+      this.toast.mostrar(motivo, 'error');
+      return null;
+    }
+    return archivo;
+  }
+
   abrirFormCertificado(): void {
     if (!this.esDueno()) {
       return;
@@ -384,6 +423,8 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_obtencion: '',
       descripcion_certificado: '',
     });
+    this.archivoCertificado.set(null);
+    this.quitarArchivoCertificado.set(false);
     this.mostrandoFormCertificado.set(true);
   }
 
@@ -398,12 +439,16 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_obtencion: c.fecha_obtencion,
       descripcion_certificado: c.descripcion_certificado ?? '',
     });
+    this.archivoCertificado.set(null);
+    this.quitarArchivoCertificado.set(false);
     this.mostrandoFormCertificado.set(true);
   }
 
   cancelarCertificado(): void {
     this.mostrandoFormCertificado.set(false);
     this.certificadoEditar.set(null);
+    this.archivoCertificado.set(null);
+    this.quitarArchivoCertificado.set(false);
   }
 
   guardarCertificado(): void {
@@ -417,30 +462,60 @@ export class InformacionProfesionalComponent implements OnInit {
     const raw = this.formCertificado.getRawValue();
     const editando = this.certificadoEditar();
 
-    const datos: Certificado = {
-      id: editando?.id ?? `c-${Date.now()}`,
-      nombre_certificado: raw.nombre_certificado.trim(),
-      institucion_certificado: raw.institucion_certificado.trim(),
-      fecha_obtencion: raw.fecha_obtencion,
-      descripcion_certificado: raw.descripcion_certificado.trim(),
-    };
+    const nuevo = this.archivoCertificado();
+    const quitar = this.quitarArchivoCertificado();
+    const anterior = editando?.archivo_adjunto;
+    let subidoUrl: string | null = null;
 
-    const certificados = editando
-      ? (prof.certificados ?? []).map((c) => (c.id === editando.id ? datos : c))
-      : [...(prof.certificados ?? []), datos];
+    const subida$: Observable<ArchivoSubido | null> = nuevo
+      ? this.adjuntos.subir(nuevo, String(prof.profesional_userData.id))
+      : of(null);
 
-    this.clientProfesional.updateProfesional(prof.id, { ...prof, certificados }).subscribe({
-      next: (actualizado) => {
-        this.profesional.set(actualizado);
-        this.guardandoCertificado.set(false);
-        this.mostrandoFormCertificado.set(false);
-        this.certificadoEditar.set(null);
-      },
-      error: () => {
-        this.guardandoCertificado.set(false);
-        this.toast.mostrar('No se pudo guardar el certificado.');
-      },
-    });
+    subida$
+      .pipe(
+        switchMap((subido) => {
+          subidoUrl = subido?.url ?? null;
+
+          const datos: Certificado = {
+            id: editando?.id ?? `c-${Date.now()}`,
+            nombre_certificado: raw.nombre_certificado.trim(),
+            institucion_certificado: raw.institucion_certificado.trim(),
+            fecha_obtencion: raw.fecha_obtencion,
+            descripcion_certificado: raw.descripcion_certificado.trim(),
+            ...(subido
+              ? { archivo_adjunto: subido.url, archivo_nombre: subido.nombre }
+              : anterior && !quitar
+                ? { archivo_adjunto: anterior, archivo_nombre: editando?.archivo_nombre }
+                : {}),
+          };
+
+          const certificados = editando
+            ? (prof.certificados ?? []).map((c) => (c.id === editando.id ? datos : c))
+            : [...(prof.certificados ?? []), datos];
+
+          return this.clientProfesional.updateProfesional(prof.id!, { ...prof, certificados });
+        }),
+      )
+      .subscribe({
+        next: (actualizado) => {
+          this.profesional.set(actualizado);
+          if (anterior && (nuevo || quitar)) {
+            this.adjuntos.eliminar(anterior).subscribe();
+          }
+          this.guardandoCertificado.set(false);
+          this.mostrandoFormCertificado.set(false);
+          this.certificadoEditar.set(null);
+          this.archivoCertificado.set(null);
+          this.quitarArchivoCertificado.set(false);
+        },
+        error: () => {
+          if (subidoUrl) {
+            this.adjuntos.eliminar(subidoUrl).subscribe();
+          }
+          this.guardandoCertificado.set(false);
+          this.toast.mostrar('No se pudo guardar el certificado.');
+        },
+      });
   }
 
   eliminarCertificado(id: string | number | undefined): void {
@@ -453,10 +528,16 @@ export class InformacionProfesionalComponent implements OnInit {
       if (!confirmado) {
         return;
       }
+      const eliminado = (prof.certificados ?? []).find((c) => c.id === id);
       const certificados = (prof.certificados ?? []).filter((c) => c.id !== id);
 
       this.clientProfesional.updateProfesional(prof.id!, { ...prof, certificados }).subscribe({
-        next: (actualizado) => this.profesional.set(actualizado),
+        next: (actualizado) => {
+          this.profesional.set(actualizado);
+          if (eliminado?.archivo_adjunto) {
+            this.adjuntos.eliminar(eliminado.archivo_adjunto).subscribe();
+          }
+        },
         error: () => this.toast.mostrar('No se pudo eliminar el certificado.'),
       });
     });
@@ -481,6 +562,26 @@ export class InformacionProfesionalComponent implements OnInit {
   get fecha_obtencion_tit()    { return this.formTitulo.controls.fecha_obtencion; }
   get descripcion_titulo()     { return this.formTitulo.controls.descripcion_titulo; }
 
+  /** Archivo elegido para el título (todavía sin subir) y marca de "quitar el archivo actual" */
+  readonly archivoTitulo = signal<File | null>(null);
+  readonly quitarArchivoTitulo = signal<boolean>(false);
+  readonly tituloConArchivo = computed(
+    () => !!this.archivoTitulo() || (!!this.tituloEditar()?.archivo_adjunto && !this.quitarArchivoTitulo()),
+  );
+
+  onArchivoTitulo(event: Event): void {
+    const archivo = this.elegirArchivo(event);
+    if (archivo) {
+      this.archivoTitulo.set(archivo);
+      this.quitarArchivoTitulo.set(false);
+    }
+  }
+
+  quitarAdjuntoTitulo(): void {
+    this.archivoTitulo.set(null);
+    this.quitarArchivoTitulo.set(true);
+  }
+
   abrirFormTitulo(): void {
     if (!this.esDueno()) {
       return;
@@ -492,6 +593,8 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_obtencion: '',
       descripcion_titulo: '',
     });
+    this.archivoTitulo.set(null);
+    this.quitarArchivoTitulo.set(false);
     this.mostrandoFormTitulo.set(true);
   }
 
@@ -506,12 +609,16 @@ export class InformacionProfesionalComponent implements OnInit {
       fecha_obtencion: t.fecha_obtencion,
       descripcion_titulo: t.descripcion_titulo ?? '',
     });
+    this.archivoTitulo.set(null);
+    this.quitarArchivoTitulo.set(false);
     this.mostrandoFormTitulo.set(true);
   }
 
   cancelarTitulo(): void {
     this.mostrandoFormTitulo.set(false);
     this.tituloEditar.set(null);
+    this.archivoTitulo.set(null);
+    this.quitarArchivoTitulo.set(false);
   }
 
   guardarTitulo(): void {
@@ -525,30 +632,60 @@ export class InformacionProfesionalComponent implements OnInit {
     const raw = this.formTitulo.getRawValue();
     const editando = this.tituloEditar();
 
-    const datos: TitulosPro = {
-      id: editando?.id ?? `t-${Date.now()}`,
-      nombre_titulo: raw.nombre_titulo.trim(),
-      institucion_educativa: raw.institucion_educativa.trim(),
-      fecha_obtencion: raw.fecha_obtencion,
-      descripcion_titulo: raw.descripcion_titulo.trim(),
-    };
+    const nuevo = this.archivoTitulo();
+    const quitar = this.quitarArchivoTitulo();
+    const anterior = editando?.archivo_adjunto;
+    let subidoUrl: string | null = null;
 
-    const titulos = editando
-      ? (prof.titulos ?? []).map((t) => (t.id === editando.id ? datos : t))
-      : [...(prof.titulos ?? []), datos];
+    const subida$: Observable<ArchivoSubido | null> = nuevo
+      ? this.adjuntos.subir(nuevo, String(prof.profesional_userData.id))
+      : of(null);
 
-    this.clientProfesional.updateProfesional(prof.id, { ...prof, titulos }).subscribe({
-      next: (actualizado) => {
-        this.profesional.set(actualizado);
-        this.guardandoTitulo.set(false);
-        this.mostrandoFormTitulo.set(false);
-        this.tituloEditar.set(null);
-      },
-      error: () => {
-        this.guardandoTitulo.set(false);
-        this.toast.mostrar('No se pudo guardar el título.');
-      },
-    });
+    subida$
+      .pipe(
+        switchMap((subido) => {
+          subidoUrl = subido?.url ?? null;
+
+          const datos: TitulosPro = {
+            id: editando?.id ?? `t-${Date.now()}`,
+            nombre_titulo: raw.nombre_titulo.trim(),
+            institucion_educativa: raw.institucion_educativa.trim(),
+            fecha_obtencion: raw.fecha_obtencion,
+            descripcion_titulo: raw.descripcion_titulo.trim(),
+            ...(subido
+              ? { archivo_adjunto: subido.url, archivo_nombre: subido.nombre }
+              : anterior && !quitar
+                ? { archivo_adjunto: anterior, archivo_nombre: editando?.archivo_nombre }
+                : {}),
+          };
+
+          const titulos = editando
+            ? (prof.titulos ?? []).map((t) => (t.id === editando.id ? datos : t))
+            : [...(prof.titulos ?? []), datos];
+
+          return this.clientProfesional.updateProfesional(prof.id!, { ...prof, titulos });
+        }),
+      )
+      .subscribe({
+        next: (actualizado) => {
+          this.profesional.set(actualizado);
+          if (anterior && (nuevo || quitar)) {
+            this.adjuntos.eliminar(anterior).subscribe();
+          }
+          this.guardandoTitulo.set(false);
+          this.mostrandoFormTitulo.set(false);
+          this.tituloEditar.set(null);
+          this.archivoTitulo.set(null);
+          this.quitarArchivoTitulo.set(false);
+        },
+        error: () => {
+          if (subidoUrl) {
+            this.adjuntos.eliminar(subidoUrl).subscribe();
+          }
+          this.guardandoTitulo.set(false);
+          this.toast.mostrar('No se pudo guardar el título.');
+        },
+      });
   }
 
   eliminarTitulo(id: string | number | undefined): void {
@@ -561,10 +698,16 @@ export class InformacionProfesionalComponent implements OnInit {
       if (!confirmado) {
         return;
       }
+      const eliminado = (prof.titulos ?? []).find((t) => t.id === id);
       const titulos = (prof.titulos ?? []).filter((t) => t.id !== id);
 
       this.clientProfesional.updateProfesional(prof.id!, { ...prof, titulos }).subscribe({
-        next: (actualizado) => this.profesional.set(actualizado),
+        next: (actualizado) => {
+          this.profesional.set(actualizado);
+          if (eliminado?.archivo_adjunto) {
+            this.adjuntos.eliminar(eliminado.archivo_adjunto).subscribe();
+          }
+        },
         error: () => this.toast.mostrar('No se pudo eliminar el título.'),
       });
     });

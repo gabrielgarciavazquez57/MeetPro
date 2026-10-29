@@ -696,3 +696,32 @@
     gap: 0.6rem;
   }
 }
+
+.adjunto-nombre {
+  font-size: 0.85rem;
+  color: #475569;
+  overflow-wrap: anywhere;
+}
+
+.campo-ayuda {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.74rem;
+  color: #64748b;
+}
+
+.titulo-card-adjunto {
+  align-self: flex-start;
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.titulo-card-adjunto:hover {
+  color: #1d4ed8;
+}
