@@ -18,16 +18,12 @@
 
       <div class="contenedor-izquierdo">
         <section class="seccion-foto-datos">
-          @if (esDueno()) {
-            <a class="btn-contratar" [routerLink]="['/editar-profesional', prof.profesional_userData.id]">Editar perfil</a>
-          } @else {
-            <button
-              type="button"
-              class="btn-contratar"
-              [class.btn-contratar--activo]="panel() === 'beneficios'"
-              (click)="togglePanel('beneficios')"
-            >Contratar profesional</button>
-          }
+          <button
+            type="button"
+            class="btn-contratar"
+            [class.btn-contratar--activo]="panel() === 'beneficios'"
+            (click)="togglePanel('beneficios')"
+          >Contratar profesional</button>
           <div class="fila-superior">
             <div class="avatar-perfil">
               @if (prof.profesional_userData.fotoPerfil) {
@@ -193,7 +189,7 @@
 
       <div class="columna-derecha">
         <a class="tarjeta-accion" [routerLink]="['/turnos', prof.professionalId]">
-          <span class="accion-titulo">{{ esDueno() ? 'Mi agenda' : 'Turnos' }}</span>
+          <span class="accion-titulo">Turnos</span>
           <span class="accion-deco" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -211,8 +207,8 @@
           </span>
         </button>
 
-        <a class="tarjeta-accion" [routerLink]="esDueno() ? ['/consultas'] : ['/consulta', prof.professionalId]">
-          <span class="accion-titulo">{{ esDueno() ? 'Consultas recibidas' : 'Consulta online' }}</span>
+        <a class="tarjeta-accion" [routerLink]="['/consulta', prof.professionalId]">
+          <span class="accion-titulo">Consulta online</span>
           <span class="accion-deco" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="5" width="18" height="14" rx="2" />
