@@ -1,4 +1,8 @@
 <section class="fondo-profesional">
+  <div class="acceso-lateral">
+    <button type="button" class="btn-acceso-lateral" (click)="volver()">Volver atrás</button>
+  </div>
+
   <div class="titulo-registro-grupo">
     <h1 class="titulo-registro">{{ editando ? 'Editar perfil profesional' : 'Registro profesional' }}</h1>
     <p class="titulo-registro-sub">
@@ -6,6 +10,16 @@
     </p>
   </div>
   <div class="formulario-profesional">
+    <ol class="pasos" aria-label="Pasos del formulario">
+      @for (nombre of pasos; track $index) {
+        <li class="paso" [class.paso--activo]="pasoActual() === $index" [class.paso--hecho]="pasoActual() > $index">
+          <button type="button" class="paso-boton" [attr.aria-current]="pasoActual() === $index ? 'step' : null" (click)="irAPaso($index)">
+            <span class="paso-numero">{{ $index + 1 }}</span>
+            <span class="paso-nombre">{{ nombre }}</span>
+          </button>
+        </li>
+      }
+    </ol>
     <form [formGroup]="form" (ngSubmit)="handleSubmit()">
 
     <div class="carrusel-form">
@@ -17,7 +31,7 @@
       @switch (pasoActual()) {
         @case (0) {
       <div class="datos-profesion" [class.paso-der]="direccionPaso() === 'der'" [class.paso-izq]="direccionPaso() === 'izq'">
-        <h3 class="titulo-seccion">Datos Profesionales:</h3>
+        <h3 class="titulo-seccion">Datos profesionales:</h3>
         <ul>
           <li>
             <label for="profession">Profesión: </label>
@@ -44,7 +58,7 @@
               @if(descriptionprofesional.hasError('required')){
                 <span>Campo requerido</span>
               }@else if (descriptionprofesional.hasError('maxlength')) {
-                <span>Debe contener menos de 500 caracteres</span>
+                <span>Debe tener 500 caracteres como máximo</span>
               }
             }
           </li>
@@ -86,7 +100,7 @@
               @if(direccionPresencial.hasError('required')){
                 <span>Campo requerido</span>
               }@else if(direccionPresencial.hasError('maxlength')){
-                <span>Debe contener menos de 200 caracteres</span>
+                <span>Debe tener 200 caracteres como máximo</span>
               }
             }
           </li>
@@ -124,7 +138,7 @@
                   @if(tituloGroup.get('descripcion_titulo')?.touched && tituloGroup.get('descripcion_titulo')?.hasError('required')){
                     <span>Campo requerido</span>
                   }@else if (tituloGroup.get('descripcion_titulo')?.hasError('maxlength')) {
-                    <span>Debe contener menos de 300 caracteres</span>
+                    <span>Debe tener 300 caracteres como máximo</span>
                   }
                 </li>
                 <li>
@@ -212,7 +226,7 @@
             <label for="descripcionAmpliada">Contanos más sobre tu trayectoria: </label>
             <textarea formControlName="descripcionAmpliada" id="descripcionAmpliada" rows="7"></textarea>
             @if (descripcionAmpliada.hasError('maxlength')) {
-              <span>Debe contener menos de 2000 caracteres</span>
+              <span>Debe tener 2000 caracteres como máximo</span>
             }
           </li>
         </ul>
@@ -251,7 +265,7 @@
                   @if(proyectoGroup.get('descripcion_proyecto')?.touched && proyectoGroup.get('descripcion_proyecto')?.hasError('required')){
                     <span>Campo requerido</span>
                   }@else if (proyectoGroup.get('descripcion_proyecto')?.hasError('maxlength')) {
-                    <span>Debe contener menos de 800 caracteres</span>
+                    <span>Debe tener 800 caracteres como máximo</span>
                   }
                 </li>
                 <li>
@@ -317,7 +331,7 @@
                   <label [for]="'descripcion_certificado-' + $index">Descripción (opcional): </label>
                   <textarea formControlName="descripcion_certificado" [id]="'descripcion_certificado-' + $index" rows="3"></textarea>
                   @if(certGroup.get('descripcion_certificado')?.hasError('maxlength')) {
-                    <span>Debe contener menos de 500 caracteres</span>
+                    <span>Debe tener 500 caracteres como máximo</span>
                   }
                 </li>
                 <li>
@@ -350,6 +364,9 @@
         <button type="submit" [disabled]="form.invalid" class="btn btn-grande">
           {{ editando ? 'GUARDAR CAMBIOS' : 'GUARDAR PERFIL PROFESIONAL' }}
         </button>
+        @if (pasosPendientes().length) {
+          <p class="boton-form-ayuda">Faltan datos en: {{ pasosPendientes().join(', ') }}.</p>
+        }
       </div>
 
     </form>

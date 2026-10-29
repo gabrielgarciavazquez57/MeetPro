@@ -511,3 +511,203 @@ span::before {
     flex-direction: column !important;
   }
 }
+
+/* ===== Acceso rápido lateral (mismo patrón que el resto de las pantallas) ===== */
+.acceso-lateral {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn-acceso-lateral {
+  display: block;
+  box-sizing: border-box;
+  width: 250px;
+  text-align: left;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+  background-color: #ffffff;
+  background-image: linear-gradient(270deg, #c3d6fa 0%, #e7eefc 55%, #ffffff 100%);
+  border: none;
+  border-right: 3px solid #2563eb;
+  padding: 0.85rem 1.15rem;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.22);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  animation: acceso-lateral-entrada 0.45s ease both;
+}
+
+.btn-acceso-lateral:hover {
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+  transform: translateX(2px);
+}
+
+@keyframes acceso-lateral-entrada {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .acceso-lateral {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  .btn-acceso-lateral {
+    flex: 1 1 auto;
+    width: auto;
+    text-align: center;
+    padding: 0.7rem 0.9rem;
+    border-right: none;
+    border-bottom: 3px solid #2563eb;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    animation: none;
+  }
+}
+
+/* ===== Indicador de pasos ===== */
+.pasos {
+  display: flex;
+  max-width: 44rem;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.paso {
+  position: relative;
+  flex: 1;
+}
+
+.paso + .paso::before {
+  content: '';
+  position: absolute;
+  top: 1.1rem;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #d0d7e2;
+  transition: background-color 0.2s ease;
+}
+
+.paso + .paso--activo::before,
+.paso + .paso--hecho::before {
+  background-color: #2563eb;
+}
+
+.paso-boton {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0;
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.paso-numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #64748b;
+  background-color: #ffffff;
+  border: 2px solid #d0d7e2;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.paso-nombre {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.paso--hecho .paso-numero {
+  color: #2563eb;
+  border-color: #2563eb;
+}
+
+.paso--activo .paso-numero {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.paso--activo .paso-nombre {
+  color: #1d4ed8;
+}
+
+.paso-boton:hover .paso-numero {
+  border-color: #2563eb;
+}
+
+/* El estilo base de "span" marca todo como error: estas etiquetas no lo son */
+.paso-numero::before,
+.paso-nombre::before,
+.bloque-numero::before {
+  content: none;
+}
+
+/* El botón de guardar y su ayuda van uno debajo del otro */
+.boton-form {
+  flex-direction: column;
+  align-items: center;
+}
+
+.boton-form-ayuda {
+  margin: 0.75rem 0 0;
+  max-width: 28rem;
+  font-size: 0.78rem;
+  text-align: center;
+  color: #64748b;
+}
+
+/* Con 6 pasos no entran todos los nombres en celular: solo se muestra el del paso actual */
+@media (max-width: 600px) {
+  .pasos {
+    margin-bottom: 2.6rem;
+  }
+
+  .paso-nombre {
+    display: none;
+  }
+
+  .paso--activo .paso-nombre {
+    display: block;
+    position: absolute;
+    top: 2.9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+}

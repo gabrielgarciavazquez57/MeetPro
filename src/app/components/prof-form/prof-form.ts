@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormArray, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
@@ -22,6 +23,7 @@ import { ConfirmacionService } from '../../services/confirmacion';
 export class ProfesionalForm implements OnInit {
   private readonly toast = inject(ToastService);
   private readonly confirmacion = inject(ConfirmacionService);
+  private readonly location = inject(Location);
   protected readonly fb = inject(FormBuilder);
   protected readonly route = inject(ActivatedRoute);
   protected readonly router = inject(Router);
@@ -59,6 +61,44 @@ export class ProfesionalForm implements OnInit {
     }
     this.direccionPaso.set('izq');
     this.pasoActual.update((p) => p - 1);
+  }
+
+  protected readonly pasos = ['Datos', 'Títulos', 'Experiencia', 'Descripción', 'Proyectos', 'Certificados'] as const;
+
+  irAPaso(paso: number): void {
+    if (paso === this.pasoActual()) {
+      return;
+    }
+    this.direccionPaso.set(paso > this.pasoActual() ? 'der' : 'izq');
+    this.pasoActual.set(paso);
+  }
+
+  /** Un paso tiene datos pendientes si alguno de sus campos es inválido */
+  private pasoInvalido(paso: number): boolean {
+    switch (paso) {
+      case 0:
+        return ['profession', 'professionalId', 'descriptionprofesional', 'precio', 'linkedin', 'linkReunion', 'direccionPresencial']
+          .some((campo) => this.form.get(campo)?.invalid);
+      case 1:
+        return this.form.controls.titulos.invalid;
+      case 2:
+        return this.form.controls.experiencias.invalid;
+      case 3:
+        return this.form.controls.descripcionAmpliada.invalid;
+      case 4:
+        return this.form.controls.proyectosNuevos.invalid;
+      default:
+        return this.form.controls.certificados.invalid;
+    }
+  }
+
+  /** Nombres de los pasos con datos pendientes (para la ayuda debajo del botón de guardar) */
+  protected pasosPendientes(): string[] {
+    return this.pasos.filter((_, i) => this.pasoInvalido(i));
+  }
+
+  volver(): void {
+    this.location.back();
   }
 
   protected readonly form = this.fb.nonNullable.group({
