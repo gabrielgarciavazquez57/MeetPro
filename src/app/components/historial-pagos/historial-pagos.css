@@ -27,7 +27,7 @@
 /* ===== Tarjetas de pago ===== */
 .pagos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.1rem;
   margin: 0;
   padding: 0;
@@ -41,7 +41,7 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 1.6rem 1.25rem 1.1rem;
+  padding: 1.2rem 1.4rem 0.9rem;
   color: #ffffff;
   background: linear-gradient(165deg, #14346a 0%, #0f2547 100%);
   border: 1px solid #1d4580;
@@ -63,8 +63,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.9rem;
-  height: 3.9rem;
+  width: 3.2rem;
+  height: 3.2rem;
   color: #0f2547;
   background-color: #ffffff;
   border: 4px solid var(--icono);
@@ -72,8 +72,8 @@
 }
 
 .pago-card-icono svg {
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .pago-card--rechazado .pago-card-icono {
@@ -82,10 +82,10 @@
 
 .pago-card-titulo {
   width: 100%;
-  margin: 1rem 0 1.1rem;
-  padding-bottom: 0.55rem;
+  margin: 0.7rem 0 0.9rem;
+  padding-bottom: 0.45rem;
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: 0.02em;
@@ -95,11 +95,15 @@
 }
 
 .pago-card-datos {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1.1rem;
   width: 100%;
   margin: 0;
+}
+
+.pago-card-total {
+  grid-column: 1 / -1;
 }
 
 .pago-card-datos dt {
@@ -136,7 +140,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-top: 1.1rem;
+  margin-top: 0.8rem;
 }
 
 .pago-card-prueba {
