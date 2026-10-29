@@ -212,3 +212,102 @@ form {
     align-items: flex-start;
   }
 }
+
+/* ===== Modo de prueba ===== */
+.pago-prueba {
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+  margin: 0 auto 1.5rem;
+  padding: 0.85rem 1rem;
+  background-color: #fffbeb;
+  border: 1.5px solid #fde68a;
+  border-left: 4px solid #f59e0b;
+}
+
+.pago-prueba-titulo {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b45309;
+}
+
+.pago-prueba-texto {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #78350f;
+}
+
+.pago-tarjetas-prueba {
+  margin-bottom: 1.5rem;
+  padding: 0.9rem 1rem;
+  background-color: #f6f8fe;
+  border: 1px solid #d9e2f4;
+  border-left: 4px solid #93b4f5;
+}
+
+.pago-tarjetas-prueba-titulo {
+  margin: 0 0 0.6rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.pago-tarjeta-prueba {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.pago-tarjeta-prueba + .pago-tarjeta-prueba {
+  border-top: 1px solid #d9e2f4;
+}
+
+.pago-tarjeta-prueba-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  font-size: 0.82rem;
+  color: #334155;
+}
+
+.pago-tarjeta-prueba-datos code {
+  font-family: 'Space Grotesk', ui-monospace, monospace;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  color: #0f172a;
+}
+
+.pago-rechazo {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 3px solid #dc2626;
+}
+
+.pago-exito-comprobante {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.pago-exito-comprobante strong {
+  color: #0f172a;
+  letter-spacing: 0.04em;
+}

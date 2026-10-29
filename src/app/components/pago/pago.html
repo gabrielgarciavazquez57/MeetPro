@@ -20,13 +20,23 @@
     </div>
 
     <div class="pago-panel">
+      <div class="pago-prueba" role="note">
+        <strong class="pago-prueba-titulo">Modo de prueba</strong>
+        <p class="pago-prueba-texto">
+          Este pago es simulado: no se realiza ningún cobro ni se guardan datos de la tarjeta.
+          No ingreses los datos de una tarjeta real.
+        </p>
+      </div>
+
       @if (pagoRealizado()) {
         <div class="pago-exito">
           <span class="pago-exito-icono" aria-hidden="true">✓</span>
-          <h2 class="pago-exito-titulo">¡Pago realizado!</h2>
+          <h2 class="pago-exito-titulo">¡Pago de prueba aprobado!</h2>
           <p class="pago-exito-texto">
-            Se procesó el pago de <strong>${{ prof.pago?.precio?.toFixed(2) }}</strong> a {{ nombreProfesional() }}.
+            Se simuló el pago de <strong>${{ prof.pago?.precio?.toFixed(2) }}</strong> a {{ nombreProfesional() }}.
+            No se realizó ningún cobro.
           </p>
+          <p class="pago-exito-comprobante">Comprobante de prueba: <strong>{{ comprobante() }}</strong></p>
           <a class="btn-t btn-t--primario btn-t--grande" [routerLink]="['/perfil-prof', prof.profesional_userData.id]">
             Volver al perfil
           </a>
@@ -50,13 +60,26 @@
             </div>
           </div>
 
+          <div class="pago-tarjetas-prueba">
+            <h3 class="pago-tarjetas-prueba-titulo">Tarjetas de prueba</h3>
+            @for (t of tarjetasPrueba; track t.tipo) {
+              <div class="pago-tarjeta-prueba">
+                <div class="pago-tarjeta-prueba-datos">
+                  <strong>{{ t.etiqueta }}</strong>
+                  <code>{{ t.numero }}</code>
+                </div>
+                <button type="button" class="btn-t" (click)="usarTarjeta(t.tipo)">Usar</button>
+              </div>
+            }
+          </div>
+
           <form [formGroup]="form" (ngSubmit)="handleSubmit()">
             <div class="pago-tarjeta">
               <h3 class="pago-tarjeta-titulo">Datos de la tarjeta</h3>
 
               <div class="campo">
                 <label for="titular">Nombre del titular</label>
-                <input type="text" id="titular" formControlName="titular" placeholder="Como figura en la tarjeta">
+                <input type="text" id="titular" formControlName="titular" placeholder="Como figura en la tarjeta" autocomplete="off">
                 @if (titular.touched && titular.hasError('required')) {
                   <span class="campo-error">Campo requerido</span>
                 }
@@ -72,12 +95,15 @@
                   placeholder="0000 0000 0000 0000"
                   inputmode="numeric"
                   maxlength="19"
+                  autocomplete="off"
                   (input)="onNumeroInput($event)"
                 >
                 @if (numero.touched && numero.hasError('required')) {
                   <span class="campo-error">Campo requerido</span>
                 } @else if (numero.touched && numero.hasError('pattern')) {
                   <span class="campo-error">Ingresá los 16 dígitos de la tarjeta</span>
+                } @else if (numero.hasError('noEsDePrueba')) {
+                  <span class="campo-error">Es un entorno de prueba: usá una de las tarjetas de prueba de arriba.</span>
                 }
               </div>
 
@@ -92,6 +118,7 @@
                     placeholder="MM/AA"
                     inputmode="numeric"
                     maxlength="5"
+                    autocomplete="off"
                     (input)="onVencInput($event)"
                   >
                   @if (venc.touched && venc.hasError('required')) {
@@ -103,7 +130,7 @@
 
                 <div class="campo">
                   <label for="cvv">CVV</label>
-                  <input class="pago-input-numero" type="text" id="cvv" formControlName="cvv" placeholder="123" inputmode="numeric" maxlength="4">
+                  <input class="pago-input-numero" type="text" id="cvv" formControlName="cvv" placeholder="123" inputmode="numeric" maxlength="4" autocomplete="off">
                   @if (cvv.touched && cvv.hasError('required')) {
                     <span class="campo-error">Requerido</span>
                   } @else if (cvv.touched && cvv.hasError('pattern')) {
@@ -120,8 +147,14 @@
                   <path d="M8 10V7a4 4 0 0 1 8 0v3" />
                 </svg>
               </span>
-              Esta es una pasarela de pago simulada: no se procesa ningún cobro real ni se guardan los datos de la tarjeta.
+              Los datos de la tarjeta no se envían ni se guardan en ningún lado.
             </p>
+
+            @if (rechazado()) {
+              <p class="pago-rechazo" role="alert">
+                Pago rechazado (simulado). Para probar un pago aprobado, usá la tarjeta de prueba "Pago aprobado".
+              </p>
+            }
 
             <div class="pago-acciones">
               <button type="submit" class="btn-t btn-t--primario btn-t--grande" [disabled]="form.invalid || procesando() || !tienePrecio()">

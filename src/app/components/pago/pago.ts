@@ -1,9 +1,22 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+
+/** Único entorno de pago: simulado. Solo se aceptan estas tarjetas de prueba, ninguna real */
+const TARJETA_APROBADA = '4242 4242 4242 4242';
+const TARJETA_RECHAZADA = '4000 0000 0000 0002';
+
+/** Si el número está completo y no es una tarjeta de prueba, el pago no se permite */
+function tarjetaDePrueba(control: AbstractControl): ValidationErrors | null {
+  const valor: string = control.value ?? '';
+  if (!/^(\d{4} ){3}\d{4}$/.test(valor)) {
+    return null;
+  }
+  return valor === TARJETA_APROBADA || valor === TARJETA_RECHAZADA ? null : { noEsDePrueba: true };
+}
 
 @Component({
   selector: 'app-pago',
@@ -24,6 +37,14 @@ export class PagoComponent implements OnInit {
 
   readonly procesando = signal<boolean>(false);
   readonly pagoRealizado = signal<boolean>(false);
+  /** true cuando la tarjeta de prueba "rechazada" fue usada: simula un pago que no se aprobó */
+  readonly rechazado = signal<boolean>(false);
+  readonly comprobante = signal<string>('');
+
+  protected readonly tarjetasPrueba = [
+    { tipo: 'aprobada', etiqueta: 'Pago aprobado', numero: TARJETA_APROBADA },
+    { tipo: 'rechazada', etiqueta: 'Pago rechazado', numero: TARJETA_RECHAZADA },
+  ] as const;
 
   /** true si el profesional cargó un precio para su servicio */
   readonly tienePrecio = computed(() => typeof this.profesional()?.pago?.precio === 'number');
@@ -35,7 +56,7 @@ export class PagoComponent implements OnInit {
 
   protected readonly form = this.fb.nonNullable.group({
     titular:  ['', [Validators.required, Validators.minLength(3)]],
-    numero:   ['', [Validators.required, Validators.pattern(/^(\d{4} ){3}\d{4}$/)]],
+    numero:   ['', [Validators.required, Validators.pattern(/^(\d{4} ){3}\d{4}$/), tarjetaDePrueba]],
     venc:     ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
     cvv:      ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
   });
@@ -87,16 +108,34 @@ export class PagoComponent implements OnInit {
     this.venc.setValue(formateado);
   }
 
+  /** Completa el formulario con una tarjeta de prueba */
+  usarTarjeta(tipo: 'aprobada' | 'rechazada'): void {
+    this.rechazado.set(false);
+    this.form.patchValue({
+      titular: 'Titular de Prueba',
+      numero: tipo === 'aprobada' ? TARJETA_APROBADA : TARJETA_RECHAZADA,
+      venc: '12/30',
+      cvv: '123',
+    });
+    this.form.markAsDirty();
+  }
+
   handleSubmit(): void {
     if (this.form.invalid || !this.tienePrecio()) {
       this.form.markAllAsTouched();
       return;
     }
 
-    // No hay pasarela de pago real conectada: se simula el procesamiento.
+    // No hay pasarela de pago conectada ni se guarda nada: el resultado depende solo de la tarjeta de prueba.
+    this.rechazado.set(false);
     this.procesando.set(true);
     setTimeout(() => {
       this.procesando.set(false);
+      if (this.numero.value === TARJETA_RECHAZADA) {
+        this.rechazado.set(true);
+        return;
+      }
+      this.comprobante.set('PRUEBA-' + Math.random().toString(36).slice(2, 8).toUpperCase());
       this.pagoRealizado.set(true);
     }, 1200);
   }
