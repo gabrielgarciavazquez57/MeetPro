@@ -1,6 +1,6 @@
 .toasts {
   position: fixed;
-  top: 4.5rem;
+  bottom: 1.5rem;
   right: 1.25rem;
   z-index: 1000;
   display: flex;
@@ -85,7 +85,7 @@
 
 @media (max-width: 640px) {
   .toasts {
-    top: 3.5rem;
+    bottom: 1rem;
     right: 1.25rem;
     left: 1.25rem;
     width: auto;
