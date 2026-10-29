@@ -61,16 +61,6 @@ export class PerfilUser implements OnInit {
     });
   }
 
-  /** Búsqueda de la dirección en Google Maps (se abre en otra pestaña), o null si no hay dirección */
-  protected enlaceMapa(user: User): string | null {
-    const d = user.address;
-    const partes = [d?.address, d?.city, d?.province, d?.country].filter((p) => !!p?.trim());
-    if (partes.length < 2) {
-      return null;
-    }
-    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(partes.join(', '));
-  }
-
   eliminarPerfil(): void {
     const user = this.usuario();
     if (!user?.id) {
