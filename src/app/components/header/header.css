@@ -72,6 +72,11 @@
   color: #2563eb;
 }
 
+.navbar-campana--alerta,
+.navbar-campana--alerta:hover {
+  color: #dc2626;
+}
+
 .navbar-campana svg {
   width: 1.3rem;
   height: 1.3rem;
@@ -88,7 +93,7 @@
   line-height: 1.1;
   text-align: center;
   color: #ffffff;
-  background-color: #2563eb;
+  background-color: #dc2626;
 }
 
 .btn-cerrar-sesion {
