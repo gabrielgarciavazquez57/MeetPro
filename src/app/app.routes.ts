@@ -16,6 +16,8 @@ import { Valoraciones } from './components/valoraciones/valoraciones';
 import { InformacionProfesionalComponent } from './components/informacion-profesional/informacion-profesional';
 import { ContenidoClienteProfesional } from './components/contenido-cliente-profesional/contenido-cliente-profesional';
 import { PagoComponent } from './components/pago/pago';
+import { ListaNotificaciones } from './components/lista-notificaciones/lista-notificaciones';
+import { ListaConsultas } from './components/lista-consultas/lista-consultas';
 
 export const routes: Routes = [
   {
@@ -80,7 +82,7 @@ export const routes: Routes = [
     component: ProfesionalesConsultados
   },
   {
-    path: 'consulta',
+    path: 'consulta/:profesionalId',
     title: 'Nueva consulta',
     component: FormularioConsulta
   },
@@ -113,5 +115,15 @@ export const routes: Routes = [
   path: 'pago/:profesionalId',
   title: 'Realizar pago - Mensual',
   component: PagoComponent,
+},
+{
+  path: 'notificaciones',
+  title: 'Notificaciones',
+  component: ListaNotificaciones,
+},
+{
+  path: 'consultas',
+  title: 'Consultas',
+  component: ListaConsultas,
 }
 ];

@@ -1,0 +1,120 @@
+<app-barra-nav titulo="Consultas" />
+
+<div class="fondo-turnos">
+  @if (cargando()) {
+    <p class="estado-msg">Cargando consultas...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" routerLink="/notificaciones">Notificaciones</a>
+      <button type="button" class="btn-acceso-lateral" (click)="volver()">Volver atrás</button>
+    </div>
+
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Consultas</h1>
+        <p class="turnos-sub">Mensajes con profesionales y clientes</p>
+      </div>
+    </div>
+
+    <div class="turnos-panel">
+      @if (esProfesional()) {
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'recibidas'" (click)="irA('recibidas')">
+            Recibidas
+            @if (sinResponder()) {
+              <span class="tab-contador tab-contador--alerta">{{ sinResponder() }}</span>
+            } @else if (recibidas().length) {
+              <span class="tab-contador">{{ recibidas().length }}</span>
+            }
+          </button>
+          <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'enviadas'" (click)="irA('enviadas')">
+            Enviadas
+            @if (enviadas().length) {
+              <span class="tab-contador">{{ enviadas().length }}</span>
+            }
+          </button>
+        </div>
+      }
+
+      @if (pestana() === 'recibidas' && esProfesional()) {
+        @if (recibidas().length === 0) {
+          <p class="vacio">Todavía no recibiste consultas.</p>
+        } @else {
+          <ul class="lista-cards">
+            @for (c of recibidas(); track c.id) {
+              <li class="turno-card" [class.turno-card--pendiente]="!c.respuesta" [class.turno-card--confirmado]="!!c.respuesta">
+                <div class="turno-fecha">
+                  <span class="turno-fecha-dia">{{ dia(c) }}</span>
+                  <span class="turno-fecha-mes">{{ mes(c) }}</span>
+                </div>
+                <div class="turno-cuerpo">
+                  <span class="turno-nombre">{{ c.titulo }}</span>
+                  <span class="turno-detalle"><strong>De:</strong> {{ c.nombre }} {{ c.apellido }} · {{ c.email }}</span>
+                  <span class="turno-detalle consulta-texto">{{ c.descripcion }}</span>
+
+                  @if (c.respuesta) {
+                    <div class="turno-nota">
+                      <strong>Tu respuesta</strong> ({{ fecha(c.fechaRespuesta) }}): {{ c.respuesta }}
+                    </div>
+                  } @else {
+                    <textarea
+                      class="consulta-respuesta"
+                      rows="3"
+                      maxlength="1000"
+                      placeholder="Escribí tu respuesta"
+                      [value]="borradores()[c.id!] || ''"
+                      (input)="escribir(c.id!, $any($event.target).value)"
+                    ></textarea>
+                    <div class="turno-acciones">
+                      <button
+                        type="button"
+                        class="btn-t btn-t--primario"
+                        [disabled]="!(borradores()[c.id!] || '').trim() || enviando() === c.id"
+                        (click)="responder(c)"
+                      >
+                        {{ enviando() === c.id ? 'Enviando...' : 'Enviar respuesta' }}
+                      </button>
+                    </div>
+                  }
+                </div>
+              </li>
+            }
+          </ul>
+        }
+      } @else {
+        @if (enviadas().length === 0) {
+          <p class="vacio">
+            No enviaste consultas.
+            <a routerLink="/profesionales-lista">Elegí un profesional</a> y usá Consulta online en su perfil.
+          </p>
+        } @else {
+          <ul class="lista-cards">
+            @for (c of enviadas(); track c.id) {
+              <li class="turno-card" [class.turno-card--pendiente]="!c.respuesta" [class.turno-card--confirmado]="!!c.respuesta">
+                <div class="turno-fecha">
+                  <span class="turno-fecha-dia">{{ dia(c) }}</span>
+                  <span class="turno-fecha-mes">{{ mes(c) }}</span>
+                </div>
+                <div class="turno-cuerpo">
+                  <span class="turno-nombre">{{ c.titulo }}</span>
+                  <span class="turno-detalle"><strong>Para:</strong> {{ nombreProfesional(c.professionalId) }}</span>
+                  <span class="turno-detalle consulta-texto">{{ c.descripcion }}</span>
+
+                  @if (c.respuesta) {
+                    <div class="turno-nota">
+                      <strong>Respuesta de {{ nombreProfesional(c.professionalId) }}</strong> ({{ fecha(c.fechaRespuesta) }}): {{ c.respuesta }}
+                    </div>
+                  } @else {
+                    <span class="turno-detalle">Todavía sin respuesta.</span>
+                  }
+                </div>
+              </li>
+            }
+          </ul>
+        }
+      }
+    </div>
+  }
+</div>

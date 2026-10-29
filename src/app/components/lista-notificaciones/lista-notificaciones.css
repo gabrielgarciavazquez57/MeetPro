@@ -1,0 +1,15 @@
+.noti--nueva {
+  background-color: #f6f8fe;
+}
+
+.noti-hace {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.noti-punto {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #2563eb;
+}

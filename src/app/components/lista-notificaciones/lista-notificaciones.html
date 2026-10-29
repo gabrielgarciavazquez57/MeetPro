@@ -1,0 +1,76 @@
+<app-barra-nav titulo="Notificaciones" />
+
+<div class="fondo-turnos">
+  <div class="acceso-lateral">
+    <a class="btn-acceso-lateral" routerLink="/consultas">Mis consultas</a>
+    <button type="button" class="btn-acceso-lateral" (click)="volver()">Volver atrás</button>
+  </div>
+
+  <div class="turnos-encabezado">
+    <div>
+      <h1 class="turnos-titulo">Notificaciones</h1>
+      <p class="turnos-sub">Turnos, mensajes, valoraciones y contenido</p>
+    </div>
+    @if (noLeidas() > 0) {
+      <button type="button" class="btn-t" (click)="marcarTodas()">Marcar todas como leídas</button>
+    }
+  </div>
+
+  <div class="turnos-panel">
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'todas'" (click)="irA('todas')">
+        Todas
+        @if (total()) {
+          <span class="tab-contador">{{ total() }}</span>
+        }
+      </button>
+      <button type="button" role="tab" class="tab" [class.tab--activa]="pestana() === 'noleidas'" (click)="irA('noleidas')">
+        Sin leer
+        @if (noLeidas()) {
+          <span class="tab-contador tab-contador--alerta">{{ noLeidas() }}</span>
+        }
+      </button>
+    </div>
+
+    @if (cargando() && total() === 0) {
+      <p class="vacio">Cargando notificaciones...</p>
+    } @else if (visibles().length === 0) {
+      <p class="vacio">
+        {{ pestana() === 'noleidas' ? 'No tenés notificaciones sin leer.' : 'Todavía no tenés notificaciones.' }}
+      </p>
+    } @else {
+      <ul class="lista-cards">
+        @for (n of visibles(); track n.id) {
+          <li class="turno-card" [class.noti--nueva]="!n.leida">
+            <div class="turno-fecha">
+              <span class="turno-fecha-dia">{{ dia(n) }}</span>
+              <span class="turno-fecha-mes">{{ mes(n) }}</span>
+            </div>
+            <div class="turno-cuerpo">
+              <div class="turno-linea">
+                <span class="badge" [class.badge--pendiente]="n.tipo === 'turno_cercano'">{{ etiqueta(n) }}</span>
+                <span class="noti-hace">{{ hace(n) }}</span>
+                @if (!n.leida) {
+                  <span class="noti-punto" aria-label="Sin leer"></span>
+                }
+              </div>
+              <span class="turno-nombre">{{ n.titulo }}</span>
+              @if (n.mensaje) {
+                <span class="turno-detalle">{{ n.mensaje }}</span>
+              }
+              <div class="turno-acciones">
+                @if (n.enlace) {
+                  <button type="button" class="btn-t btn-t--primario" (click)="abrir(n)">Ver</button>
+                }
+                @if (!n.leida) {
+                  <button type="button" class="btn-t" (click)="marcarLeida(n)">Marcar como leída</button>
+                }
+                <button type="button" class="btn-t btn-t--peligro" (click)="eliminar(n)">Eliminar</button>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>

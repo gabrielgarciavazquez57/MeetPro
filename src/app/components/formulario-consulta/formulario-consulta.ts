@@ -1,8 +1,9 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Auth } from '../../services/auth';
+import { ClientConsulta } from '../../services/client-consulta';
 import { BarraNav } from '../barra-nav/barra-nav';
 
 @Component({
@@ -17,6 +18,12 @@ export class FormularioConsulta implements OnInit {
   private readonly router = inject(Router);
   private readonly location = inject(Location);
   private readonly auth = inject(Auth);
+  private readonly route = inject(ActivatedRoute);
+  private readonly clientConsulta = inject(ClientConsulta);
+
+  /** Matrícula del profesional al que va dirigida la consulta */
+  private professionalId = '';
+  readonly enviando = signal<boolean>(false);
 
   /** Archivos adjuntos seleccionados */
   readonly archivos = signal<File[]>([]);
@@ -34,6 +41,12 @@ export class FormularioConsulta implements OnInit {
   get descripcion() { return this.form.controls.descripcion; }
 
   ngOnInit(): void {
+    this.professionalId = this.route.snapshot.paramMap.get('profesionalId') ?? '';
+    if (!this.professionalId) {
+      this.router.navigate(['/profesionales-lista']);
+      return;
+    }
+
     const u = this.auth.usuario();
 
     if (!u) {
@@ -73,18 +86,34 @@ export class FormularioConsulta implements OnInit {
       return;
     }
 
+    const usuario = this.auth.usuario();
+    if (!usuario?.id || this.enviando()) {
+      return;
+    }
+
     const { titulo, nombre, apellido, email, descripcion } = this.form.getRawValue();
 
-    console.log('Consulta enviada:', {
-      titulo,
-      nombre,
-      apellido,
-      email,
-      descripcion,
-      archivos: this.archivos().map((f) => f.name),
-    });
-
-    alert('Consulta enviada con éxito. Te responderemos por email.');
-    this.router.navigate(['/']);
+    this.enviando.set(true);
+    this.clientConsulta
+      .addConsulta({
+        professionalId: this.professionalId,
+        userId: String(usuario.id),
+        nombre,
+        apellido,
+        email,
+        titulo: titulo.trim(),
+        descripcion: descripcion.trim(),
+      })
+      .subscribe({
+        next: () => {
+          this.enviando.set(false);
+          alert('Consulta enviada con éxito. Vas a ver la respuesta en tus notificaciones.');
+          this.router.navigate(['/consultas']);
+        },
+        error: () => {
+          this.enviando.set(false);
+          alert('No se pudo enviar la consulta. Intentá de nuevo.');
+        },
+      });
   }
 }

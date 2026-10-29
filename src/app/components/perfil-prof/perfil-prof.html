@@ -207,7 +207,7 @@
           </span>
         </button>
 
-        <a class="tarjeta-accion" routerLink="/consulta">
+        <a class="tarjeta-accion" [routerLink]="['/consulta', prof.professionalId]">
           <span class="accion-titulo">Consulta online</span>
           <span class="accion-deco" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">

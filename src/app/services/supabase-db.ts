@@ -10,7 +10,9 @@ export type Tabla =
   | 'valoraciones'
   | 'informacionesProfesionales'
   | 'proyectos'
-  | 'contenido-profesional-cliente';
+  | 'contenido-profesional-cliente'
+  | 'notificaciones'
+  | 'consultas';
 
 /** Columnas de cada tabla (deben coincidir con supabase/schema.sql) */
 const COLUMNAS: Record<Tabla, string[]> = {
@@ -34,6 +36,11 @@ const COLUMNAS: Record<Tabla, string[]> = {
   ],
   'contenido-profesional-cliente': [
     'id', 'professionalId', 'tipo', 'dniCliente', 'titulo', 'fecha', 'hora', 'descripcion', 'link',
+  ],
+  notificaciones: ['id', 'user_id', 'tipo', 'titulo', 'mensaje', 'enlace', 'leida', 'creada', 'ref'],
+  consultas: [
+    'id', 'professionalId', 'userId', 'nombre', 'apellido', 'email', 'titulo', 'descripcion',
+    'respuesta', 'fechaRespuesta', 'creada',
   ],
 };
 

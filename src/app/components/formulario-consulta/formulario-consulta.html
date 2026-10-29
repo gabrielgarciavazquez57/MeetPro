@@ -7,7 +7,7 @@
 
   <div class="titulo-consulta-grupo">
     <h1 class="titulo-consulta">Nueva consulta</h1>
-    <p class="titulo-consulta-sub">Contanos tu duda y te respondemos por email</p>
+    <p class="titulo-consulta-sub">Contanos tu duda y el profesional te responde por acá</p>
   </div>
 
   <form class="formulario-consulta" [formGroup]="form" (ngSubmit)="handleSubmit()">
@@ -69,7 +69,7 @@
     </div>
 
     <div class="boton-form">
-      <button type="submit" [disabled]="form.invalid" class="btn btn-grande">ENVIAR CONSULTA</button>
+      <button type="submit" [disabled]="form.invalid || enviando()" class="btn btn-grande">{{ enviando() ? 'ENVIANDO...' : 'ENVIAR CONSULTA' }}</button>
     </div>
   </form>
 </section>
