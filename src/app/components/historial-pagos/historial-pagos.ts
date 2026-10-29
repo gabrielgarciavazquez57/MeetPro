@@ -43,9 +43,6 @@ export class HistorialPagos implements OnInit {
       .sort((a, b) => b.fecha.localeCompare(a.fecha));
   });
 
-  readonly aprobados = computed(() => this.visibles().filter((t) => t.estado === 'aprobado'));
-  readonly total = computed(() => this.aprobados().reduce((suma, t) => suma + t.monto, 0));
-
   ngOnInit(): void {
     if (!this.esNavegador) {
       return;
@@ -76,10 +73,6 @@ export class HistorialPagos implements OnInit {
 
   monto(t: Ticket): string {
     return t.monto.toLocaleString('es-AR', { style: 'currency', currency: t.moneda || 'ARS', minimumFractionDigits: 2 });
-  }
-
-  totalTexto(): string {
-    return this.total().toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 });
   }
 
   fecha(t: Ticket): string {
