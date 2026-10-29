@@ -2,7 +2,7 @@
 
 <div class="fondo-valoraciones">
   @if (cargando()) {
-    <p class="estado-msg">Cargando valoraciones...</p>
+    <p class="estado-msg estado-cargando">Cargando valoraciones...</p>
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {

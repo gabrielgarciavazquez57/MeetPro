@@ -1,5 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+/* Base global de MeetPro. Los estilos de cada pantalla viven en su componente. */
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #334155;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: #cfe0ff;
+  color: #0f172a;
+}
+
+/* Anillo de foco visible al navegar con teclado (los componentes que ya definen el suyo lo mantienen) */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Indicador de carga para los mensajes "Cargando..." */
+.estado-cargando::before {
+  content: '';
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  margin-right: 0.6em;
+  vertical-align: -0.14em;
+  border: 2px solid #c3ccda;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: giro-cargando 0.7s linear infinite;
+}
+
+@keyframes giro-cargando {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respeta la preferencia del sistema de reducir el movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

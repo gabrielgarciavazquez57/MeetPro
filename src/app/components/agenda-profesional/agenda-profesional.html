@@ -63,7 +63,7 @@
 <div class="fondo-turnos">
 
   @if (cargando()) {
-    <p class="estado-msg">Cargando agenda...</p>
+    <p class="estado-msg estado-cargando">Cargando agenda...</p>
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else {

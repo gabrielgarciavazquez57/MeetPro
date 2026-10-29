@@ -2,7 +2,7 @@
 
 <div class="fondo-profesional">
   @if (cargando()) {
-    <p class="estado-msg">Cargando profesional...</p>
+    <p class="estado-msg estado-cargando">Cargando profesional...</p>
   } @else if (error()) {
     <p class="estado-msg estado-error">{{ error() }}</p>
   } @else if (profesional(); as prof) {
