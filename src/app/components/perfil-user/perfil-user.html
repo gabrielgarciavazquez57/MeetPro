@@ -134,8 +134,11 @@
 
       <div class="datos-titulos">
         <h2 class="titulo-seccion">Dirección</h2>
+        @if (enlaceMapa(user); as mapa) {
+          <a class="enlace-mapa" [href]="mapa" target="_blank" rel="noopener">Ver en el mapa</a>
+        }
         <ul>
-          <li>
+          <li class="item-ancho">
             <label>Calle</label>
             <span class="valor">{{ user.address?.address }}</span>
           </li>

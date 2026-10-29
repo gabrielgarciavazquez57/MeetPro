@@ -475,3 +475,75 @@ label {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Datos personales y dirección ===== */
+.datos-titulos {
+  position: relative;
+}
+
+/* El dato principal de la dirección ocupa todo el ancho */
+.item-ancho {
+  grid-column: 1 / -1;
+}
+
+.item-ancho .valor {
+  font-size: 1.05rem;
+}
+
+/* La última fila queda sin línea inferior: cierra la tarjeta limpia */
+.datos-profesion li:nth-last-child(-n + 2),
+.datos-titulos li:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.datos-titulos li:nth-last-child(-n + 2) {
+  padding-bottom: 0;
+}
+
+.enlace-mapa {
+  position: absolute;
+  top: 2.1rem;
+  right: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.enlace-mapa::after {
+  content: ' \2197';
+}
+
+.enlace-mapa:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .datos-profesion,
+  .datos-titulos {
+    padding: 1.25rem;
+  }
+
+  /* Dirección también en una columna, como los datos personales */
+  .datos-titulos > ul {
+    grid-template-columns: 1fr;
+  }
+
+  /* Con una sola columna, solo el último dato queda sin línea */
+  .datos-profesion li:nth-last-child(2),
+  .datos-titulos li:nth-last-child(2) {
+    border-bottom: 1px solid #d0d7e2;
+  }
+
+  .datos-titulos li:nth-last-child(2) {
+    padding-bottom: 0.75rem;
+  }
+
+  .enlace-mapa {
+    top: 1.35rem;
+    right: 1.25rem;
+  }
+}
