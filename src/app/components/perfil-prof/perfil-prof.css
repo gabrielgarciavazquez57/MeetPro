@@ -647,11 +647,20 @@ label {
 
 @media (max-width: 600px) {
   .fondo-profesional {
-    padding: 1.5rem 1rem;
+    /* deja lugar para las dos barras de navegación fijas */
+    padding: 10.5rem 1rem 1.5rem;
   }
 
   .contenedor-izquierdo section {
     padding: 1.35rem;
+  }
+
+  /* El botón deja de flotar en la esquina (tapaba el avatar) y ocupa todo el ancho */
+  .btn-contratar {
+    position: static;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
   }
 
   .fila-superior {
@@ -672,6 +681,8 @@ label {
   }
 
   .botones-secundarios {
+    /* en columna, los 280px del escritorio se aplicarían como alto */
+    flex: 0 0 auto;
     flex-direction: row;
     flex-wrap: wrap;
     padding-left: 0;
@@ -688,4 +699,64 @@ label {
   .columna-derecha {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* ===== Resumen en la cabecera: puntaje y precio ===== */
+.fila-resumen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.chip-resumen {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  color: #475569;
+  text-decoration: none;
+  background-color: #f6f8fe;
+  border: 1px solid #d9e2f4;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.chip-resumen b {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.chip-resumen i {
+  font-style: normal;
+  color: #64748b;
+}
+
+.chip-resumen b.chip-estrella {
+  color: #f59e0b;
+}
+
+.chip-resumen--enlace:hover {
+  background-color: #eff4ff;
+  border-color: #2563eb;
+}
+
+/* ===== Descripción de las tarjetas de acción ===== */
+.accion-descripcion {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.45rem;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #64748b;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tarjeta-accion:hover .accion-descripcion {
+  background-color: #f7faff;
+  box-shadow: 0 0 0 4px #f7faff;
 }

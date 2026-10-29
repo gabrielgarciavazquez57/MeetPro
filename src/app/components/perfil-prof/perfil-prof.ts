@@ -5,6 +5,8 @@ import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { formatearTelefono } from '../../shared/codigos-pais';
 import { Auth } from '../../services/auth';
+import { ClientValoracion } from '../../services/client-valoracion';
+import { Valoracion } from '../../interfaces/valoracion';
 
 @Component({
   selector: 'app-perfil-profesional',
@@ -17,10 +19,33 @@ export class PerfilProfesional implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly auth = inject(Auth);
+  private readonly clientValoracion = inject(ClientValoracion);
 
   protected readonly formatearTelefono = formatearTelefono;
 
   profesional = signal<Profesional | null>(null);
+  private readonly valoraciones = signal<Valoracion[]>([]);
+
+  readonly cantidadValoraciones = computed(() => this.valoraciones().length);
+
+  /** Promedio de puntaje con coma decimal (por ejemplo "4,5"), o null si no hay valoraciones */
+  readonly promedioTexto = computed(() => {
+    const lista = this.valoraciones();
+    if (!lista.length) {
+      return null;
+    }
+    const promedio = lista.reduce((suma, v) => suma + v.puntaje, 0) / lista.length;
+    return (Math.round(promedio * 10) / 10).toLocaleString('es-AR');
+  });
+
+  /** Precio mensual con formato de pesos (por ejemplo "$ 7.500"), o null si no cargó uno */
+  readonly precioTexto = computed(() => {
+    const precio = this.profesional()?.pago?.precio;
+    if (typeof precio !== 'number' || precio <= 0) {
+      return null;
+    }
+    return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  });
   cargando = signal<boolean>(true);
   error = signal<string | null>(null);
 
@@ -73,6 +98,10 @@ export class PerfilProfesional implements OnInit {
           this.profesional.set(null);
         } else {
           this.profesional.set(data[0]);
+          this.clientValoracion.getValoracionesByProfesional(data[0].professionalId).subscribe({
+            next: (lista) => this.valoraciones.set(lista),
+            error: () => this.valoraciones.set([]),
+          });
         }
         this.cargando.set(false);
       },
