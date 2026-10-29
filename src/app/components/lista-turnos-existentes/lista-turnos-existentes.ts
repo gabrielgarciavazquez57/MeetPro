@@ -9,6 +9,7 @@ import { Auth } from '../../services/auth';
 import { Turno } from '../../interfaces/turno';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 import {
   diaDelMes,
   esActivo,
@@ -32,6 +33,7 @@ type TipoAccion = 'cancelar' | 'reprogramar';
   styleUrls: ['../../shared/turnos.css', './lista-turnos-existentes.css'],
 })
 export class ListaTurnosExistentes implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly clientTurno = inject(ClientTurno);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly route = inject(ActivatedRoute);
@@ -159,7 +161,7 @@ export class ListaTurnosExistentes implements OnInit {
       },
       error: () => {
         this.procesando.set(false);
-        alert('No se pudo cancelar el turno. Intentá de nuevo.');
+        this.toast.mostrar('No se pudo cancelar el turno. Intentá de nuevo.');
       },
     });
   }

@@ -7,6 +7,7 @@ import { ClientCuenta } from '../../services/client-cuenta';
 import { Auth } from '../../services/auth';
 import { User } from '../../interfaces/user';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 
 type Filtro = 'todos' | 'profesionales' | 'clientes' | 'admins';
 
@@ -21,6 +22,7 @@ const normalizar = (texto: string | undefined) =>
   styleUrls: ['../../shared/turnos.css', './lista-usuarios.css'],
 })
 export class ListaUsuarios implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly clientUser = inject(ClientUser);
   private readonly clientCuenta = inject(ClientCuenta);
   private readonly auth = inject(Auth);
@@ -124,7 +126,7 @@ export class ListaUsuarios implements OnInit {
       },
       error: () => {
         this.eliminando.set(false);
-        alert('No se pudo eliminar el usuario. Intentá de nuevo.');
+        this.toast.mostrar('No se pudo eliminar el usuario. Intentá de nuevo.');
       },
     });
   }

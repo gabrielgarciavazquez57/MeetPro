@@ -13,6 +13,7 @@ import { CodigoTelefono } from '../codigo-telefono/codigo-telefono';
 import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-argentina';
 import { CODIGO_PAIS_DEFECTO, separarTelefono } from '../../shared/codigos-pais';
 import { countries, type ICountry } from 'countries-list';
+import { ToastService } from '../../services/toast';
 
 const OTRA_CIUDAD = 'Otra ciudad...';
 
@@ -49,6 +50,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
   styleUrl: './user-form.css',
 })
 export class UserForm implements OnInit {
+  private readonly toast = inject(ToastService);
   protected readonly fb = inject(FormBuilder);
   protected readonly client = inject(ClientUser);
   protected readonly clientProfesional = inject(ClientProfesional);
@@ -281,7 +283,7 @@ export class UserForm implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
-      alert('No se encontró el usuario a editar.');
+      this.toast.mostrar('No se encontró el usuario a editar.');
       this.router.navigate(['/']);
       return;
     }
@@ -300,7 +302,7 @@ export class UserForm implements OnInit {
         });
       },
       error: () => {
-        alert('No se pudo cargar el usuario.');
+        this.toast.mostrar('No se pudo cargar el usuario.');
         this.router.navigate(['/']);
       },
     });
@@ -335,7 +337,7 @@ export class UserForm implements OnInit {
       next: (lista) => {
         const registroId = lista[0]?.id;
         const finalizar = () => {
-          alert('Perfil actualizado. Se quitó tu perfil profesional.');
+          this.toast.mostrar('Perfil actualizado. Se quitó tu perfil profesional.');
           this.router.navigate(['/perfil-user', userId]);
         };
 
@@ -350,7 +352,7 @@ export class UserForm implements OnInit {
         });
       },
       error: () => {
-        alert('Perfil actualizado, pero no se pudo quitar el perfil profesional.');
+        this.toast.mostrar('Perfil actualizado, pero no se pudo quitar el perfil profesional.');
         this.router.navigate(['/perfil-user', userId]);
       },
     });
@@ -358,11 +360,11 @@ export class UserForm implements OnInit {
 
 handleSubmit() {
     if (this.form.pending) {
-      alert('Esperá un momento, estamos verificando tus datos...');
+      this.toast.mostrar('Esperá un momento, estamos verificando tus datos...');
       return;
     }
     if (this.form.invalid) {
-      alert('Formulario invalido!');
+      this.toast.mostrar('Formulario invalido!');
       return;
     }
 
@@ -378,7 +380,7 @@ handleSubmit() {
 
     if (this.editando) {
       if (!this.usuarioId) {
-        alert('No se encontró el usuario a editar.');
+        this.toast.mostrar('No se encontró el usuario a editar.');
         return;
       }
       if (!confirm('¿Guardar los cambios en tu perfil?')) {
@@ -399,14 +401,14 @@ handleSubmit() {
               this.eliminarPerfilProfesional(this.usuarioId!);
               return;
             }
-            alert(
+            this.toast.mostrar(
               nuevaPassword && !esPropio
                 ? 'Perfil actualizado. La contraseña de otro usuario no se puede cambiar desde acá.'
                 : 'Perfil actualizado con éxito!',
             );
             this.router.navigate(['/perfil-user', this.usuarioId]);
           },
-          error: () => alert('No se pudo actualizar el perfil. Intentá de nuevo.'),
+          error: () => this.toast.mostrar('No se pudo actualizar el perfil. Intentá de nuevo.'),
         });
       return;
     }
@@ -418,7 +420,7 @@ handleSubmit() {
         .subscribe({
           next: (createdUser) => {
             this.auth.iniciarSesion(createdUser);
-            alert('Exito al registrarse!');
+            this.toast.mostrar('Exito al registrarse!');
             this.form.reset();
 
             if (user_data.isProfesional) {
@@ -429,11 +431,11 @@ handleSubmit() {
           },
           error: (err: Error) => {
             if (err.message === 'CONFIRMAR_EMAIL') {
-              alert('Te enviamos un email para confirmar la cuenta. Confirmalo e iniciá sesión.');
+              this.toast.mostrar('Te enviamos un email para confirmar la cuenta. Confirmalo e iniciá sesión.');
               this.router.navigate(['/login']);
               return;
             }
-            alert('No se pudo completar el registro: ' + err.message);
+            this.toast.mostrar('No se pudo completar el registro: ' + err.message);
           },
         });
     }

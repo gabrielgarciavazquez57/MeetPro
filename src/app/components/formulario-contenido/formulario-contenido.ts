@@ -2,6 +2,7 @@ import { Component, inject, input, output, signal, OnInit } from '@angular/core'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClientContenido } from '../../services/client-contenido';
 import { ContenidoProfesionalCliente } from '../../interfaces/contenido-profesional-cliente';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-formulario-contenido',
@@ -11,6 +12,7 @@ import { ContenidoProfesionalCliente } from '../../interfaces/contenido-profesio
   styleUrl: './formulario-contenido.css',
 })
 export class FormularioContenido implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
   private readonly clientContenido = inject(ClientContenido);
 
@@ -88,7 +90,7 @@ export class FormularioContenido implements OnInit {
   handleSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      alert('Completá el título y la descripción.');
+      this.toast.mostrar('Completá el título y la descripción.');
       return;
     }
 
@@ -112,7 +114,7 @@ export class FormularioContenido implements OnInit {
         : this.clientContenido.addContenido(contenido);
 
     peticion.subscribe(() => {
-      alert(editar ? 'Contenido actualizado con éxito.' : 'Contenido cargado con éxito.');
+      this.toast.mostrar(editar ? 'Contenido actualizado con éxito.' : 'Contenido cargado con éxito.');
       this.guardado.emit();
     });
   }

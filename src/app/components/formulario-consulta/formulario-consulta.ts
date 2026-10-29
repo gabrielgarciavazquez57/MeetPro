@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Auth } from '../../services/auth';
 import { ClientConsulta } from '../../services/client-consulta';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-formulario-consulta',
@@ -14,6 +15,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
   styleUrl: './formulario-consulta.css',
 })
 export class FormularioConsulta implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly location = inject(Location);
@@ -50,7 +52,7 @@ export class FormularioConsulta implements OnInit {
     const u = this.auth.usuario();
 
     if (!u) {
-      alert('Necesitás iniciar sesión para enviar una consulta.');
+      this.toast.mostrar('Necesitás iniciar sesión para enviar una consulta.');
       this.router.navigate(['/login']);
       return;
     }
@@ -82,7 +84,7 @@ export class FormularioConsulta implements OnInit {
   handleSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      alert('Completá el título y la descripción de la consulta.');
+      this.toast.mostrar('Completá el título y la descripción de la consulta.');
       return;
     }
 
@@ -107,12 +109,12 @@ export class FormularioConsulta implements OnInit {
       .subscribe({
         next: () => {
           this.enviando.set(false);
-          alert('Consulta enviada con éxito. Vas a ver la respuesta en tus notificaciones.');
+          this.toast.mostrar('Consulta enviada con éxito. Vas a ver la respuesta en tus notificaciones.');
           this.router.navigate(['/consultas']);
         },
         error: () => {
           this.enviando.set(false);
-          alert('No se pudo enviar la consulta. Intentá de nuevo.');
+          this.toast.mostrar('No se pudo enviar la consulta. Intentá de nuevo.');
         },
       });
   }

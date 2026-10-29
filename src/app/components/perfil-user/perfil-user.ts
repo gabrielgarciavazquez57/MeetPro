@@ -7,6 +7,7 @@ import { Auth } from '../../services/auth';
 import { User } from '../../interfaces/user'; // ajustá la ruta
 import { BarraNav } from '../barra-nav/barra-nav';
 import { formatearTelefono } from '../../shared/codigos-pais';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-perfil-user',
@@ -16,6 +17,7 @@ import { formatearTelefono } from '../../shared/codigos-pais';
   styleUrl: './perfil-user.css',
 })
 export class PerfilUser implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly clientUser = inject(ClientUser);
@@ -67,13 +69,13 @@ export class PerfilUser implements OnInit {
       if (this.auth.usuario()?.id === user.id) {
         this.auth.cerrarSesion();
       }
-      alert('Perfil eliminado.');
+      this.toast.mostrar('Perfil eliminado.');
       this.router.navigate(['/']);
     };
 
     this.clientCuenta.eliminarCuenta(user).subscribe({
       next: finalizar,
-      error: () => alert('No se pudo eliminar el perfil. Intentá de nuevo.'),
+      error: () => this.toast.mostrar('No se pudo eliminar el perfil. Intentá de nuevo.'),
     });
   }
 }

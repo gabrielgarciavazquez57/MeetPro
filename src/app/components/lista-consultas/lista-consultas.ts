@@ -8,6 +8,7 @@ import { ClientProfesional } from '../../services/client-profesional';
 import { Consulta } from '../../interfaces/consulta';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 
 type Pestana = 'recibidas' | 'enviadas';
 
@@ -19,6 +20,7 @@ type Pestana = 'recibidas' | 'enviadas';
   styleUrls: ['../../shared/turnos.css', './lista-consultas.css'],
 })
 export class ListaConsultas implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly auth = inject(Auth);
   private readonly router = inject(Router);
   private readonly location = inject(Location);
@@ -114,7 +116,7 @@ export class ListaConsultas implements OnInit {
       },
       error: () => {
         this.enviando.set(null);
-        alert('No se pudo enviar la respuesta. Intentá de nuevo.');
+        this.toast.mostrar('No se pudo enviar la respuesta. Intentá de nuevo.');
       },
     });
   }

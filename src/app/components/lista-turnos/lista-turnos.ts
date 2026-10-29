@@ -9,6 +9,7 @@ import { Auth } from '../../services/auth';
 import { Turno } from '../../interfaces/turno';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 import {
   agruparPorDia,
   aISO,
@@ -36,6 +37,7 @@ interface CeldaCalendario {
   styleUrls: ['../../shared/turnos.css', './lista-turnos.css'],
 })
 export class ListaTurnos implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly clientTurno = inject(ClientTurno);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly route = inject(ActivatedRoute);
@@ -254,7 +256,7 @@ export class ListaTurnos implements OnInit {
 
     const cliente = this.auth.usuario();
     if (!cliente) {
-      alert('Iniciá sesión para solicitar un turno.');
+      this.toast.mostrar('Iniciá sesión para solicitar un turno.');
       this.router.navigate(['/login']);
       return;
     }

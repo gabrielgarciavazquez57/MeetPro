@@ -10,6 +10,7 @@ import { Auth } from '../../services/auth';
 import { ConfigDisponibilidad, ModalidadTurno, Turno } from '../../interfaces/turno';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 import {
   agruparPorDia,
   calcularHorarios,
@@ -41,6 +42,7 @@ type TipoAccion = 'confirmar' | 'rechazar' | 'cancelar';
   styleUrls: ['../../shared/turnos.css', './agenda-profesional.css'],
 })
 export class AgendaProfesional implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly clientTurno = inject(ClientTurno);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly route = inject(ActivatedRoute);
@@ -293,11 +295,11 @@ export class AgendaProfesional implements OnInit {
       error: (err: Error) => {
         this.procesando.set(false);
         if (err.message === 'ESTADO_CAMBIO') {
-          alert('Esa solicitud cambió de estado (el cliente pudo haberla cancelado). Se actualizó la lista.');
+          this.toast.mostrar('Esa solicitud cambió de estado (el cliente pudo haberla cancelado). Se actualizó la lista.');
           this.accion.set(null);
           this.recargar();
         } else {
-          alert('No se pudo completar la acción. Intentá de nuevo.');
+          this.toast.mostrar('No se pudo completar la acción. Intentá de nuevo.');
         }
       },
     });
@@ -312,7 +314,7 @@ export class AgendaProfesional implements OnInit {
       },
       error: () => {
         this.procesando.set(false);
-        alert('No se pudo actualizar el turno.');
+        this.toast.mostrar('No se pudo actualizar el turno.');
       },
     });
   }
@@ -340,7 +342,7 @@ export class AgendaProfesional implements OnInit {
       },
       error: () => {
         this.procesando.set(false);
-        alert('No se pudieron generar los horarios.');
+        this.toast.mostrar('No se pudieron generar los horarios.');
       },
     });
   }

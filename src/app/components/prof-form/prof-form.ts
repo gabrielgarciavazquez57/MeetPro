@@ -10,6 +10,7 @@ import { User } from '../../interfaces/user';
 import { Profesional } from '../../interfaces/profesional';
 import { InformacionProfesional } from '../../interfaces/informacion-profesional';
 import { Proyecto } from '../../interfaces/proyecto';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-profesional-form',
@@ -18,6 +19,7 @@ import { Proyecto } from '../../interfaces/proyecto';
   styleUrl: './prof-form.css',
 })
 export class ProfesionalForm implements OnInit {
+  private readonly toast = inject(ToastService);
   protected readonly fb = inject(FormBuilder);
   protected readonly route = inject(ActivatedRoute);
   protected readonly router = inject(Router);
@@ -76,7 +78,7 @@ export class ProfesionalForm implements OnInit {
     const userId = this.route.snapshot.paramMap.get('userId');
 
     if (!userId) {
-      alert('No se encontró el usuario. Volviendo al registro.');
+      this.toast.mostrar('No se encontró el usuario. Volviendo al registro.');
       this.router.navigate(['/CreateUser']);
       return;
     }
@@ -89,7 +91,7 @@ export class ProfesionalForm implements OnInit {
         }
       },
       error: () => {
-        alert('No se pudo cargar el usuario.');
+        this.toast.mostrar('No se pudo cargar el usuario.');
         this.router.navigate(['/CreateUser']);
       }
     });
@@ -100,7 +102,7 @@ export class ProfesionalForm implements OnInit {
       next: (lista) => {
         const prof = lista[0];
         if (!prof) {
-          alert('No tenés un perfil profesional para editar.');
+          this.toast.mostrar('No tenés un perfil profesional para editar.');
           this.router.navigate(['/perfil-user', userId]);
           return;
         }
@@ -131,7 +133,7 @@ export class ProfesionalForm implements OnInit {
         this.cargarProyectosExistentes(prof.professionalId);
       },
       error: () => {
-        alert('No se pudo cargar el perfil profesional.');
+        this.toast.mostrar('No se pudo cargar el perfil profesional.');
         this.router.navigate(['/perfil-user', userId]);
       }
     });
@@ -335,7 +337,7 @@ export class ProfesionalForm implements OnInit {
 
   handleSubmit() {
     if (this.form.invalid || !this.userData) {
-      alert('Formulario invalido o usuario no cargado!');
+      this.toast.mostrar('Formulario invalido o usuario no cargado!');
       return;
     }
 
@@ -349,7 +351,7 @@ export class ProfesionalForm implements OnInit {
 
     if (this.editando) {
       if (!this.registroId) {
-        alert('No se encontró el perfil profesional a editar.');
+        this.toast.mostrar('No se encontró el perfil profesional a editar.');
         return;
       }
       if (!confirm('¿Guardar los cambios en tu perfil profesional?')) {
@@ -366,7 +368,7 @@ export class ProfesionalForm implements OnInit {
 
       this.clientProfesional.updateProfesional(this.registroId, profesional_editado).subscribe(() => {
         this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
-          alert('Perfil profesional actualizado con éxito!');
+          this.toast.mostrar('Perfil profesional actualizado con éxito!');
           this.router.navigate(['/perfil-prof', this.userData!.id]);
         });
       });
@@ -383,7 +385,7 @@ export class ProfesionalForm implements OnInit {
 
       this.clientProfesional.addProfesional(new_profesional).subscribe(() => {
         this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
-          alert('Perfil profesional registrado con éxito!');
+          this.toast.mostrar('Perfil profesional registrado con éxito!');
           this.router.navigate(['/']);
         });
       });

@@ -13,6 +13,7 @@ import { Certificado } from '../../interfaces/certificado';
 import { TitulosPro } from '../../interfaces/titulos-pro';
 import { ExperienciaPro } from '../../interfaces/experiencia-pro';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-informacion-profesional',
@@ -22,6 +23,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
   styleUrl: './informacion-profesional.css',
 })
 export class InformacionProfesionalComponent implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
@@ -158,7 +160,7 @@ export class InformacionProfesionalComponent implements OnInit {
         next: alTerminar,
         error: () => {
           this.guardando.set(false);
-          alert('No se pudo guardar la descripción ampliada.');
+          this.toast.mostrar('No se pudo guardar la descripción ampliada.');
         },
       });
     } else {
@@ -166,7 +168,7 @@ export class InformacionProfesionalComponent implements OnInit {
         next: alTerminar,
         error: () => {
           this.guardando.set(false);
-          alert('No se pudo guardar la descripción ampliada.');
+          this.toast.mostrar('No se pudo guardar la descripción ampliada.');
         },
       });
     }
@@ -322,7 +324,7 @@ export class InformacionProfesionalComponent implements OnInit {
       next: alTerminar,
       error: () => {
         this.guardandoProyecto.set(false);
-        alert('No se pudo guardar el proyecto.');
+        this.toast.mostrar('No se pudo guardar el proyecto.');
       },
     });
   }
@@ -341,7 +343,7 @@ export class InformacionProfesionalComponent implements OnInit {
           this.indiceProyecto.set(0);
         }
       },
-      error: () => alert('No se pudo eliminar el proyecto.'),
+      error: () => this.toast.mostrar('No se pudo eliminar el proyecto.'),
     });
   }
 
@@ -429,7 +431,7 @@ export class InformacionProfesionalComponent implements OnInit {
       },
       error: () => {
         this.guardandoCertificado.set(false);
-        alert('No se pudo guardar el certificado.');
+        this.toast.mostrar('No se pudo guardar el certificado.');
       },
     });
   }
@@ -444,7 +446,7 @@ export class InformacionProfesionalComponent implements OnInit {
 
     this.clientProfesional.updateProfesional(prof.id, { ...prof, certificados }).subscribe({
       next: (actualizado) => this.profesional.set(actualizado),
-      error: () => alert('No se pudo eliminar el certificado.'),
+      error: () => this.toast.mostrar('No se pudo eliminar el certificado.'),
     });
   }
 
@@ -532,7 +534,7 @@ export class InformacionProfesionalComponent implements OnInit {
       },
       error: () => {
         this.guardandoTitulo.set(false);
-        alert('No se pudo guardar el título.');
+        this.toast.mostrar('No se pudo guardar el título.');
       },
     });
   }
@@ -547,7 +549,7 @@ export class InformacionProfesionalComponent implements OnInit {
 
     this.clientProfesional.updateProfesional(prof.id, { ...prof, titulos }).subscribe({
       next: (actualizado) => this.profesional.set(actualizado),
-      error: () => alert('No se pudo eliminar el título.'),
+      error: () => this.toast.mostrar('No se pudo eliminar el título.'),
     });
   }
 
@@ -634,7 +636,7 @@ export class InformacionProfesionalComponent implements OnInit {
       },
       error: () => {
         this.guardandoExperiencia.set(false);
-        alert('No se pudo guardar la experiencia.');
+        this.toast.mostrar('No se pudo guardar la experiencia.');
       },
     });
   }
@@ -649,7 +651,7 @@ export class InformacionProfesionalComponent implements OnInit {
 
     this.clientProfesional.updateProfesional(prof.id, { ...prof, experiencias }).subscribe({
       next: (actualizado) => this.profesional.set(actualizado),
-      error: () => alert('No se pudo eliminar la experiencia.'),
+      error: () => this.toast.mostrar('No se pudo eliminar la experiencia.'),
     });
   }
 }

@@ -7,6 +7,7 @@ import { Auth } from '../../services/auth';
 import { Profesional } from '../../interfaces/profesional';
 import { Valoracion } from '../../interfaces/valoracion';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-valoraciones',
@@ -16,6 +17,7 @@ import { BarraNav } from '../barra-nav/barra-nav';
   styleUrl: './valoraciones.css',
 })
 export class Valoraciones implements OnInit {
+  private readonly toast = inject(ToastService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
@@ -111,7 +113,7 @@ export class Valoraciones implements OnInit {
     }
     this.clientValoracion.deleteValoracion(id).subscribe({
       next: () => this.valoraciones.update((lista) => lista.filter((v) => v.id !== id)),
-      error: () => alert('No se pudo eliminar la valoración.'),
+      error: () => this.toast.mostrar('No se pudo eliminar la valoración.'),
     });
   }
 
@@ -122,7 +124,7 @@ export class Valoraciones implements OnInit {
   enviar(): void {
     const usuario = this.auth.usuario();
     if (!usuario) {
-      alert('Iniciá sesión para dejar una valoración.');
+      this.toast.mostrar('Iniciá sesión para dejar una valoración.');
       return;
     }
     if (this.form.invalid) {
@@ -151,7 +153,7 @@ export class Valoraciones implements OnInit {
       },
       error: () => {
         this.enviando.set(false);
-        alert('No se pudo enviar la valoración.');
+        this.toast.mostrar('No se pudo enviar la valoración.');
       },
     });
   }

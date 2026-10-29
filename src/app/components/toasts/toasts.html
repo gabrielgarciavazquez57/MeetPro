@@ -1,0 +1,29 @@
+<div class="toasts" aria-live="polite">
+  @for (t of items(); track t.id) {
+    <div class="toast" [class]="'toast toast--' + t.tipo" [attr.role]="t.tipo === 'error' ? 'alert' : 'status'">
+      <span class="toast-icono" aria-hidden="true">
+        @switch (t.tipo) {
+          @case ('exito') {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 12.5 4.5 4.5L19 7.5" />
+            </svg>
+          }
+          @case ('error') {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7.5v5.5M12 16.5h.01" />
+            </svg>
+          }
+          @default {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 11v5.5M12 7.5h.01" />
+            </svg>
+          }
+        }
+      </span>
+      <p class="toast-mensaje">{{ t.mensaje }}</p>
+      <button type="button" class="toast-cerrar" aria-label="Cerrar aviso" (click)="cerrar(t.id)">&times;</button>
+    </div>
+  }
+</div>
