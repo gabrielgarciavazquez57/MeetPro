@@ -1,7 +1,10 @@
 <section class="fondo-login">
+  <div class="login-fondo" aria-hidden="true" [style.background-image]="'url(img/home-1.webp)'"></div>
+
   <div class="login-card">
+    <span class="login-logo"><span class="logo-meet">Meet</span><span class="logo-pro">Pro</span></span>
     <h1 class="login-titulo">Iniciar sesión</h1>
-    <p class="login-sub">Ingresá con tu usuario y contraseña.</p>
+    <p class="login-sub">Ingresá con tu usuario y contraseña para ver tu perfil, tus turnos y tus notificaciones.</p>
 
     <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="login-form">
       <label class="campo">
@@ -14,19 +17,31 @@
 
       <label class="campo">
         <span class="campo-label">Contraseña</span>
-        <input type="password" formControlName="password" autocomplete="current-password" />
+        <span class="campo-password">
+          <input [type]="verPassword() ? 'text' : 'password'" formControlName="password" autocomplete="current-password" />
+          <button
+            type="button"
+            class="btn-ver-password"
+            [attr.aria-label]="verPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            [attr.aria-pressed]="verPassword()"
+            (click)="alternarPassword()"
+          >{{ verPassword() ? 'Ocultar' : 'Mostrar' }}</button>
+        </span>
         @if (password.touched && password.hasError('required')) {
           <span class="campo-error">Campo requerido</span>
         }
       </label>
 
       @if (error()) {
-        <p class="login-alerta">{{ error() }}</p>
+        <p class="login-alerta" role="alert">{{ error() }}</p>
       }
 
-      <button type="submit" class="btn-login" [disabled]="cargando()">
-        {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
-      </button>
+      <div class="login-acciones">
+        <button type="submit" class="btn-login" [disabled]="cargando()">
+          {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+        <a class="btn-volver" routerLink="/">Volver</a>
+      </div>
 
       <p class="login-registro">
         ¿No tenés cuenta?

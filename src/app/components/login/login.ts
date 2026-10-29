@@ -17,6 +17,11 @@ export class Login {
 
   readonly cargando = signal(false);
   readonly error = signal<string | null>(null);
+  readonly verPassword = signal(false);
+
+  alternarPassword(): void {
+    this.verPassword.update((v) => !v);
+  }
 
   readonly form = this.fb.nonNullable.group({
     username: ['', [Validators.required]],
