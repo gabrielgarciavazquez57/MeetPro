@@ -11,6 +11,7 @@ import { ConfigDisponibilidad, ModalidadTurno, Turno } from '../../interfaces/tu
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { ToastService } from '../../services/toast';
+import { ConfirmacionService } from '../../services/confirmacion';
 import {
   agruparPorDia,
   calcularHorarios,
@@ -43,6 +44,7 @@ type TipoAccion = 'confirmar' | 'rechazar' | 'cancelar';
 })
 export class AgendaProfesional implements OnInit {
   private readonly toast = inject(ToastService);
+  private readonly confirmacion = inject(ConfirmacionService);
   private readonly clientTurno = inject(ClientTurno);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly route = inject(ActivatedRoute);
@@ -353,12 +355,21 @@ export class AgendaProfesional implements OnInit {
 
   vaciarDia(turnos: Turno[]): void {
     const fecha = turnos[0]?.fecha;
-    if (!fecha || !confirm(`¿Quitar todos los horarios libres del ${formatearFecha(fecha)}?`)) {
+    if (!fecha) {
       return;
     }
-    this.clientTurno
-      .eliminarTurnos(turnos.map((t) => t.id!))
-      .subscribe({ next: () => this.recargar() });
+    this.confirmacion
+      .pedir({
+        titulo: 'Quitar horarios',
+        mensaje: `¿Quitar todos los horarios libres del ${formatearFecha(fecha)}?`,
+        aceptar: 'Quitar',
+        peligro: true,
+      })
+      .then((confirmado) => {
+        if (confirmado) {
+          this.clientTurno.eliminarTurnos(turnos.map((t) => t.id!)).subscribe({ next: () => this.recargar() });
+        }
+      });
   }
 
   verMasHistorial(): void {

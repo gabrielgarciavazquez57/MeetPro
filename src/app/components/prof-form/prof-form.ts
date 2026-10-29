@@ -11,6 +11,7 @@ import { Profesional } from '../../interfaces/profesional';
 import { InformacionProfesional } from '../../interfaces/informacion-profesional';
 import { Proyecto } from '../../interfaces/proyecto';
 import { ToastService } from '../../services/toast';
+import { ConfirmacionService } from '../../services/confirmacion';
 
 @Component({
   selector: 'app-profesional-form',
@@ -20,6 +21,7 @@ import { ToastService } from '../../services/toast';
 })
 export class ProfesionalForm implements OnInit {
   private readonly toast = inject(ToastService);
+  private readonly confirmacion = inject(ConfirmacionService);
   protected readonly fb = inject(FormBuilder);
   protected readonly route = inject(ActivatedRoute);
   protected readonly router = inject(Router);
@@ -341,6 +343,7 @@ export class ProfesionalForm implements OnInit {
       return;
     }
 
+    const userData = this.userData;
     const raw = this.form.getRawValue();
     const { descripcionAmpliada, proyectosNuevos, certificados, precio, ...resto } = raw;
 
@@ -350,34 +353,44 @@ export class ProfesionalForm implements OnInit {
     }));
 
     if (this.editando) {
-      if (!this.registroId) {
+      const registroId = this.registroId;
+      if (!registroId) {
         this.toast.mostrar('No se encontró el perfil profesional a editar.');
         return;
       }
-      if (!confirm('¿Guardar los cambios en tu perfil profesional?')) {
-        return;
-      }
+      this.confirmacion
+        .pedir({ titulo: 'Guardar cambios', mensaje: '¿Guardar los cambios en tu perfil profesional?', aceptar: 'Guardar' })
+        .then((confirmado) => {
+          if (!confirmado) {
+            return;
+          }
 
-      const profesional_editado: Profesional = {
-        id: this.registroId,
-        profesional_userData: this.userData,
-        ...resto,
-        certificados: certificadosFinal,
-        pago: { precio },
-      };
+          const profesional_editado: Profesional = {
+            id: registroId,
+            profesional_userData: userData,
+            ...resto,
+            certificados: certificadosFinal,
+            pago: { precio },
+          };
 
-      this.clientProfesional.updateProfesional(this.registroId, profesional_editado).subscribe(() => {
-        this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
-          this.toast.mostrar('Perfil profesional actualizado con éxito!');
-          this.router.navigate(['/perfil-prof', this.userData!.id]);
+          this.clientProfesional.updateProfesional(registroId, profesional_editado).subscribe(() => {
+            this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
+              this.toast.mostrar('Perfil profesional actualizado con éxito!');
+              this.router.navigate(['/perfil-prof', userData.id]);
+            });
+          });
         });
-      });
       return;
     }
 
-    if (confirm('Desea registrar este perfil profesional?')) {
+    this.confirmacion
+      .pedir({ titulo: 'Registrar perfil', mensaje: '¿Desea registrar este perfil profesional?', aceptar: 'Registrar' })
+      .then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
       const new_profesional: Profesional = {
-        profesional_userData: this.userData,
+        profesional_userData: userData,
         ...resto,
         certificados: certificadosFinal,
         pago: { precio },
@@ -389,6 +402,6 @@ export class ProfesionalForm implements OnInit {
           this.router.navigate(['/']);
         });
       });
-    }
+    });
   }
 }

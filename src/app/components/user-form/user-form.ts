@@ -14,6 +14,7 @@ import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-
 import { CODIGO_PAIS_DEFECTO, separarTelefono } from '../../shared/codigos-pais';
 import { countries, type ICountry } from 'countries-list';
 import { ToastService } from '../../services/toast';
+import { ConfirmacionService } from '../../services/confirmacion';
 
 const OTRA_CIUDAD = 'Otra ciudad...';
 
@@ -51,6 +52,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 })
 export class UserForm implements OnInit {
   private readonly toast = inject(ToastService);
+  private readonly confirmacion = inject(ConfirmacionService);
   protected readonly fb = inject(FormBuilder);
   protected readonly client = inject(ClientUser);
   protected readonly clientProfesional = inject(ClientProfesional);
@@ -383,7 +385,8 @@ handleSubmit() {
         this.toast.mostrar('No se encontró el usuario a editar.');
         return;
       }
-      if (!confirm('¿Guardar los cambios en tu perfil?')) {
+      this.confirmacion.pedir({ titulo: 'Guardar cambios', mensaje: '¿Guardar los cambios en tu perfil?', aceptar: 'Guardar' }).then((confirmado) => {
+      if (!confirmado) {
         return;
       }
 
@@ -410,10 +413,14 @@ handleSubmit() {
           },
           error: () => this.toast.mostrar('No se pudo actualizar el perfil. Intentá de nuevo.'),
         });
+      });
       return;
     }
 
-    if (confirm('Desea registrar este usuario?')) {
+    this.confirmacion.pedir({ titulo: 'Registrar usuario', mensaje: '¿Desea registrar este usuario?', aceptar: 'Registrar' }).then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
       this.auth
         .registrar(user_data.email.trim(), rest.password)
         .pipe(switchMap((authId) => this.client.addUser({ ...user_data, isAdmin: false, auth_id: authId })))
@@ -438,6 +445,6 @@ handleSubmit() {
             this.toast.mostrar('No se pudo completar el registro: ' + err.message);
           },
         });
-    }
+    });
   }
 }

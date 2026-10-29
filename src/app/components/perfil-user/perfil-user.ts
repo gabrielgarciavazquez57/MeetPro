@@ -8,6 +8,7 @@ import { User } from '../../interfaces/user'; // ajustá la ruta
 import { BarraNav } from '../barra-nav/barra-nav';
 import { formatearTelefono } from '../../shared/codigos-pais';
 import { ToastService } from '../../services/toast';
+import { ConfirmacionService } from '../../services/confirmacion';
 
 @Component({
   selector: 'app-perfil-user',
@@ -18,6 +19,7 @@ import { ToastService } from '../../services/toast';
 })
 export class PerfilUser implements OnInit {
   private readonly toast = inject(ToastService);
+  private readonly confirmacion = inject(ConfirmacionService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly clientUser = inject(ClientUser);
@@ -61,21 +63,35 @@ export class PerfilUser implements OnInit {
 
   eliminarPerfil(): void {
     const user = this.usuario();
-    if (!user?.id || !confirm('¿Eliminar tu perfil? Se borran tu cuenta y todos tus datos (turnos, valoraciones, perfil profesional, etc.). Esta acción no se puede deshacer.')) {
+    if (!user?.id) {
       return;
     }
 
-    const finalizar = () => {
-      if (this.auth.usuario()?.id === user.id) {
-        this.auth.cerrarSesion();
-      }
-      this.toast.mostrar('Perfil eliminado.');
-      this.router.navigate(['/']);
-    };
+    this.confirmacion
+      .pedir({
+        titulo: 'Eliminar perfil',
+        mensaje:
+          '¿Eliminar tu perfil? Se borran tu cuenta y todos tus datos (turnos, valoraciones, perfil profesional, etc.). Esta acción no se puede deshacer.',
+        aceptar: 'Eliminar perfil',
+        peligro: true,
+      })
+      .then((confirmado) => {
+        if (!confirmado) {
+          return;
+        }
 
-    this.clientCuenta.eliminarCuenta(user).subscribe({
-      next: finalizar,
-      error: () => this.toast.mostrar('No se pudo eliminar el perfil. Intentá de nuevo.'),
-    });
+        const finalizar = () => {
+          if (this.auth.usuario()?.id === user.id) {
+            this.auth.cerrarSesion();
+          }
+          this.toast.mostrar('Perfil eliminado.');
+          this.router.navigate(['/']);
+        };
+
+        this.clientCuenta.eliminarCuenta(user).subscribe({
+          next: finalizar,
+          error: () => this.toast.mostrar('No se pudo eliminar el perfil. Intentá de nuevo.'),
+        });
+      });
   }
 }

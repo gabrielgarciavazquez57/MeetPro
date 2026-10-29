@@ -7,6 +7,7 @@ import { Profesional } from '../../interfaces/profesional';
 import { ContenidoProfesionalCliente } from '../../interfaces/contenido-profesional-cliente';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { FormularioContenido } from '../formulario-contenido/formulario-contenido';
+import { ConfirmacionService } from '../../services/confirmacion';
 
 @Component({
   selector: 'app-contenido-cliente-profesional',
@@ -16,6 +17,7 @@ import { FormularioContenido } from '../formulario-contenido/formulario-contenid
   styleUrl: './contenido-cliente-profesional.css',
 })
 export class ContenidoClienteProfesional implements OnInit {
+  private readonly confirmacion = inject(ConfirmacionService);
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
   private readonly clientContenido = inject(ClientContenido);
@@ -48,10 +50,11 @@ export class ContenidoClienteProfesional implements OnInit {
     if (id == null) {
       return;
     }
-    if (!confirm('¿Eliminar este contenido?')) {
-      return;
-    }
-    this.clientContenido.deleteContenido(id).subscribe(() => this.cargarContenido());
+    this.confirmacion.pedir({ titulo: 'Eliminar contenido', mensaje: '¿Eliminar este contenido?', aceptar: 'Eliminar', peligro: true }).then((confirmado) => {
+      if (confirmado) {
+        this.clientContenido.deleteContenido(id).subscribe(() => this.cargarContenido());
+      }
+    });
   }
 
   cerrarFormulario(): void {

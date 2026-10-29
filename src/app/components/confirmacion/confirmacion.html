@@ -1,0 +1,27 @@
+@if (actual(); as c) {
+  <div class="confirmacion-fondo" (click)="responder(false)">
+    <div
+      class="confirmacion"
+      [class.confirmacion--peligro]="c.peligro"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="confirmacion-titulo"
+      aria-describedby="confirmacion-mensaje"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 class="confirmacion-titulo" id="confirmacion-titulo">{{ c.titulo || 'Confirmar' }}</h2>
+      <p class="confirmacion-mensaje" id="confirmacion-mensaje">{{ c.mensaje }}</p>
+      <div class="confirmacion-acciones">
+        <button type="button" class="confirmacion-btn" (click)="responder(false)">{{ c.cancelar || 'Cancelar' }}</button>
+        <button
+          #botonAceptar
+          type="button"
+          class="confirmacion-btn confirmacion-btn--aceptar"
+          (click)="responder(true)"
+        >
+          {{ c.aceptar || 'Aceptar' }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

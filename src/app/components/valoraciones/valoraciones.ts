@@ -8,6 +8,7 @@ import { Profesional } from '../../interfaces/profesional';
 import { Valoracion } from '../../interfaces/valoracion';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { ToastService } from '../../services/toast';
+import { ConfirmacionService } from '../../services/confirmacion';
 
 @Component({
   selector: 'app-valoraciones',
@@ -18,6 +19,7 @@ import { ToastService } from '../../services/toast';
 })
 export class Valoraciones implements OnInit {
   private readonly toast = inject(ToastService);
+  private readonly confirmacion = inject(ConfirmacionService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
@@ -108,12 +110,17 @@ export class Valoraciones implements OnInit {
   }
 
   eliminarValoracion(id: string | undefined): void {
-    if (!id || !confirm('¿Eliminar tu valoración?')) {
+    if (!id) {
       return;
     }
-    this.clientValoracion.deleteValoracion(id).subscribe({
-      next: () => this.valoraciones.update((lista) => lista.filter((v) => v.id !== id)),
-      error: () => this.toast.mostrar('No se pudo eliminar la valoración.'),
+    this.confirmacion.pedir({ titulo: 'Eliminar valoración', mensaje: '¿Eliminar tu valoración?', aceptar: 'Eliminar', peligro: true }).then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
+      this.clientValoracion.deleteValoracion(id).subscribe({
+        next: () => this.valoraciones.update((lista) => lista.filter((v) => v.id !== id)),
+        error: () => this.toast.mostrar('No se pudo eliminar la valoración.'),
+      });
     });
   }
 

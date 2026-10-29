@@ -14,6 +14,7 @@ import { TitulosPro } from '../../interfaces/titulos-pro';
 import { ExperienciaPro } from '../../interfaces/experiencia-pro';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { ToastService } from '../../services/toast';
+import { ConfirmacionService } from '../../services/confirmacion';
 
 @Component({
   selector: 'app-informacion-profesional',
@@ -24,6 +25,7 @@ import { ToastService } from '../../services/toast';
 })
 export class InformacionProfesionalComponent implements OnInit {
   private readonly toast = inject(ToastService);
+  private readonly confirmacion = inject(ConfirmacionService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly clientProfesional = inject(ClientProfesional);
@@ -330,20 +332,25 @@ export class InformacionProfesionalComponent implements OnInit {
   }
 
   eliminarProyecto(id: string | number | undefined): void {
-    if (id == null || !this.esDueno() || !confirm('¿Eliminar este proyecto?')) {
+    if (id == null || !this.esDueno()) {
       return;
     }
-    this.clientProyecto.deleteProyecto(id).subscribe({
-      next: () => {
-        this.proyectos.update((lista) => lista.filter((p) => p.id !== id));
-        const total = this.proyectos().length;
-        if (total > 0) {
-          this.indiceProyecto.update((i) => Math.min(i, total - 1));
-        } else {
-          this.indiceProyecto.set(0);
-        }
-      },
-      error: () => this.toast.mostrar('No se pudo eliminar el proyecto.'),
+    this.confirmacion.pedir({ titulo: 'Eliminar proyecto', mensaje: '¿Eliminar este proyecto?', aceptar: 'Eliminar', peligro: true }).then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
+      this.clientProyecto.deleteProyecto(id).subscribe({
+        next: () => {
+          this.proyectos.update((lista) => lista.filter((p) => p.id !== id));
+          const total = this.proyectos().length;
+          if (total > 0) {
+            this.indiceProyecto.update((i) => Math.min(i, total - 1));
+          } else {
+            this.indiceProyecto.set(0);
+          }
+        },
+        error: () => this.toast.mostrar('No se pudo eliminar el proyecto.'),
+      });
     });
   }
 
@@ -438,15 +445,20 @@ export class InformacionProfesionalComponent implements OnInit {
 
   eliminarCertificado(id: string | number | undefined): void {
     const prof = this.profesional();
-    if (id == null || !prof?.id || !this.esDueno() || !confirm('¿Eliminar este certificado?')) {
+    if (id == null || !prof?.id || !this.esDueno()) {
       return;
     }
 
-    const certificados = (prof.certificados ?? []).filter((c) => c.id !== id);
+    this.confirmacion.pedir({ titulo: 'Eliminar certificado', mensaje: '¿Eliminar este certificado?', aceptar: 'Eliminar', peligro: true }).then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
+      const certificados = (prof.certificados ?? []).filter((c) => c.id !== id);
 
-    this.clientProfesional.updateProfesional(prof.id, { ...prof, certificados }).subscribe({
-      next: (actualizado) => this.profesional.set(actualizado),
-      error: () => this.toast.mostrar('No se pudo eliminar el certificado.'),
+      this.clientProfesional.updateProfesional(prof.id!, { ...prof, certificados }).subscribe({
+        next: (actualizado) => this.profesional.set(actualizado),
+        error: () => this.toast.mostrar('No se pudo eliminar el certificado.'),
+      });
     });
   }
 
@@ -541,15 +553,20 @@ export class InformacionProfesionalComponent implements OnInit {
 
   eliminarTitulo(id: string | number | undefined): void {
     const prof = this.profesional();
-    if (id == null || !prof?.id || !this.esDueno() || !confirm('¿Eliminar este título?')) {
+    if (id == null || !prof?.id || !this.esDueno()) {
       return;
     }
 
-    const titulos = (prof.titulos ?? []).filter((t) => t.id !== id);
+    this.confirmacion.pedir({ titulo: 'Eliminar título', mensaje: '¿Eliminar este título?', aceptar: 'Eliminar', peligro: true }).then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
+      const titulos = (prof.titulos ?? []).filter((t) => t.id !== id);
 
-    this.clientProfesional.updateProfesional(prof.id, { ...prof, titulos }).subscribe({
-      next: (actualizado) => this.profesional.set(actualizado),
-      error: () => this.toast.mostrar('No se pudo eliminar el título.'),
+      this.clientProfesional.updateProfesional(prof.id!, { ...prof, titulos }).subscribe({
+        next: (actualizado) => this.profesional.set(actualizado),
+        error: () => this.toast.mostrar('No se pudo eliminar el título.'),
+      });
     });
   }
 
@@ -643,15 +660,20 @@ export class InformacionProfesionalComponent implements OnInit {
 
   eliminarExperiencia(id: string | number | undefined): void {
     const prof = this.profesional();
-    if (id == null || !prof?.id || !this.esDueno() || !confirm('¿Eliminar esta experiencia?')) {
+    if (id == null || !prof?.id || !this.esDueno()) {
       return;
     }
 
-    const experiencias = (prof.experiencias ?? []).filter((e) => e.id !== id);
+    this.confirmacion.pedir({ titulo: 'Eliminar experiencia', mensaje: '¿Eliminar esta experiencia?', aceptar: 'Eliminar', peligro: true }).then((confirmado) => {
+      if (!confirmado) {
+        return;
+      }
+      const experiencias = (prof.experiencias ?? []).filter((e) => e.id !== id);
 
-    this.clientProfesional.updateProfesional(prof.id, { ...prof, experiencias }).subscribe({
-      next: (actualizado) => this.profesional.set(actualizado),
-      error: () => this.toast.mostrar('No se pudo eliminar la experiencia.'),
+      this.clientProfesional.updateProfesional(prof.id!, { ...prof, experiencias }).subscribe({
+        next: (actualizado) => this.profesional.set(actualizado),
+        error: () => this.toast.mostrar('No se pudo eliminar la experiencia.'),
+      });
     });
   }
 }
