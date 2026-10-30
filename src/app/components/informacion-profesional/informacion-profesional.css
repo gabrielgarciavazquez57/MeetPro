@@ -798,7 +798,7 @@
   border-color: #fca5a5;
 }
 
-/* Agregar proyecto: cuadrado gris de borde discontinuo con un más grande y el texto, abajo a la derecha de la última tarjeta */
+/* Agregar proyecto: cuadrado gris de borde discontinuo con un más grande y el texto, a la derecha de la última tarjeta, a la mitad de su altura */
 .proyecto-agregar {
   box-sizing: border-box;
   display: flex;
@@ -810,8 +810,7 @@
   max-width: 9.5rem;
   aspect-ratio: 1 / 1;
   justify-self: center;
-  align-self: end;
-  margin-bottom: 3rem;
+  align-self: center;
   padding: 0.5rem;
   color: #94a3b8;
   background: none;
