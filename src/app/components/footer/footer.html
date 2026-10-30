@@ -1,7 +1,7 @@
 <div class="footer-inner">
   <div class="footer-top">
     <div class="footer-marca">
-      <span class="footer-logo">MeetPro</span>
+      <span class="footer-logo">Meet<span class="footer-logo-pro">Pro</span></span>
       <p class="footer-tagline">
         Conectá con profesionales verificados y gestioná tus turnos en un solo lugar.
       </p>
@@ -12,6 +12,17 @@
         <h3 class="footer-col-titulo">Plataforma</h3>
         <a routerLink="/" class="footer-link">Inicio</a>
         <a routerLink="/profesionales-lista" class="footer-link">Profesionales</a>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-col-titulo">Tu cuenta</h3>
+        @if (auth.usuario(); as usuario) {
+          <a [routerLink]="['/perfil-user', usuario.id]" class="footer-link">Mi perfil</a>
+          <a routerLink="/notificaciones" class="footer-link">Notificaciones</a>
+        } @else {
+          <a routerLink="/login" class="footer-link">Iniciar sesión</a>
+          <a routerLink="/CreateUser" class="footer-link">Crear cuenta</a>
+        }
       </div>
 
       <div class="footer-col" id="soporte">
@@ -25,9 +36,6 @@
 
   <div class="footer-bottom">
     <span>© {{ anio }} MeetPro. Todos los derechos reservados.</span>
-    <span class="footer-bottom-legal">
-      <a href="#" class="footer-link">Términos</a>
-      <a href="#" class="footer-link">Privacidad</a>
-    </span>
+    <span class="footer-autor">Desarrollado por <strong>Gabriel García Vázquez</strong></span>
   </div>
 </div>

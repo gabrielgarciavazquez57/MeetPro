@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-footer',
@@ -8,5 +9,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './footer.css',
 })
 export class Footer {
+  protected readonly auth = inject(Auth);
   protected readonly anio = new Date().getFullYear();
 }
