@@ -20,40 +20,54 @@
     </div>
 
     @if (clientes().length === 0) {
-      <p class="vacio">Todavía ningún cliente tiene turnos confirmados o realizados con vos.</p>
+      <p class="vacio">Todavía ningún cliente te pagó ni tiene turnos confirmados o realizados con vos.</p>
     } @else {
       <div class="lista-clientes">
-        @for (c of clientes(); track c.datos.id) {
+        @for (c of clientes(); track c.id) {
           <div class="tarjeta-cliente">
             <div class="tarjeta-header">
-              <div class="avatar-cliente">{{ c.datos.name.charAt(0) }}{{ c.datos.lastname.charAt(0) }}</div>
+              <div class="avatar-cliente">{{ c.name.charAt(0) }}{{ c.lastname.charAt(0) }}</div>
               <div class="tarjeta-titulo-grupo">
-                <h2 class="nombre-cliente">{{ c.datos.name }} {{ c.datos.lastname }}</h2>
+                <h2 class="nombre-cliente">{{ c.name }} {{ c.lastname }}</h2>
                 <span class="badge-cliente">Cliente</span>
               </div>
             </div>
 
             <ul class="detalle-cliente">
-              <li>
-                <label>DNI</label>
-                <span class="valor">{{ c.datos.dni }}</span>
-              </li>
+              @if (c.dni) {
+                <li>
+                  <label>DNI</label>
+                  <span class="valor">{{ c.dni }}</span>
+                </li>
+              }
               <li>
                 <label>Correo electrónico</label>
-                <span class="valor">{{ c.datos.email }}</span>
+                <span class="valor">{{ c.email }}</span>
               </li>
-              <li>
-                <label>Teléfono</label>
-                <span class="valor">{{ c.datos.phoneNumber }}</span>
-              </li>
-              <li>
-                <label>Turnos</label>
-                <span class="valor">{{ c.turnos }} {{ c.turnos === 1 ? 'turno' : 'turnos' }}</span>
-              </li>
-              <li>
-                <label>Último turno</label>
-                <span class="valor">{{ formatearFecha(c.ultimo.fecha) }} · {{ rangoHorario(c.ultimo) }}</span>
-              </li>
+              @if (c.phoneNumber) {
+                <li>
+                  <label>Teléfono</label>
+                  <span class="valor">{{ c.phoneNumber }}</span>
+                </li>
+              }
+              @if (c.pagos) {
+                <li>
+                  <label>Pagos realizados</label>
+                  <span class="valor">{{ c.pagos }} {{ c.pagos === 1 ? 'pago' : 'pagos' }}</span>
+                </li>
+              }
+              @if (c.turnos) {
+                <li>
+                  <label>Turnos</label>
+                  <span class="valor">{{ c.turnos }} {{ c.turnos === 1 ? 'turno' : 'turnos' }}</span>
+                </li>
+              }
+              @if (c.ultimoTurno; as u) {
+                <li>
+                  <label>Último turno</label>
+                  <span class="valor">{{ formatearFecha(u.fecha) }} · {{ rangoHorario(u) }}</span>
+                </li>
+              }
             </ul>
           </div>
         }

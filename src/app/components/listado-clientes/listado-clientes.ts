@@ -4,16 +4,27 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ClientTurno } from '../../services/client-turno';
 import { ClientProfesional } from '../../services/client-profesional';
+import { ClientTicket } from '../../services/client-ticket';
 import { Auth } from '../../services/auth';
-import { ClienteTurno, Turno } from '../../interfaces/turno';
+import { Turno } from '../../interfaces/turno';
+import { Ticket } from '../../interfaces/ticket';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
 import { estadoVisible, formatearFecha, ordenarPorFecha, rangoHorario } from '../../shared/turno-utils';
 
 interface Cliente {
-  datos: ClienteTurno;
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  dni?: string;
+  phoneNumber?: string;
   turnos: number;
-  ultimo: Turno;
+  ultimoTurno?: Turno;
+  pagos: number;
+  ultimoPago?: string;
+  /** Para ordenar: la actividad más reciente (turno o pago) */
+  actividad: string;
 }
 
 @Component({
@@ -26,6 +37,7 @@ interface Cliente {
 export class ListadoClientes implements OnInit {
   private readonly clientTurno = inject(ClientTurno);
   private readonly clientProfesional = inject(ClientProfesional);
+  private readonly clientTicket = inject(ClientTicket);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly auth = inject(Auth);
@@ -37,33 +49,54 @@ export class ListadoClientes implements OnInit {
   readonly profesionalId = signal<string>('');
   readonly profesional = signal<Profesional | null>(null);
   readonly turnos = signal<Turno[]>([]);
+  readonly tickets = signal<Ticket[]>([]);
   readonly cargando = signal<boolean>(true);
   readonly error = signal<string | null>(null);
 
   /** Ruta del perfil del profesional al que se vuelve */
   readonly rutaPerfil = computed(() => ['/perfil-prof', this.profesional()?.profesional_userData?.id]);
 
-  /** Clientes que contrataron al profesional: tienen al menos un turno confirmado o realizado */
+  /** Clientes que contrataron al profesional: pagaron o tienen al menos un turno confirmado o realizado */
   readonly clientes = computed<Cliente[]>(() => {
-    const grupos = new Map<string, Turno[]>();
+    const porId = new Map<string, Cliente>();
+    const actual = (id: string, base: Pick<Cliente, 'name' | 'lastname' | 'email'>): Cliente => {
+      const c = porId.get(id) ?? { id, ...base, turnos: 0, pagos: 0, actividad: '' };
+      porId.set(id, c);
+      return c;
+    };
 
     for (const t of this.turnos()) {
       const estado = estadoVisible(t);
       if (!t.cliente || (estado !== 'confirmado' && estado !== 'completado')) {
         continue;
       }
-      const clave = String(t.cliente.id);
-      grupos.set(clave, [...(grupos.get(clave) ?? []), t]);
+      const c = actual(String(t.cliente.id), t.cliente);
+      c.dni = t.cliente.dni;
+      c.phoneNumber = t.cliente.phoneNumber;
+      c.turnos += 1;
+      if (!c.ultimoTurno || ordenarPorFecha([c.ultimoTurno, t], true)[0] === t) {
+        c.ultimoTurno = t;
+      }
     }
 
-    const lista = [...grupos.values()].map((turnos) => {
-      const ultimo = ordenarPorFecha(turnos, true)[0];
-      return { datos: ultimo.cliente as ClienteTurno, turnos: turnos.length, ultimo };
-    });
+    const miId = String(this.profesional()?.profesional_userData?.id);
+    for (const p of this.tickets()) {
+      if (p.estado !== 'aprobado' || String(p.profesional.id) !== miId) {
+        continue;
+      }
+      const c = actual(String(p.usuario.id), p.usuario);
+      c.pagos += 1;
+      if (!c.ultimoPago || p.fecha > c.ultimoPago) {
+        c.ultimoPago = p.fecha;
+      }
+    }
 
-    return lista.sort((a, b) =>
-      (b.ultimo.fecha + b.ultimo.hora).localeCompare(a.ultimo.fecha + a.ultimo.hora),
-    );
+    for (const c of porId.values()) {
+      const turno = c.ultimoTurno ? `${c.ultimoTurno.fecha}T${c.ultimoTurno.hora}` : '';
+      c.actividad = turno > (c.ultimoPago ?? '') ? turno : (c.ultimoPago ?? '');
+    }
+
+    return [...porId.values()].sort((a, b) => b.actividad.localeCompare(a.actividad));
   });
 
   ngOnInit(): void {
@@ -81,8 +114,9 @@ export class ListadoClientes implements OnInit {
     forkJoin({
       profesionales: this.clientProfesional.getProfesionales(),
       turnos: this.clientTurno.getTurnosDeProfesional(id),
+      tickets: this.clientTicket.getTickets(),
     }).subscribe({
-      next: ({ profesionales, turnos }) => {
+      next: ({ profesionales, turnos, tickets }) => {
         const prof = profesionales.find((p) => String(p.professionalId) === String(id)) ?? null;
         if (!prof) {
           this.error.set('No se encontró el profesional.');
@@ -97,6 +131,7 @@ export class ListadoClientes implements OnInit {
         }
 
         this.turnos.set(turnos);
+        this.tickets.set(tickets);
         this.cargando.set(false);
       },
       error: (err) => {
