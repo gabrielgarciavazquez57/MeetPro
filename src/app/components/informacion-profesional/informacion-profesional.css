@@ -797,3 +797,29 @@
   background-color: #fef2f2;
   border-color: #fca5a5;
 }
+
+/* Agregar proyecto: cuadrado gris de borde discontinuo con un más al centro, después de la última tarjeta */
+.proyecto-agregar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 3.2rem;
+  font-weight: 300;
+  line-height: 1;
+  color: #94a3b8;
+  background: none;
+  border: 2px dashed #94a3b8;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.proyecto-agregar:hover,
+.proyecto-agregar:focus-visible {
+  color: #475569;
+  border-color: #475569;
+}

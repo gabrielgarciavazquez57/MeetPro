@@ -56,9 +56,6 @@
       <section class="informacion-seccion" id="seccion-proyectos">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Proyectos</h2>
-          @if (esDueno() && !mostrandoFormProyecto()) {
-            <button type="button" class="btn-editar" (click)="abrirFormProyecto()">+ Agregar proyecto</button>
-          }
         </div>
 
         @if (mostrandoFormProyecto()) {
@@ -106,7 +103,7 @@
           </form>
         }
 
-        @if (proyectos().length) {
+        @if (proyectos().length || (esDueno() && !mostrandoFormProyecto())) {
           <div class="proyectos-grid">
             @for (p of proyectos(); track p.id) {
               <article class="proyecto-tile" [class.proyecto-tile--abierto]="proyectoAbierto() === p.id" [class.proyecto-tile--editable]="esDueno()">
@@ -142,6 +139,11 @@
                   </button>
                 </div>
               </article>
+            }
+            @if (esDueno() && !mostrandoFormProyecto()) {
+              <button type="button" class="proyecto-agregar" title="Agregar proyecto" aria-label="Agregar proyecto" (click)="abrirFormProyecto()">
+                <span aria-hidden="true">+</span>
+              </button>
             }
           </div>
         } @else if (!mostrandoFormProyecto()) {
