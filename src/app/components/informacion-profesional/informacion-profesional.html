@@ -109,7 +109,25 @@
         @if (proyectos().length) {
           <div class="proyectos-grid">
             @for (p of proyectos(); track p.id) {
-              <article class="proyecto-tile" [class.proyecto-tile--abierto]="proyectoAbierto() === p.id">
+              <article class="proyecto-tile" [class.proyecto-tile--abierto]="proyectoAbierto() === p.id" [class.proyecto-tile--editable]="esDueno()">
+                @if (esDueno()) {
+                  <div class="proyecto-iconos">
+                    <button type="button" class="btn-icono btn-icono--editar" title="Editar proyecto" aria-label="Editar proyecto" (click)="editarProyecto(p)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-icono btn-icono--eliminar" title="Eliminar proyecto" aria-label="Eliminar proyecto" (click)="eliminarProyecto(p.id)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 6h18" />
+                        <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                        <path d="M10 11v6M14 11v6" />
+                      </svg>
+                    </button>
+                  </div>
+                }
                 <h3 class="proyecto-titulo">{{ p.titulo_proyecto }}</h3>
                 @if (p.imagen_proyecto) {
                   <img class="proyecto-imagen" [src]="p.imagen_proyecto" [alt]="p.titulo_proyecto">
@@ -122,12 +140,6 @@
                   <button type="button" class="btn-editar-item" (click)="alternarProyecto(p.id)">
                     {{ proyectoAbierto() === p.id ? 'Ver menos' : 'Ver más' }}
                   </button>
-                  @if (esDueno()) {
-                    <div class="proyecto-acciones">
-                      <button type="button" class="btn-editar-item" (click)="editarProyecto(p)">Editar</button>
-                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarProyecto(p.id)">Eliminar</button>
-                    </div>
-                  }
                 </div>
               </article>
             }

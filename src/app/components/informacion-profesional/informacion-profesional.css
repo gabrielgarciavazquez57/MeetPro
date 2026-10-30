@@ -678,6 +678,7 @@
 
 /* Mismo estilo que los botones del perfil (Turnos, Valoraciones...), más anchas y largas */
 .proyecto-tile {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -746,4 +747,53 @@
   .proyectos-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Editar (lápiz verde) y eliminar (cesto rojo): arriba a la derecha de la tarjeta */
+.proyecto-iconos {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  display: flex;
+  gap: 0.2rem;
+}
+
+.proyecto-tile--editable .proyecto-titulo {
+  padding-right: 4.2rem;
+}
+
+.btn-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-icono svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.btn-icono--editar {
+  color: #16a34a;
+}
+
+.btn-icono--editar:hover {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+}
+
+.btn-icono--eliminar {
+  color: #dc2626;
+}
+
+.btn-icono--eliminar:hover {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
 }
