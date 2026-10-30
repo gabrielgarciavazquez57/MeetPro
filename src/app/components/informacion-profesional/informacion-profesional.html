@@ -24,17 +24,8 @@
       <section class="informacion-seccion" id="seccion-descripcion">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Descripción ampliada</h2>
-          @if (esDueno() && !editando()) {
-            @if (informacion()) {
-              <button type="button" class="btn-icono btn-icono--editar" title="Editar descripción" aria-label="Editar descripción" (click)="abrirEdicion()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 20h9" />
-                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
-                </svg>
-              </button>
-            } @else {
-              <button type="button" class="btn-editar" (click)="abrirEdicion()">+ Agregar</button>
-            }
+          @if (esDueno() && !editando() && !informacion()?.descripcionAmpliada) {
+            <button type="button" class="btn-editar" (click)="abrirEdicion()">+ Agregar</button>
           }
         </div>
 
@@ -54,7 +45,17 @@
             </div>
           </form>
         } @else if (informacion()?.descripcionAmpliada) {
-          <p class="descripcion-texto">{{ informacion()!.descripcionAmpliada }}</p>
+          <div class="descripcion-texto">
+            @if (esDueno()) {
+              <button type="button" class="btn-icono btn-icono--editar descripcion-editar" title="Editar descripción" aria-label="Editar descripción" (click)="abrirEdicion()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
+              </button>
+            }
+            <p class="descripcion-parrafo">{{ informacion()!.descripcionAmpliada }}</p>
+          </div>
         } @else {
           <p class="estado-msg estado-msg--panel">Todavía no hay una descripción ampliada para este profesional.</p>
         }
@@ -162,9 +163,6 @@
       <section class="informacion-seccion" id="seccion-titulos">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Títulos</h2>
-          @if (esDueno() && !mostrandoFormTitulo()) {
-            <button type="button" class="btn-editar" (click)="abrirFormTitulo()">+ Agregar título</button>
-          }
         </div>
 
         @if (mostrandoFormTitulo()) {
@@ -227,7 +225,7 @@
           </form>
         }
 
-        @if (prof.titulos?.length) {
+        @if (prof.titulos?.length || (esDueno() && !mostrandoFormTitulo())) {
           <ul class="lista-titulos">
             @for (t of prof.titulos; track t.id ?? $index) {
               <li class="titulo-card">
@@ -264,6 +262,14 @@
                 @if (t.archivo_adjunto) {
                   <a class="titulo-card-adjunto" [href]="t.archivo_adjunto" target="_blank" rel="noopener" (click)="adjuntos.abrir(t.archivo_adjunto!, $event)">{{ t.archivo_nombre || 'Ver archivo adjunto' }}</a>
                 }
+              </li>
+            }
+            @if (esDueno() && !mostrandoFormTitulo()) {
+              <li class="titulo-agregar-item">
+                <button type="button" class="proyecto-agregar titulo-agregar" title="Agregar título" aria-label="Agregar título" (click)="abrirFormTitulo()">
+                  <span class="proyecto-agregar-mas" aria-hidden="true">+</span>
+                  <span class="proyecto-agregar-texto">Agregar Título</span>
+                </button>
               </li>
             }
           </ul>

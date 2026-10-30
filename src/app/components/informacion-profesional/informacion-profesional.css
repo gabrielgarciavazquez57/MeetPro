@@ -858,3 +858,57 @@
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
 }
+
+/* Descripción: el lápiz va dentro de la tarjeta, arriba a la derecha */
+#seccion-descripcion .descripcion-texto {
+  position: relative;
+  white-space: normal;
+}
+
+#seccion-descripcion .descripcion-parrafo {
+  margin: 0;
+  padding-right: 2.2rem;
+  white-space: pre-wrap;
+}
+
+.descripcion-editar {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+}
+
+/* Títulos: sin el contenedor blanco de la sección; cada título es su propia tarjeta */
+#seccion-titulos.informacion-seccion {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+#seccion-titulos .titulo-card,
+#seccion-titulos .form-descripcion {
+  padding: 1.25rem 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+/* Agregar título: mismo estilo que "Agregar Proyecto", del tamaño de una tarjeta de título */
+.titulo-agregar-item {
+  display: flex;
+}
+
+.titulo-agregar {
+  max-width: none;
+  aspect-ratio: auto;
+  align-self: stretch;
+  min-height: 6.25rem;
+  gap: 0.2rem;
+}
+
+.titulo-agregar .proyecto-agregar-mas {
+  font-size: 2.6rem;
+}
