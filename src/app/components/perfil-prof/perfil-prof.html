@@ -83,7 +83,7 @@
                 <span class="dato-texto">
                   <label>Teléfono</label>
                   @if (formatearTelefono(prof.profesional_userData.phoneNumber); as tel) {
-                    <span class="valor">{{ tel.bandera }} <span class="telefono-codigo">{{ tel.codigo }}</span> {{ tel.numero }}</span>
+                    <span class="valor"><span class="telefono-codigo">{{ tel.codigo }}</span> {{ tel.numero }}</span>
                   } @else {
                     <span class="valor">{{ prof.profesional_userData.phoneNumber }}</span>
                   }
