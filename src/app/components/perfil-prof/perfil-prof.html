@@ -42,6 +42,19 @@
                 <span class="badge-id-profesional">Matrícula Nº {{ prof.professionalId }}</span>
               </div>
               <p class="descripcion-profesional">{{ prof.descriptionprofesional }}</p>
+              @if (prof.video?.url) {
+                @if (prof.video?.tipo === 'link') {
+                  <a class="btn-video-prof" [href]="prof.video?.url" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                    Video Profesional
+                  </a>
+                } @else {
+                  <button type="button" class="btn-video-prof" (click)="abrirVideo()">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                    Video Profesional
+                  </button>
+                }
+              }
             </div>
           </div>
 
@@ -248,5 +261,14 @@
 
     </div>
 
+
+    @if (videoAbierto() && prof.video?.url; as urlVideo) {
+      <div class="video-fondo" (click)="cerrarVideo()" role="dialog" aria-modal="true" aria-label="Video profesional">
+        <div class="video-flotante" (click)="$event.stopPropagation()">
+          <button type="button" class="video-cerrar" (click)="cerrarVideo()" aria-label="Cerrar video">×</button>
+          <video class="video-reproductor" [src]="urlVideo" controls autoplay playsinline></video>
+        </div>
+      </div>
+    }
   }
 </div>

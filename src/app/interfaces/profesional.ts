@@ -3,6 +3,7 @@ import{TitulosPro} from "./titulos-pro";
 import{ExperienciaPro} from "./experiencia-pro";
 import{Certificado} from "./certificado";
 import{Pago} from "./pago";
+import{VideoProfesional} from "./video-profesional";
 
 export interface Profesional {
     id?: string;
@@ -17,4 +18,5 @@ export interface Profesional {
     experiencias: ExperienciaPro[];
     certificados?: Certificado[];
     pago?: Pago;
+    video?: VideoProfesional | null;
 }

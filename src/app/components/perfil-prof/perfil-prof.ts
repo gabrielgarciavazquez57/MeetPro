@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, OnInit } from '@angular/core';
+import { Component, HostListener, computed, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClientProfesional } from '../../services/client-profesional';
 import { Profesional } from '../../interfaces/profesional';
@@ -30,6 +30,18 @@ export class PerfilProfesional implements OnInit {
     const u = this.profesional()?.profesional_userData;
     return !!logueado && !!u && String(logueado.id) === String(u.id);
   });
+
+  /** Reproductor flotante del video de presentación (cuando el video es un archivo subido) */
+  readonly videoAbierto = signal<boolean>(false);
+
+  abrirVideo(): void {
+    this.videoAbierto.set(true);
+  }
+
+  @HostListener('document:keydown.escape')
+  cerrarVideo(): void {
+    this.videoAbierto.set(false);
+  }
 
   /** Panel flotante abierto: 'titulos', 'experiencias', 'beneficios' o null */
   panel = signal<'titulos' | 'experiencias' | 'beneficios' | null>(null);

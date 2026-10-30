@@ -700,3 +700,78 @@ label {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Video Profesional: botón debajo de la descripción y reproductor flotante en el centro */
+.btn-video-prof {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.9rem;
+  padding: 0.6rem 1.2rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2563eb;
+  background-color: #ffffff;
+  border: 2px solid #d0d7e2;
+  border-left: 4px solid #2563eb;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-video-prof svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn-video-prof:hover {
+  background-color: #f5f8ff;
+  border-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.14);
+}
+
+.video-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: rgba(10, 23, 48, 0.78);
+}
+
+.video-flotante {
+  position: relative;
+  width: min(100%, 900px);
+  background-color: #000000;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.video-reproductor {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  background-color: #000000;
+}
+
+.video-cerrar {
+  position: absolute;
+  top: -2.6rem;
+  right: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.video-cerrar:hover {
+  color: #93c5fd;
+}

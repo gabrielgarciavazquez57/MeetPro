@@ -23,7 +23,7 @@ const COLUMNAS: Record<Tabla, string[]> = {
   ],
   profesionales: [
     'id', 'profesional_userData', 'profession', 'professionalId', 'descriptionprofesional', 'linkedin',
-    'titulos', 'experiencias', 'certificados', 'linkReunion', 'direccionPresencial', 'pago',
+    'titulos', 'experiencias', 'certificados', 'linkReunion', 'direccionPresencial', 'pago', 'video',
   ],
   turnos: [
     'id', 'professionalId', 'fecha', 'hora', 'duracion', 'modalidad', 'estado', 'cliente', 'motivo',

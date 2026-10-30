@@ -14,6 +14,8 @@ import { InformacionProfesional } from '../../interfaces/informacion-profesional
 import { Proyecto } from '../../interfaces/proyecto';
 import { ToastService } from '../../services/toast';
 import { ConfirmacionService } from '../../services/confirmacion';
+import { VideoProfesionalService } from '../../services/video-profesional';
+import { VideoProfesional } from '../../interfaces/video-profesional';
 
 @Component({
   selector: 'app-profesional-form',
@@ -32,6 +34,7 @@ export class ProfesionalForm implements OnInit {
   protected readonly clientProfesional = inject(ClientProfesional); // 👈 nuevo
   protected readonly clientInformacion = inject(ClientInformacionProfesional);
   protected readonly clientProyecto = inject(ClientProyecto);
+  protected readonly videos = inject(VideoProfesionalService);
 
   protected userData: User | null = null;
 
@@ -43,6 +46,66 @@ export class ProfesionalForm implements OnInit {
   private informacionExistente: InformacionProfesional | null = null;
   /** Proyectos ya guardados para este profesional (solo se muestran, no se editan acá) */
   readonly proyectosExistentes = signal<Proyecto[]>([]);
+
+  // ===== VIDEO DE PRESENTACIÓN (opcional): un link o un archivo =====
+  readonly videoModo = signal<'ninguno' | 'link' | 'archivo'>('ninguno');
+  /** Archivo elegido ahora (todavía sin subir) */
+  readonly videoArchivo = signal<File | null>(null);
+  /** Video ya guardado en el perfil (al editar) */
+  readonly videoExistente = signal<VideoProfesional | null>(null);
+  readonly errorVideo = signal<string | null>(null);
+  readonly subiendoVideo = signal<boolean>(false);
+
+  elegirModoVideo(modo: 'ninguno' | 'link' | 'archivo'): void {
+    this.videoModo.set(modo);
+    this.errorVideo.set(null);
+    if (modo !== 'link') {
+      this.form.controls.videoLink.setValue('');
+    }
+    if (modo !== 'archivo') {
+      this.videoArchivo.set(null);
+    }
+  }
+
+  onVideoArchivo(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const archivo = input.files?.[0];
+    input.value = '';
+    if (!archivo) {
+      return;
+    }
+    const motivo = this.videos.validar(archivo);
+    this.errorVideo.set(motivo);
+    if (!motivo) {
+      this.videoArchivo.set(archivo);
+    }
+  }
+
+  /** Devuelve el video que queda en el perfil (subiendo el archivo nuevo si hace falta) */
+  private resolverVideo(userId: string): Observable<VideoProfesional | null> {
+    const modo = this.videoModo();
+    if (modo === 'link') {
+      const url = this.form.controls.videoLink.value.trim();
+      return of(url ? { tipo: 'link' as const, url } : null);
+    }
+    if (modo === 'archivo') {
+      const archivo = this.videoArchivo();
+      if (archivo) {
+        return this.videos.subir(archivo, userId);
+      }
+      const existente = this.videoExistente();
+      return of(existente?.tipo === 'archivo' ? existente : null);
+    }
+    return of(null);
+  }
+
+  /** Si el video guardado antes era un archivo y ya no se usa, se borra del almacenamiento */
+  private limpiarVideoViejo(nuevo: VideoProfesional | null): void {
+    const anterior = this.videoExistente();
+    if (anterior?.tipo === 'archivo' && anterior.url !== nuevo?.url) {
+      this.videos.eliminar(anterior.url).subscribe();
+    }
+  }
 
   // ===== CARRUSEL DE PASOS =====
   readonly pasoActual = signal(0);
@@ -85,7 +148,7 @@ export class ProfesionalForm implements OnInit {
       case 2:
         return this.form.controls.experiencias.invalid;
       case 3:
-        return this.form.controls.descripcionAmpliada.invalid;
+        return this.form.controls.descripcionAmpliada.invalid || this.form.controls.videoLink.invalid;
       case 4:
         return this.form.controls.proyectosNuevos.invalid;
       default:
@@ -113,6 +176,7 @@ export class ProfesionalForm implements OnInit {
     titulos:      this.fb.array([this.crearTitulo()]),
     experiencias: this.fb.array([this.crearExperiencia()]),
     descripcionAmpliada: ['', [Validators.maxLength(2000)]],
+    videoLink:           ['', [Validators.pattern(/^https?:\/\/.+/)]],
     proyectosNuevos: this.fb.array<ReturnType<typeof this.crearProyectoNuevo>>([]),
     certificados:    this.fb.array<ReturnType<typeof this.crearCertificado>>([]),
   });
@@ -151,6 +215,15 @@ export class ProfesionalForm implements OnInit {
         }
 
         this.registroId = prof.id ?? null;
+
+        if (prof.video?.url) {
+          this.videoModo.set(prof.video.tipo);
+          if (prof.video.tipo === 'link') {
+            this.form.patchValue({ videoLink: prof.video.url });
+          } else {
+            this.videoExistente.set(prof.video);
+          }
+        }
 
         this.form.patchValue({
           profession: prof.profession,
@@ -229,6 +302,7 @@ export class ProfesionalForm implements OnInit {
   get titulos()      { return this.form.controls.titulos as FormArray; }
   get experiencias() { return this.form.controls.experiencias as FormArray; }
   get descripcionAmpliada() { return this.form.controls.descripcionAmpliada; }
+  get videoLink()           { return this.form.controls.videoLink; }
   get proyectosNuevos()     { return this.form.controls.proyectosNuevos as FormArray; }
   get certificados()        { return this.form.controls.certificados as FormArray; }
 
@@ -386,7 +460,7 @@ export class ProfesionalForm implements OnInit {
 
     const userData = this.userData;
     const raw = this.form.getRawValue();
-    const { descripcionAmpliada, proyectosNuevos, certificados, precio, ...resto } = raw;
+    const { descripcionAmpliada, proyectosNuevos, certificados, precio, videoLink, ...resto } = raw;
 
     const certificadosFinal = certificados.map((c, i) => ({
       ...c,
@@ -406,19 +480,31 @@ export class ProfesionalForm implements OnInit {
             return;
           }
 
-          const profesional_editado: Profesional = {
-            id: registroId,
-            profesional_userData: userData,
-            ...resto,
-            certificados: certificadosFinal,
-            pago: { precio },
-          };
+          this.subiendoVideo.set(true);
+          this.resolverVideo(String(userData.id)).subscribe({
+            next: (video) => {
+              const profesional_editado: Profesional = {
+                id: registroId,
+                profesional_userData: userData,
+                ...resto,
+                certificados: certificadosFinal,
+                pago: { precio },
+                video,
+              };
 
-          this.clientProfesional.updateProfesional(registroId, profesional_editado).subscribe(() => {
-            this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
-              this.toast.mostrar('Perfil profesional actualizado con éxito!');
-              this.router.navigate(['/perfil-prof', userData.id]);
-            });
+              this.clientProfesional.updateProfesional(registroId, profesional_editado).subscribe(() => {
+                this.limpiarVideoViejo(video);
+                this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
+                  this.subiendoVideo.set(false);
+                  this.toast.mostrar('Perfil profesional actualizado con éxito!');
+                  this.router.navigate(['/perfil-prof', userData.id]);
+                });
+              });
+            },
+            error: () => {
+              this.subiendoVideo.set(false);
+              this.toast.mostrar('No se pudo subir el video. Probá de nuevo.', 'error');
+            },
           });
         });
       return;
@@ -430,18 +516,29 @@ export class ProfesionalForm implements OnInit {
       if (!confirmado) {
         return;
       }
-      const new_profesional: Profesional = {
-        profesional_userData: userData,
-        ...resto,
-        certificados: certificadosFinal,
-        pago: { precio },
-      };
+      this.subiendoVideo.set(true);
+      this.resolverVideo(String(userData.id)).subscribe({
+        next: (video) => {
+          const new_profesional: Profesional = {
+            profesional_userData: userData,
+            ...resto,
+            certificados: certificadosFinal,
+            pago: { precio },
+            video,
+          };
 
-      this.clientProfesional.addProfesional(new_profesional).subscribe(() => {
-        this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
-          this.toast.mostrar('Perfil profesional registrado con éxito!');
-          this.router.navigate(['/']);
-        });
+          this.clientProfesional.addProfesional(new_profesional).subscribe(() => {
+            this.guardarExtras(resto.professionalId, descripcionAmpliada, proyectosNuevos).subscribe(() => {
+              this.subiendoVideo.set(false);
+              this.toast.mostrar('Perfil profesional registrado con éxito!');
+              this.router.navigate(['/']);
+            });
+          });
+        },
+        error: () => {
+          this.subiendoVideo.set(false);
+          this.toast.mostrar('No se pudo subir el video. Probá de nuevo.', 'error');
+        },
       });
     });
   }
