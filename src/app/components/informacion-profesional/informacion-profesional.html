@@ -142,7 +142,8 @@
             }
             @if (esDueno() && !mostrandoFormProyecto()) {
               <button type="button" class="proyecto-agregar" title="Agregar proyecto" aria-label="Agregar proyecto" (click)="abrirFormProyecto()">
-                <span aria-hidden="true">+</span>
+                <span class="proyecto-agregar-mas" aria-hidden="true">+</span>
+                <span class="proyecto-agregar-texto">Agregar Proyecto</span>
               </button>
             }
           </div>
