@@ -1,1 +1,188 @@
-/* Los estilos de esta pantalla viven en shared/turnos.css */
+/* Sin el contenedor blanco: las tarjetas van directo sobre el fondo */
+.lista-profesionales {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 820px;
+}
+
+/* Tarjetas: mismas que el listado de profesionales */
+.tarjeta-profesional {
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.tarjeta-profesional:hover {
+  border-color: #2563eb;
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.14);
+  transform: translateY(-2px);
+}
+
+.tarjeta-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.15rem;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid #d0d7e2;
+}
+
+.avatar-profesional {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  background: linear-gradient(155deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border: 3px solid #2563eb;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+.avatar-profesional img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarjeta-titulo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.nombre-profesional {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.badge-profesion {
+  align-self: flex-start;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2563eb;
+  letter-spacing: 0.01em;
+}
+
+.tarjeta-puntaje {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.tarjeta-estrella {
+  color: #60a5fa;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.tarjeta-puntaje--vacio {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.detalle-profesional {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.detalle-profesional li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #e4e8ed;
+}
+
+.detalle-profesional li:first-child {
+  padding-top: 0;
+}
+
+.detalle-profesional li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detalle-profesional label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.detalle-profesional .valor {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  word-break: break-word;
+}
+
+.detalle-profesional .valor.descripcion {
+  font-weight: 400;
+  color: #475569;
+  line-height: 1.55;
+  letter-spacing: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tarjeta-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.35rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid #d0d7e2;
+}
+
+.tarjeta-footer .btn-t {
+  padding: 0.45rem 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .lista-profesionales {
+    grid-template-columns: 1fr;
+  }
+
+  .tarjeta-profesional {
+    padding: 1.35rem;
+  }
+}

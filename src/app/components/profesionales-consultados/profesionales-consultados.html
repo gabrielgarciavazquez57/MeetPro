@@ -19,40 +19,64 @@
       </div>
     </div>
 
-    <div class="turnos-panel">
-      @if (consultados().length === 0) {
-        <p class="vacio">
-          Todavía no consultaste con ningún profesional.
-          <a routerLink="/profesionales-lista">Buscá uno</a> y reservá tu primer turno.
-        </p>
-      } @else {
-        <ul class="lista-cards">
-          @for (c of consultados(); track c.professionalId) {
-            <li class="turno-card">
-              <div class="turno-fecha">
-                <span class="turno-fecha-dia">{{ c.consultas }}</span>
-                <span class="turno-fecha-mes">{{ c.consultas === 1 ? 'vez' : 'veces' }}</span>
+    @if (consultados().length === 0) {
+      <p class="vacio">
+        Todavía no consultaste con ningún profesional.
+        <a routerLink="/profesionales-lista">Buscá uno</a> y reservá tu primer turno.
+      </p>
+    } @else {
+      <div class="lista-profesionales">
+        @for (c of consultados(); track c.professionalId) {
+          <div class="tarjeta-profesional">
+            <div class="tarjeta-header">
+              <div class="avatar-profesional">
+                @if (c.profesional?.profesional_userData?.fotoPerfil) {
+                  <img [src]="c.profesional?.profesional_userData?.fotoPerfil" [alt]="c.profesional?.profesional_userData?.name">
+                } @else {
+                  {{ c.profesional?.profesional_userData?.name?.charAt(0) }}{{ c.profesional?.profesional_userData?.lastname?.charAt(0) }}
+                }
               </div>
-              <div class="turno-cuerpo">
-                <span class="turno-nombre">
+              <div class="tarjeta-titulo-grupo">
+                <h2 class="nombre-profesional">
                   {{ c.profesional?.profesional_userData?.name }} {{ c.profesional?.profesional_userData?.lastname }}
-                </span>
-                <span class="turno-detalle">{{ c.profesional?.profession }}</span>
-                <span class="turno-detalle">
-                  <strong>Última consulta:</strong> {{ formatearFecha(c.ultima.fecha) }} · {{ rangoHorario(c.ultima) }}
-                </span>
-                <div class="turno-acciones">
-                  <a class="btn-t btn-t--primario" [routerLink]="['/turnos', c.professionalId]">Reservar de nuevo</a>
-                  @if (c.profesional?.profesional_userData?.id; as pid) {
-                    <a class="btn-t" [routerLink]="['/perfil-prof', pid]">Ver perfil</a>
+                </h2>
+                <span class="badge-profesion">{{ c.profesional?.profession }}</span>
+                <span class="tarjeta-puntaje">
+                  <span class="tarjeta-estrella" aria-hidden="true">★</span>
+                  @if (promedioDe(c.professionalId)) {
+                    {{ promedioDe(c.professionalId) }}
+                  } @else {
+                    <span class="tarjeta-puntaje--vacio">Sin valoraciones</span>
                   }
-                  <a class="btn-t" [routerLink]="['/valoraciones', c.professionalId]">Valoraciones</a>
-                </div>
+                </span>
               </div>
-            </li>
-          }
-        </ul>
-      }
-    </div>
+            </div>
+
+            <ul class="detalle-profesional">
+              <li>
+                <label>Matrícula del profesional</label>
+                <span class="valor">{{ c.professionalId }}</span>
+              </li>
+              <li>
+                <label>Consultas realizadas</label>
+                <span class="valor">{{ c.consultas }} {{ c.consultas === 1 ? 'vez' : 'veces' }}</span>
+              </li>
+              <li>
+                <label>Última consulta</label>
+                <span class="valor">{{ formatearFecha(c.ultima.fecha) }} · {{ rangoHorario(c.ultima) }}</span>
+              </li>
+            </ul>
+
+            <div class="tarjeta-footer">
+              <a class="btn-t btn-t--primario" [routerLink]="['/turnos', c.professionalId]">Reservar de nuevo</a>
+              @if (c.profesional?.profesional_userData?.id; as pid) {
+                <a class="btn-t" [routerLink]="['/perfil-prof', pid]">Ver perfil</a>
+              }
+              <a class="btn-t" [routerLink]="['/valoraciones', c.professionalId]">Valoraciones</a>
+            </div>
+          </div>
+        }
+      </div>
+    }
   }
 </div>
