@@ -773,3 +773,8 @@ span::before {
   font-size: 0.75rem;
   color: #64748b;
 }
+
+/* Segundo título dentro de un mismo paso (ej. el video, debajo de la descripción ampliada) */
+.datos-profesion .titulo-seccion--siguiente {
+  margin-top: 2rem;
+}

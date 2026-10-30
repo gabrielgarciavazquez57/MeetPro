@@ -378,7 +378,7 @@ export class ProfesionalForm implements OnInit {
   crearTitulo() {
     return this.fb.nonNullable.group({
       nombre_titulo:          ['', [Validators.required]],
-      descripcion_titulo:     ['', [Validators.required, Validators.maxLength(300)]],
+      descripcion_titulo:     ['', [Validators.maxLength(300)]],
       fecha_obtencion:        ['', [Validators.required]],
       institucion_educativa:  ['', [Validators.required]],
     });

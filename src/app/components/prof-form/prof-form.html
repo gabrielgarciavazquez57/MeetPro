@@ -139,11 +139,9 @@
                   }
                 </li>
                 <li class="descripcion-item">
-                  <label [for]="'descripcion_titulo-' + $index">Descripción: </label>
+                  <label [for]="'descripcion_titulo-' + $index">Descripción (opcional): </label>
                   <textarea formControlName="descripcion_titulo" [id]="'descripcion_titulo-' + $index" rows="3"></textarea>
-                  @if(tituloGroup.get('descripcion_titulo')?.touched && tituloGroup.get('descripcion_titulo')?.hasError('required')){
-                    <span>Campo requerido</span>
-                  }@else if (tituloGroup.get('descripcion_titulo')?.hasError('maxlength')) {
+                  @if (tituloGroup.get('descripcion_titulo')?.hasError('maxlength')) {
                     <span>Debe tener 300 caracteres como máximo</span>
                   }
                 </li>
@@ -235,9 +233,11 @@
               <span>Debe tener 2000 caracteres como máximo</span>
             }
           </li>
+        </ul>
 
+        <h3 class="titulo-seccion titulo-seccion--siguiente">Video de presentación (opcional):</h3>
+        <ul>
           <li class="video-item">
-            <label>Video de presentación (opcional): </label>
             <div class="video-opciones" role="group" aria-label="Tipo de video">
               <button type="button" class="video-opcion" [class.video-opcion--activa]="videoModo() === 'ninguno'" (click)="elegirModoVideo('ninguno')">Sin video</button>
               <button type="button" class="video-opcion" [class.video-opcion--activa]="videoModo() === 'link'" (click)="elegirModoVideo('link')">Link a un video</button>
