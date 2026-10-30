@@ -41,6 +41,19 @@
             Volver al perfil
           </a>
         </div>
+      } @else if (pagoPrevio(); as previo) {
+        <div class="pago-exito">
+          <span class="pago-exito-icono" aria-hidden="true">✓</span>
+          <h2 class="pago-exito-titulo">Ya pagaste este mes</h2>
+          <p class="pago-exito-texto">
+            Ya realizaste el pago mensual a {{ nombreProfesional() }}. Solo se puede hacer un pago por mes:
+            podés volver a pagar a partir del <strong>{{ proximoPago }}</strong>.
+          </p>
+          <p class="pago-exito-comprobante">Comprobante: <strong>{{ previo.numeroComprobante }}</strong></p>
+          <a class="btn-t btn-t--primario btn-t--grande" [routerLink]="['/perfil-prof', prof.profesional_userData.id]">
+            Volver al perfil
+          </a>
+        </div>
       } @else {
         <div class="pago-contenido">
           <div class="pago-resumen">

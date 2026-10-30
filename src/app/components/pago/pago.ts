@@ -51,6 +51,14 @@ export class PagoComponent implements OnInit {
   /** true cuando la tarjeta de prueba "rechazada" fue usada: simula un pago que no se aprobó */
   readonly rechazado = signal<boolean>(false);
   readonly comprobante = signal<string>('');
+  /** Pago aprobado de este mes al mismo profesional: si existe, no se puede pagar de nuevo hasta el mes siguiente */
+  readonly pagoPrevio = signal<Ticket | null>(null);
+
+  /** Primer día del mes que viene, desde cuando se vuelve a poder pagar */
+  protected readonly proximoPago = (() => {
+    const hoy = new Date();
+    return new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1).toLocaleDateString('es-AR', { day: 'numeric', month: 'long' });
+  })();
 
   protected readonly tarjetasPrueba = [
     { tipo: 'aprobada', etiqueta: 'Pago aprobado', numero: TARJETA_APROBADA },
@@ -95,12 +103,41 @@ export class PagoComponent implements OnInit {
         }
         this.profesional.set(prof);
         this.cargando.set(false);
+        if (prof) {
+          this.buscarPagoDelMes(prof);
+        }
       },
       error: (err) => {
         console.error('Error al traer el profesional:', err);
         this.error.set('No se pudo cargar el profesional.');
         this.cargando.set(false);
       },
+    });
+  }
+
+  /** Busca si el usuario ya pagó este mes a este profesional (la base también lo impide) */
+  private buscarPagoDelMes(prof: Profesional): void {
+    const usuario = this.auth.usuario();
+    if (!usuario?.id) {
+      return;
+    }
+    const hoy = new Date();
+    const esteMes = (iso: string) => {
+      const d = new Date(iso);
+      return d.getFullYear() === hoy.getFullYear() && d.getMonth() === hoy.getMonth();
+    };
+    this.clientTicket.getTickets().subscribe({
+      next: (tickets) =>
+        this.pagoPrevio.set(
+          tickets.find(
+            (t) =>
+              t.estado === 'aprobado' &&
+              String(t.usuario.id) === String(usuario.id) &&
+              String(t.profesional.id) === String(prof.profesional_userData.id) &&
+              esteMes(t.fecha),
+          ) ?? null,
+        ),
+      error: (err) => console.error('Error al revisar los pagos del mes:', err),
     });
   }
 
@@ -182,8 +219,13 @@ export class PagoComponent implements OnInit {
         this.comprobante.set(guardado.numeroComprobante);
         this.pagoRealizado.set(true);
       },
-      error: () => {
+      error: (err: unknown) => {
         this.procesando.set(false);
+        if (String((err as Error)?.message ?? err).includes('PAGO_MENSUAL_DUPLICADO')) {
+          this.toast.mostrar('Ya realizaste el pago de este mes a este profesional.', 'aviso');
+          this.buscarPagoDelMes(prof);
+          return;
+        }
         this.toast.mostrar('No se pudo registrar el pago. Intentá de nuevo.', 'error');
       },
     });
