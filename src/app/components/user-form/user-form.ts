@@ -2,6 +2,7 @@ import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, AbstractControl, AsyncValidatorFn, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BarraNav } from '../barra-nav/barra-nav';
 import { Location } from '@angular/common';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { User } from '../../interfaces/user';
@@ -46,7 +47,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 
 @Component({
   selector: 'app-user-form',
-  imports: [ReactiveFormsModule, Desplegable, CodigoTelefono],
+  imports: [BarraNav, ReactiveFormsModule, Desplegable, CodigoTelefono],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
 })

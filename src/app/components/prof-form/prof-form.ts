@@ -2,6 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormArray, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BarraNav } from '../barra-nav/barra-nav';
 import { Observable, forkJoin, of } from 'rxjs';
 import { ClientUser } from '../../services/client-user';
 import { ClientProfesional } from '../../services/client-profesional'; // 👈 nuevo
@@ -16,7 +17,7 @@ import { ConfirmacionService } from '../../services/confirmacion';
 
 @Component({
   selector: 'app-profesional-form',
-  imports: [ReactiveFormsModule],
+  imports: [BarraNav, ReactiveFormsModule],
   templateUrl: './prof-form.html',
   styleUrl: './prof-form.css',
 })

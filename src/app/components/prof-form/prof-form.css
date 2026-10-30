@@ -711,3 +711,14 @@ span::before {
     white-space: nowrap;
   }
 }
+
+/* Al editar el perfil se muestra la barra de navegación fija: se deja lugar arriba */
+.fondo-profesional.fondo-profesional--con-nav {
+  padding-top: 8.5rem;
+}
+
+@media (max-width: 640px) {
+  .fondo-profesional.fondo-profesional--con-nav {
+    padding-top: 8.5rem;
+  }
+}

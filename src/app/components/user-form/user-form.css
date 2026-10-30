@@ -741,3 +741,14 @@ app-desplegable {
   border-top-color: #2563eb;
   animation: giro-cargando 0.7s linear infinite;
 }
+
+/* Al editar el perfil se muestra la barra de navegación fija: se deja lugar arriba */
+.fondo-registro.fondo-registro--con-nav {
+  padding-top: 8.5rem;
+}
+
+@media (max-width: 640px) {
+  .fondo-registro.fondo-registro--con-nav {
+    padding-top: 8.5rem;
+  }
+}

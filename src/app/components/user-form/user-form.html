@@ -1,4 +1,8 @@
-<section class="fondo-registro">
+@if (editando) {
+  <app-barra-nav titulo="Editar perfil" />
+}
+
+<section class="fondo-registro" [class.fondo-registro--con-nav]="editando">
     <div class="acceso-lateral">
       <button type="button" class="btn-acceso-lateral" (click)="volver()">Volver atrás</button>
     </div>
