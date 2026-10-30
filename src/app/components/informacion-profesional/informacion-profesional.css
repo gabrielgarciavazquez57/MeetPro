@@ -918,3 +918,79 @@
 .titulo-agregar .proyecto-agregar-mas {
   font-size: 2.6rem;
 }
+
+/* Certificados: cada uno es un cuadrado del mismo tamaño y estilo que los botones del perfil (Turnos, Valoraciones...) */
+#seccion-certificados .lista-titulos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 210px);
+  gap: 1.1rem;
+}
+
+#seccion-certificados .titulo-card {
+  position: relative;
+  box-sizing: border-box;
+  aspect-ratio: 5 / 4;
+  padding: 1rem;
+  overflow: hidden;
+  border: 2.5px solid #d0d7e2;
+  border-left: 6px solid #2563eb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+#seccion-certificados .titulo-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.14);
+  transform: translateY(-2px);
+}
+
+#seccion-certificados .titulo-card-nombre {
+  padding-right: 3.6rem;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+#seccion-certificados .titulo-card-acciones {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  margin: 0;
+}
+
+#seccion-certificados .titulo-card-institucion {
+  font-size: 0.8rem;
+}
+
+#seccion-certificados .titulo-card-desc {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#seccion-certificados .titulo-card-adjunto {
+  display: block;
+  max-width: 100%;
+  font-size: 0.74rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#seccion-certificados .titulo-agregar-item {
+  display: block;
+}
+
+#seccion-certificados .titulo-agregar {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: 5 / 4;
+}
+
+@media (max-width: 480px) {
+  #seccion-certificados .lista-titulos {
+    grid-template-columns: 1fr;
+  }
+}
