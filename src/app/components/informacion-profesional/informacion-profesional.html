@@ -281,9 +281,6 @@
       <section class="informacion-seccion" id="seccion-certificados">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Certificados</h2>
-          @if (esDueno() && !mostrandoFormCertificado()) {
-            <button type="button" class="btn-editar" (click)="abrirFormCertificado()">+ Agregar certificado</button>
-          }
         </div>
 
         @if (mostrandoFormCertificado()) {
@@ -346,7 +343,7 @@
           </form>
         }
 
-        @if (prof.certificados?.length) {
+        @if (prof.certificados?.length || (esDueno() && !mostrandoFormCertificado())) {
           <ul class="lista-titulos">
             @for (c of prof.certificados; track c.id ?? $index) {
               <li class="titulo-card">
@@ -383,6 +380,14 @@
                 @if (c.archivo_adjunto) {
                   <a class="titulo-card-adjunto" [href]="c.archivo_adjunto" target="_blank" rel="noopener" (click)="adjuntos.abrir(c.archivo_adjunto!, $event)">{{ c.archivo_nombre || 'Ver archivo adjunto' }}</a>
                 }
+              </li>
+            }
+            @if (esDueno() && !mostrandoFormCertificado()) {
+              <li class="titulo-agregar-item">
+                <button type="button" class="proyecto-agregar titulo-agregar" title="Agregar certificado" aria-label="Agregar certificado" (click)="abrirFormCertificado()">
+                  <span class="proyecto-agregar-mas" aria-hidden="true">+</span>
+                  <span class="proyecto-agregar-texto">Agregar Certificado</span>
+                </button>
               </li>
             }
           </ul>

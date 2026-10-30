@@ -877,8 +877,9 @@
   right: 0.55rem;
 }
 
-/* Títulos y experiencia: sin el contenedor blanco de la sección; cada ítem es su propia tarjeta */
+/* Títulos, certificados y experiencia: sin el contenedor blanco de la sección; cada ítem es su propia tarjeta */
 #seccion-titulos.informacion-seccion,
+#seccion-certificados.informacion-seccion,
 #seccion-experiencia.informacion-seccion {
   background: none;
   border: none;
@@ -888,6 +889,8 @@
 
 #seccion-titulos .titulo-card,
 #seccion-titulos .form-descripcion,
+#seccion-certificados .titulo-card,
+#seccion-certificados .form-descripcion,
 #seccion-experiencia .titulo-card,
 #seccion-experiencia .form-descripcion {
   padding: 1.25rem 1.5rem;
