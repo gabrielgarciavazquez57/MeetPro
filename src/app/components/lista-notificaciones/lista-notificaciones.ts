@@ -17,6 +17,8 @@ const ETIQUETAS: Record<TipoNotificacion, string> = {
   valoracion: 'Valoración',
   consulta: 'Consulta',
   contenido: 'Contenido',
+  pago_recibido: 'Pago recibido',
+  pago_realizado: 'Pago',
 };
 
 @Component({

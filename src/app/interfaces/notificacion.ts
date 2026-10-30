@@ -6,7 +6,9 @@ export type TipoNotificacion =
   | 'mensaje'
   | 'valoracion'
   | 'consulta'
-  | 'contenido';
+  | 'contenido'
+  | 'pago_recibido'
+  | 'pago_realizado';
 
 export interface Notificacion {
   id: string;
