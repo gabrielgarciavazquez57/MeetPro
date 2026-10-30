@@ -453,96 +453,6 @@
   border-color: #2563eb;
 }
 
-/* Carrusel de proyectos */
-.carrusel-proyectos {
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  overflow: hidden;
-}
-
-.btn-flecha {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  font-size: 2.1rem;
-  line-height: 1;
-  color: #94a3b8;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: color 0.15s ease;
-}
-
-.btn-flecha:hover {
-  color: #64748b;
-}
-
-.btn-flecha:active {
-  transform: scale(0.96);
-}
-
-.carrusel-indicador {
-  margin: 0.6rem 0 0;
-  text-align: center;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #94a3b8;
-  letter-spacing: 0.04em;
-}
-
-.proyecto-card {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.15rem;
-  background-color: #f8fafc;
-  border: 1px solid #e4e8ed;
-  border-left: 3px solid #60a5fa;
-  transition: border-color 0.15s ease;
-}
-
-.proyecto-card:hover {
-  border-color: #2563eb;
-}
-
-@keyframes proyecto-desliza-der {
-  from {
-    opacity: 0;
-    transform: translateX(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes proyecto-desliza-izq {
-  from {
-    opacity: 0;
-    transform: translateX(-28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.proyecto-card--der {
-  animation: proyecto-desliza-der 0.28s ease;
-}
-
-.proyecto-card--izq {
-  animation: proyecto-desliza-izq 0.28s ease;
-}
-
 /* Títulos y certificados */
 .lista-titulos {
   margin: 1rem 0 0;
@@ -740,26 +650,12 @@
   color: #1d4ed8;
 }
 
-/* Proyectos: sin el contenedor blanco de la sección; cada proyecto es su propia tarjeta */
+/* Proyectos: sin el contenedor blanco de la sección; cada proyecto es una tarjeta como las del perfil profesional */
 #seccion-proyectos.informacion-seccion {
   background: none;
   border: none;
   box-shadow: none;
   padding: 0;
-}
-
-#seccion-proyectos .proyecto-card {
-  padding: 1.5rem;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-left: 4px solid #2563eb;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(15, 23, 42, 0.08);
-}
-
-#seccion-proyectos .proyecto-card:hover {
-  border-color: #2563eb;
 }
 
 #seccion-proyectos .form-descripcion {
@@ -770,4 +666,84 @@
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.proyectos-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: start;
+}
+
+/* Mismo estilo que los botones del perfil (Turnos, Valoraciones...), más anchas y largas */
+.proyecto-tile {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 21rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border: 2.5px solid #d0d7e2;
+  border-left: 6px solid #2563eb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
+}
+
+.proyecto-tile:hover {
+  border-color: #2563eb;
+  background-color: #f7faff;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.14);
+  transform: translateY(-2px);
+}
+
+.proyecto-tile .proyecto-titulo {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.proyecto-tile .proyecto-imagen {
+  aspect-ratio: 16 / 10;
+}
+
+.proyecto-tile .proyecto-descripcion {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.proyecto-tile--abierto .proyecto-descripcion {
+  display: block;
+  overflow: visible;
+}
+
+.proyecto-tile .proyecto-link {
+  margin-top: 0;
+  font-size: 0.75rem;
+}
+
+.proyecto-pie {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .proyectos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 440px) {
+  .proyectos-grid {
+    grid-template-columns: 1fr;
+  }
 }

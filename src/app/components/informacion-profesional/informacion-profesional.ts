@@ -180,43 +180,11 @@ export class InformacionProfesionalComponent implements OnInit {
   }
 
   // ===== PROYECTOS =====
-  /** Índice del proyecto que se muestra en el carrusel */
-  readonly indiceProyecto = signal(0);
-  /** Sentido del último cambio, para animar el deslizamiento */
-  readonly direccionProyecto = signal<'izq' | 'der'>('der');
+  /** Proyecto con el texto completo a la vista (los demás se muestran resumidos) */
+  readonly proyectoAbierto = signal<string | number | null>(null);
 
-  readonly proyectoActual = computed(() => {
-    const lista = this.proyectos();
-    if (!lista.length) {
-      return null;
-    }
-    const i = Math.min(this.indiceProyecto(), lista.length - 1);
-    return lista[i];
-  });
-
-  /** El proyecto actual envuelto en una lista: al cambiar de id, Angular recrea
-   *  el <article> (en vez de reutilizarlo), así la animación CSS se reproduce siempre. */
-  readonly proyectoActualLista = computed(() => {
-    const p = this.proyectoActual();
-    return p ? [p] : [];
-  });
-
-  siguienteProyecto(): void {
-    const total = this.proyectos().length;
-    if (total < 2) {
-      return;
-    }
-    this.direccionProyecto.set('der');
-    this.indiceProyecto.update((i) => (i + 1) % total);
-  }
-
-  anteriorProyecto(): void {
-    const total = this.proyectos().length;
-    if (total < 2) {
-      return;
-    }
-    this.direccionProyecto.set('izq');
-    this.indiceProyecto.update((i) => (i - 1 + total) % total);
+  alternarProyecto(id: string | number | undefined): void {
+    this.proyectoAbierto.update((actual) => (actual === (id ?? null) ? null : (id ?? null)));
   }
 
   private cargarProyectos(): void {
@@ -224,7 +192,6 @@ export class InformacionProfesionalComponent implements OnInit {
     this.clientProyecto.getProyectos().subscribe({
       next: (data) => {
         this.proyectos.set(data.filter((p) => String(p.professionalId) === id));
-        this.indiceProyecto.set(0);
       },
       error: (err) => console.error('Error al traer los proyectos:', err),
     });
@@ -313,9 +280,6 @@ export class InformacionProfesionalComponent implements OnInit {
       this.proyectos.update((lista) =>
         editando ? lista.map((p) => (p.id === editando.id ? guardado : p)) : [guardado, ...lista],
       );
-      if (!editando) {
-        this.indiceProyecto.set(0);
-      }
       this.guardandoProyecto.set(false);
       this.mostrandoFormProyecto.set(false);
       this.proyectoEditar.set(null);
@@ -345,12 +309,6 @@ export class InformacionProfesionalComponent implements OnInit {
       this.clientProyecto.deleteProyecto(id).subscribe({
         next: () => {
           this.proyectos.update((lista) => lista.filter((p) => p.id !== id));
-          const total = this.proyectos().length;
-          if (total > 0) {
-            this.indiceProyecto.update((i) => Math.min(i, total - 1));
-          } else {
-            this.indiceProyecto.set(0);
-          }
         },
         error: () => this.toast.mostrar('No se pudo eliminar el proyecto.'),
       });
