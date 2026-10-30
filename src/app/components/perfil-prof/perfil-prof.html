@@ -9,7 +9,7 @@
 
     @if (esDueno()) {
       <div class="acceso-lateral">
-        <button type="button" class="btn-acceso-lateral">Listado de clientes</button>
+        <a class="btn-acceso-lateral" [routerLink]="['/listado-clientes', prof.professionalId]">Listado de clientes</a>
         <a class="btn-acceso-lateral" routerLink="/pagos-recibidos">Historial de pagos - Recibidos</a>
       </div>
     }

@@ -1,0 +1,63 @@
+<app-barra-nav titulo="Listado de clientes" />
+
+<div class="fondo-turnos">
+
+  @if (cargando()) {
+    <p class="estado-msg estado-cargando">Cargando clientes...</p>
+  } @else if (error()) {
+    <p class="estado-msg estado-error">{{ error() }}</p>
+  } @else {
+    <div class="acceso-lateral">
+      <a class="btn-acceso-lateral" [routerLink]="['/agenda', profesionalId()]">Mi agenda</a>
+      <a class="btn-acceso-lateral" [routerLink]="rutaPerfil()">Volver atrás</a>
+    </div>
+
+    <div class="turnos-encabezado">
+      <div>
+        <h1 class="turnos-titulo">Listado de clientes</h1>
+        <p class="turnos-sub">Quienes contrataron tus servicios</p>
+      </div>
+    </div>
+
+    @if (clientes().length === 0) {
+      <p class="vacio">Todavía ningún cliente tiene turnos confirmados o realizados con vos.</p>
+    } @else {
+      <div class="lista-clientes">
+        @for (c of clientes(); track c.datos.id) {
+          <div class="tarjeta-cliente">
+            <div class="tarjeta-header">
+              <div class="avatar-cliente">{{ c.datos.name.charAt(0) }}{{ c.datos.lastname.charAt(0) }}</div>
+              <div class="tarjeta-titulo-grupo">
+                <h2 class="nombre-cliente">{{ c.datos.name }} {{ c.datos.lastname }}</h2>
+                <span class="badge-cliente">Cliente</span>
+              </div>
+            </div>
+
+            <ul class="detalle-cliente">
+              <li>
+                <label>DNI</label>
+                <span class="valor">{{ c.datos.dni }}</span>
+              </li>
+              <li>
+                <label>Correo electrónico</label>
+                <span class="valor">{{ c.datos.email }}</span>
+              </li>
+              <li>
+                <label>Teléfono</label>
+                <span class="valor">{{ c.datos.phoneNumber }}</span>
+              </li>
+              <li>
+                <label>Turnos</label>
+                <span class="valor">{{ c.turnos }} {{ c.turnos === 1 ? 'turno' : 'turnos' }}</span>
+              </li>
+              <li>
+                <label>Último turno</label>
+                <span class="valor">{{ formatearFecha(c.ultimo.fecha) }} · {{ rangoHorario(c.ultimo) }}</span>
+              </li>
+            </ul>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

@@ -11,6 +11,7 @@ import { AgendaProfesional } from './components/agenda-profesional/agenda-profes
 import { ListaUsuarios } from './components/lista-usuarios/lista-usuarios';
 import { ListaTurnosExistentes } from './components/lista-turnos-existentes/lista-turnos-existentes';
 import { ProfesionalesConsultados } from './components/profesionales-consultados/profesionales-consultados';
+import { ListadoClientes } from './components/listado-clientes/listado-clientes';
 import { FormularioConsulta } from './components/formulario-consulta/formulario-consulta';
 import { Valoraciones } from './components/valoraciones/valoraciones';
 import { InformacionProfesionalComponent } from './components/informacion-profesional/informacion-profesional';
@@ -81,6 +82,11 @@ export const routes: Routes = [
     path: 'profesionales-consultados/:userId',
     title: 'Profesionales consultados',
     component: ProfesionalesConsultados
+  },
+  {
+    path: 'listado-clientes/:profesionalId',
+    title: 'Listado de clientes',
+    component: ListadoClientes
   },
   {
     path: 'consulta/:profesionalId',
