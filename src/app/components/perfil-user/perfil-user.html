@@ -90,73 +90,89 @@
           </a>
       </div>
 
-      <div class="datos-profesion">
-        <h2 class="titulo-seccion">Datos personales</h2>
-        <ul>
-          <li>
-            <label>Usuario</label>
-            <span class="valor">{{ user.username }}</span>
-          </li>
-          <li>
-            <label>Email</label>
-            <span class="valor">{{ user.email }}</span>
-          </li>
-          <li>
-            <label>Teléfono</label>
+      <section class="seccion-datos">
+        <h2 class="seccion-datos-cabecera">
+          <span class="seccion-datos-icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
+            </svg>
+          </span>
+          Datos personales
+        </h2>
+        <div class="seccion-datos-lista">
+          <div class="dato">
+            <span class="dato-etiqueta">Usuario</span>
+            <span class="dato-valor">{{ user.username }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Email</span>
+            <span class="dato-valor">{{ user.email }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Teléfono</span>
             @if (formatearTelefono(user.phoneNumber); as tel) {
-              <span class="valor"><span class="telefono-codigo">{{ tel.codigo }}</span> {{ tel.numero }}</span>
+              <span class="dato-valor"><span class="telefono-codigo">{{ tel.codigo }}</span> {{ tel.numero }}</span>
             } @else {
-              <span class="valor">{{ user.phoneNumber }}</span>
+              <span class="dato-valor">{{ user.phoneNumber }}</span>
             }
-          </li>
-          <li>
-            <label>DNI</label>
-            <span class="valor">{{ user.dni }}</span>
-          </li>
-          <li>
-            <label>Fecha de nacimiento</label>
-            <span class="valor">{{ user.dateOfBirth | date:'dd/MM/yyyy':'UTC' }}</span>
-          </li>
-          <li>
-            <label>Edad</label>
-            <span class="valor">{{ user.age }}</span>
-          </li>
-          <li>
-            <label>Género</label>
-            <span class="valor">{{ user.gender }}</span>
-          </li>
-          <li>
-            <label>Nacionalidad</label>
-            <span class="valor">{{ user.nationality }}</span>
-          </li>
-        </ul>
-      </div>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">DNI</span>
+            <span class="dato-valor">{{ user.dni }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Fecha de nacimiento</span>
+            <span class="dato-valor">{{ user.dateOfBirth | date:'dd/MM/yyyy':'UTC' }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Edad</span>
+            <span class="dato-valor">{{ user.age }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Género</span>
+            <span class="dato-valor">{{ user.gender }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Nacionalidad</span>
+            <span class="dato-valor">{{ user.nationality }}</span>
+          </div>
+        </div>
+      </section>
 
-      <div class="datos-titulos">
-        <h2 class="titulo-seccion">Dirección</h2>
-        <ul>
-          <li class="item-ancho">
-            <label>Calle</label>
-            <span class="valor">{{ user.address?.address }}</span>
-          </li>
-          <li>
-            <label>Ciudad</label>
-            <span class="valor">{{ user.address?.city }}</span>
-          </li>
-          <li>
-            <label>Provincia</label>
-            <span class="valor">{{ user.address?.province }}</span>
-          </li>
-          <li>
-            <label>País</label>
-            <span class="valor">{{ user.address?.country }}</span>
-          </li>
-          <li>
-            <label>Código postal</label>
-            <span class="valor">{{ user.address?.zipCode }}</span>
-          </li>
-        </ul>
-      </div>
+      <section class="seccion-datos">
+        <h2 class="seccion-datos-cabecera">
+          <span class="seccion-datos-icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+          </span>
+          Dirección
+        </h2>
+        <div class="seccion-datos-lista">
+          <div class="dato dato--ancho">
+            <span class="dato-etiqueta">Calle</span>
+            <span class="dato-valor">{{ user.address?.address }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Ciudad</span>
+            <span class="dato-valor">{{ user.address?.city }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Provincia</span>
+            <span class="dato-valor">{{ user.address?.province }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">País</span>
+            <span class="dato-valor">{{ user.address?.country }}</span>
+          </div>
+          <div class="dato">
+            <span class="dato-etiqueta">Código postal</span>
+            <span class="dato-valor">{{ user.address?.zipCode }}</span>
+          </div>
+        </div>
+      </section>
 
       <div class="boton-form">
         <button type="button" class="btn-eliminar-perfil" (click)="eliminarPerfil()">Eliminar perfil</button>

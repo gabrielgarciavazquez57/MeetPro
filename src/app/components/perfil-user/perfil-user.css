@@ -112,20 +112,13 @@
   gap: 1.5rem;
 }
 
-.perfil-header,
-.datos-profesion,
-.datos-titulos {
+.perfil-header {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(15, 23, 42, 0.08);
   padding: 2rem;
-}
-
-.datos-profesion,
-.datos-titulos {
-  border-left: 4px solid #2563eb;
 }
 
 /* Cabecera */
@@ -264,88 +257,8 @@
   letter-spacing: 0.01em;
 }
 
-/* Títulos de sección */
-.titulo-seccion {
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 1rem;
-  padding-bottom: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  position: relative;
-}
-
-.titulo-seccion::before,
-.titulo-seccion::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-}
-
-.titulo-seccion::before {
-  width: 100%;
-  background-color: #9aa7ba;
-}
-
-.titulo-seccion::after {
-  width: 2.25rem;
-  background-color: #2563eb;
-}
-
-
-.datos-profesion > ul,
-.datos-titulos > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0 2rem;
-}
-
-.datos-profesion li,
-.datos-titulos li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 0.75rem 0.85rem;
-  margin: 0 -0.85rem;
-  border-bottom: 1px solid #d0d7e2;
-  transition: background-color 0.15s ease;
-}
-
-.datos-profesion li:hover,
-.datos-titulos li:hover {
-  background-color: #f7faff;
-}
-
-.datos-titulos li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.valor {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #0f172a;
-  letter-spacing: -0.01em;
-  word-break: break-word;
-}
-
 .telefono-codigo {
-  color: #64748b;
+  color: #2563eb;
 }
 
 /* Botones de acción (mismo estilo que perfil profesional) */
@@ -467,53 +380,104 @@ label {
     font-size: 1.25rem;
   }
 
-  .datos-profesion > ul {
-    grid-template-columns: 1fr;
-  }
-
   .columna-acciones {
     grid-template-columns: 1fr;
   }
 }
 
-/* ===== Datos personales y dirección ===== */
-/* El dato principal de la dirección ocupa todo el ancho */
-.item-ancho {
+/* ===== Datos personales y dirección: tarjetas con cabecera azul y datos en mosaicos ===== */
+.seccion-datos {
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+}
+
+.seccion-datos-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.seccion-datos-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.seccion-datos-icono svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.seccion-datos-lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  padding: 1.5rem;
+}
+
+.dato {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.85rem 1rem;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.dato:hover {
+  background-color: #e0edff;
+  border-color: #93c5fd;
+}
+
+.dato--ancho {
   grid-column: 1 / -1;
 }
 
-.item-ancho .valor {
+.dato-etiqueta {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dato-valor {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f2547;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.dato--ancho .dato-valor {
   font-size: 1.05rem;
 }
 
-/* La última fila queda sin línea inferior: cierra la tarjeta limpia */
-.datos-profesion li:nth-last-child(-n + 2),
-.datos-titulos li:nth-last-child(-n + 2) {
-  border-bottom: none;
-}
-
-.datos-titulos li:nth-last-child(-n + 2) {
-  padding-bottom: 0;
-}
-
 @media (max-width: 600px) {
-  .datos-profesion,
-  .datos-titulos {
-    padding: 1.25rem;
+  .seccion-datos-cabecera {
+    padding: 0.9rem 1.15rem;
   }
 
-  /* Dirección también en una columna, como los datos personales */
-  .datos-titulos > ul {
+  .seccion-datos-lista {
     grid-template-columns: 1fr;
-  }
-
-  /* Con una sola columna, solo el último dato queda sin línea */
-  .datos-profesion li:nth-last-child(2),
-  .datos-titulos li:nth-last-child(2) {
-    border-bottom: 1px solid #d0d7e2;
-  }
-
-  .datos-titulos li:nth-last-child(2) {
-    padding-bottom: 0.75rem;
+    padding: 1.15rem;
   }
 }
