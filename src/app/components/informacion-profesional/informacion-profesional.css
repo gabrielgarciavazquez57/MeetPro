@@ -739,3 +739,35 @@
 .titulo-card-adjunto:hover {
   color: #1d4ed8;
 }
+
+/* Proyectos: sin el contenedor blanco de la sección; cada proyecto es su propia tarjeta */
+#seccion-proyectos.informacion-seccion {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+#seccion-proyectos .proyecto-card {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+#seccion-proyectos .proyecto-card:hover {
+  border-color: #2563eb;
+}
+
+#seccion-proyectos .form-descripcion {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #2563eb;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+}
