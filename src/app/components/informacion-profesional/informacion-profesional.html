@@ -25,9 +25,16 @@
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Descripción ampliada</h2>
           @if (esDueno() && !editando()) {
-            <button type="button" class="btn-editar" (click)="abrirEdicion()">
-              {{ informacion() ? 'Editar' : '+ Agregar' }}
-            </button>
+            @if (informacion()) {
+              <button type="button" class="btn-icono btn-icono--editar" title="Editar descripción" aria-label="Editar descripción" (click)="abrirEdicion()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
+              </button>
+            } @else {
+              <button type="button" class="btn-editar" (click)="abrirEdicion()">+ Agregar</button>
+            }
           }
         </div>
 
@@ -228,8 +235,20 @@
                   <p class="titulo-card-nombre">{{ t.nombre_titulo }}</p>
                   @if (esDueno()) {
                     <div class="titulo-card-acciones">
-                      <button type="button" class="btn-editar-item" (click)="editarTitulo(t)">Editar</button>
-                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarTitulo(t.id)">Eliminar</button>
+                      <button type="button" class="btn-icono btn-icono--editar" title="Editar título" aria-label="Editar título" (click)="editarTitulo(t)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 20h9" />
+                          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                        </svg>
+                      </button>
+                      <button type="button" class="btn-icono btn-icono--eliminar" title="Eliminar título" aria-label="Eliminar título" (click)="eliminarTitulo(t.id)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M3 6h18" />
+                          <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+                          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                          <path d="M10 11v6M14 11v6" />
+                        </svg>
+                      </button>
                     </div>
                   }
                 </div>
@@ -329,8 +348,20 @@
                   <p class="titulo-card-nombre">{{ c.nombre_certificado }}</p>
                   @if (esDueno()) {
                     <div class="titulo-card-acciones">
-                      <button type="button" class="btn-editar-item" (click)="editarCertificado(c)">Editar</button>
-                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarCertificado(c.id)">Eliminar</button>
+                      <button type="button" class="btn-icono btn-icono--editar" title="Editar certificado" aria-label="Editar certificado" (click)="editarCertificado(c)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 20h9" />
+                          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                        </svg>
+                      </button>
+                      <button type="button" class="btn-icono btn-icono--eliminar" title="Eliminar certificado" aria-label="Eliminar certificado" (click)="eliminarCertificado(c.id)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M3 6h18" />
+                          <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+                          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                          <path d="M10 11v6M14 11v6" />
+                        </svg>
+                      </button>
                     </div>
                   }
                 </div>
@@ -411,8 +442,20 @@
                   <p class="titulo-card-nombre">{{ e.titulo_experiencia }}</p>
                   @if (esDueno()) {
                     <div class="titulo-card-acciones">
-                      <button type="button" class="btn-editar-item" (click)="editarExperiencia(e)">Editar</button>
-                      <button type="button" class="btn-eliminar-proyecto" (click)="eliminarExperiencia(e.id)">Eliminar</button>
+                      <button type="button" class="btn-icono btn-icono--editar" title="Editar experiencia" aria-label="Editar experiencia" (click)="editarExperiencia(e)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 20h9" />
+                          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                        </svg>
+                      </button>
+                      <button type="button" class="btn-icono btn-icono--eliminar" title="Eliminar experiencia" aria-label="Eliminar experiencia" (click)="eliminarExperiencia(e.id)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M3 6h18" />
+                          <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+                          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                          <path d="M10 11v6M14 11v6" />
+                        </svg>
+                      </button>
                     </div>
                   }
                 </div>
