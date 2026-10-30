@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable, switchMap, timer } from 'rxjs';
 import { ClientProfesional } from '../../services/client-profesional';
 import { ClientTicket } from '../../services/client-ticket';
+import { NotificacionesService } from '../../services/notificaciones';
 import { Auth } from '../../services/auth';
 import { ToastService } from '../../services/toast';
 import { Ticket } from '../../interfaces/ticket';
@@ -38,6 +39,7 @@ export class PagoComponent implements OnInit {
   private readonly auth = inject(Auth);
   private readonly clientTicket = inject(ClientTicket);
   private readonly toast = inject(ToastService);
+  private readonly notificaciones = inject(NotificacionesService);
 
   readonly profesionalId = signal<string>('');
   readonly profesional = signal<Profesional | null>(null);
@@ -171,6 +173,8 @@ export class PagoComponent implements OnInit {
     guardado$.subscribe({
       next: (guardado) => {
         this.procesando.set(false);
+        // El disparador de la base ya generó el aviso del pago: se trae enseguida
+        this.notificaciones.actualizar();
         if (rechazada) {
           this.rechazado.set(true);
           return;
