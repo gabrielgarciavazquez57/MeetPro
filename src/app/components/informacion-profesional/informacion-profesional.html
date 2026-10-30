@@ -394,9 +394,6 @@
       <section class="informacion-seccion" id="seccion-experiencia">
         <div class="informacion-seccion-head">
           <h2 class="titulo-seccion">Experiencia profesional</h2>
-          @if (esDueno() && !mostrandoFormExperiencia()) {
-            <button type="button" class="btn-editar" (click)="abrirFormExperiencia()">+ Agregar experiencia</button>
-          }
         </div>
 
         @if (mostrandoFormExperiencia()) {
@@ -440,7 +437,7 @@
           </form>
         }
 
-        @if (prof.experiencias?.length) {
+        @if (prof.experiencias?.length || (esDueno() && !mostrandoFormExperiencia())) {
           <ul class="lista-titulos">
             @for (e of prof.experiencias; track e.id ?? $index) {
               <li class="titulo-card">
@@ -471,6 +468,14 @@
                 @if (e.fecha_inicio || e.fecha_fin) {
                   <p class="titulo-card-fecha">{{ e.fecha_inicio }}@if (e.fecha_fin) { — {{ e.fecha_fin }} }</p>
                 }
+              </li>
+            }
+            @if (esDueno() && !mostrandoFormExperiencia()) {
+              <li class="titulo-agregar-item">
+                <button type="button" class="proyecto-agregar titulo-agregar" title="Agregar experiencia" aria-label="Agregar experiencia" (click)="abrirFormExperiencia()">
+                  <span class="proyecto-agregar-mas" aria-hidden="true">+</span>
+                  <span class="proyecto-agregar-texto">Agregar Experiencia</span>
+                </button>
               </li>
             }
           </ul>
