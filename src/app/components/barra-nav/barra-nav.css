@@ -151,10 +151,10 @@
 .barra-nav-titulo {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #64748b;
+  color: #334155;
   padding: 0.5rem 0.9rem;
 }
 
