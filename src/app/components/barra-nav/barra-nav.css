@@ -253,3 +253,15 @@
     height: 2.6rem;
   }
 }
+
+@media (max-width: 640px) {
+  .barra-nav {
+    gap: 0.5rem;
+  }
+
+  .barra-nav-grupo,
+  .barra-nav-grupo--der {
+    justify-content: space-between;
+    gap: 0;
+  }
+}

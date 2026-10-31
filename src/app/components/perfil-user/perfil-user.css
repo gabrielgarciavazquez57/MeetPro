@@ -380,29 +380,15 @@
     font-size: 1.25rem;
   }
 
+  /* Igual que en el perfil profesional: dos por fila y con el mismo tamaño de tarjeta (5:4, hasta 210 px) */
   .columna-acciones {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
   }
 
-  /* Filas bajas en vez de cuadrados del ancho de la pantalla */
   .tarjeta-accion {
-    aspect-ratio: auto;
-    min-height: 3.6rem;
-    padding: 0.85rem 1rem;
-    justify-content: center;
-  }
-
-  .accion-titulo {
-    font-size: 1rem;
-  }
-
-  .accion-deco {
-    left: auto;
-    right: -10px;
-    bottom: -24px;
-    width: 76px;
-    height: 76px;
+    max-width: 210px;
+    justify-self: center;
   }
 }
 
@@ -503,6 +489,7 @@
 /* Celulares: el contenido empieza justo debajo de la barra de navegación */
 @media (max-width: 640px) {
   .fondo-profesional {
-    padding-top: 6.25rem;
+    /* mismo margen lateral que el perfil profesional, para que las tarjetas midan lo mismo */
+    padding: 6.25rem 1rem 3rem;
   }
 }
