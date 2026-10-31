@@ -199,12 +199,17 @@
   }
 
   .barra-nav-grupo {
-    gap: 0;
+    gap: 0.65rem;
   }
 
   .barra-nav-link {
-    font-size: 0.78rem;
-    padding: 0.65rem 0.45rem;
+    font-size: 0.72rem;
+    padding: 0.65rem 0.25rem;
+  }
+
+  .barra-nav-avatar {
+    width: 2.6rem;
+    height: 2.6rem;
   }
 }
 
@@ -212,6 +217,7 @@
 @media (max-width: 640px) {
   .barra-nav {
     top: 3.3rem;
+    box-sizing: border-box;
     width: 100%;
     padding: 0.35rem 0.5rem;
     border-bottom-width: 3px;
@@ -233,13 +239,17 @@
     padding: 0.35rem 0.25rem;
   }
 
+  .barra-nav-grupo {
+    gap: 0.4rem;
+  }
+
   .barra-nav-link {
-    font-size: 0.72rem;
-    padding: 0.65rem 0.3rem;
+    font-size: 0.7rem;
+    padding: 0.65rem 0.15rem;
   }
 
   .barra-nav-avatar {
-    width: 2.7rem;
-    height: 2.7rem;
+    width: 2.6rem;
+    height: 2.6rem;
   }
 }

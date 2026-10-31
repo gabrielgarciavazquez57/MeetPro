@@ -382,6 +382,27 @@
 
   .columna-acciones {
     grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  /* Filas bajas en vez de cuadrados del ancho de la pantalla */
+  .tarjeta-accion {
+    aspect-ratio: auto;
+    min-height: 3.6rem;
+    padding: 0.85rem 1rem;
+    justify-content: center;
+  }
+
+  .accion-titulo {
+    font-size: 1rem;
+  }
+
+  .accion-deco {
+    left: auto;
+    right: -10px;
+    bottom: -24px;
+    width: 76px;
+    height: 76px;
   }
 }
 
