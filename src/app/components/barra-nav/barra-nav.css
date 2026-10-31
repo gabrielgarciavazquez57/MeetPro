@@ -207,3 +207,39 @@
     padding: 0.65rem 0.45rem;
   }
 }
+
+/* Celulares: barra a todo el ancho justo debajo del encabezado y cinta más baja */
+@media (max-width: 640px) {
+  .barra-nav {
+    top: 3.3rem;
+    width: 100%;
+    padding: 0.35rem 0.5rem;
+    border-bottom-width: 3px;
+  }
+
+  .barra-nav--sub {
+    top: 6.3rem;
+    width: min(80vw, 340px);
+    padding: 0 2rem;
+  }
+
+  .barra-nav-titulo {
+    padding: 0.45rem 0.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .barra-nav {
+    padding: 0.35rem 0.25rem;
+  }
+
+  .barra-nav-link {
+    font-size: 0.72rem;
+    padding: 0.65rem 0.3rem;
+  }
+
+  .barra-nav-avatar {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+}

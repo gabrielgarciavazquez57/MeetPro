@@ -648,7 +648,7 @@ label {
 @media (max-width: 600px) {
   .fondo-profesional {
     /* deja lugar para las dos barras de navegación fijas */
-    padding: 10.5rem 1rem 1.5rem;
+    padding: 6.25rem 1rem 1.5rem;
   }
 
   .contenedor-izquierdo section {
@@ -666,6 +666,7 @@ label {
   .fila-superior {
     flex-direction: column;
     align-items: stretch;
+    gap: 1.6rem;
   }
 
   .avatar-perfil {
@@ -782,4 +783,61 @@ label {
 
 .video-cerrar:hover {
   color: #93c5fd;
+}
+
+/* Paneles (Títulos, Experiencia, Beneficios): en pantallas chicas se abren flotando en el centro, con fondo oscuro */
+.panel-cerrar,
+.panel-fondo {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .panel-fondo {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: block;
+    background-color: rgba(10, 23, 48, 0.62);
+  }
+
+  .panel-flotante {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    width: min(92vw, 440px);
+    height: fit-content;
+    max-height: 82vh;
+    margin: auto;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .panel-flotante-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .panel-cerrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin: -0.4rem -0.5rem -0.4rem 0;
+    padding: 0;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #64748b;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .panel-cerrar:hover {
+    color: #2563eb;
+  }
 }

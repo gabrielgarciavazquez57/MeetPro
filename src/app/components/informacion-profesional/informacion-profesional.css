@@ -1019,3 +1019,10 @@
     margin: -0.55rem -0.55rem -0.55rem 0;
   }
 }
+
+/* Celulares: el contenido empieza justo debajo de la barra de navegación */
+@media (max-width: 640px) {
+  .fondo-informacion {
+    padding-top: 6.25rem;
+  }
+}

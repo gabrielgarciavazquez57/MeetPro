@@ -654,7 +654,7 @@
 
 @media (max-width: 640px) {
   .fondo-turnos {
-    padding: 8.5rem 1rem 5rem;
+    padding: 6.25rem 1rem 5rem;
   }
 
   .turnos-panel {
@@ -673,6 +673,10 @@
 
   .stat-valor {
     font-size: 1.3rem;
+  }
+
+  .stat-label {
+    letter-spacing: 0.03em;
   }
 
   /* Las pestañas pasan a dos filas: así se ven todas, sin una escondida a la derecha */

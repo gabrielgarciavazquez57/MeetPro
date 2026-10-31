@@ -130,10 +130,15 @@
                 </span>
               </button>
 
+              @if (panel()) {
+                <div class="panel-fondo" (click)="cerrarPanel()"></div>
+              }
+
               @if (panel() === 'titulos') {
                 <div class="panel-flotante">
                   <div class="panel-flotante-head">
                     <h3 class="panel-flotante-titulo">Títulos obtenidos</h3>
+                    <button type="button" class="panel-cerrar" (click)="cerrarPanel()" aria-label="Cerrar">×</button>
                   </div>
                   @if (prof.titulos?.length) {
                     <ul class="panel-lista">
@@ -160,6 +165,7 @@
                 <div class="panel-flotante">
                   <div class="panel-flotante-head">
                     <h3 class="panel-flotante-titulo">Experiencia Profesional</h3>
+                    <button type="button" class="panel-cerrar" (click)="cerrarPanel()" aria-label="Cerrar">×</button>
                   </div>
                   @if (prof.experiencias?.length) {
                     <ul class="panel-lista">
@@ -183,6 +189,7 @@
                 <div class="panel-flotante">
                   <div class="panel-flotante-head">
                     <h3 class="panel-flotante-titulo">Beneficios +</h3>
+                    <button type="button" class="panel-cerrar" (click)="cerrarPanel()" aria-label="Cerrar">×</button>
                   </div>
                   <ul class="panel-lista">
                     @for (b of beneficios; track b.titulo) {

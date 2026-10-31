@@ -719,7 +719,7 @@ span::before {
 
 @media (max-width: 640px) {
   .fondo-profesional.fondo-profesional--con-nav {
-    padding-top: 10.25rem;
+    padding-top: 6.25rem;
   }
 }
 

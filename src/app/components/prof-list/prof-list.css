@@ -391,3 +391,10 @@
     padding: 1.35rem;
   }
 }
+
+/* Celulares: el contenido empieza justo debajo de la barra de navegación */
+@media (max-width: 640px) {
+  .fondo-profesional {
+    padding-top: 6.25rem;
+  }
+}

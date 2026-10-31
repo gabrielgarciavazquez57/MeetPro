@@ -376,3 +376,10 @@ span:not(.adjunto-nombre)::before {
     grid-template-columns: 1fr;
   }
 }
+
+/* Celulares: el contenido empieza justo debajo de la barra de navegación */
+@media (max-width: 640px) {
+  .fondo-consulta {
+    padding-top: 6.25rem;
+  }
+}

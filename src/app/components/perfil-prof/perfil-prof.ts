@@ -38,9 +38,15 @@ export class PerfilProfesional implements OnInit {
     this.videoAbierto.set(true);
   }
 
-  @HostListener('document:keydown.escape')
   cerrarVideo(): void {
     this.videoAbierto.set(false);
+  }
+
+  /** Con Escape se cierra lo que esté abierto: el video o un panel */
+  @HostListener('document:keydown.escape')
+  cerrarConEscape(): void {
+    this.cerrarVideo();
+    this.cerrarPanel();
   }
 
   /** Panel flotante abierto: 'titulos', 'experiencias', 'beneficios' o null */

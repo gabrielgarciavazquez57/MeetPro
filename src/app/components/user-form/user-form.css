@@ -749,7 +749,7 @@ app-desplegable {
 
 @media (max-width: 640px) {
   .fondo-registro.fondo-registro--con-nav {
-    padding-top: 10.25rem;
+    padding-top: 6.25rem;
   }
 }
 
