@@ -102,6 +102,16 @@ a.footer-link:hover {
 }
 
 @media (max-width: 640px) {
+  .footer-col {
+    gap: 0;
+  }
+
+  .footer-col .footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.4rem;
+  }
+
   :host {
     padding: 2rem 1.25rem 1.25rem;
   }

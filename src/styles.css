@@ -58,3 +58,12 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Celulares: con menos de 16 px, iOS hace zoom al tocar un campo y deja la página descentrada */
+@media (max-width: 600px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}

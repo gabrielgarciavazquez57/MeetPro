@@ -42,3 +42,7 @@
 <nav class="barra-nav barra-nav--sub">
   <span class="barra-nav-titulo">{{ titulo() }}</span>
 </nav>
+
+@if (esAdmin()) {
+  <a class="barra-nav-admin-flotante" routerLink="/usuarios">Usuarios - Admin</a>
+}

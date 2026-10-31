@@ -994,3 +994,28 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Celulares: los íconos de editar y eliminar son más grandes para tocarlos bien */
+@media (max-width: 640px) {
+  .btn-icono {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .btn-icono svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .proyecto-tile--editable .proyecto-titulo {
+    padding-right: 5.6rem;
+  }
+
+  #seccion-certificados .titulo-card-nombre {
+    padding-right: 5.6rem;
+  }
+
+  .titulo-card-acciones {
+    margin: -0.55rem -0.55rem -0.55rem 0;
+  }
+}
