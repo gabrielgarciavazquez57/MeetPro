@@ -47,6 +47,12 @@
   padding: 2.5rem;
 }
 
+.selector-idioma-tarjeta {
+  position: absolute;
+  top: 2.4rem;
+  right: 1.8rem;
+}
+
 .login-logo {
   display: inline-block;
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;

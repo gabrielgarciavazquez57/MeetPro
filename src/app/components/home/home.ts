@@ -3,10 +3,11 @@ import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth';
+import { SelectorIdioma } from '../selector-idioma/selector-idioma';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, SelectorIdioma],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

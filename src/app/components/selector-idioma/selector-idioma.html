@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="btn-idioma"
+  translate="no"
+  (click)="idioma.alternar()"
+  [attr.aria-label]="idioma.idioma() === 'es' ? 'Switch the site to English' : 'Cambiar el sitio a español'"
+  [attr.title]="idioma.idioma() === 'es' ? 'Switch the site to English' : 'Cambiar el sitio a español'"
+>
+  <span class="btn-idioma-opcion" [class.btn-idioma-opcion--activa]="idioma.idioma() === 'es'">ES</span>
+  <span class="btn-idioma-separador" aria-hidden="true"></span>
+  <span class="btn-idioma-opcion" [class.btn-idioma-opcion--activa]="idioma.idioma() === 'en'">EN</span>
+</button>

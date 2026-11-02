@@ -64,6 +64,12 @@
   padding: 2.5rem;
 }
 
+.selector-idioma-tarjeta {
+  position: absolute;
+  top: 2.4rem;
+  right: 1.8rem;
+}
+
 .home-logo {
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   font-size: 1.9rem;
