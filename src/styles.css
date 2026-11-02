@@ -173,15 +173,18 @@ body {
 .acceso-lateral .btn-acceso-lateral:nth-child(5) { animation-delay: 0.24s; }
 .acceso-lateral .btn-acceso-lateral:nth-child(6) { animation-delay: 0.3s; }
 
-/* Celulares: los botones pasan a una fila arriba del contenido */
+/* Celulares: los botones pasan a una fila al final de la página, justo antes del pie.
+   El contenedor de cada pantalla es una columna flex, así que "order" los manda al último lugar. */
 @media (max-width: 700px) {
   .acceso-lateral {
     position: static;
+    order: 99;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.5rem;
     width: 100%;
-    margin-bottom: 1.25rem;
+    margin: auto 0 0;
+    padding-top: 1.75rem;
     transform: none;
     filter: none;
   }
