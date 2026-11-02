@@ -5,6 +5,7 @@ import { Auth } from '../../services/auth';
 import { NotificacionesService } from '../../services/notificaciones';
 import { Notificacion, TipoNotificacion } from '../../interfaces/notificacion';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { localeActual } from '../../shared/idioma-actual';
 
 type Pestana = 'todas' | 'noleidas';
 
@@ -91,7 +92,7 @@ export class ListaNotificaciones implements OnInit {
   }
 
   mes(n: Notificacion): string {
-    return new Date(n.creada).toLocaleDateString('es-AR', { month: 'short' }).replace('.', '');
+    return new Date(n.creada).toLocaleDateString(localeActual(), { month: 'short' }).replace('.', '');
   }
 
   /** "hace 5 min", "hace 3 h", "ayer" o la fecha */
@@ -104,6 +105,6 @@ export class ListaNotificaciones implements OnInit {
     const dias = Math.floor(horas / 24);
     if (dias === 1) return 'ayer';
     if (dias < 7) return `hace ${dias} días`;
-    return new Date(n.creada).toLocaleDateString('es-AR');
+    return new Date(n.creada).toLocaleDateString(localeActual());
   }
 }

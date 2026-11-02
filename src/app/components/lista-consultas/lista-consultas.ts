@@ -8,6 +8,7 @@ import { ClientProfesional } from '../../services/client-profesional';
 import { Consulta } from '../../interfaces/consulta';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { localeActual } from '../../shared/idioma-actual';
 import { ToastService } from '../../services/toast';
 
 type Pestana = 'recibidas' | 'enviadas';
@@ -122,7 +123,7 @@ export class ListaConsultas implements OnInit {
   }
 
   fecha(iso: string | undefined): string {
-    return iso ? new Date(iso).toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' }) : '';
+    return iso ? new Date(iso).toLocaleString(localeActual(), { dateStyle: 'medium', timeStyle: 'short' }) : '';
   }
 
   dia(c: Consulta): string {
@@ -130,7 +131,7 @@ export class ListaConsultas implements OnInit {
   }
 
   mes(c: Consulta): string {
-    return new Date(c.creada ?? Date.now()).toLocaleDateString('es-AR', { month: 'short' }).replace('.', '');
+    return new Date(c.creada ?? Date.now()).toLocaleDateString(localeActual(), { month: 'short' }).replace('.', '');
   }
 
   private ordenar(lista: Consulta[]): Consulta[] {

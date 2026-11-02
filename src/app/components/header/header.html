@@ -3,6 +3,23 @@
     <span class="logo-text"><span class="logo-meet">Meet</span><span class="logo-pro">Pro</span></span>
   </a>
 
+  <div class="navbar-acciones">
+  <button
+    type="button"
+    class="btn-idioma"
+    translate="no"
+    (click)="idioma.alternar()"
+    [attr.aria-label]="idioma.idioma() === 'es' ? 'Switch the site to English' : 'Cambiar el sitio a español'"
+    [attr.title]="idioma.idioma() === 'es' ? 'Switch the site to English' : 'Cambiar el sitio a español'"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+    </svg>
+    {{ idioma.idioma() === 'es' ? 'EN' : 'ES' }}
+  </button>
+
   @if (usuario(); as u) {
     <div class="navbar-sesion">
       <a class="navbar-campana" [class.navbar-campana--alerta]="noLeidas() > 0" routerLink="/notificaciones" aria-label="Notificaciones" title="Notificaciones">
@@ -20,4 +37,5 @@
       </button>
     </div>
   }
+  </div>
 </nav>

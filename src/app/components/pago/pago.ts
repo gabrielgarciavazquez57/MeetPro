@@ -10,6 +10,7 @@ import { ToastService } from '../../services/toast';
 import { Ticket } from '../../interfaces/ticket';
 import { Profesional } from '../../interfaces/profesional';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { localeActual } from '../../shared/idioma-actual';
 
 /** Único entorno de pago: simulado. Solo se aceptan estas tarjetas de prueba, ninguna real */
 const TARJETA_APROBADA = '4242 4242 4242 4242';
@@ -57,7 +58,7 @@ export class PagoComponent implements OnInit {
   /** Primer día del mes que viene, desde cuando se vuelve a poder pagar */
   protected readonly proximoPago = (() => {
     const hoy = new Date();
-    return new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1).toLocaleDateString('es-AR', { day: 'numeric', month: 'long' });
+    return new Date(hoy.getFullYear(), hoy.getMonth() + 1, 1).toLocaleDateString(localeActual(), { day: 'numeric', month: 'long' });
   })();
 
   protected readonly tarjetasPrueba = [

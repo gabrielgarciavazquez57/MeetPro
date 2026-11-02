@@ -5,6 +5,7 @@ import { Auth } from '../../services/auth';
 import { ClientTicket } from '../../services/client-ticket';
 import { Ticket } from '../../interfaces/ticket';
 import { BarraNav } from '../barra-nav/barra-nav';
+import { localeActual } from '../../shared/idioma-actual';
 
 type Modo = 'realizados' | 'recibidos';
 
@@ -77,14 +78,14 @@ export class HistorialPagos implements OnInit {
   }
 
   monto(t: Ticket): string {
-    return t.monto.toLocaleString('es-AR', { style: 'currency', currency: t.moneda || 'ARS', minimumFractionDigits: 2 });
+    return t.monto.toLocaleString(localeActual(), { style: 'currency', currency: t.moneda || 'ARS', minimumFractionDigits: 2 });
   }
 
   acumuladoTexto(): string {
-    return this.acumulado().toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 });
+    return this.acumulado().toLocaleString(localeActual(), { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 });
   }
 
   fecha(t: Ticket): string {
-    return new Date(t.fecha).toLocaleString('es-AR', { dateStyle: 'medium', timeStyle: 'short' });
+    return new Date(t.fecha).toLocaleString(localeActual(), { dateStyle: 'medium', timeStyle: 'short' });
   }
 }
