@@ -80,6 +80,7 @@ body {
   flex-direction: column;
   gap: 0.6rem;
   transform: translateY(-50%);
+  filter: drop-shadow(0 8px 14px rgba(10, 23, 48, 0.34));
 }
 
 .btn-acceso-lateral {
@@ -88,9 +89,9 @@ body {
   align-items: center;
   gap: 0.75rem;
   box-sizing: border-box;
-  width: 232px;
+  width: 256px;
   min-height: 2.9rem;
-  padding: 0.7rem 1rem 0.7rem 1.15rem;
+  padding: 0.7rem 2.3rem 0.7rem 1.15rem;
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   font-size: 0.86rem;
   font-weight: 600;
@@ -102,9 +103,9 @@ body {
   background-color: #ffffff;
   border: none;
   border-left: 4px solid #2563eb;
-  box-shadow: 0 8px 22px rgba(10, 23, 48, 0.28);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 1.75rem) 100%, 0 100%);
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-left-width 0.18s ease;
+  transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-left-width 0.18s ease;
   animation: acceso-lateral-entrada 0.45s ease both;
 }
 
@@ -126,7 +127,6 @@ body {
   color: #1d4ed8;
   background-color: #eff6ff;
   border-left-width: 7px;
-  box-shadow: 0 12px 28px rgba(10, 23, 48, 0.34);
   transform: translateX(4px);
 }
 
@@ -183,10 +183,12 @@ body {
     width: 100%;
     margin-bottom: 1.25rem;
     transform: none;
+    filter: none;
   }
 
   .btn-acceso-lateral {
     flex: 1 1 auto;
+    clip-path: none;
     justify-content: center;
     width: auto;
     min-height: 2.75rem;
