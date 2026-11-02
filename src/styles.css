@@ -2,6 +2,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Sin rebote en los extremos: evita que se vea el fondo blanco sobre el header y bajo el footer */
+  overscroll-behavior-y: none;
 }
 
 body {
