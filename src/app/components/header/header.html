@@ -12,12 +12,9 @@
     [attr.aria-label]="idioma.idioma() === 'es' ? 'Switch the site to English' : 'Cambiar el sitio a español'"
     [attr.title]="idioma.idioma() === 'es' ? 'Switch the site to English' : 'Cambiar el sitio a español'"
   >
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18" />
-      <path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
-    </svg>
-    {{ idioma.idioma() === 'es' ? 'EN' : 'ES' }}
+    <span class="btn-idioma-opcion" [class.btn-idioma-opcion--activa]="idioma.idioma() === 'es'">ES</span>
+    <span class="btn-idioma-separador" aria-hidden="true"></span>
+    <span class="btn-idioma-opcion" [class.btn-idioma-opcion--activa]="idioma.idioma() === 'en'">EN</span>
   </button>
 
   @if (usuario(); as u) {
