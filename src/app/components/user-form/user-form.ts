@@ -407,7 +407,16 @@ handleSubmit() {
       const cambioPassword$ = nuevaPassword && esPropio ? this.auth.cambiarPassword(nuevaPassword) : of(undefined);
 
       cambioPassword$
-        .pipe(switchMap(() => this.client.updateUser(this.usuarioId!, { id: this.usuarioId!, ...user_data })))
+        .pipe(
+          switchMap(() => this.client.updateUser(this.usuarioId!, { id: this.usuarioId!, ...user_data })),
+          switchMap((actualizado) =>
+            // la foto y demás datos también se reflejan en el perfil profesional; si falla, el perfil igual quedó guardado
+            this.clientProfesional.sincronizarDatosUsuario({ ...user_data, id: this.usuarioId! }).pipe(
+              catchError(() => of(null)),
+              map(() => actualizado),
+            ),
+          ),
+        )
         .subscribe({
           next: () => {
             if (dejaDeSerProfesional) {
