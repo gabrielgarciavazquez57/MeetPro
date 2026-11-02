@@ -67,3 +67,148 @@ body {
     font-size: 16px !important;
   }
 }
+
+/* ===== Menú lateral de accesos rápidos (Volver atrás, Mis turnos, Proyectos, etc.) =====
+   Un solo diseño para todas las pantallas: botones blancos con acento azul y una flecha,
+   fijos al borde izquierdo en escritorio y en fila en celulares. */
+.acceso-lateral {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transform: translateY(-50%);
+}
+
+.btn-acceso-lateral {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-sizing: border-box;
+  width: 232px;
+  min-height: 2.9rem;
+  padding: 0.7rem 1rem 0.7rem 1.15rem;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  text-align: left;
+  text-decoration: none;
+  color: #1e3a8a;
+  background-color: #ffffff;
+  border: none;
+  border-left: 4px solid #2563eb;
+  box-shadow: 0 8px 22px rgba(10, 23, 48, 0.28);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-left-width 0.18s ease;
+  animation: acceso-lateral-entrada 0.45s ease both;
+}
+
+/* flecha a la derecha */
+.btn-acceso-lateral::after {
+  content: '';
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-left: auto;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  opacity: 0.45;
+  transform: rotate(45deg);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.btn-acceso-lateral:hover {
+  color: #1d4ed8;
+  background-color: #eff6ff;
+  border-left-width: 7px;
+  box-shadow: 0 12px 28px rgba(10, 23, 48, 0.34);
+  transform: translateX(4px);
+}
+
+.btn-acceso-lateral:hover::after {
+  opacity: 1;
+  transform: translateX(2px) rotate(45deg);
+}
+
+.btn-acceso-lateral:active {
+  transform: translateX(2px) scale(0.98);
+}
+
+.btn-acceso-lateral:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* sección activa (Información profesional marca en cuál estás) */
+.btn-acceso-lateral.btn-acceso-lateral--activo {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-left-color: #93c5fd;
+}
+
+.btn-acceso-lateral.btn-acceso-lateral--activo::after {
+  opacity: 0.9;
+}
+
+@keyframes acceso-lateral-entrada {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.acceso-lateral .btn-acceso-lateral:nth-child(1) { animation-delay: 0s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(2) { animation-delay: 0.06s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(3) { animation-delay: 0.12s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(4) { animation-delay: 0.18s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(5) { animation-delay: 0.24s; }
+.acceso-lateral .btn-acceso-lateral:nth-child(6) { animation-delay: 0.3s; }
+
+/* Celulares: los botones pasan a una fila arriba del contenido */
+@media (max-width: 700px) {
+  .acceso-lateral {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    transform: none;
+  }
+
+  .btn-acceso-lateral {
+    flex: 1 1 auto;
+    justify-content: center;
+    width: auto;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.84rem;
+    text-align: center;
+    border-left: none;
+    border-bottom: 3px solid #2563eb;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.14);
+    animation: none;
+  }
+
+  .btn-acceso-lateral::after {
+    display: none;
+  }
+
+  .btn-acceso-lateral:hover {
+    border-left-width: 0;
+    transform: none;
+  }
+
+  .btn-acceso-lateral.btn-acceso-lateral--activo {
+    border-bottom-color: #93c5fd;
+  }
+}
