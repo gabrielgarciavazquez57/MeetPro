@@ -13,6 +13,7 @@ import { Desplegable } from '../desplegable/desplegable';
 import { CodigoTelefono } from '../codigo-telefono/codigo-telefono';
 import { CIUDADES_ARGENTINA, PROVINCIAS_ARGENTINA } from '../../shared/ciudades-argentina';
 import { CODIGO_PAIS_DEFECTO, separarTelefono } from '../../shared/codigos-pais';
+import { reducirImagen } from '../../shared/reducir-imagen';
 import { countries, type ICountry } from 'countries-list';
 import { ToastService } from '../../services/toast';
 import { ConfirmacionService } from '../../services/confirmacion';
@@ -242,9 +243,10 @@ export class UserForm implements OnInit {
 
     const lector = new FileReader();
     lector.onload = () => {
-      const dataUrl = lector.result as string;
-      this.fotoPreview.set(dataUrl);
-      this.fotoPerfil.setValue(dataUrl);
+      reducirImagen(lector.result as string).then((dataUrl) => {
+        this.fotoPreview.set(dataUrl);
+        this.fotoPerfil.setValue(dataUrl);
+      });
     };
     lector.readAsDataURL(file);
     input.value = '';
